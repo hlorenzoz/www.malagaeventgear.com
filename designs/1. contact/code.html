@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact Us - Malaga Event Gear</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#2c2c2c",
+                        "on-tertiary-container": "#959393",
+                        "border-glass": "rgba(255, 255, 255, 0.12)",
+                        "surface-container": "#1e2020",
+                        "on-tertiary": "#313030",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#763223",
+                        "inverse-primary": "#645493",
+                        "on-primary-fixed-variant": "#4c3d7a",
+                        "surface-container-highest": "#333535",
+                        "secondary-container": "#793425",
+                        "on-primary-container": "#9b89cd",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-primary-fixed": "#200e4c",
+                        "primary-fixed": "#e8ddff",
+                        "electric-blue": "#4D8CFF",
+                        "outline": "#948f9a",
+                        "primary-container": "#31215d",
+                        "secondary": "#ffb4a4",
+                        "on-secondary-fixed": "#3c0701",
+                        "primary": "#cebdff",
+                        "on-secondary": "#591c0f",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#352561",
+                        "tertiary": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#37393a",
+                        "on-error": "#690005",
+                        "background": "#121414",
+                        "secondary-fixed-dim": "#ffb4a4",
+                        "surface-dim": "#121414",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#333535",
+                        "surface-glass": "rgba(255, 255, 255, 0.05)",
+                        "surface-container-lowest": "#0c0f0f",
+                        "primary-fixed-dim": "#cebdff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-surface-variant": "#cac4d1",
+                        "inverse-on-surface": "#2f3131",
+                        "secondary-fixed": "#ffdad3",
+                        "on-background": "#e2e2e2",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-tint": "#cebdff",
+                        "on-surface": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#ff9f8b",
+                        "outline-variant": "#49454f",
+                        "surface-container-high": "#282a2b",
+                        "surface": "#121414"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "gutter": "32px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .bg-ambient {
+            background: radial-gradient(circle at top right, rgba(77, 140, 255, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(49, 33, 93, 0.4), transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col bg-ambient">
+<!-- TopNavBar -->
+<nav class="bg-surface-glass text-primary font-body-lg text-body-lg fixed top-0 w-full z-50 backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 flex justify-between items-center px-margin-desktop py-4 mx-auto max-w-container-max md:px-margin-desktop px-margin-mobile">
+<a class="font-display-lg text-headline-md text-primary tracking-tight" href="/">Malaga Event Gear</a>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-on-surface hover:text-electric-blue transition-colors hover:bg-white/10 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Equipment</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors hover:bg-white/10 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Services</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors hover:bg-white/10 transition-all duration-300 px-3 py-2 rounded-lg" href="#">Pricing</a>
+<a class="text-electric-blue font-bold border-b-2 border-electric-blue pb-1 px-3 py-2 rounded-lg" href="#">Contact</a>
+</div>
+<div class="hidden md:flex items-center space-x-4">
+<button class="material-symbols-outlined text-on-surface hover:text-electric-blue transition-colors">search</button>
+<button class="bg-gradient-to-r from-electric-blue to-primary-container text-white px-6 py-2 rounded-lg font-label-lg active:scale-95 transition-transform">Book Now</button>
+</div>
+<!-- Mobile menu button -->
+<button class="md:hidden material-symbols-outlined text-primary">menu</button>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full relative z-10">
+<div class="text-center mb-16">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4">Get in Touch</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Ready to elevate your event? Contact our team for personalized quotes, equipment availability, and expert audiovisual advice.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Contact Info Sidebar -->
+<div class="lg:col-span-4 space-y-6">
+<!-- Direct Contact Card -->
+<div class="glass-panel rounded-xl p-8 h-full">
+<h3 class="font-headline-md text-headline-md mb-8">Contact Details</h3>
+<div class="space-y-6">
+<div class="flex items-start space-x-4">
+<div class="bg-surface-glass p-3 rounded-lg border border-border-glass">
+<span class="material-symbols-outlined text-electric-blue">call</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Phone</p>
+<a class="font-body-lg text-body-lg hover:text-electric-blue transition-colors" href="tel:+34600428750">+34 600 42 87 50</a>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="bg-surface-glass p-3 rounded-lg border border-border-glass">
+<span class="material-symbols-outlined text-electric-blue">chat</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">WhatsApp</p>
+<a class="font-body-lg text-body-lg hover:text-electric-blue transition-colors" href="https://wa.me/34600428750">Click to Chat</a>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="bg-surface-glass p-3 rounded-lg border border-border-glass">
+<span class="material-symbols-outlined text-electric-blue">mail</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Email</p>
+<a class="font-body-md text-body-md hover:text-electric-blue transition-colors break-all" href="mailto:contact@malagaeventgear.com">contact@malagaeventgear.com</a>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="bg-surface-glass p-3 rounded-lg border border-border-glass">
+<span class="material-symbols-outlined text-electric-blue">location_on</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Location</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Av. de Barcelona, 34, 3B<br/>Distrito Centro<br/>29009 Málaga, Spain</p>
+</div>
+</div>
+<div class="flex items-start space-x-4">
+<div class="bg-surface-glass p-3 rounded-lg border border-border-glass">
+<span class="material-symbols-outlined text-electric-blue">schedule</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Operating Hours</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Available 24 hours a day, 7 days a week</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Inquiry Form -->
+<div class="lg:col-span-8">
+<div class="glass-panel rounded-xl p-8 md:p-12 relative overflow-hidden">
+<!-- Decorative subtle glow -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-electric-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+<h2 class="font-headline-md text-headline-md mb-8">Request a Quote</h2>
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative">
+<input class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent" id="name" placeholder="Name" required="" type="text"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue" for="name">Full Name</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent" id="email" placeholder="Email" required="" type="email"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue" for="email">Email Address</label>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="relative">
+<input class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent" id="phone" placeholder="Phone" type="tel"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue" for="phone">Phone Number</label>
+</div>
+<div class="relative">
+<input class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors text-on-surface-variant" id="date" type="date"/>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm text-electric-blue" for="date">Event Date</label>
+</div>
+</div>
+<div class="relative">
+<select class="w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors appearance-none" id="eventType">
+<option class="bg-surface text-on-surface-variant" disabled="" selected="" value="">Select Event Type</option>
+<option class="bg-surface" value="wedding">Wedding</option>
+<option class="bg-surface" value="corporate">Corporate Event</option>
+<option class="bg-surface" value="party">Private Party</option>
+<option class="bg-surface" value="conference">Conference / MICE</option>
+<option class="bg-surface" value="other">Other</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative">
+<textarea class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent resize-none" id="message" placeholder="Message" required="" rows="4"></textarea>
+<label class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue" for="message">Event Details &amp; Requirements</label>
+</div>
+<button class="w-full bg-gradient-to-r from-electric-blue to-primary-container text-white py-4 rounded-lg font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] transition-all duration-300 active:scale-[0.98]" type="button">
+                            Submit Inquiry
+                        </button>
+</form>
+</div>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="mt-32 max-w-4xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-center mb-12">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<button class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').textContent = this.nextElementSibling.classList.contains('hidden') ? 'add' : 'remove';">
+<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors">How does the booking process work?</span>
+<span class="material-symbols-outlined icon text-on-surface-variant">add</span>
+</button>
+<div class="hidden px-6 pb-5 text-on-surface-variant font-body-md text-body-md">
+<p>Our process is simple: 1. Select your package or equipment. 2. Fill out our inquiry form. 3. Our team will contact you to confirm details. Enjoy a hassle-free event while we handle setup and breakdown.</p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<button class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').textContent = this.nextElementSibling.classList.contains('hidden') ? 'add' : 'remove';">
+<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors">Where do you offer your services?</span>
+<span class="material-symbols-outlined icon text-on-surface-variant">add</span>
+</button>
+<div class="hidden px-6 pb-5 text-on-surface-variant font-body-md text-body-md">
+<p>We primarily operate in the Costa del Sol region, including Malaga, Marbella, and surrounding areas. We also serve Sevilla and Granada for select projects.</p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<button class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group" onclick="this.nextElementSibling.classList.toggle('hidden'); this.querySelector('.icon').textContent = this.nextElementSibling.classList.contains('hidden') ? 'add' : 'remove';">
+<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors">Do you provide technical support during the event?</span>
+<span class="material-symbols-outlined icon text-on-surface-variant">add</span>
+</button>
+<div class="hidden px-6 pb-5 text-on-surface-variant font-body-md text-body-md">
+<p>Yes, many of our packages (like the MICE Pack) include a dedicated technician to ensure your event runs smoothly. Technical assistance can also be added as an optional extra to other rentals.</p>
+</div>
+</div>
+</div>
+<div class="text-center mt-8">
+<a class="inline-flex items-center space-x-2 text-electric-blue hover:text-primary transition-colors font-label-lg" href="/faq">
+<span>View all FAQs</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-background text-primary font-body-md text-body-md w-full py-16 px-margin-desktop border-t border-border-glass bg-surface-container-low grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="col-span-1 md:col-span-1">
+<span class="font-display-lg text-headline-md text-primary mb-4 block">Malaga Event Gear</span>
+<p class="text-on-tertiary-container mb-6">Professional audiovisual, lighting, and event equipment rentals for all occasions.</p>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-lg text-label-lg text-on-surface mb-4 uppercase tracking-widest">Links</h4>
+<ul class="space-y-2">
+<li><a class="text-on-tertiary-container hover:text-on-surface transition-all duration-200 hover:translate-x-1 inline-block" href="#">Terms of Service</a></li>
+<li><a class="text-on-tertiary-container hover:text-on-surface transition-all duration-200 hover:translate-x-1 inline-block" href="#">Privacy Policy</a></li>
+<li><a class="text-on-tertiary-container hover:text-on-surface transition-all duration-200 hover:translate-x-1 inline-block" href="#">Inventory List</a></li>
+<li><a class="text-on-tertiary-container hover:text-on-surface transition-all duration-200 hover:translate-x-1 inline-block" href="#">Venue Partners</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-lg text-label-lg text-on-surface mb-4 uppercase tracking-widest">Contact</h4>
+<ul class="space-y-2 text-on-tertiary-container">
+<li>+34 600 42 87 50</li>
+<li>contact@malagaeventgear.com</li>
+</ul>
+</div>
+<div class="col-span-1 md:col-span-4 mt-12 pt-8 border-t border-border-glass text-center text-on-tertiary-container font-label-sm">
+            © 2024 Malaga Event Gear. All rights reserved.
+        </div>
+</footer>
+</body></html>

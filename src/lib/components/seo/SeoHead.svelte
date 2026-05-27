@@ -17,6 +17,15 @@
 		twitter?: TwitterCardMeta;
 		jsonLdSchema?: JsonLdSchema | JsonLdSchema[];
 	} = $props();
+
+	// Simplificación usando el rune $derived de Svelte 5 para evitar condicionales complejos en el template
+	let schemas = $derived(
+		jsonLdSchema
+			? Array.isArray(jsonLdSchema)
+				? jsonLdSchema
+				: [jsonLdSchema]
+			: []
+	);
 </script>
 
 <svelte:head>
@@ -78,17 +87,7 @@
 	{/if}
 
 	<!-- SEO Generativo: Inyección de JSON-LD estructurado -->
-	{#if jsonLdSchema}
-		{#if Array.isArray(jsonLdSchema)}
-			{#each jsonLdSchema as schema}
-				<script type="application/ld+json">
-					{JSON.stringify(schema)}
-				</script>
-			{/each}
-		{#else}
-			<script type="application/ld+json">
-				{JSON.stringify(jsonLdSchema)}
-			</script>
-		{/if}
-	{/if}
+	{#each schemas as schema}
+		{@html `<script type="application/ld+json">${JSON.stringify(schema)}<\/script>`}
+	{/each}
 </svelte:head>

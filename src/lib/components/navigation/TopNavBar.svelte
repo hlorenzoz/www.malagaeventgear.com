@@ -1,0 +1,146 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+
+	// Estado reactivo con runes de Svelte 5
+	let mobileMenuOpen = $state(false);
+	let currentTheme = $state('dark');
+
+	onMount(() => {
+		const updateTheme = () => {
+			let saved = null;
+			try {
+				saved = localStorage.getItem('theme');
+			} catch (_) {}
+			const theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+			document.documentElement.setAttribute('data-theme', theme);
+			currentTheme = theme;
+		};
+
+		updateTheme();
+
+		// Escuchar cambios de tema del sistema en tiempo real
+		const mediaQuery = window.matchMedia('(prefers-color-scheme: light)');
+		const handler = () => {
+			let hasSaved = false;
+			try {
+				hasSaved = !!localStorage.getItem('theme');
+			} catch (_) {}
+			if (!hasSaved) {
+				updateTheme();
+			}
+		};
+
+		mediaQuery.addEventListener('change', handler);
+		return () => mediaQuery.removeEventListener('change', handler);
+	});
+
+	function toggleTheme() {
+		const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+		document.documentElement.setAttribute('data-theme', nextTheme);
+		try {
+			localStorage.setItem('theme', nextTheme);
+		} catch (_) {}
+		currentTheme = nextTheme;
+	}
+
+	function toggleMobileMenu() {
+		mobileMenuOpen = !mobileMenuOpen;
+	}
+
+	function closeMobileMenu() {
+		mobileMenuOpen = false;
+	}
+
+	// Enlaces de navegación con sus rutas y nombres traducidos al inglés para la UI
+	const navLinks = [
+		{ href: '/services', label: 'Equipment' },
+		{ href: '/pricing', label: 'Pricing' },
+		{ href: '/contact', label: 'Contact' }
+	];
+</script>
+
+<!-- TopNavBar Shared Component -->
+<header class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 transition-colors duration-300">
+	<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+		<!-- Brand Logo -->
+		<a class="font-display-lg text-headline-md text-primary tracking-tight transition-transform active:scale-95 duration-200" href="/" onclick={closeMobileMenu}>
+			Malaga Event Gear
+		</a>
+
+		<!-- Navigation Links (Desktop) -->
+		<nav class="hidden md:flex items-center gap-8 font-body-lg text-body-lg">
+			{#each navLinks as link}
+				{@const isActive = $page.url.pathname === link.href}
+				<a
+					href={link.href}
+					class="transition-all duration-300 pb-1 active:scale-95 hover:text-electric-blue {isActive ? 'text-electric-blue font-bold border-b-2 border-electric-blue' : 'text-on-surface hover:bg-white/5 px-2 py-0.5 rounded'}"
+				>
+					{link.label}
+				</a>
+			{/each}
+		</nav>
+
+		<!-- Actions -->
+		<div class="flex items-center gap-4">
+			<!-- Theme Toggle Button -->
+			<button
+				onclick={toggleTheme}
+				class="flex items-center justify-center w-10 h-10 rounded-full glass-panel hover:bg-white/10 text-primary hover:text-electric-blue transition-colors duration-300"
+				aria-label="Toggle color theme"
+			>
+				{#if currentTheme === 'dark'}
+					<span class="material-symbols-outlined text-[22px]">light_mode</span>
+				{:else}
+					<span class="material-symbols-outlined text-[22px]">dark_mode</span>
+				{/if}
+			</button>
+
+			<!-- Action Button -->
+			<a
+				class="hidden md:inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/20 active:scale-95 transition-all duration-300"
+				href="/contact"
+			>
+				Book Now
+			</a>
+
+			<!-- Mobile Menu Button -->
+			<button
+				onclick={toggleMobileMenu}
+				class="md:hidden flex items-center justify-center w-10 h-10 rounded-full glass-panel text-primary hover:text-electric-blue transition-colors duration-300"
+				aria-label="Open navigation menu"
+			>
+				{#if mobileMenuOpen}
+					<span class="material-symbols-outlined text-[28px]">close</span>
+				{:else}
+					<span class="material-symbols-outlined text-[28px]">menu</span>
+				{/if}
+			</button>
+		</div>
+	</div>
+
+	<!-- Mobile Dropdown Navigation Menu -->
+	{#if mobileMenuOpen}
+		<div class="md:hidden w-full bg-background/95 backdrop-blur-2xl border-b border-border-glass py-6 px-margin-mobile flex flex-col gap-6 animate-fade-in absolute left-0 top-[73px] shadow-2xl">
+			<nav class="flex flex-col gap-4">
+				{#each navLinks as link}
+					{@const isActive = $page.url.pathname === link.href}
+					<a
+						href={link.href}
+						onclick={closeMobileMenu}
+						class="font-body-lg text-lg py-2 px-4 rounded-lg transition-colors {isActive ? 'bg-primary-container/20 text-electric-blue font-bold' : 'text-on-surface hover:bg-white/5'}"
+					>
+						{link.label}
+					</a>
+				{/each}
+			</nav>
+			<a
+				onclick={closeMobileMenu}
+				class="w-full text-center py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg active:scale-98 transition-all"
+				href="/contact"
+			>
+				Book Now
+			</a>
+		</div>
+	{/if}
+</header>

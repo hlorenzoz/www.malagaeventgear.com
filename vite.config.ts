@@ -1,9 +1,11 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
 	plugins: [
+		tailwindcss(),
 		sveltekit(),
 		SvelteKitPWA({
 			registerType: 'autoUpdate',
@@ -35,7 +37,7 @@ export default defineConfig({
 				]
 			},
 			workbox: {
-				globPatterns: ['**/*.{js,css,html,png,svg,ico,webmanifest}']
+				globPatterns: ['**/*.{js,css,png,svg,ico,webmanifest}']
 			}
 		})
 	]

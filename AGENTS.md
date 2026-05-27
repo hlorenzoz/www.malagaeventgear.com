@@ -18,6 +18,19 @@ Eres un Ingeniero de Software Senior especializado en SvelteKit, integraciones c
 - **Almacenamiento/CDN:** Cloudflare R2 / Cloudflare Images.
 - **Entorno:** Node.js (desarrollo) -> Cloudflare Edge (producción).
 
+## Sistema de Diseño
+
+Las directrices visuales completas (paleta de colores, tipografía, espaciado, componentes y elevación) se encuentran en **`DESIGN.md`**. Antes de crear o modificar cualquier componente de UI, consultá ese archivo.
+
+### Temas (Claro / Oscuro)
+- El sitio soporta **dos temas**: `dark` (por defecto) y `light`.
+- Los tokens de color deben definirse como variables CSS en `:root` y sobreescribirse en `[data-theme="light"]`.
+- El tema activo se controla mediante el atributo `data-theme` en el elemento `<html>`.
+- La preferencia del usuario se persiste en `localStorage` bajo la clave `theme`.
+- En el primer acceso, se respeta `prefers-color-scheme` como valor inicial si no hay preferencia guardada.
+
+---
+
 ## Reglas Estrictas de Desarrollo
 
 ### 1. Ecosistema SvelteKit
@@ -36,6 +49,6 @@ Eres un Ingeniero de Software Senior especializado en SvelteKit, integraciones c
 - Las lecturas de archivos MDX se harán estrictamente en tiempo de compilación (Prerendering) utilizando las importaciones de Vite (`import.meta.glob`).
 
 ### 4. Flujo de Trabajo y Estilo
-- **Idiomas:** El código fuente (variables, funciones, componentes) debe escribirse en inglés. Los comentarios, documentación, *commits* y la UI de la parte pública irán en español.
+- **Idiomas:** El código fuente (variables, funciones, componentes) y la interfaz de usuario (UI) de la parte pública deben escribirse **únicamente en idioma inglés** por el momento. Los comentarios, la documentación y los commits pueden seguir escribiéndose en español.
 - **Código conciso:** Evita reescribir funciones enteras si solo cambian dos líneas. Proporciona el fragmento modificado e indica dónde insertarlo.
 - No inventes dependencias ni generes contenido de relleno ("Lorem Ipsum") a menos que se te solicite explícitamente para una maqueta.

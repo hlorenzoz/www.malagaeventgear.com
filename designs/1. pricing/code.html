@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pricing &amp; Packages - Malaga Event Gear</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#2c2c2c",
+                        "on-tertiary-container": "#959393",
+                        "border-glass": "rgba(255, 255, 255, 0.12)",
+                        "surface-container": "#1e2020",
+                        "on-tertiary": "#313030",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#763223",
+                        "inverse-primary": "#645493",
+                        "on-primary-fixed-variant": "#4c3d7a",
+                        "surface-container-highest": "#333535",
+                        "secondary-container": "#793425",
+                        "on-primary-container": "#9b89cd",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-primary-fixed": "#200e4c",
+                        "primary-fixed": "#e8ddff",
+                        "electric-blue": "#4D8CFF",
+                        "outline": "#948f9a",
+                        "primary-container": "#31215d",
+                        "secondary": "#ffb4a4",
+                        "on-secondary-fixed": "#3c0701",
+                        "primary": "#cebdff",
+                        "on-secondary": "#591c0f",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#352561",
+                        "tertiary": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#37393a",
+                        "on-error": "#690005",
+                        "background": "#121414",
+                        "secondary-fixed-dim": "#ffb4a4",
+                        "surface-dim": "#121414",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#333535",
+                        "surface-glass": "rgba(255, 255, 255, 0.05)",
+                        "surface-container-lowest": "#0c0f0f",
+                        "primary-fixed-dim": "#cebdff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-surface-variant": "#cac4d1",
+                        "inverse-on-surface": "#2f3131",
+                        "secondary-fixed": "#ffdad3",
+                        "on-background": "#e2e2e2",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-tint": "#cebdff",
+                        "on-surface": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#ff9f8b",
+                        "outline-variant": "#49454f",
+                        "surface-container-high": "#282a2b",
+                        "surface": "#121414"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "gutter": "32px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-top-color: rgba(255, 255, 255, 0.3);
+            border-left-color: rgba(255, 255, 255, 0.3);
+        }
+        .ambient-shadow {
+            box-shadow: 0 20px 40px rgba(77, 140, 255, 0.15);
+        }
+        .glow-effect {
+            box-shadow: 0 0 30px rgba(77, 140, 255, 0.3);
+        }
+        
+        @media (prefers-reduced-motion: no-preference) {
+            .reveal-card, .reveal-card-featured {
+                opacity: 0;
+                will-change: opacity, transform;
+            }
+            .reveal-card {
+                transform: translateY(30px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .reveal-card-featured {
+                transform: translateY(50px);
+                transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            }
+            .reveal-card.is-revealed, .reveal-card-featured.is-revealed {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-display-lg text-headline-md text-primary tracking-tight">
+                Malaga Event Gear
+            </div>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="text-on-surface hover:text-electric-blue transition-colors font-body-lg text-body-lg hover:bg-white/10 transition-all duration-300 rounded px-2 py-1" href="#">Equipment</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors font-body-lg text-body-lg hover:bg-white/10 transition-all duration-300 rounded px-2 py-1" href="#">Services</a>
+<a class="text-electric-blue font-bold border-b-2 border-electric-blue pb-1 font-body-lg text-body-lg active:scale-95 transition-transform" href="#">Pricing</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors font-body-lg text-body-lg hover:bg-white/10 transition-all duration-300 rounded px-2 py-1" href="#">Contact</a>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-on-surface hidden md:block">search</span>
+<a class="bg-gradient-to-r from-electric-blue to-primary-container text-white px-6 py-2 rounded-full font-label-lg hover:opacity-90 transition-opacity" href="#">Book Now</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<header class="text-center mb-20">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-6">Tailored Packages for Every Event</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Choose from customizable rental packages designed to fit any event size and budget, making planning a breeze!</p>
+</header>
+<!-- Pricing Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Eco Pack -->
+<div class="glass-card reveal-card rounded-xl p-8 flex flex-col hover:bg-white/10 transition-all duration-300">
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Eco Pack</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[48px]">Perfect for parties or small events up to 50 people. Includes sound and lighting.</p>
+</div>
+<div class="mb-8">
+<span class="font-display-lg text-[48px] font-bold text-electric-blue">€290.00</span>
+<span class="text-on-surface-variant text-sm block mt-1">(+21% VAT)</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-label-lg text-primary mb-4 border-b border-border-glass pb-2">Includes:</h4>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">2 speakers</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 wired microphone</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">2 light bars with 4 pairs of LEDs</span>
+</li>
+</ul>
+<h4 class="font-label-lg text-label-lg text-tertiary-fixed-dim mb-4 border-b border-border-glass pb-2">Optional:</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mr-2 text-sm mt-1">add</span>
+<span class="text-on-surface-variant text-sm">Projector and screen (+50€)</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mr-2 text-sm mt-1">add</span>
+<span class="text-on-surface-variant text-sm">Smoke machine (+20€)</span>
+</li>
+</ul>
+</div>
+<a class="mt-8 w-full block text-center py-3 rounded border border-border-glass bg-white/5 hover:bg-white/10 text-on-surface font-label-lg transition-colors" href="#">Enquire</a>
+</div>
+<!-- Wedding Pack (Most Popular) -->
+<div class="glass-card reveal-card-featured rounded-xl p-8 flex flex-col glow-effect border-electric-blue relative lg:col-span-1 lg:row-span-2 overflow-hidden">
+<div class="absolute top-0 right-0 bg-electric-blue text-white px-4 py-1 rounded-bl-lg font-label-sm tracking-wider uppercase">Most Popular</div>
+<!-- Embedded Image for Wedding Pack -->
+<div class="w-full h-48 rounded-lg overflow-hidden mb-6 relative">
+<img alt="Wedding setup" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida/ADBb0ug5w7wOaGS-ye7h2_G8UyqDbYMZJnFo3n0EKPpcXxJTG8hzJQlSVNraO7x5ypbKYYdJHdo3SlEoMnm1hbLotISEcdS7yUcoRvwRZg2es3rmE9bBP2RrSNpbfBHYcUdgFqF8WFmO7Ir5Rt8jZQJnina2BmPgZFoQkNAY6_lCw3zSHd_rT30euyLl6PHKpYtOedfOVJGP-qnRQ_1xiw2YAefmwjTMiIqaOEN2gciZqGAqf1K1kEvrX8MD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+</div>
+<div class="mb-6 relative z-10">
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Wedding Pack</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Perfectly suited for magical celebrations, with a professional sound system for up to 80 guests, romantic lighting effects, and wireless microphones for heartfelt speeches.</p>
+</div>
+<div class="mb-8 relative z-10">
+<span class="font-display-lg text-[56px] font-bold text-electric-blue">€650.00</span>
+<span class="text-on-surface-variant text-sm block mt-1">(+21% VAT)</span>
+</div>
+<div class="flex-grow relative z-10">
+<h4 class="font-label-lg text-label-lg text-primary mb-4 border-b border-border-glass pb-2">Includes:</h4>
+<ul class="space-y-4 mb-6">
+<li class="flex items-center p-2 rounded bg-white/5">
+<span class="material-symbols-outlined text-electric-blue mr-3">local_shipping</span>
+<span class="text-on-surface">Transport</span>
+</li>
+<li class="flex items-center p-2 rounded bg-white/5">
+<span class="material-symbols-outlined text-electric-blue mr-3">build</span>
+<span class="text-on-surface">Setup</span>
+</li>
+<li class="flex items-center p-2 rounded bg-white/5">
+<span class="material-symbols-outlined text-electric-blue mr-3">support_agent</span>
+<span class="text-on-surface">Technical assistance</span>
+</li>
+<li class="flex items-center p-2 rounded bg-white/5">
+<span class="material-symbols-outlined text-electric-blue mr-3">inventory_2</span>
+<span class="text-on-surface">Post event pickup</span>
+</li>
+</ul>
+</div>
+<a class="mt-8 w-full block text-center py-4 rounded-full bg-gradient-to-r from-secondary-container to-on-secondary-fixed-variant text-white font-label-lg hover:shadow-lg transition-all" href="#">Enquire Wedding Pack</a>
+</div>
+<!-- Product Presentation Pack -->
+<div class="glass-card reveal-card rounded-xl p-8 flex flex-col hover:bg-white/10 transition-all duration-300">
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Presentation Pack</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[48px]">Perfectly suited for impactful presentations, including a high quality screen, projector, and sound system.</p>
+</div>
+<div class="mb-8">
+<span class="font-display-lg text-[48px] font-bold text-electric-blue">€310.00</span>
+<span class="text-on-surface-variant text-sm block mt-1">(+21% VAT)</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-label-lg text-primary mb-4 border-b border-border-glass pb-2">Includes:</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 screen</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 5000 lumen projector</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">Sound system and speakers</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 wireless microphone</span>
+</li>
+</ul>
+</div>
+<a class="mt-8 w-full block text-center py-3 rounded border border-border-glass bg-white/5 hover:bg-white/10 text-on-surface font-label-lg transition-colors" href="#">Enquire</a>
+</div>
+<!-- Basic MICE Pack -->
+<div class="glass-card reveal-card rounded-xl p-8 flex flex-col hover:bg-white/10 transition-all duration-300">
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Basic MICE</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[48px]">Essential setup for small events, including screen, projector, and sound.</p>
+</div>
+<div class="mb-8">
+<span class="font-display-lg text-[48px] font-bold text-electric-blue">€295.00</span>
+<span class="text-on-surface-variant text-sm block mt-1">(+21% VAT)</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-label-lg text-primary mb-4 border-b border-border-glass pb-2">Includes:</h4>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">2x2 screen with 3000 lumen projector</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">Basic sound system for up to 40 people</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 gooseneck microphone</span>
+</li>
+</ul>
+<h4 class="font-label-lg text-label-lg text-tertiary-fixed-dim mb-4 border-b border-border-glass pb-2">Optional:</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mr-2 text-sm mt-1">add</span>
+<span class="text-on-surface-variant text-sm">Technical assistance (+240€ per day)</span>
+</li>
+</ul>
+</div>
+<a class="mt-8 w-full block text-center py-3 rounded border border-border-glass bg-white/5 hover:bg-white/10 text-on-surface font-label-lg transition-colors" href="#">Enquire</a>
+</div>
+<!-- Full MICE Pack -->
+<div class="glass-card reveal-card rounded-xl p-8 flex flex-col hover:bg-white/10 transition-all duration-300">
+<div class="mb-6">
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Full MICE</h3>
+<p class="font-body-md text-body-md text-on-surface-variant min-h-[48px]">Complete corporate event package with screen, sound, mics, and technician.</p>
+</div>
+<div class="mb-8">
+<span class="font-display-lg text-[48px] font-bold text-electric-blue">€490.00</span>
+<span class="text-on-surface-variant text-sm block mt-1">(+21% VAT)</span>
+</div>
+<div class="flex-grow">
+<h4 class="font-label-lg text-label-lg text-primary mb-4 border-b border-border-glass pb-2">Includes:</h4>
+<ul class="space-y-3 mb-6">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">60-inch screen</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">Sound system and speakers</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 gooseneck &amp; 1 wireless mic</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-1">check_circle</span>
+<span class="text-on-surface">1 technician (max 6 hours)</span>
+</li>
+</ul>
+<h4 class="font-label-lg text-label-lg text-tertiary-fixed-dim mb-4 border-b border-border-glass pb-2">Optional:</h4>
+<ul class="space-y-3">
+<li class="flex items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mr-2 text-sm mt-1">add</span>
+<span class="text-on-surface-variant text-sm">Extra tech assistance (+40€/hr)</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mr-2 text-sm mt-1">add</span>
+<span class="text-on-surface-variant text-sm">Methacrylate lectern (+50€)</span>
+</li>
+<li class="flex items-start">
+<span class="material-symbols-outlined text-on-tertiary-container mr-2 text-sm mt-1">add</span>
+<span class="text-on-surface-variant text-sm">Platforms (+35€/sqm)</span>
+</li>
+</ul>
+</div>
+<a class="mt-8 w-full block text-center py-3 rounded border border-border-glass bg-white/5 hover:bg-white/10 text-on-surface font-label-lg transition-colors" href="#">Enquire</a>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 px-margin-mobile md:px-margin-desktop border-t border-border-glass bg-surface-container-low mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="col-span-1">
+<div class="font-display-lg text-headline-md text-primary mb-4">Malaga Event Gear</div>
+<p class="font-body-md text-body-md text-on-surface-variant">© 2024 Malaga Event Gear. All rights reserved.</p>
+</div>
+<div class="col-span-1 flex flex-col space-y-2">
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-transform duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-transform duration-200" href="#">Privacy Policy</a>
+</div>
+<div class="col-span-1 flex flex-col space-y-2">
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-transform duration-200" href="#">Inventory List</a>
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-transform duration-200" href="#">Venue Partners</a>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const cards = document.querySelectorAll('.reveal-card, .reveal-card-featured');
+        cards.forEach(card => observer.observe(card));
+    });
+</script>
+</body></html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Equipment Catalog | Malaga Event Gear</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Scroll Reveal Base Classes */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(32px);
+            will-change: opacity, transform;
+            transition-property: opacity, transform;
+            transition-duration: 700ms;
+            transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+        }
+        
+        .reveal-on-scroll.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll {
+                opacity: 1;
+                transform: translateY(0);
+                transition: none !important;
+                will-change: auto;
+            }
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#2c2c2c",
+                        "on-tertiary-container": "#959393",
+                        "border-glass": "rgba(255, 255, 255, 0.12)",
+                        "surface-container": "#1e2020",
+                        "on-tertiary": "#313030",
+                        "surface-container-low": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#763223",
+                        "inverse-primary": "#645493",
+                        "on-primary-fixed-variant": "#4c3d7a",
+                        "surface-container-highest": "#333535",
+                        "secondary-container": "#793425",
+                        "on-primary-container": "#9b89cd",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "on-primary-fixed": "#200e4c",
+                        "primary-fixed": "#e8ddff",
+                        "electric-blue": "#4D8CFF",
+                        "outline": "#948f9a",
+                        "primary-container": "#31215d",
+                        "secondary": "#ffb4a4",
+                        "on-secondary-fixed": "#3c0701",
+                        "primary": "#cebdff",
+                        "on-secondary": "#591c0f",
+                        "on-error-container": "#ffdad6",
+                        "on-primary": "#352561",
+                        "tertiary": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "surface-bright": "#37393a",
+                        "on-error": "#690005",
+                        "background": "#121414",
+                        "secondary-fixed-dim": "#ffb4a4",
+                        "surface-dim": "#121414",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#333535",
+                        "surface-glass": "rgba(255, 255, 255, 0.05)",
+                        "surface-container-lowest": "#0c0f0f",
+                        "primary-fixed-dim": "#cebdff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-surface-variant": "#cac4d1",
+                        "inverse-on-surface": "#2f3131",
+                        "secondary-fixed": "#ffdad3",
+                        "on-background": "#e2e2e2",
+                        "inverse-surface": "#e2e2e2",
+                        "surface-tint": "#cebdff",
+                        "on-surface": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#ff9f8b",
+                        "outline-variant": "#49454f",
+                        "surface-container-high": "#282a2b",
+                        "surface": "#121414"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "gutter": "32px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Playfair Display"],
+                        "label-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-md": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "56px", "fontWeight": "600" }],
+                        "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-primary min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopNavBar Shared Component -->
+<header class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<!-- Brand Logo -->
+<a class="font-display-lg text-headline-md text-primary tracking-tight" href="#">
+                Malaga Event Gear
+            </a>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-8 font-body-lg text-body-lg">
+<a class="text-electric-blue font-bold border-b-2 border-electric-blue pb-1 active:scale-95 transition-transform" href="#">Equipment</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors active:scale-95 transition-transform" href="#">Services</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors active:scale-95 transition-transform" href="#">Pricing</a>
+<a class="text-on-surface hover:text-electric-blue transition-colors active:scale-95 transition-transform" href="#">Contact</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-6">
+<button class="text-primary hover:text-electric-blue transition-colors hidden md:block">
+<span class="material-symbols-outlined text-[24px]">search</span>
+</button>
+<a class="hidden md:inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/20 transition-all duration-300" href="#">
+                    Book Now
+                </a>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[100px] md:pt-[120px]">
+<!-- Hero Section -->
+<section class="relative px-margin-mobile md:px-margin-desktop py-20 md:py-32 max-w-container-max mx-auto text-center flex flex-col items-center justify-center">
+<!-- Decorative ambient glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-container rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+<span class="font-label-lg text-electric-blue uppercase tracking-[0.2em] mb-4 block">State of the Art Technology</span>
+<h1 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-6 max-w-4xl mx-auto">
+                Elevate Your Event with <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-electric-blue">Premium Audiovisual</span> Solutions
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">
+                Explore our catalog of high-end equipment. From crystal clear sound systems to dynamic lighting and special effects, we provide the tools to make your occasion unforgettable.
+            </p>
+</section>
+<!-- Featured Package: MICE Pack -->
+<section class="px-margin-mobile md:px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="relative bg-surface-container-low border border-border-glass rounded-[24px] overflow-hidden group reveal-on-scroll">
+<!-- Ambient shadow behind card -->
+<div class="absolute -inset-1 bg-gradient-to-r from-electric-blue/10 to-primary-container/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="relative grid grid-cols-1 lg:grid-cols-2 gap-0">
+<div class="relative h-[400px] lg:h-auto overflow-hidden">
+<img alt="MICE Pack Setup" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida/ADBb0uhhn7muQzMrOq1OET9-W3b-HkkGO1YqJ0eziICavObri9c3v27TKrh2o7y8lXKu7GvEk4fUSo7ZcNRp9_7Qez7owNCqSP9L0pgURBdXvwSJviS2Bgb7_4Bmbfe1t6KPwFuk8J5W7OWK04ZYuib7ZI5aeQW5M-7Cbk3OENjceK-YLLUH2yYCBGpfzwYJNdMWYIrpZN5YEvJRSE4bvQqCKAIIF5B4I39qHt1372WeZkGL8_T_ZABMvMhAtw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent lg:bg-gradient-to-r"></div>
+<div class="absolute top-6 left-6 bg-surface-glass backdrop-blur-md border border-border-glass rounded-full px-4 py-1.5 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-electric-blue animate-pulse"></div>
+<span class="font-label-sm text-label-sm text-on-surface uppercase">Featured Package</span>
+</div>
+</div>
+<div class="p-8 md:p-16 flex flex-col justify-center relative z-10 bg-surface-glass backdrop-blur-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4">MICE Pack</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                            Perfect for corporate events, the Pack MICE includes a 60-inch LED screen, high-quality audiovisual equipment, and both wired and wireless microphones, along with a dedicated technician for up to 6 hours, ensuring your presentation runs smoothly.
+                        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-electric-blue">tv</span>
+<span class="font-label-sm text-label-sm text-on-surface">60-inch Display</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-electric-blue">mic</span>
+<span class="font-label-sm text-label-sm text-on-surface">Wireless Audio</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-electric-blue">engineering</span>
+<span class="font-label-sm text-label-sm text-on-surface">On-site Technician</span>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-electric-blue">speaker</span>
+<span class="font-label-sm text-label-sm text-on-surface">Premium Sound</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-6 mt-auto">
+<div class="text-left w-full sm:w-auto">
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Starting from</span>
+<span class="font-headline-md text-[28px] text-primary">€490.00 <span class="text-[14px] text-on-surface-variant">(+VAT)</span></span>
+</div>
+<button class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 transition-all duration-300 ml-auto flex items-center justify-center gap-2">
+                                Request Specs <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Catalog Grid (Bento Style) -->
+<section class="px-margin-mobile md:px-margin-desktop py-20 max-w-container-max mx-auto">
+<div class="flex justify-between items-end mb-12 border-b border-border-glass pb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Equipment Categories</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Browse our extensive inventory for specific technical needs.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[400px]">
+<!-- Audio -->
+<a class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal-on-scroll" href="#" style="transition-delay: 0ms;">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500" data-alt="A close-up shot of a high-end professional audio mixing console in a dark studio setting. The console features numerous illuminated knobs, sliders, and digital displays glowing in vibrant electric blue and deep purple hues. The background is slightly blurred to emphasize the intricate details of the sound equipment. The overall mood is technological, sophisticated, and geared towards premium event production."></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+<div class="absolute inset-0 bg-surface-glass backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-electric-blue/30 flex items-center justify-center mb-4 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary">speaker</span>
+</div>
+<h3 class="font-headline-md text-[28px] text-on-surface mb-2">Sound Systems</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">Experience crystal clear audio with our premium sound systems, perfect for any event size from intimate weddings to large corporate conferences.</p>
+</div>
+</a>
+<!-- Lighting -->
+<a class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal-on-scroll" href="#" style="transition-delay: 100ms;">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500" data-alt="Dynamic stage lighting setup at a live event. Multiple high-intensity LED wash lights and moving head spotlights beam through a light haze. The colors are rich and vibrant, featuring deep indigos, vivid magentas, and electric blues cutting through the darkness. The scene captures the high-energy, exclusive atmosphere of a premium corporate event or concert production."></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 z-10">
+<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+</div>
+<h3 class="font-headline-md text-[24px] text-on-surface mb-2">Dynamic Lighting</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Enhance your event with dynamic lighting solutions, perfect for creating the ideal mood and ambiance.</p>
+</div>
+</a>
+<!-- Visuals -->
+<a class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal-on-scroll" href="#" style="transition-delay: 200ms;">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540655037529-dec98120b8c7?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500" data-alt="A sleek, modern corporate presentation setting. A very large, high-resolution LED screen displays crisp data visualizations against a dark, refined background. In the foreground, out of focus, are silhouettes of premium seating. The lighting is controlled and sophisticated, emphasizing the high-tech visual equipment. The aesthetic is clean, professional, and luxurious."></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-8 z-10">
+<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary">videocam</span>
+</div>
+<h3 class="font-headline-md text-[24px] text-on-surface mb-2">Projectors &amp; Screens</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">High quality projectors for crystal clear visuals, perfect for presentations, events, and screenings.</p>
+</div>
+</a>
+<!-- Special Effects -->
+<a class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal-on-scroll" href="#" style="transition-delay: 300ms;">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&amp;w=1974&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500" data-alt="Atmospheric low-lying fog rolling across a sleek, dark stage floor. Subtle backlighting in deep purple and electric blue catches the texture of the smoke, creating a mysterious and highly theatrical mood. The setting suggests a high-end product launch or an exclusive party environment. The image embodies a refined, glassmorphism aesthetic with its smooth gradients and deep shadows."></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent"></div>
+<div class="absolute top-0 left-0 w-full h-full p-8 flex flex-col justify-center z-10 max-w-lg">
+<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
+<span class="material-symbols-outlined text-primary">air</span>
+</div>
+<h3 class="font-headline-md text-[28px] text-on-surface mb-4">Special Effects</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Create a stunning atmosphere at your event with our professional grade smoke machines, hazers, and atmospheric effects.</p>
+<div class="flex items-center gap-2 text-electric-blue font-label-lg group-hover:translate-x-2 transition-transform duration-300">
+                            Explore Effects <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</div>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer Shared Component -->
+<footer class="w-full py-16 px-margin-mobile md:px-margin-desktop border-t border-border-glass bg-surface-container-low mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<div class="md:col-span-1 flex flex-col gap-4">
+<span class="font-display-lg text-headline-md text-primary">Malaga Event Gear</span>
+<p class="font-body-md text-body-md text-on-tertiary-container mt-4">
+                    Premium audiovisual and event equipment rentals for exclusive events in Malaga and the Costa del Sol.
+                </p>
+</div>
+<div class="md:col-span-3 flex flex-col md:flex-row justify-end gap-12 md:gap-24 mt-8 md:mt-0">
+<div class="flex flex-col gap-4">
+<span class="font-label-lg text-on-surface uppercase tracking-wider mb-2">Legal</span>
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-all duration-200" href="#">Terms of Service</a>
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-all duration-200" href="#">Privacy Policy</a>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-label-lg text-on-surface uppercase tracking-wider mb-2">Resources</span>
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-all duration-200" href="#">Inventory List</a>
+<a class="font-body-md text-body-md text-on-tertiary-container hover:text-on-surface hover:translate-x-1 transition-all duration-200" href="#">Venue Partners</a>
+</div>
+</div>
+<div class="md:col-span-4 mt-16 pt-8 border-t border-border-glass/50 flex justify-between items-center flex-col md:flex-row gap-4">
+<span class="font-body-md text-body-md text-on-tertiary-container">© 2024 Malaga Event Gear. All rights reserved.</span>
+<div class="flex items-center gap-6">
+<a class="text-on-tertiary-container hover:text-electric-blue transition-colors" href="#">
+<span class="material-symbols-outlined">mail</span>
+</a>
+<a class="text-on-tertiary-container hover:text-electric-blue transition-colors" href="#">
+<span class="material-symbols-outlined">call</span>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((element) => {
+            observer.observe(element);
+        });
+    });
+</script>
+</body></html>

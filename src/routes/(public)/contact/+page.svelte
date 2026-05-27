@@ -1,0 +1,360 @@
+<script lang="ts">
+	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
+
+	// Structured JSON-LD schema for the Contact Page
+	const contactSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'ContactPage',
+		'name': 'Contact Us - Malaga Event Gear',
+		'description': 'Contact the technical team at Malaga Event Gear to request custom quotes for sound, lighting, and screen rentals.',
+		'url': 'https://www.malagaeventgear.com/contact',
+		'mainEntity': {
+			'@type': 'LocalBusiness',
+			'name': 'Malaga Event Gear',
+			'telephone': '+34600428750',
+			'email': 'contact@malagaeventgear.com',
+			'address': {
+				'@type': 'PostalAddress',
+				'streetAddress': 'Av. de Barcelona, 34',
+				'addressLocality': 'Malaga',
+				'postalCode': '29009',
+				'addressCountry': 'ES'
+			}
+		}
+	};
+
+	// Reactive states managed by Svelte 5 Runes
+	let name = $state('');
+	let email = $state('');
+	let phone = $state('');
+	let date = $state('');
+	let eventType = $state('');
+	let message = $state('');
+	
+	let isSubmitted = $state(false);
+	let errorMessage = $state('');
+	let openFaqIndex = $state<number | null>(null);
+
+	onMount(() => {
+		// Capture query parameters if the user clicked from a specific pack
+		const params = new URLSearchParams(window.location.search);
+		const pack = params.get('pack');
+		const category = params.get('category');
+		
+		if (pack) {
+			eventType = 'corporate';
+			message = `Hi, I am interested in booking the Pack: ${pack.toUpperCase()}. Please let me know the availability and details.`;
+		} else if (category) {
+			message = `Hi, I am interested in booking equipment from the category: ${category.toUpperCase()}. I look forward to your quote.`;
+		}
+	});
+
+	function handleSubmit(e: Event) {
+		e.preventDefault();
+		if (!name.trim() || !email.trim() || !message.trim()) {
+			errorMessage = 'Please fill out all required fields.';
+			return;
+		}
+		errorMessage = '';
+		isSubmitted = true;
+	}
+
+	const faqs = [
+		{
+			q: 'How does the booking process work?',
+			a: 'The process is simple: 1. Select your pack or equipment. 2. Fill out our quote form. 3. Our technical team contacts you to confirm specifications. Enjoy a stress-free event while we handle setup and teardown.'
+		},
+		{
+			q: 'Where do you offer your services?',
+			a: 'We operate mainly across the Costa del Sol, including Malaga, Marbella, Torremolinos, Fuengirola, Benalmadena, Estepona, and nearby areas. We also cover Seville, Granada, and Cordoba for specific projects.'
+		},
+		{
+			q: 'Do you offer technical support during the event?',
+			a: 'Yes, many of our packages (like the MICE Pack) already include a dedicated technician on-site to manage sound and displays. For smaller packages, you can optionally hire on-site assistance per hour or full day.'
+		}
+	];
+
+	function toggleFaq(index: number) {
+		openFaqIndex = openFaqIndex === index ? null : index;
+	}
+</script>
+
+<!-- SEO Head & JSON-LD Injection -->
+<SeoHead
+	title="Contact Us & Audiovisual Quotes | MEG"
+	description="Get in touch with Malaga Event Gear to request quotes for sound, lighting, and screen rentals. 24/7 technical support."
+	canonicalUrl="https://www.malagaeventgear.com/contact"
+	jsonLdSchema={contactSchema}
+/>
+
+<!-- Main Content Canvas -->
+<div class="pt-8 pb-24 max-w-container-max mx-auto w-full relative z-10 px-margin-mobile">
+	<div class="text-center mb-16">
+		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+			Immediate Response 24/7
+		</span>
+		<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-4 text-on-background">
+			Get in Touch
+		</h1>
+		<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+			Ready to elevate your event? Contact our technical team to receive tailored quotes, check equipment availability, and get expert advice.
+		</p>
+	</div>
+
+	<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+		<!-- Contact Info Sidebar (4 Cols) -->
+		<div class="lg:col-span-4 flex">
+			<div class="glass-panel rounded-xl p-8 w-full flex flex-col justify-between">
+				<div>
+					<h3 class="font-headline-md text-headline-md mb-8 text-on-surface">Contact Details</h3>
+					<div class="space-y-6">
+						<div class="flex items-start space-x-4">
+							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
+								<span class="material-symbols-outlined">call</span>
+							</div>
+							<div>
+								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Phone</p>
+								<a class="font-body-lg text-body-lg hover:text-electric-blue transition-colors text-on-surface" href="tel:+34600428750">
+									+34 600 42 87 50
+								</a>
+							</div>
+						</div>
+						
+						<div class="flex items-start space-x-4">
+							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
+								<span class="material-symbols-outlined">chat</span>
+							</div>
+							<div>
+								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">WhatsApp</p>
+								<a class="font-body-lg text-body-lg hover:text-electric-blue transition-colors text-on-surface" href="https://wa.me/34600428750" target="_blank" rel="noopener noreferrer">
+									Send us a message
+								</a>
+							</div>
+						</div>
+						
+						<div class="flex items-start space-x-4">
+							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
+								<span class="material-symbols-outlined">mail</span>
+							</div>
+							<div>
+								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Email</p>
+								<a class="font-body-md text-body-md hover:text-electric-blue transition-colors text-on-surface break-all" href="mailto:contact@malagaeventgear.com">
+									contact@malagaeventgear.com
+								</a>
+							</div>
+						</div>
+						
+						<div class="flex items-start space-x-4">
+							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
+								<span class="material-symbols-outlined">location_on</span>
+							</div>
+							<div>
+								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Location</p>
+								<p class="font-body-md text-body-md text-on-surface-variant">
+									Av. de Barcelona, 34, 3B<br />
+									District Centro<br />
+									29009 Malaga, Spain
+								</p>
+							</div>
+						</div>
+						
+						<div class="flex items-start space-x-4">
+							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
+								<span class="material-symbols-outlined">schedule</span>
+							</div>
+							<div>
+								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">Operating Hours</p>
+								<p class="font-body-md text-body-md text-on-surface-variant">
+									Technical support and logistics 24 hours, 7 days a week.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Inquiry Form (8 Cols) -->
+		<div class="lg:col-span-8 flex">
+			<div class="glass-panel rounded-xl p-8 md:p-12 w-full relative overflow-hidden flex flex-col justify-center">
+				<!-- Subtle decorative glow -->
+				<div class="absolute -top-24 -right-24 w-64 h-64 bg-electric-blue/10 rounded-full blur-3xl pointer-events-none"></div>
+				
+				{#if isSubmitted}
+					<div class="text-center py-12 space-y-6 animate-fade-in relative z-10">
+						<div class="w-20 h-20 bg-electric-blue/20 text-electric-blue rounded-full flex items-center justify-center mx-auto mb-4 border border-electric-blue/30">
+							<span class="material-symbols-outlined text-[48px]">check_circle</span>
+						</div>
+						<h2 class="font-headline-md text-headline-md text-on-surface">Quote Requested!</h2>
+						<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mx-auto">
+							Hi <strong>{name}</strong>, we received your request successfully. Our technical team in Malaga will evaluate it and contact you by email (<strong>{email}</strong>) in less than 2 hours.
+						</p>
+						<button 
+							onclick={() => { isSubmitted = false; name = ''; email = ''; phone = ''; message = ''; date = ''; eventType = ''; }}
+							class="px-8 py-3 rounded-full border border-border-glass bg-white/5 hover:bg-white/10 text-on-surface font-label-lg active:scale-95 transition-all"
+						>
+							Send another request
+						</button>
+					</div>
+				{:else}
+					<h2 class="font-headline-md text-headline-md mb-8 text-on-surface">Request a Quote</h2>
+					<form onsubmit={handleSubmit} class="space-y-6 relative z-10">
+						{#if errorMessage}
+							<div class="p-4 rounded-lg bg-error-container/30 border border-error text-error text-sm font-body-md animate-fade-in">
+								{errorMessage}
+							</div>
+						{/if}
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<!-- Name -->
+							<div class="relative">
+								<input 
+									type="text" 
+									id="name"
+									bind:value={name}
+									required
+									placeholder="Full Name"
+									class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent"
+								/>
+								<label 
+									for="name"
+									class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue"
+								>
+									Full Name *
+								</label>
+							</div>
+
+							<!-- Email -->
+							<div class="relative">
+								<input 
+									type="email" 
+									id="email"
+									bind:value={email}
+									required
+									placeholder="Email Address"
+									class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent"
+								/>
+								<label 
+									for="email"
+									class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue"
+								>
+									Email Address *
+								</label>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+							<!-- Phone -->
+							<div class="relative">
+								<input 
+									type="tel" 
+									id="phone"
+									bind:value={phone}
+									placeholder="Phone"
+									class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent"
+								/>
+								<label 
+									for="phone"
+									class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue"
+								>
+									Contact Phone
+								</label>
+							</div>
+
+							<!-- Date -->
+							<div class="relative">
+								<input 
+									type="date" 
+									id="date"
+									bind:value={date}
+									class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface-variant focus:ring-0 focus:border-electric-blue transition-colors text-on-surface"
+								/>
+								<label 
+									for="date"
+									class="absolute left-0 -top-3.5 text-electric-blue font-label-sm text-label-sm"
+								>
+									Event Date
+								</label>
+							</div>
+						</div>
+
+						<!-- Event Type -->
+						<div class="relative">
+							<select 
+								id="eventType"
+								bind:value={eventType}
+								class="w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors appearance-none"
+							>
+								<option class="bg-surface text-on-surface-variant" disabled value="">Event Type</option>
+								<option class="bg-surface" value="wedding">Wedding / Celebration</option>
+								<option class="bg-surface" value="corporate">Corporate Event</option>
+								<option class="bg-surface" value="party">Private Party</option>
+								<option class="bg-surface" value="conference">Conference / MICE</option>
+								<option class="bg-surface" value="other">Other type of event</option>
+							</select>
+							<span class="material-symbols-outlined absolute right-0 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+						</div>
+
+						<!-- Message -->
+						<div class="relative">
+							<textarea 
+								id="message"
+								bind:value={message}
+								required
+								rows="4"
+								placeholder="Message"
+								class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent resize-none"
+							></textarea>
+							<label 
+								for="message"
+								class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue"
+							>
+								Event Details & Technical Requirements *
+							</label>
+						</div>
+
+						<!-- Submit Button -->
+						<button 
+							type="submit"
+							class="w-full bg-gradient-to-r from-electric-blue to-primary-container text-white py-4 rounded-lg font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-[0.98] transition-all duration-300"
+						>
+							Send Request
+						</button>
+					</form>
+				{/if}
+			</div>
+		</div>
+	</div>
+
+	<!-- FAQ Accordion Section -->
+	<section class="mt-32 max-w-4xl mx-auto">
+		<h2 class="font-headline-md text-headline-md text-center mb-12 text-on-background">Frequently Asked Questions</h2>
+		<div class="space-y-4">
+			{#each faqs as faq, i}
+				{@const isOpen = openFaqIndex === i}
+				<div class="glass-panel rounded-xl overflow-hidden transition-colors duration-300">
+					<button 
+						onclick={() => toggleFaq(i)}
+						class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group"
+						aria-expanded={isOpen}
+					>
+						<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
+							{faq.q}
+						</span>
+						<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}">
+							{#if isOpen}remove{:else}add{/if}
+						</span>
+					</button>
+					
+					{#if isOpen}
+						<div class="px-6 pb-5 text-on-surface-variant font-body-md text-body-md animate-fade-in border-t border-border-glass/30 pt-3">
+							<p>{faq.a}</p>
+						</div>
+					{/if}
+				</div>
+			{/each}
+		</div>
+	</section>
+</div>
