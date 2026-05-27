@@ -18,6 +18,24 @@ Eres un Ingeniero de Software Senior especializado en SvelteKit, integraciones c
 - **Almacenamiento/CDN:** Cloudflare R2 / Cloudflare Images.
 - **Entorno:** Node.js (desarrollo) -> Cloudflare Edge (producción).
 
+---
+
+## Router de Skills de IA (AI Skills Router)
+
+Cuando detectes o inicies una tarea en este proyecto, **cargá inmediatamente** la skill relevante según el contexto antes de escribir código o realizar diagnósticos. Esto garantiza que apliquemos de manera estricta los mejores estándares de desarrollo:
+
+| Contexto / Tarea | Skill a Cargar | Enfoque Principal |
+| :--- | :--- | :--- |
+| **Componentes y Reactividad**<br>Eventos, stores, lógica de renderizado, y sintaxis de Svelte 5. | `svelte-core-bestpractices`<br>`svelte-code-writer` | Buenas prácticas de Svelte 5, modularidad, tipado estricto y aserciones. |
+| **Estética y Visuales**<br>Uso de variables CSS, glassmorphism, paleta de colores (DESIGN.md), y micro-animaciones. | `ui-ux-pro-max` | Diseño estético premium, interacción de usuario, colores armoniosos y contraste. |
+| **HTML5 & CSS Moderno**<br>Efectos de scroll, View Transitions, container queries, :has(), y APIs nativas del DOM. | `modern-web-guidance` | Estándares HTML5, optimización visual y compatibilidad con APIs de navegador avanzadas. |
+| **SEO Técnico & LCP**<br>Optimización de imágenes (AVIF/WebP), prioridades de red, y auditorías de Core Web Vitals (LCP, INP, CLS). | `debug-optimize-lcp` | SEO Técnico, optimización del Largest Contentful Paint y rendimiento crítico. |
+| **Rendimiento general**<br>Diagnóstico de cuellos de botella de JS, auditorías de velocidad y perfiles con Lighthouse. | `performance-investigation` | Diagnóstico de rendimiento, renderizado Edge veloz y eliminación de scripts bloqueantes. |
+| **Accesibilidad (a11y)**<br>Navegación por teclado, etiquetas ARIA, contraste WCAG 2.1 AA, y semántica HTML5. | `a11y-debugging` | Accesibilidad web global, inclusión, usabilidad y SEO Holístico. |
+| **Testing de Interfaces**<br>Validación visual, logs del navegador, y pruebas de integración locales con Playwright. | `webapp-testing` | Pruebas de integración automatizadas y validación funcional del frontend. |
+
+---
+
 ## Sistema de Diseño
 
 Las directrices visuales completas (paleta de colores, tipografía, espaciado, componentes y elevación) se encuentran en **`DESIGN.md`**. Antes de crear o modificar cualquier componente de UI, consultá ese archivo.
