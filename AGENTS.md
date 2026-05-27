@@ -117,7 +117,7 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 - No inventes dependencias ni generes contenido de relleno ("Lorem Ipsum") a menos que se te solicite explícitamente para una maqueta.
 
 ### 5. Creación y Actualización de Contenido (Blog / SEO)
-Al crear o actualizar contenido para posts del blog, se deben seguir estrictamente estas directrices para garantizar la máxima calidad y rendimiento en buscadores:
+Al crear o actualizar contenido para posts del blog o páginas comerciales, se deben seguir estrictamente estas directrices para garantizar la máxima calidad y rendimiento en buscadores:
 
 - **Evitar introducciones genéricas de IA**: No arranques con introducciones cliché o predecibles. Empezá siempre con un dato concreto, un error común del sector o un caso de estudio real.
 - **Alineación con la intención de búsqueda (Search Intent)**: Estructurá el contenido respondiendo directamente a lo que busca el usuario (guías paso a paso, soluciones directas a problemas o comparativas).
@@ -126,5 +126,43 @@ Al crear o actualizar contenido para posts del blog, se deben seguir estrictamen
 - **Control de densidad de palabras clave (Keyword Stuffing)**: Usá la palabra clave principal de forma orgánica solo unas pocas veces y priorizá variaciones naturales y sinónimos semánticos.
 - **Optimización de enlaces internos (Internal Linking)**: Añadí entre 3 y 5 enlaces contextuales hacia otros contenidos relevantes y estructurá la web usando topic clusters (Hub & Spoke).
 - **Formateo para legibilidad y retención**: Utilizá párrafos cortos, listas con viñetas y elementos visuales potentes para enganchar al usuario y mejorar la experiencia de lectura.
+
+#### Los 5 Errores Críticos que Matan el Tráfico (y cómo resolverlos)
+Para auditorías o actualizaciones, resolvé siempre estos problemas que frenan el posicionamiento:
+
+1. **Estructuras de sitio rotas o planas (Broken/Flat Structures)**:
+   - Reconstruí la navegación principal agrupando páginas lógicamente.
+   - Añadí subcategorías basadas en búsquedas reales y tags.
+   - Creá páginas de aterrizaje (landing pages) individuales para cada servicio o producto principal.
+   - Implementá hilos de Ariadna (breadcrumbs) para guiar a usuarios y crawlers.
+   - Mantené los enlaces del footer súper limpios y enfocados para evitar la dilución del rastreo (crawl dilution).
+
+2. **Enlaces internos débiles y páginas huérfanas (Orphan Pages)**:
+   - Mapeá todas las URLs para encontrar páginas con cero enlaces entrantes.
+   - Enlazá desde posts de alto tráfico hacia las páginas comerciales que necesitás posicionar.
+   - Colocá enlaces contextuales dentro de los párrafos, no solo en menús o footers.
+   - Fusioná (merge) páginas duplicadas o muy similares para concentrar la autoridad del enlace (link equity).
+   - Usá textos de anclaje (anchor texts) descriptivos e incorporá palabras clave de forma 100% natural.
+
+3. **Páginas delgadas o de baja calidad (Thin/Spammy Content)**:
+   - Añadí tablas, especificaciones de producto, guías paso a paso o comparativas usando campos personalizados.
+   - Reemplazá resúmenes cortos por explicaciones detalladas que respondan a dudas reales del comprador.
+   - Incorporá preguntas frecuentes (FAQs), llamadas a la acción (CTAs) claras y elementos visuales (iconos, tablas).
+   - Eliminá (prune) o actualizá textos viejos o generados por IA que no aporten valor real.
+   - Programá auditorías trimestrales para repasar y mantener al día las publicaciones antiguas.
+
+4. **Metadatos y Sitemap Imprecisos**:
+   - Reescribí las meta etiquetas title para que coincidan con la intención de búsqueda y aumenten el CTR.
+   - Agrupá los posts en categorías claras y reflejalas con precisión en el sitemap.
+   - Usá un sitemap dinámico que se actualice automáticamente con cada nueva página.
+   - Enviá el sitemap a Google Search Console (GSC) y validalo en el archivo `robots.txt`.
+   - Eliminá URLs rotas (404) o inútiles que malgastan el presupuesto de rastreo (crawl budget).
+
+5. **Páginas y señales de E-E-A-T que generan confianza real**:
+   - Diseñá una sección "Sobre Nosotros" (About) detallada que cuente la historia real de la marca.
+   - Creá una página dedicada a opiniones de clientes con testimonios reales y contenido generado por usuarios (UGC).
+   - Enlazá de manera externa a fuentes autorizadas y de alta confianza en el sector.
+   - Incluí siempre la autoría (autor calificado) y fechas de publicación o última actualización en los artículos.
+   - Asegurá perfiles de marca activos en redes sociales y vinculalos desde el sitio web.
 
 *Nota: Pequeñas mejoras aplicadas a contenidos generados previamente por IA pueden disparar drásticamente el posicionamiento y el tráfico orgánico.*
