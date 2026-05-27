@@ -27,10 +27,11 @@ Cuando detectes o inicies una tarea en este proyecto, **cargá inmediatamente** 
 | Contexto / Tarea | Skill a Cargar | Enfoque Principal |
 | :--- | :--- | :--- |
 | **Componentes y Reactividad**<br>Eventos, stores, lógica de renderizado, y sintaxis de Svelte 5. | `svelte-core-bestpractices`<br>`svelte-code-writer` | Buenas prácticas de Svelte 5, modularidad, tipado estricto y aserciones. |
-| **Estética y Visuales**<br>Uso de variables CSS, glassmorphism, paleta de colores (DESIGN.md), y micro-animaciones. | `ui-ux-pro-max` | Diseño estético premium, interacción de usuario, colores armoniosos y contraste. |
+| **Estética y Visuales Premium**<br>Uso de variables CSS, glassmorphism, paleta de colores (DESIGN.md), y micro-animaciones. | `ui-ux-pro-max` | Diseño estético premium, interacción de usuario, colores armoniosos y contraste. |
 | **HTML5 & CSS Moderno**<br>Efectos de scroll, View Transitions, container queries, :has(), y APIs nativas del DOM. | `modern-web-guidance` | Estándares HTML5, optimización visual y compatibilidad con APIs de navegador avanzadas. |
-| **SEO Técnico & LCP**<br>Optimización de imágenes (AVIF/WebP), prioridades de red, y auditorías de Core Web Vitals (LCP, INP, CLS). | `debug-optimize-lcp` | SEO Técnico, optimización del Largest Contentful Paint y rendimiento crítico. |
-| **Rendimiento general**<br>Diagnóstico de cuellos de botella de JS, auditorías de velocidad y perfiles con Lighthouse. | `performance-investigation` | Diagnóstico de rendimiento, renderizado Edge veloz y eliminación de scripts bloqueantes. |
+| **SEO Técnico & Generativo**<br>Inyección de metadatos estructurados JSON-LD (Schema.org), optimización de imágenes (AVIF/WebP), prioridades de red, y Google Rich Results. | `debug-optimize-lcp`<br>`structured-data-schema` | SEO Técnico de última generación, Schema Markup robusto y Rich Results de alto impacto. |
+| **Rendimiento & Cloudflare**<br>Diagnóstico de cuellos de botella de JS, Edge Rendering, Wrangler y restricciones de Cloudflare Workers/Pages. | `performance-investigation`<br>`cloudflare-guard` | Edge compatibility, optimizaciones de cómputo en la red y eliminación de scripts bloqueantes. |
+| **Mobile & PWA Readiness**<br>Compatibilidad PWA, touch targets (mín 44px), safe areas (safe-area-inset-*), notch compliance y Capacitor. | `mobile-readiness-lead` | Compatibilidad fluida con dispositivos móviles y preparación Capacitor/PWA. |
 | **Accesibilidad (a11y)**<br>Navegación por teclado, etiquetas ARIA, contraste WCAG 2.1 AA, y semántica HTML5. | `a11y-debugging` | Accesibilidad web global, inclusión, usabilidad y SEO Holístico. |
 | **Testing de Interfaces**<br>Validación visual, logs del navegador, y pruebas de integración locales con Playwright. | `webapp-testing` | Pruebas de integración automatizadas y validación funcional del frontend. |
 
