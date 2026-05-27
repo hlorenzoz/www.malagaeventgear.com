@@ -29,12 +29,55 @@ Cuando detectes o inicies una tarea en este proyecto, **cargá inmediatamente** 
 | **Componentes y Reactividad**<br>Eventos, stores, lógica de renderizado, y sintaxis de Svelte 5. | `svelte-core-bestpractices [Local]`<br>`svelte-code-writer [Local]` | Buenas prácticas de Svelte 5, modularidad, tipado estricto y aserciones. |
 | **Estética y Visuales Premium**<br>Uso de variables CSS, glassmorphism, paleta de colores (DESIGN.md), y micro-animaciones. | `ui-ux-pro-max [Global]`<br>`frontend-design [Global]`<br>`high-end-visual-design [Global]`<br>`glassmorphism [Global]`<br>`minimalist-ui [Global]` | Wow-factor visual, glassmorphism sofisticado, paletas balanceadas e interacciones fluidas. |
 | **HTML5 & CSS Moderno**<br>Efectos de scroll, View Transitions, container queries, :has(), y APIs nativas del DOM. | `modern-web-guidance [Local]` | Estándares HTML5, optimización visual y compatibilidad con APIs de navegador avanzadas. |
-| **SEO, Contenido & Conversión**<br>Estrategia SEO, auditorías locales y técnicas, JSON-LD, E-E-A-T, redacción (anti-AI-slop), topic clustering (Hub & Spoke), backlinks y conversión. | `debug-optimize-lcp [Global]`<br>`structured-data-schema [Global]`<br>`seo-audit [Global]`<br>`seo-geo [Global]`<br>`programmatic-seo [Global]`<br>`copywriting [Global]`<br>`landing-page-conversion-framework [Global]`<br>`page-audit [Local]`<br>`seo-cluster [Local]`<br>`content-brief [Local]`<br>`eeat-audit [Local]`<br>`write-content [Local]`<br>`improve-content [Local]`<br>`linkbuilding [Local]`<br>`featured-snippet-optimizer [Local]`<br>`semantic-gap-analysis [Local]`<br>`topic-cluster-planning [Local]`<br>`expert-interview [Local]`<br>`keyword-deep-dive [Local]` | SEO Técnico y Geográfico, auditorías competitivas y de calidad, creación estructurada de contenidos premium no-slop y enlazado semántico de alto rango. |
+| **SEO, Contenido & Conversión**<br>Estrategia SEO, auditorías locales y técnicas, JSON-LD, E-E-A-T, redacción (anti-AI-slop), topic clustering (Hub & Spoke), backlinks y conversión. | **Globales:**<br>`debug-optimize-lcp [Global]`<br>`structured-data-schema [Global]`<br>`seo-audit [Global]`<br>`seo-geo [Global]`<br>`programmatic-seo [Global]`<br>`copywriting [Global]`<br>`landing-page-conversion-framework [Global]`<br><br>**Locales del Proyecto:**<br>*(Ver Diccionario de Habilidades Locales abajo)* | SEO Técnico y de negocio, inyección de metadatos JSON-LD estructurados y optimizaciones de conversión. Para redacción y estrategia de contenido avanzada, cargar la skill local correspondiente del diccionario detallado.* |
 | **Rendimiento & Cloudflare**<br>Diagnóstico de cuellos de botella de JS, Edge Rendering, Wrangler y restricciones de Cloudflare Workers/Pages. | `performance-investigation [Local]`<br>`cloudflare-guard [Global]`<br>`cloudflare [Global]`<br>`cloudflare-deploy [Global]`<br>`workers-best-practices [Global]`<br>`wrangler [Global]`<br>`performance [Global]`<br>`web-perf [Global]`<br>`lighthouse [Global]` | Edge compatibility, wrangler config, optimizaciones críticas de carga y eliminación de scripts bloqueantes. |
 | **Mobile & PWA Readiness**<br>Compatibilidad PWA, touch targets (mín 44px), safe areas (safe-area-inset-*), notch compliance y Capacitor. | `mobile-readiness-lead [Global]` | Compatibilidad fluida con dispositivos móviles y preparación Capacitor/PWA. |
 | **Accesibilidad (a11y)**<br>Navegación por teclado, etiquetas ARIA, contraste WCAG 2.1 AA, y semántica HTML5. | `a11y-debugging [Global]` | Accesibilidad web global, inclusión, usabilidad y SEO Holístico. |
 | **Testing de Interfaces**<br>Validación visual, logs del navegador, y pruebas de integración locales con Playwright. | `webapp-testing [Global]`<br>`e2e-testing-patterns [Global]`<br>`tdd [Global]`<br>`test-driven-development [Global]` | Pruebas de integración automatizadas, desarrollo guiado por pruebas (TDD) y Playwright. |
 | **Seguridad & Autenticación**<br>Protección contra ataques en la web, flujos de sesión del CRM y seguridad de base de datos. | `security-best-practices [Global]`<br>`better-auth-best-practices [Global]` | Prácticas sólidas de autenticación, escape de entradas de usuario y robustez de APIs. |
+
+---
+
+### Diccionario de Habilidades Locales de SEO & Contenido
+
+Para tareas específicas de análisis y creación de contenidos, los agentes de IA deben cargar de forma dirigida las siguientes herramientas locales del proyecto:
+
+1. **`page-audit [Local]`**
+   - **Propósito:** Auditar el rendimiento de una página web en particular (calidad, estructura y posición frente a competidores).
+   - **Cuándo usar:** Al optimizar la arquitectura de URL individuales o diagnosticar problemas de indexación y CTR.
+2. **`seo-cluster [Local]`**
+   - **Propósito:** Topic clustering semántico basado en el solapamiento del SERP real de Google.
+   - **Cuándo usar:** Al organizar la arquitectura temática del sitio en hubs y spokes para dominar un nicho en Málaga.
+3. **`content-brief [Local]`**
+   - **Propósito:** Creación de guías y briefs de contenido detallados mediante análisis de los 10 primeros resultados de Google.
+   - **Cuándo usar:** Antes de empezar a escribir un nuevo artículo para mapear vacíos de información y asegurar cobertura semántica.
+4. **`eeat-audit [Local]`**
+   - **Propósito:** Evaluar y optimizar las señales de Experiencia, Conocimiento, Autoridad y Confianza (E-E-A-T) exigidas por Google.
+   - **Cuándo usar:** Al redactar páginas institucionales, perfiles de autores o fichas técnicas.
+5. **`write-content [Local]`**
+   - **Propósito:** Redacción de artículos completos sin automatismos robóticos ("anti-AI-slop") y con estilo orgánico premium.
+   - **Cuándo usar:** Para redactar post de blog o páginas comerciales que deban sonar 100% humanas y persuasivas.
+6. **`improve-content [Local]`**
+   - **Propósito:** Optimización y refresco de páginas preexistentes de bajo rendimiento orgánico.
+   - **Cuándo usar:** Al optimizar textos obsoletos o recuperar posiciones perdidas en el buscador.
+7. **`linkbuilding [Local]`**
+   - **Propósito:** Diseño de estrategias temáticas y seguras de backlinks en base a la fase de autoridad del dominio.
+   - **Cuándo usar:** Al planificar campañas de captación de enlaces externos.
+8. **`featured-snippet-optimizer [Local]`**
+   - **Propósito:** Ganar y optimizar para fragmentos destacados de Google (Featured Snippets).
+   - **Cuándo usar:** Cuando una palabra clave ya posiciona en el Top 10 y queremos forzar la aparición en la parte superior con un fragmento resumido.
+9. **`semantic-gap-analysis [Local]`**
+   - **Propósito:** Identificación de brechas de entidades, términos clave y relaciones frente al Top 3 de competidores.
+   - **Cuándo usar:** Al realizar análisis competitivos semánticos minuciosos para optimizar textos activos.
+10. **`topic-cluster-planning [Local]`**
+    - **Propósito:** Planificación integral de Hubs & Spokes y creación de matrices robustas de enlazado interno.
+    - **Cuándo usar:** Al estructurar la estrategia de contenido del blog a 90 días.
+11. **`expert-interview [Local]`**
+    - **Propósito:** Extracción dirigida de conocimiento de expertos de primera mano (SMEs) para proveer datos únicos a la IA.
+    - **Cuándo usar:** Antes de planificar el contenido de un post especializado o de alto nivel técnico.
+12. **`keyword-deep-dive [Local]`**
+    - **Propósito:** Investigación profunda de la intención de búsqueda detrás de una consulta e ingeniería inversa de competidores.
+    - **Cuándo usar:** Al evaluar la viabilidad de posicionar para una nueva palabra clave comercial o informativa.
 
 ---
 

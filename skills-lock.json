@@ -1,17 +1,77 @@
 {
   "version": 1,
   "skills": {
+    "content-brief": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/content-brief/SKILL.md",
+      "computedHash": "2ca46432f4f8365145413628a1973ed81f9e73c831a27324cc28745cdd520a9f"
+    },
+    "eeat-audit": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/eeat-audit/SKILL.md",
+      "computedHash": "6dfd71451880e3a21a96af30d0db68288b9f29bf1177a248570876aedda35074"
+    },
+    "expert-interview": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/expert-interview/SKILL.md",
+      "computedHash": "c1eab25ae5cc9743c1b6a6b90394fc400173082e18d9fd4401ba8dfcbc1b9cab"
+    },
+    "featured-snippet-optimizer": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/featured-snippet-optimizer/SKILL.md",
+      "computedHash": "37472fb0e3fa9b3610d334aaad71621556f2c0213b6ffe4835f73ac6d77ca3c7"
+    },
+    "improve-content": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/improve-content/SKILL.md",
+      "computedHash": "a73818b5ddb9bf685ba24fc22f7b30deb1119ce92c0551530376f47d60bff3b1"
+    },
+    "keyword-deep-dive": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/keyword-deep-dive/SKILL.md",
+      "computedHash": "0f89296d2700fd4fbcc49a6edea94a02663922460f1253927832edbe83e26472"
+    },
+    "linkbuilding": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/linkbuilding/SKILL.md",
+      "computedHash": "b88e2446ccc0a404984050afbf411e79ce83165aafd790bf2cd0d55917b050ce"
+    },
     "modern-web-guidance": {
       "source": "GoogleChrome/modern-web-guidance",
       "sourceType": "github",
       "skillPath": "skills/modern-web-guidance/SKILL.md",
       "computedHash": "5ba7a1367448fb7892112f0b629e9e23d1ba73eda5193aa0cadade6e8d2a83ba"
     },
+    "page-audit": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/page-audit/SKILL.md",
+      "computedHash": "3933de15da45cbaf5b2a55a316831cc47f8cee37b975598b97c5679fab39760f"
+    },
     "performance-investigation": {
       "source": "sveltejs/svelte",
       "sourceType": "github",
       "skillPath": ".agents/skills/performance-investigation/SKILL.md",
       "computedHash": "3d008ff2e61e5484a340dc947611ea7635be064d2143ff1e9226e8f571806af1"
+    },
+    "semantic-gap-analysis": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/semantic-gap-analysis/SKILL.md",
+      "computedHash": "74faa15291ba6e25b1444aa98752b3d821a9a65cf6b8f6d46252be70686260a2"
+    },
+    "seo-cluster": {
+      "source": "agricidaniel/claude-seo",
+      "sourceType": "github",
+      "skillPath": "skills/seo-cluster/SKILL.md",
+      "computedHash": "674aa23e6d39424989bfbbff4e7af77b610fffd297374bfcccce32a57f4d3a62"
     },
     "svelte-code-writer": {
       "source": "sveltejs/ai-tools",
@@ -24,6 +84,18 @@
       "sourceType": "github",
       "skillPath": "plugins/claude/svelte/skills/svelte-core-bestpractices/SKILL.md",
       "computedHash": "bec11e369679027edf9d4acbe6d9788f8da33dc14b48b874f231d3ba13705324"
+    },
+    "topic-cluster-planning": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/topic-cluster-planning/SKILL.md",
+      "computedHash": "d1a0ef4242e46df9cc82cfc8643f932a06c71f91b09506a4dd008a7aa4e799a1"
+    },
+    "write-content": {
+      "source": "inhouseseo/superseo-skills",
+      "sourceType": "github",
+      "skillPath": "skills/write-content/SKILL.md",
+      "computedHash": "29266d428ff1381dddf44dbe979e613bef875b028b980d1afe1db80510d7bb15"
     }
   }
 }
