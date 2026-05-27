@@ -115,3 +115,16 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 - **Idiomas:** El código fuente (variables, funciones, componentes) y la interfaz de usuario (UI) de la parte pública deben escribirse **únicamente en idioma inglés** por el momento. Los comentarios, la documentación y los commits pueden seguir escribiéndose en español.
 - **Código conciso:** Evita reescribir funciones enteras si solo cambian dos líneas. Proporciona el fragmento modificado e indica dónde insertarlo.
 - No inventes dependencias ni generes contenido de relleno ("Lorem Ipsum") a menos que se te solicite explícitamente para una maqueta.
+
+### 5. Creación y Actualización de Contenido (Blog / SEO)
+Al crear o actualizar contenido para posts del blog, se deben seguir estrictamente estas directrices para garantizar la máxima calidad y rendimiento en buscadores:
+
+- **Evitar introducciones genéricas de IA**: No arranques con introducciones cliché o predecibles. Empezá siempre con un dato concreto, un error común del sector o un caso de estudio real.
+- **Alineación con la intención de búsqueda (Search Intent)**: Estructurá el contenido respondiendo directamente a lo que busca el usuario (guías paso a paso, soluciones directas a problemas o comparativas).
+- **Incorporar experiencia real (E-E-A-T)**: Incluí datos empíricos, capturas de pantalla o aprendizajes prácticos de proyectos reales.
+- **Ángulo y enfoque único**: Diferenciá el contenido aportando metodologías propias, frameworks prácticos o ideas originales que no estén repetidas en otros sitios.
+- **Control de densidad de palabras clave (Keyword Stuffing)**: Usá la palabra clave principal de forma orgánica solo unas pocas veces y priorizá variaciones naturales y sinónimos semánticos.
+- **Optimización de enlaces internos (Internal Linking)**: Añadí entre 3 y 5 enlaces contextuales hacia otros contenidos relevantes y estructurá la web usando topic clusters (Hub & Spoke).
+- **Formateo para legibilidad y retención**: Utilizá párrafos cortos, listas con viñetas y elementos visuales potentes para enganchar al usuario y mejorar la experiencia de lectura.
+
+*Nota: Pequeñas mejoras aplicadas a contenidos generados previamente por IA pueden disparar drásticamente el posicionamiento y el tráfico orgánico.*
