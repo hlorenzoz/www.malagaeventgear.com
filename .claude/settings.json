@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_engram_engram__mem_update",
+      "Skill(git-commit)",
+      "Skill(git-commit:*)"
+    ]
+  }
+}
