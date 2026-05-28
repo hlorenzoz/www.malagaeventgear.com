@@ -39,6 +39,75 @@
 			'closes': '23:59'
 		}
 	};
+
+	let openFaqIndex = $state<number | null>(null);
+
+	let faqs = $derived([
+		{
+			q: i18n.lang === 'en' ? 'How does the booking process work?' : '¿Cómo funciona el proceso de reserva?',
+			a: i18n.lang === 'en'
+				? 'Simple: select a pack, fill out our quote form, and our team contacts you within 2 hours to confirm details. We handle setup, run the show, and pack up post-event.'
+				: 'Simple: elegís un pack, completás nuestro formulario, y nuestro equipo te contacta en 2 horas para confirmar detalles. Nos encargamos del montaje, el show y el desmontaje post-evento.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'Where do you offer your services?' : '¿Dónde ofrecen sus servicios?',
+			a: i18n.lang === 'en'
+				? 'We cover the full Costa del Sol — Malaga, Marbella, Torremolinos, Fuengirola, Benalmadena, and Estepona. We also travel to Seville, Granada, and Cordoba for specific projects.'
+				: 'Cubrimos toda la Costa del Sol — Málaga, Marbella, Torremolinos, Fuengirola, Benalmádena y Estepona. También viajamos a Sevilla, Granada y Córdoba para proyectos específicos.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'What types of events do you cover?' : '¿Qué tipos de eventos cubren?',
+			a: i18n.lang === 'en'
+				? 'Weddings, private parties, corporate conferences, product launches, MICE events, cultural festivals, and private celebrations of any scale.'
+				: 'Bodas, fiestas privadas, conferencias corporativas, lanzamientos de productos, eventos MICE, festivales culturales y celebraciones privadas de cualquier escala.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'What makes MEG different from other rental companies?' : '¿Qué diferencia a MEG de otras empresas de alquiler?',
+			a: i18n.lang === 'en'
+				? 'Over 27 years of experience, a dedicated on-site technician for every booking, premium brand equipment (Shure, QSC, Martin), and 2,500+ successful events — all at transparent, all-inclusive pricing.'
+				: 'Más de 27 años de experiencia, técnico dedicado en sitio en cada reserva, equipamiento de marcas premium (Shure, QSC, Martin) y más de 2.500 eventos exitosos — a precios transparentes y todo incluido.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'Can I customize a package for my specific needs?' : '¿Puedo personalizar un paquete para mis necesidades?',
+			a: i18n.lang === 'en'
+				? "Absolutely. Every pack can be extended with add-ons like extra microphones, fog machines, projectors, and LED uplighting. Contact us with your requirements and we'll build a perfect quote."
+				: 'Por supuesto. Cada pack se puede ampliar con complementos como micrófonos adicionales, máquinas de humo, proyectores e iluminación LED. Contactanos con tus requerimientos y armamos un presupuesto a tu medida.'
+		}
+	]);
+
+	let steps = $derived([
+		{ num: '01', title: i18n.t.process.s1Title, desc: i18n.t.process.s1Desc, icon: 'package_2' },
+		{ num: '02', title: i18n.t.process.s2Title, desc: i18n.t.process.s2Desc, icon: 'request_quote' },
+		{ num: '03', title: i18n.t.process.s3Title, desc: i18n.t.process.s3Desc, icon: 'task_alt' },
+		{ num: '04', title: i18n.t.process.s4Title, desc: i18n.t.process.s4Desc, icon: 'celebration' }
+	]);
+
+	let pricingPlans = $derived([
+		{
+			id: 'eco',
+			name: i18n.t.packages.ecoTitle,
+			price: '290',
+			features: [i18n.t.packages.ecoF1, i18n.t.packages.ecoF2, i18n.t.packages.ecoF3],
+			checkIconClass: 'text-electric-blue',
+			popular: false
+		},
+		{
+			id: 'wedding',
+			name: i18n.t.packages.weddingTitle,
+			price: '650',
+			features: [i18n.t.packages.weddingF1, i18n.t.packages.weddingF2, i18n.t.packages.weddingF3],
+			checkIconClass: 'text-secondary',
+			popular: true
+		},
+		{
+			id: 'mice',
+			name: i18n.t.packages.miceTitle,
+			price: '490',
+			features: [i18n.t.packages.miceF1, i18n.t.packages.miceF2, i18n.t.packages.miceF3],
+			checkIconClass: 'text-primary',
+			popular: false
+		}
+	]);
 </script>
 
 <!-- SEO Head & JSON-LD Injection -->
@@ -214,13 +283,226 @@
 						{i18n.t.categories.fxText}
 					</p>
 				</div>
-				<a 
+				<a
 					href="/services"
 					class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 				>
 					<span class="material-symbols-outlined text-[32px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
 				</a>
 			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Packages Showcase Section -->
+<section class="py-32 px-margin-mobile md:px-margin-desktop">
+	<div class="max-w-container-max mx-auto">
+		<div class="text-center mb-20">
+			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-secondary uppercase tracking-widest mb-4">
+				{i18n.t.packages.badge}
+			</span>
+			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background mb-4">{i18n.t.packages.title}</h2>
+			<p class="font-body-lg text-on-surface-variant max-w-xl mx-auto">{i18n.t.packages.subtitle}</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<!-- Eco Pack -->
+			<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col">
+				<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center mb-6">
+					<span class="material-symbols-outlined text-electric-blue">eco</span>
+				</div>
+				<h3 class="font-headline-md text-[22px] text-on-surface mb-1">{i18n.t.packages.ecoTitle}</h3>
+				<div class="text-[28px] font-bold text-on-surface mb-4">
+					{i18n.t.packages.ecoPrice} <span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+				</div>
+				<p class="font-body-md text-on-surface-variant text-sm mb-6">{i18n.t.packages.ecoDesc}</p>
+				<ul class="space-y-2 mb-8 flex-1">
+					{#each [i18n.t.packages.ecoF1, i18n.t.packages.ecoF2, i18n.t.packages.ecoF3] as feature}
+						<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
+							<span class="material-symbols-outlined text-electric-blue text-[18px]">check</span>
+							{feature}
+						</li>
+					{/each}
+				</ul>
+				<a href="/contact?pack=eco" class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+					{i18n.t.packages.enquire}
+				</a>
+			</div>
+
+			<!-- Wedding Pack (Most Popular) -->
+			<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col relative overflow-hidden border border-primary/30">
+				<div class="absolute top-4 right-4">
+					<span class="px-3 py-1 rounded-full bg-primary/20 text-primary font-label-sm text-[11px] uppercase tracking-widest">
+						{i18n.t.pricing.mostPopular}
+					</span>
+				</div>
+				<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
+					<span class="material-symbols-outlined text-secondary">favorite</span>
+				</div>
+				<h3 class="font-headline-md text-[22px] text-on-surface mb-1">{i18n.t.packages.weddingTitle}</h3>
+				<div class="text-[28px] font-bold mb-4">
+					<span class="text-gradient">{i18n.t.packages.weddingPrice}</span>
+					<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+				</div>
+				<p class="font-body-md text-on-surface-variant text-sm mb-6">{i18n.t.packages.weddingDesc}</p>
+				<ul class="space-y-2 mb-8 flex-1">
+					{#each [i18n.t.packages.weddingF1, i18n.t.packages.weddingF2, i18n.t.packages.weddingF3] as feature}
+						<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
+							<span class="material-symbols-outlined text-secondary text-[18px]">check</span>
+							{feature}
+						</li>
+					{/each}
+				</ul>
+				<a href="/contact?pack=wedding" class="bg-gradient-to-r from-secondary-container to-secondary text-on-secondary px-6 py-3 rounded-full font-label-lg text-center hover:shadow-[0_0_20px_rgba(255,180,164,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+					{i18n.t.packages.enquire}
+				</a>
+			</div>
+
+			<!-- MICE Pack -->
+			<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col">
+				<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
+					<span class="material-symbols-outlined text-primary">business_center</span>
+				</div>
+				<h3 class="font-headline-md text-[22px] text-on-surface mb-1">{i18n.t.packages.miceTitle}</h3>
+				<div class="text-[28px] font-bold text-on-surface mb-4">
+					{i18n.t.packages.micePrice} <span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+				</div>
+				<p class="font-body-md text-on-surface-variant text-sm mb-6">{i18n.t.packages.miceDesc}</p>
+				<ul class="space-y-2 mb-8 flex-1">
+					{#each [i18n.t.packages.miceF1, i18n.t.packages.miceF2, i18n.t.packages.miceF3] as feature}
+						<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
+							<span class="material-symbols-outlined text-primary text-[18px]">check</span>
+							{feature}
+						</li>
+					{/each}
+				</ul>
+				<a href="/contact?pack=mice" class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+					{i18n.t.packages.enquire}
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- How It Works Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop relative border-y border-border-glass bg-surface-container-low transition-colors duration-300">
+	<div class="max-w-container-max mx-auto">
+		<div class="text-center mb-16">
+			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-primary uppercase tracking-widest mb-4">
+				{i18n.t.process.badge}
+			</span>
+			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background">{i18n.t.process.title}</h2>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+			<div class="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-border-glass to-transparent"></div>
+			{#each steps as step, i}
+				<div class="flex flex-col items-center text-center reveal active is-revealed" style="transition-delay: {i * 0.1}s">
+					<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center mb-4 relative z-10 border border-border-glass">
+						<span class="material-symbols-outlined text-electric-blue">{step.icon}</span>
+					</div>
+					<div class="font-bold text-[40px] text-gradient opacity-30 mb-2 leading-none">{step.num}</div>
+					<h3 class="font-headline-sm text-[18px] text-on-surface mb-2">{step.title}</h3>
+					<p class="font-body-md text-sm text-on-surface-variant">{step.desc}</p>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- Pricing Preview Section -->
+<section class="py-32 px-margin-mobile md:px-margin-desktop relative border-b border-border-glass bg-surface-container-low transition-colors duration-300">
+	<div class="max-w-container-max mx-auto">
+		<div class="text-center mb-16">
+			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+				{i18n.t.pricingPreview.badge}
+			</span>
+			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background mb-4">{i18n.t.pricingPreview.title}</h2>
+			<p class="font-body-lg text-on-surface-variant max-w-lg mx-auto">{i18n.t.pricingPreview.subtitle}</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+			{#each pricingPlans as plan}
+				<div class="glass-panel p-8 rounded-2xl reveal active is-revealed flex flex-col {plan.popular ? 'border border-secondary/30 relative pt-10' : ''}">
+					{#if plan.popular}
+						<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+							<span class="px-4 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-[11px] uppercase tracking-widest whitespace-nowrap">
+								{i18n.t.pricing.mostPopular}
+							</span>
+						</div>
+					{/if}
+					<h3 class="font-headline-md text-[20px] text-on-surface mb-3">{plan.name}</h3>
+					<div class="flex items-baseline gap-1 mb-6">
+						<span class="font-label-sm text-on-surface-variant">{i18n.t.pricing.from}</span>
+						<span class="text-[36px] font-bold text-on-surface">€{plan.price}</span>
+						<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+					</div>
+					<ul class="space-y-3 mb-8 flex-1">
+						{#each plan.features as f}
+							<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
+								<span class="material-symbols-outlined text-[18px] {plan.checkIconClass}">check_circle</span>
+								{f}
+							</li>
+						{/each}
+					</ul>
+					<a href="/pricing#{plan.id}" class="text-center px-6 py-3 rounded-full font-label-lg border border-border-glass hover:bg-on-surface/5 transition-all active:scale-95 duration-200 text-on-surface">
+						{i18n.t.pricing.bookPack}
+					</a>
+				</div>
+			{/each}
+		</div>
+
+		<div class="text-center">
+			<a href="/pricing" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-10 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+				{i18n.t.pricingPreview.viewAll}
+				<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-300">
+	<div class="max-w-4xl mx-auto">
+		<div class="text-center mb-16">
+			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-primary uppercase tracking-widest mb-4">
+				{i18n.t.faq.badge}
+			</span>
+			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background">{i18n.t.faq.title}</h2>
+		</div>
+
+		<div class="space-y-4">
+			{#each faqs as faq, i}
+				{@const isOpen = openFaqIndex === i}
+				<div class="glass-panel rounded-xl overflow-hidden transition-colors duration-300">
+					<button
+						onclick={() => openFaqIndex = openFaqIndex === i ? null : i}
+						class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group"
+						aria-expanded={isOpen}
+					>
+						<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
+							{faq.q}
+						</span>
+						<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}">
+							{#if isOpen}remove{:else}add{/if}
+						</span>
+					</button>
+					{#if isOpen}
+						<div class="px-6 pb-5 text-on-surface-variant font-body-md text-body-md border-t border-border-glass/30 pt-3">
+							<p>{faq.a}</p>
+						</div>
+					{/if}
+				</div>
+			{/each}
+		</div>
+
+		<div class="text-center mt-12">
+			<p class="text-on-surface-variant font-body-md mb-4">
+				{i18n.lang === 'en' ? 'Have more questions?' : '¿Tenés más preguntas?'}
+			</p>
+			<a href="/contact" class="glass-panel text-on-surface px-8 py-3 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+				{i18n.t.contact.title}
+			</a>
 		</div>
 	</div>
 </section>

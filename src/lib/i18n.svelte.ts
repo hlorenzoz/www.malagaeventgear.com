@@ -100,6 +100,56 @@ export const translations = {
 			successText3: ') in less than 2 hours.',
 			successButton: 'Send another request',
 			faqTitle: 'Frequently Asked Questions'
+		},
+		// Packages Showcase
+		packages: {
+			badge: 'Featured Packages',
+			title: 'Choose Your Perfect Pack',
+			subtitle: 'Tailored for every occasion. All packages include transport, setup, and on-site technical support.',
+			ecoTitle: 'Eco Pack',
+			ecoPrice: '€290',
+			ecoDesc: 'For private parties and small events up to 50 guests. Solid sound and ambient lighting.',
+			ecoF1: '2 Active speakers',
+			ecoF2: '1 Wired microphone',
+			ecoF3: '2 RGBW LED light bars',
+			weddingTitle: 'Wedding Pack',
+			weddingPrice: '€650',
+			weddingDesc: 'Magical sound and romantic lighting for up to 80 guests. Our most-loved celebration package.',
+			weddingF1: 'High-end acoustic system',
+			weddingF2: 'Romantic ambient lighting',
+			weddingF3: 'Wireless microphones',
+			miceTitle: 'MICE Pack',
+			micePrice: '€490',
+			miceDesc: 'Professional AV for conferences and corporate events. Includes a 60" LED screen and on-site technician.',
+			miceF1: '60" LED screen',
+			miceF2: 'Wireless audio system',
+			miceF3: 'On-site technical support',
+			enquire: 'Get a Quote'
+		},
+		// How It Works
+		process: {
+			badge: 'How It Works',
+			title: 'Your Event in 4 Simple Steps',
+			s1Title: 'Select Your Pack',
+			s1Desc: 'Browse our packages and pick the one that fits your event size and style.',
+			s2Title: 'Request a Quote',
+			s2Desc: 'Fill out our quick form. We respond in under 2 hours with full availability.',
+			s3Title: 'Confirm & Plan',
+			s3Desc: 'Our team confirms logistics, venue access, and every technical detail.',
+			s4Title: 'Enjoy Your Event',
+			s4Desc: 'We handle setup, run the show, and pack everything up. Zero stress for you.'
+		},
+		// Pricing Preview
+		pricingPreview: {
+			badge: 'Transparent Pricing',
+			title: 'Simple, All-Inclusive Pricing',
+			subtitle: 'No hidden fees. Transport, setup, and technical support always included.',
+			viewAll: 'View All Packages'
+		},
+		// FAQ
+		faq: {
+			badge: 'FAQ',
+			title: 'Common Questions'
 		}
 	},
 	es: {
@@ -198,6 +248,56 @@ export const translations = {
 			successText3: ') en menos de 2 horas.',
 			successButton: 'Enviar otra solicitud',
 			faqTitle: 'Preguntas Frecuentes'
+		},
+		// Packages Showcase
+		packages: {
+			badge: 'Packs Destacados',
+			title: 'Elegí Tu Pack Ideal',
+			subtitle: 'Personalizados para cada ocasión. Todos incluyen transporte, montaje y soporte técnico en sitio.',
+			ecoTitle: 'Eco Pack',
+			ecoPrice: '€290',
+			ecoDesc: 'Para fiestas privadas y eventos pequeños de hasta 50 personas. Sonido sólido e iluminación ambiental.',
+			ecoF1: '2 Altavoces activos',
+			ecoF2: '1 Micrófono de cable',
+			ecoF3: '2 Barras de luz LED RGBW',
+			weddingTitle: 'Pack Bodas',
+			weddingPrice: '€650',
+			weddingDesc: 'Sonido mágico e iluminación romántica para hasta 80 invitados. Nuestro pack de celebración más elegido.',
+			weddingF1: 'Sistema acústico de alta gama',
+			weddingF2: 'Iluminación ambiental romántica',
+			weddingF3: 'Micrófonos inalámbricos',
+			miceTitle: 'Pack MICE',
+			micePrice: '€490',
+			miceDesc: 'AV profesional para conferencias y eventos corporativos. Incluye pantalla LED 60" y técnico en sitio.',
+			miceF1: 'Pantalla LED 60"',
+			miceF2: 'Sistema de audio inalámbrico',
+			miceF3: 'Soporte técnico en sitio',
+			enquire: 'Solicitar Presupuesto'
+		},
+		// How It Works
+		process: {
+			badge: 'Cómo Funciona',
+			title: 'Tu Evento en 4 Pasos Simples',
+			s1Title: 'Elegí Tu Pack',
+			s1Desc: 'Explorá nuestros paquetes y elegí el que mejor se adapta al tamaño y estilo de tu evento.',
+			s2Title: 'Solicitá Presupuesto',
+			s2Desc: 'Completá nuestro formulario rápido. Respondemos en menos de 2 horas con disponibilidad completa.',
+			s3Title: 'Confirmamos & Planificamos',
+			s3Desc: 'Nuestro equipo confirma la logística, el acceso al lugar y cada detalle técnico.',
+			s4Title: 'Disfrutá Tu Evento',
+			s4Desc: 'Nos encargamos del montaje, el show y el desmontaje. Cero estrés para vos.'
+		},
+		// Pricing Preview
+		pricingPreview: {
+			badge: 'Precios Transparentes',
+			title: 'Precios Simples y Todo Incluido',
+			subtitle: 'Sin costos ocultos. Transporte, montaje y soporte técnico siempre incluidos.',
+			viewAll: 'Ver Todos los Packs'
+		},
+		// FAQ
+		faq: {
+			badge: 'FAQ',
+			title: 'Preguntas Frecuentes'
 		}
 	}
 } as const;
