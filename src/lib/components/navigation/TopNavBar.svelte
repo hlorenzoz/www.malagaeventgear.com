@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { i18n } from '$lib/i18n.svelte';
 
 	// Estado reactivo con runes de Svelte 5
 	let mobileMenuOpen = $state(false);
@@ -44,6 +45,10 @@
 		currentTheme = nextTheme;
 	}
 
+	function toggleLang() {
+		i18n.lang = i18n.lang === 'en' ? 'es' : 'en';
+	}
+
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;
 	}
@@ -52,20 +57,20 @@
 		mobileMenuOpen = false;
 	}
 
-	// Enlaces de navegación con sus rutas y nombres traducidos al inglés para la UI
-	const navLinks = [
-		{ href: '/services', label: 'Equipment' },
-		{ href: '/pricing', label: 'Pricing' },
-		{ href: '/contact', label: 'Contact' }
-	];
+	// Enlaces de navegación reactivos
+	let navLinks = $derived([
+		{ href: '/services', label: i18n.t.nav.equipment },
+		{ href: '/pricing', label: i18n.t.nav.pricing },
+		{ href: '/contact', label: i18n.t.nav.contact }
+	]);
 </script>
 
 <!-- TopNavBar Shared Component -->
 <header class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 transition-colors duration-300">
 	<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
 		<!-- Brand Logo -->
-		<a class="font-display-lg text-headline-md text-primary tracking-tight transition-transform active:scale-95 duration-200" href="/" onclick={closeMobileMenu}>
-			Malaga Event Gear
+		<a class="font-display-lg text-[22px] md:text-headline-md text-primary tracking-tight transition-transform active:scale-95 duration-200" href="/" onclick={closeMobileMenu}>
+			{i18n.t.nav.brand}
 		</a>
 
 		<!-- Navigation Links (Desktop) -->
@@ -82,7 +87,16 @@
 		</nav>
 
 		<!-- Actions -->
-		<div class="flex items-center gap-4">
+		<div class="flex items-center gap-2 md:gap-4">
+			<!-- Language Toggle Button -->
+			<button
+				onclick={toggleLang}
+				class="flex items-center justify-center px-3 py-1.5 h-10 rounded-full glass-panel hover:bg-white/10 text-on-surface font-label-sm text-sm hover:text-electric-blue transition-colors duration-300"
+				aria-label="Toggle language"
+			>
+				{i18n.lang.toUpperCase()}
+			</button>
+
 			<!-- Theme Toggle Button -->
 			<button
 				onclick={toggleTheme}
@@ -101,7 +115,7 @@
 				class="hidden md:inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/20 active:scale-95 transition-all duration-300"
 				href="/contact"
 			>
-				Book Now
+				{i18n.t.nav.bookNow}
 			</a>
 
 			<!-- Mobile Menu Button -->
@@ -139,7 +153,7 @@
 				class="w-full text-center py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg active:scale-98 transition-all"
 				href="/contact"
 			>
-				Book Now
+				{i18n.t.nav.bookNow}
 			</a>
 		</div>
 	{/if}

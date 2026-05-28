@@ -2,10 +2,14 @@
 	import TopNavBar from '$lib/components/navigation/TopNavBar.svelte';
 	import Footer from '$lib/components/navigation/Footer.svelte';
 	import { onMount } from 'svelte';
+	import { i18n } from '$lib/i18n.svelte';
 
 	let { children } = $props();
 
 	onMount(() => {
+		// Inicializar i18n de forma segura en el cliente (evita desajustes de hidratación)
+		i18n.init();
+
 		// Inicialización de la animación de Scroll Reveal
 		const observerOptions = {
 			root: null,

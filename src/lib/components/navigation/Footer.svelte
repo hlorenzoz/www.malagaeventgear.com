@@ -1,5 +1,5 @@
 <script lang="ts">
-	// No reactive state is strictly needed for the static footer, but we'll use typescript and standard Svelte 5 tags.
+	import { i18n } from '$lib/i18n.svelte';
 </script>
 
 <!-- Footer Shared Component -->
@@ -9,10 +9,13 @@
 			<!-- Col 1: Brand Info -->
 			<div class="md:col-span-4 flex flex-col gap-4">
 				<span class="font-display-lg text-headline-md text-primary tracking-tight">
-					Malaga Event Gear
+					{i18n.t.nav.brand}
 				</span>
 				<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mt-2">
-					Premium sound, lighting, and screen rentals for exclusive events in Malaga and the Costa del Sol. State-of-the-art equipment and tailored technical support.
+					{i18n.lang === 'en' 
+						? 'Premium sound, lighting, and screen rentals for exclusive events in Malaga and the Costa del Sol. State-of-the-art equipment and tailored technical support.'
+						: 'Alquiler de equipos premium de sonido, iluminación y pantallas para eventos exclusivos en Málaga y la Costa del Sol. Equipamiento de vanguardia y soporte técnico a medida.'
+					}
 				</p>
 			</div>
 
@@ -20,17 +23,27 @@
 			<div class="md:col-span-3 md:col-start-6 flex flex-col gap-4">
 				<span class="font-label-lg text-on-surface uppercase tracking-wider mb-2">Legal</span>
 				<nav class="flex flex-col gap-3">
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/terms">Terms of Service</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/privacy">Privacy Policy</a>
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/terms">
+						{i18n.lang === 'en' ? 'Terms of Service' : 'Términos del Servicio'}
+					</a>
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/privacy">
+						{i18n.lang === 'en' ? 'Privacy Policy' : 'Política de Privacidad'}
+					</a>
 				</nav>
 			</div>
 
 			<!-- Col 3: Resources -->
 			<div class="md:col-span-3 flex flex-col gap-4">
-				<span class="font-label-lg text-on-surface uppercase tracking-wider mb-2">Resources</span>
+				<span class="font-label-lg text-on-surface uppercase tracking-wider mb-2">
+					{i18n.lang === 'en' ? 'Resources' : 'Recursos'}
+				</span>
 				<nav class="flex flex-col gap-3">
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/inventory">Complete Catalog</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/partners">Partner Venues</a>
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/inventory">
+						{i18n.lang === 'en' ? 'Complete Catalog' : 'Catálogo Completo'}
+					</a>
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/partners">
+						{i18n.lang === 'en' ? 'Partner Venues' : 'Espacios Colaboradores'}
+					</a>
 				</nav>
 			</div>
 		</div>
@@ -38,7 +51,7 @@
 		<!-- Bottom Row: Copyright & Socials -->
 		<div class="pt-8 border-t border-border-glass/50 flex flex-col md:flex-row justify-between items-center gap-4 text-center">
 			<span class="font-body-md text-body-md text-on-surface-variant text-sm">
-				© {new Date().getFullYear()} Malaga Event Gear. All rights reserved.
+				© {new Date().getFullYear()} {i18n.t.nav.brand}. {i18n.lang === 'en' ? 'All rights reserved.' : 'Todos los derechos reservados.'}
 			</span>
 			<div class="flex items-center gap-4">
 				<a 

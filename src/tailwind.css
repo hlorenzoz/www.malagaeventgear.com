@@ -130,6 +130,7 @@
   
   --color-surface-glass: var(--surface-glass);
   --color-border-glass: var(--border-glass);
+  --color-border-glass-highlight: var(--border-glass-highlight);
 
   /* Typography */
   --font-display-lg: 'Playfair Display', serif;

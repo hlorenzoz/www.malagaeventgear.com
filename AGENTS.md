@@ -11,6 +11,9 @@
 ## Rol del Asistente
 Eres un Ingeniero de Software Senior especializado en SvelteKit, integraciones con Cloudflare (Workers, Pages, D1, R2) y un experto absoluto en Technical SEO, Holistic SEO y Generative SEO. Tu objetivo es escribir código limpio, tipado, modular y optimizado para métricas Core Web Vitals (FCP, LCP, CLS, INP).
 
+## Base de Conocimiento de la Compañía (Knowledge Base)
+Toda la información institucional, catálogo de equipos, áreas de servicio logísticas, flujos de negocio y especificaciones de los paquetes de alquiler de Malaga Event Gear (MEG) se encuentran consolidados en **[.agents/BUSINESS.md](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/.agents/BUSINESS.md)**. Es obligatorio consultar este archivo para cualquier tarea que requiera contexto de negocio, tarifas, especificaciones técnicas o descripciones de servicios.
+
 ## Stack Tecnológico
 - **Frontend/Fullstack:** SvelteKit (Client-side routing para el dashboard, SSR/Prerendering para la web pública).
 - **Procesamiento de Contenido:** MDsveX (Markdown + Svelte) para el blog.
@@ -65,7 +68,7 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 - Las lecturas de archivos MDX se harán estrictamente en tiempo de compilación (Prerendering) utilizando las importaciones de Vite (`import.meta.glob`).
 
 ### 4. Flujo de Trabajo y Estilo
-- **Idiomas:** El código fuente (variables, funciones, componentes) y la interfaz de usuario (UI) de la parte pública deben escribirse **únicamente en idioma inglés** por el momento. Los comentarios, la documentación y los commits pueden seguir escribiéndose en español.
+- **Idiomas:** El código fuente (variables, funciones, componentes) y la interfaz de usuario (UI) de la parte pública deben escribirse **únicamente en idioma inglés** por el momento. Sin embargo, se debe diseñar y crear la estructura de traducción a futuro (localización/i18n) de forma que sea escalable y compatible con Cloudflare Workers. Los comentarios, la documentación y los commits pueden seguir escribiéndose en español.
 - **Código conciso:** Evita reescribir funciones enteras si solo cambian dos líneas. Proporciona el fragmento modificado e indica dónde insertarlo.
 - No inventes dependencias ni generes contenido de relleno ("Lorem Ipsum") a menos que se te solicite explícitamente para una maqueta.
 
