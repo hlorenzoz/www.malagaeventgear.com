@@ -1,17 +1,65 @@
 {
   "version": 1,
   "skills": {
+    "ai-seo": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/ai-seo/SKILL.md",
+      "computedHash": "a6befed362ed7127d051db085bc8be9470abbe87f70a40ee9a05e201dd8c693f"
+    },
+    "analytics": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/analytics/SKILL.md",
+      "computedHash": "11fcba681577e36b5ad88e391d932a9c94fb1e593e94010c750739eefa9c4057"
+    },
+    "competitor-profiling": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/competitor-profiling/SKILL.md",
+      "computedHash": "d691200df7b02d85327192dd2203f97eec5a01e7748e9b171a5c9d6a584dc181"
+    },
+    "competitors": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/competitors/SKILL.md",
+      "computedHash": "9e15de4d3b5e9a44f500124e2d2f57ba7fd3f4134912d9caf155ff6975215e99"
+    },
     "content-brief": {
       "source": "inhouseseo/superseo-skills",
       "sourceType": "github",
       "skillPath": "skills/content-brief/SKILL.md",
       "computedHash": "2ca46432f4f8365145413628a1973ed81f9e73c831a27324cc28745cdd520a9f"
     },
+    "content-strategy": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/content-strategy/SKILL.md",
+      "computedHash": "13824c129ab70874c57d766c2d844f8dac7a0b366845f108a73527c9d094c4f6"
+    },
+    "copy-editing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/copy-editing/SKILL.md",
+      "computedHash": "ba4e44a8470b3ae2add3e0ffa74c85d8b0357db4ca2cf8cfa7b4abc9d94fc602"
+    },
     "copywriting": {
       "source": "coreyhaines31/marketingskills",
       "sourceType": "github",
       "skillPath": "skills/copywriting/SKILL.md",
       "computedHash": "d3191c3ad90610e0cacecf638d927418852264fabbd6e81c045094dad7d96f11"
+    },
+    "cro": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/cro/SKILL.md",
+      "computedHash": "07f7a27c57e48f4b67230712f8efbc5bcc01611b35321b3c2c2e5279c9304bcd"
+    },
+    "customer-research": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/customer-research/SKILL.md",
+      "computedHash": "628dcedb189ccccc08e7eaf12d884bbc7e43f8b2576f0f3143ed0a17fd40cc1f"
     },
     "eeat-audit": {
       "source": "inhouseseo/superseo-skills",
@@ -43,11 +91,29 @@
       "skillPath": "skills/keyword-deep-dive/SKILL.md",
       "computedHash": "0f89296d2700fd4fbcc49a6edea94a02663922460f1253927832edbe83e26472"
     },
+    "lighthouse": {
+      "source": "onnokh/lighthouse",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "94bf9e0d6c9d8489d53d378a81584ca75df11c29f255feb6351292e02e839097"
+    },
     "linkbuilding": {
       "source": "inhouseseo/superseo-skills",
       "sourceType": "github",
       "skillPath": "skills/linkbuilding/SKILL.md",
       "computedHash": "b88e2446ccc0a404984050afbf411e79ce83165aafd790bf2cd0d55917b050ce"
+    },
+    "marketing-ideas": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-ideas/SKILL.md",
+      "computedHash": "551cde99c831df343bfb2989ef0e9b4c257d7c2e8ee5572eeeaa0e322a8b5c8b"
+    },
+    "marketing-psychology": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/marketing-psychology/SKILL.md",
+      "computedHash": "50d735eb0f5c36f379ed2200f21aeacc9b9ad85667b5d33ec6111857352a1340"
     },
     "modern-web-guidance": {
       "source": "GoogleChrome/modern-web-guidance",
@@ -67,17 +133,53 @@
       "skillPath": ".agents/skills/performance-investigation/SKILL.md",
       "computedHash": "3d008ff2e61e5484a340dc947611ea7635be064d2143ff1e9226e8f571806af1"
     },
+    "popups": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/popups/SKILL.md",
+      "computedHash": "95c5cb45dcbb05362168255d97ee68d53a5916d8de779bd08f5f70c9b0cabd36"
+    },
+    "pricing": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/pricing/SKILL.md",
+      "computedHash": "8a58f814ed556274658a39c57cfafe51c7a53736fdd9400bd91faa41abe84ca5"
+    },
+    "programmatic-seo": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/programmatic-seo/SKILL.md",
+      "computedHash": "0bbdcbacfbe46fd78d774041ee49afd313505bb435b775dc246f4b8e6981d797"
+    },
+    "schema": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/schema/SKILL.md",
+      "computedHash": "2f4807070c77b5c52af3a7e56d2ca5ee12ae2fd8b749d76ab68d3de40f323e78"
+    },
     "semantic-gap-analysis": {
       "source": "inhouseseo/superseo-skills",
       "sourceType": "github",
       "skillPath": "skills/semantic-gap-analysis/SKILL.md",
       "computedHash": "74faa15291ba6e25b1444aa98752b3d821a9a65cf6b8f6d46252be70686260a2"
     },
+    "seo-audit": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/seo-audit/SKILL.md",
+      "computedHash": "f2dc52130189068981f21e1c0bdc4471ac7cd9b08d8a1320604411aa0f950385"
+    },
     "seo-cluster": {
       "source": "agricidaniel/claude-seo",
       "sourceType": "github",
       "skillPath": "skills/seo-cluster/SKILL.md",
       "computedHash": "674aa23e6d39424989bfbbff4e7af77b610fffd297374bfcccce32a57f4d3a62"
+    },
+    "site-architecture": {
+      "source": "coreyhaines31/marketingskills",
+      "sourceType": "github",
+      "skillPath": "skills/site-architecture/SKILL.md",
+      "computedHash": "48a38c5e2b000d134c3db282364b1014bad362fa91d4618ad8c2eb7cee991208"
     },
     "svelte-code-writer": {
       "source": "sveltejs/ai-tools",

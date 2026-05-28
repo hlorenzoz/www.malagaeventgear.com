@@ -30,3 +30,8 @@ Este registro documenta las habilidades (skills) disponibles y las reglas de arq
 | **chrome-devtools** | Depuración, auditorías de red/performance | Automatización y depuración fina mediante las herramientas de desarrollo de Chrome. |
 | **debug-optimize-lcp** | Optimización de Largest Contentful Paint | Identificación y solución de retrasos en la carga del contenido principal. |
 | **webapp-testing** | Pruebas y validación E2E con Playwright | Interacción y verificación funcional sobre navegadores reales. |
+| **analytics** | Medición, GA4, tracking de conversiones y eventos | Configuración, depuración y optimización de analítica web, UTM y GTM. |
+| **pricing** | Estructura de precios, tiers, monetización | Definición de planes, empaquetado, tiers de precios y estrategias de monetización. |
+| **schema** | Datos estructurados, SEO rich snippets, JSON-LD | Creación, optimización y auditoría de marcado de esquema dinámico y estático. |
+| **competitors** | Páginas de comparación, alternativas ("VS") | Creación de páginas de aterrizaje comparativas y posicionamiento ante competidores. |
+| **popups** | Modales de conversión, banners, exit-intent | Diseño, comportamiento y optimización de popups y overlays para captación de leads. |

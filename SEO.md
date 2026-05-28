@@ -112,6 +112,21 @@ Para tareas específicas de análisis y creación de contenidos en este proyecto
 12. **`keyword-deep-dive [Local]`**
     - **Propósito:** Investigación profunda de la intención de búsqueda detrás de una consulta e ingeniería inversa de competidores.
     - **Cuándo usar:** Al evaluar la viabilidad de posicionar para una nueva palabra clave comercial o informativa.
+13. **`analytics [Local]`**
+    - **Propósito:** Configuración, auditoría y tracking de eventos y conversiones (GA4, GTM).
+    - **Cuándo usar:** Al querer medir conversiones, configurar píxeles de seguimiento o depurar la interacción del usuario.
+14. **`pricing [Local]`**
+    - **Propósito:** Diseño de estructuras de precios, tiers y estrategias de monetización SaaS/Servicios.
+    - **Cuándo usar:** Al rediseñar la sección de precios, crear nuevos planes o definir propuestas comerciales de valor.
+15. **`schema [Local]`**
+    - **Propósito:** Inserción y optimización de datos estructurados enriquecidos (Schema.org / JSON-LD).
+    - **Cuándo usar:** Al querer mejorar la visibilidad orgánica en Google mediante Rich Snippets y optimizar para chatbots (GEO).
+16. **`competitors [Local]`**
+    - **Propósito:** Creación de páginas de aterrizaje comparativas (versus / alternativas).
+    - **Cuándo usar:** Al estructurar contenido comercial del tipo "Alternativas a X" o "[Nuestra Marca] vs [Competidor]".
+17. **`popups [Local]`**
+    - **Propósito:** Diseño y optimización de modales, overlays y ventanas emergentes enfocadas en la conversión.
+    - **Cuándo usar:** Al configurar captación de leads mediante exit-intent o banners informativos flotantes.
 
 ---
 
