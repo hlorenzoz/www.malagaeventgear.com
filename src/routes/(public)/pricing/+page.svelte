@@ -36,6 +36,7 @@
 	let plans = $derived(
 		packages.map((pkg) => ({
 			id: pkg.id,
+			route: pkg.route,
 			name: pkg.name,
 			price: pkg.price.toFixed(2),
 			desc: pkg.desc[i18n.lang],
@@ -96,7 +97,9 @@
 					</div>
 				{/if}
 				<div class="mb-6 relative z-10">
-					<h3 class="font-headline-md text-headline-md text-on-background mb-2">{plan.name}</h3>
+					<h3 class="font-headline-md text-headline-md text-on-background mb-2 hover:text-electric-blue transition-colors">
+						<a href={plan.route}>{plan.name}</a>
+					</h3>
 					<p class="font-body-md text-body-md text-on-surface-variant">
 						{plan.desc}
 					</p>
@@ -118,7 +121,7 @@
 				</div>
 				<a 
 					class="mt-8 w-full block text-center py-4 rounded-full bg-gradient-to-r from-secondary-container to-secondary text-white font-label-lg hover:shadow-lg active:scale-95 transition-all duration-300" 
-					href="/contact?pack={plan.id}"
+					href="/contact-us?pack={plan.id}"
 				>
 					{i18n.t.pricing.bookPack} {plan.name}
 				</a>
@@ -127,7 +130,9 @@
 			<!-- Eco and other Packs -->
 			<div class="glass-card reveal active is-revealed rounded-xl p-8 flex flex-col hover:bg-on-surface/5 transition-all duration-300">
 				<div class="mb-6">
-					<h3 class="font-headline-md text-headline-md text-on-background mb-2">{plan.name}</h3>
+					<h3 class="font-headline-md text-headline-md text-on-background mb-2 hover:text-electric-blue transition-colors">
+						<a href={plan.route}>{plan.name}</a>
+					</h3>
 					<p class="font-body-md text-body-md text-on-surface-variant min-h-[48px]">
 						{plan.desc}
 					</p>
@@ -161,7 +166,7 @@
 				</div>
 				<a 
 					class="mt-8 w-full block text-center py-3 rounded border border-border-glass bg-on-surface/5 hover:bg-on-surface/10 text-on-surface font-label-lg active:scale-98 transition-all" 
-					href="/contact?pack={plan.id}"
+					href="/contact-us?pack={plan.id}"
 				>
 					{i18n.t.pricing.check}
 				</a>

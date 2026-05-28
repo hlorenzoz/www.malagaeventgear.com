@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { packages } from '$lib/data/packages';
 
 	// Structured JSON-LD schema for Generative SEO
 	const homeSchema = {
@@ -82,32 +83,52 @@
 		{ num: '04', title: i18n.t.process.s4Title, desc: i18n.t.process.s4Desc, icon: 'celebration' }
 	]);
 
-	let pricingPlans = $derived([
-		{
-			id: 'eco',
-			name: i18n.t.packages.ecoTitle,
-			price: '290',
-			features: [i18n.t.packages.ecoF1, i18n.t.packages.ecoF2, i18n.t.packages.ecoF3],
-			checkIconClass: 'text-electric-blue',
-			popular: false
-		},
-		{
-			id: 'wedding',
-			name: i18n.t.packages.weddingTitle,
-			price: '650',
-			features: [i18n.t.packages.weddingF1, i18n.t.packages.weddingF2, i18n.t.packages.weddingF3],
-			checkIconClass: 'text-secondary',
-			popular: true
-		},
-		{
-			id: 'mice',
-			name: i18n.t.packages.miceTitle,
-			price: '490',
-			features: [i18n.t.packages.miceF1, i18n.t.packages.miceF2, i18n.t.packages.miceF3],
-			checkIconClass: 'text-primary',
-			popular: false
-		}
-	]);
+	// Dynamic featured plans mapped directly from our centralized storage
+	let pricingPlans = $derived(
+		packages
+			.filter((pkg) => ['eco', 'wedding', 'mice-full'].includes(pkg.id))
+			.map((pkg) => ({
+				id: pkg.id,
+				route: pkg.route,
+				name: pkg.name,
+				price: pkg.price.toString(),
+				features: pkg.includes[i18n.lang].slice(0, 3), // show first 3 features
+				checkIconClass: pkg.id === 'eco' 
+					? 'text-electric-blue' 
+					: pkg.id === 'wedding' 
+						? 'text-secondary' 
+						: 'text-primary',
+				popular: pkg.popular
+			}))
+	);
+
+	// Localized featured packages for the homepage showcase section
+	let homepagePacks = $derived(
+		packages
+			.filter((pkg) => ['eco', 'wedding', 'mice-full'].includes(pkg.id))
+			.map((pkg) => ({
+				id: pkg.id,
+				route: pkg.route,
+				name: pkg.name,
+				price: pkg.price.toString(),
+				desc: pkg.desc[i18n.lang],
+				features: pkg.includes[i18n.lang].slice(0, 3), // select first 3 key specs
+				icon: pkg.id === 'eco' 
+					? 'eco' 
+					: pkg.id === 'wedding' 
+						? 'favorite' 
+						: 'business_center',
+				iconBg: pkg.id === 'eco' 
+					? 'bg-electric-blue/20 text-electric-blue' 
+					: pkg.id === 'wedding' 
+						? 'bg-secondary/20 text-secondary' 
+						: 'bg-primary/20 text-primary',
+				popular: pkg.popular,
+				borderClass: pkg.popular 
+					? 'border border-primary/30' 
+					: ''
+			}))
+	);
 </script>
 
 <!-- SEO Head & JSON-LD Injection -->
@@ -306,80 +327,43 @@
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-			<!-- Eco Pack -->
-			<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col">
-				<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center mb-6">
-					<span class="material-symbols-outlined text-electric-blue">eco</span>
+			{#each homepagePacks as pack (pack.id)}
+				<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col relative overflow-hidden {pack.borderClass}">
+					{#if pack.popular}
+						<div class="absolute top-4 right-4">
+							<span class="px-3 py-1 rounded-full bg-primary/20 text-primary font-label-sm text-[11px] uppercase tracking-widest">
+								{i18n.t.pricing.mostPopular}
+							</span>
+						</div>
+					{/if}
+					<div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 {pack.iconBg}">
+						<span class="material-symbols-outlined">{pack.icon}</span>
+					</div>
+					<h3 class="font-headline-md text-[22px] text-on-surface mb-1 hover:text-electric-blue transition-colors">
+						<a href={pack.route}>{pack.name}</a>
+					</h3>
+					<div class="text-[28px] font-bold mb-4 {pack.popular ? '' : 'text-on-surface'}">
+						{#if pack.popular}
+							<span class="text-gradient">{pack.price} €</span>
+						{:else}
+							<span>{pack.price} €</span>
+						{/if}
+						<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+					</div>
+					<p class="font-body-md text-on-surface-variant text-sm mb-6">{pack.desc}</p>
+					<ul class="space-y-2 mb-8 flex-1">
+						{#each pack.features as feature}
+							<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
+								<span class="material-symbols-outlined text-[18px] {pack.id === 'eco' ? 'text-electric-blue' : pack.id === 'wedding' ? 'text-secondary' : 'text-primary'}">check</span>
+								{feature}
+							</li>
+						{/each}
+					</ul>
+					<a href="/contact-us?pack={pack.id}" class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+						{i18n.t.packages.enquire}
+					</a>
 				</div>
-				<h3 class="font-headline-md text-[22px] text-on-surface mb-1">{i18n.t.packages.ecoTitle}</h3>
-				<div class="text-[28px] font-bold text-on-surface mb-4">
-					{i18n.t.packages.ecoPrice} <span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
-				</div>
-				<p class="font-body-md text-on-surface-variant text-sm mb-6">{i18n.t.packages.ecoDesc}</p>
-				<ul class="space-y-2 mb-8 flex-1">
-					{#each [i18n.t.packages.ecoF1, i18n.t.packages.ecoF2, i18n.t.packages.ecoF3] as feature}
-						<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
-							<span class="material-symbols-outlined text-electric-blue text-[18px]">check</span>
-							{feature}
-						</li>
-					{/each}
-				</ul>
-				<a href="/contact?pack=eco" class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
-					{i18n.t.packages.enquire}
-				</a>
-			</div>
-
-			<!-- Wedding Pack (Most Popular) -->
-			<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col relative overflow-hidden border border-primary/30">
-				<div class="absolute top-4 right-4">
-					<span class="px-3 py-1 rounded-full bg-primary/20 text-primary font-label-sm text-[11px] uppercase tracking-widest">
-						{i18n.t.pricing.mostPopular}
-					</span>
-				</div>
-				<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-6">
-					<span class="material-symbols-outlined text-secondary">favorite</span>
-				</div>
-				<h3 class="font-headline-md text-[22px] text-on-surface mb-1">{i18n.t.packages.weddingTitle}</h3>
-				<div class="text-[28px] font-bold mb-4">
-					<span class="text-gradient">{i18n.t.packages.weddingPrice}</span>
-					<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
-				</div>
-				<p class="font-body-md text-on-surface-variant text-sm mb-6">{i18n.t.packages.weddingDesc}</p>
-				<ul class="space-y-2 mb-8 flex-1">
-					{#each [i18n.t.packages.weddingF1, i18n.t.packages.weddingF2, i18n.t.packages.weddingF3] as feature}
-						<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
-							<span class="material-symbols-outlined text-secondary text-[18px]">check</span>
-							{feature}
-						</li>
-					{/each}
-				</ul>
-				<a href="/contact?pack=wedding" class="bg-gradient-to-r from-secondary-container to-secondary text-on-secondary px-6 py-3 rounded-full font-label-lg text-center hover:shadow-[0_0_20px_rgba(255,180,164,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
-					{i18n.t.packages.enquire}
-				</a>
-			</div>
-
-			<!-- MICE Pack -->
-			<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col">
-				<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-6">
-					<span class="material-symbols-outlined text-primary">business_center</span>
-				</div>
-				<h3 class="font-headline-md text-[22px] text-on-surface mb-1">{i18n.t.packages.miceTitle}</h3>
-				<div class="text-[28px] font-bold text-on-surface mb-4">
-					{i18n.t.packages.micePrice} <span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
-				</div>
-				<p class="font-body-md text-on-surface-variant text-sm mb-6">{i18n.t.packages.miceDesc}</p>
-				<ul class="space-y-2 mb-8 flex-1">
-					{#each [i18n.t.packages.miceF1, i18n.t.packages.miceF2, i18n.t.packages.miceF3] as feature}
-						<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
-							<span class="material-symbols-outlined text-primary text-[18px]">check</span>
-							{feature}
-						</li>
-					{/each}
-				</ul>
-				<a href="/contact?pack=mice" class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
-					{i18n.t.packages.enquire}
-				</a>
-			</div>
+			{/each}
 		</div>
 	</div>
 </section>
