@@ -6,6 +6,17 @@
 
 ---
 
+## Objetivo del Proyecto
+
+1. **Migración del sitio web en WordPress a SvelteKit**: [malagaeventgear.com](https://malagaeventgear.com/)
+   - **Páginas**: Migración de todas las páginas del sitio web actual (incluyendo las páginas legales, etc.).
+   - **Migración de imágenes**: Transferencia y optimización de imágenes a Cloudflare CDN.
+   - **Migración de todos los posts**: Migración en formato MDX de todos los posts detallados en el [sitemap](https://malagaeventgear.com/sitemap_index.xml).
+
+2. **Creación / actualización de contenido**
+
+---
+
 # Contexto del Proyecto y Reglas para el Asistente de IA
 
 ## Rol del Asistente
