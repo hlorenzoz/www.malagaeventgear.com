@@ -89,3 +89,10 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 ### 6. Spec-Driven Development (SDD) (Mandatorio)
 - **Desarrollo Guiado por Especificaciones (SDD):** Cada vez que se cree, modifique o actualice cualquier funcionalidad, lógica de negocio o componente, es **estrictamente mandatorio** seguir la metodología SDD paso a paso (Explore -> Propose -> Spec -> Design -> Tasks -> Apply -> Verify -> Archive).
 - **Prohibido el código inmediato:** Bajo ninguna circunstancia se debe saltar a escribir código directamente sin antes haber definido y aprobado las especificaciones técnicas pertinentes.
+
+### 7. Almacenamiento Centralizado de Paquetes (Mandatorio)
+- **Estructura homogénea y validación:** Toda la información sobre paquetes de servicios (precios, inclusiones, opcionales, descripciones, y límites de invitados) debe almacenarse centralizadamente en `src/lib/data/packages.ts`, empleando esquemas de validación Zod.
+- **Prohibido duplicar datos:** Ningún componente o página debe harcodear o duplicar datos de paquetes; siempre se debe consultar este sistema de almacenamiento unificado.
+
+### 8. Pruebas E2E Obligatorias (Mandatorio)
+- **Pruebas de integración:** Para cada nueva implementación, diseño, refactorización o adición de páginas, se deben crear o actualizar las pruebas E2E correspondientes (usando Playwright bajo la carpeta `tests/`) para asegurar la completa integridad, responsividad y correcto funcionamiento libre de regresiones.

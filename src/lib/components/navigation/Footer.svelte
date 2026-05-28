@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { i18n } from '$lib/i18n.svelte';
+	import { packages } from '$lib/data/packages';
 </script>
 
 <!-- Footer Shared Component -->
@@ -61,18 +62,17 @@
 				</nav>
 			</div>
 
-			<!-- Col 3: Resources -->
+			<!-- Col 3: Service Packages -->
 			<div class="md:col-span-3 flex flex-col gap-4">
 				<span class="font-label-lg text-on-surface uppercase tracking-wider mb-2">
-					{i18n.lang === 'en' ? 'Resources' : 'Recursos'}
+					{i18n.lang === 'en' ? 'Service Packages' : 'Paquetes de Servicios'}
 				</span>
-				<nav class="flex flex-col gap-3">
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/inventory">
-						{i18n.lang === 'en' ? 'Complete Catalog' : 'Catálogo Completo'}
-					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/partners">
-						{i18n.lang === 'en' ? 'Partner Venues' : 'Espacios Colaboradores'}
-					</a>
+				<nav class="flex flex-col gap-2">
+					{#each packages as pkg (pkg.id)}
+						<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href={pkg.route}>
+							{pkg.name}
+						</a>
+					{/each}
 				</nav>
 			</div>
 		</div>

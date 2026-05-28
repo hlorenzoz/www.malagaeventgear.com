@@ -80,23 +80,23 @@
 			</div>
 			<hr class="border-border-glass" />
 			<nav class="flex flex-col gap-4 font-body-md text-body-md text-on-surface-variant">
-				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing?pack=eco">
+				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/eco-pack">
 					<span class="material-symbols-outlined text-[18px]">eco</span>
 					Eco Pack (290 €)
 				</a>
-				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing?pack=wedding">
+				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/wedding-pack">
 					<span class="material-symbols-outlined text-[18px]">favorite</span>
 					Wedding Pack (650 €)
 				</a>
-				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing?pack=product">
+				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/product-presentation-pack">
 					<span class="material-symbols-outlined text-[18px]">co_present</span>
 					Product Presentation (310 €)
 				</a>
-				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing?pack=basic-mice">
+				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/basic-mice-pack">
 					<span class="material-symbols-outlined text-[18px]">groups</span>
 					Basic MICE Pack (295 €)
 				</a>
-				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing?pack=mice">
+				<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/mice-pack">
 					<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
 					MICE Pack (490 €)
 				</a>

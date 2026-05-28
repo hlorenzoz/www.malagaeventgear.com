@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { packages } from '$lib/data/packages';
 
 	// Structured JSON-LD schema of product/service offers for Generative SEO
 	let pricingSchema = $derived({
@@ -15,119 +16,35 @@
 			'lowPrice': '290.00',
 			'highPrice': '650.00',
 			'offerCount': '5',
-			'offers': [
-				{
-					'@type': 'Offer',
-					'name': 'Eco Pack',
-					'price': '290.00',
+			'offers': packages.map((pkg) => ({
+				'@type': 'Offer',
+				'name': pkg.name,
+				'price': pkg.price.toFixed(2),
+				'priceCurrency': 'EUR',
+				'priceSpecification': {
+					'@type': 'UnitPriceSpecification',
+					'priceType': 'http://purl.org/goodrelations/v1#ListPrice',
+					'price': pkg.price.toFixed(2),
 					'priceCurrency': 'EUR',
-					'priceSpecification': {
-						'@type': 'UnitPriceSpecification',
-						'priceType': 'http://purl.org/goodrelations/v1#ListPrice',
-						'price': '290.00',
-						'priceCurrency': 'EUR',
-						'valueAddedTaxIncluded': 'false'
-					}
-				},
-				{
-					'@type': 'Offer',
-					'name': 'Wedding Pack',
-					'price': '650.00',
-					'priceCurrency': 'EUR',
-					'priceSpecification': {
-						'@type': 'UnitPriceSpecification',
-						'priceType': 'http://purl.org/goodrelations/v1#ListPrice',
-						'price': '650.00',
-						'priceCurrency': 'EUR',
-						'valueAddedTaxIncluded': 'false'
-					}
-				},
-				{
-					'@type': 'Offer',
-					'name': 'Full MICE Pack',
-					'price': '490.00',
-					'priceCurrency': 'EUR',
-					'priceSpecification': {
-						'@type': 'UnitPriceSpecification',
-						'priceType': 'http://purl.org/goodrelations/v1#ListPrice',
-						'price': '490.00',
-						'priceCurrency': 'EUR',
-						'valueAddedTaxIncluded': 'false'
-					}
+					'valueAddedTaxIncluded': 'false'
 				}
-			]
+			}))
 		}
 	});
 
-	// Localized plan specifications
-	let plans = $derived([
-		{
-			id: 'eco',
-			name: 'Eco Pack',
-			price: '290.00',
-			desc: i18n.lang === 'en' 
-				? 'Ideal for private parties or small events of up to 50 people. Includes basic sound and lighting setups.'
-				: 'Ideal para fiestas privadas o eventos pequeños de hasta 50 personas. Incluye configuración básica de sonido e iluminación.',
-			includes: i18n.lang === 'en'
-				? ['2 High-quality active speakers', '1 Wired microphone', '2 Light bars with RGBW LED spotlights']
-				: ['2 Altavoces activos de alta calidad', '1 Micrófono de cable', '2 Barras de luz con focos LED RGBW'],
-			optional: i18n.lang === 'en'
-				? ['Projector & screen (+50€)', 'Fog machine (+20€)']
-				: ['Proyector y pantalla (+50€)', 'Máquina de humo (+20€)']
-		},
-		{
-			id: 'wedding',
-			name: 'Wedding Pack',
-			price: '650.00',
-			desc: i18n.lang === 'en'
-				? 'Designed to perfection for magical and unforgettable celebrations. Includes a professional high-end acoustic system for up to 80 guests, romantic ambient lighting, and wireless microphones for moving speeches.'
-				: 'Diseñado a la perfección para celebraciones mágicas e inolvidables. Incluye sistema acústico profesional de alta gama para hasta 80 invitados, luces ambientales románticas y micrófonos inalámbricos para discursos emotivos.',
-			includes: i18n.lang === 'en'
-				? ['Transport in Malaga and surrounding areas', 'Professional setup and aesthetic cabling', 'Live technical assistance and control', 'Quick teardown post-event']
-				: ['Transporte en Málaga y áreas cercanas', 'Montaje profesional y cableado estético', 'Asistencia técnica y control en directo', 'Desmontaje rápido post-evento'],
-			popular: true,
-			image: 'https://lh3.googleusercontent.com/aida/ADBb0ug5w7wOaGS-ye7h2_G8UyqDbYMZJnFo3n0EKPpcXxJTG8hzJQlSVNraO7x5ypbKYYdJHdo3SlEoMnm1hbLotISEcdS7yUcoRvwRZg2es3rmE9bBP2RrSNpbfBHYcUdgFqF8WFmO7Ir5Rt8jZQJnina2BmPgZFoQkNAY6_lCw3zSHd_rT30euyLl6PHKpYtOedfOVJGP-qnRQ_1xiw2YAefmwjTMiIqaOEN2gciZqGAqf1K1kEvrX8MD'
-		},
-		{
-			id: 'presentation',
-			name: 'Presentation Pack',
-			price: '310.00',
-			desc: i18n.lang === 'en'
-				? 'Designed for presentations with high visual impact. Includes high-brightness projector, proper screen format, and sound reinforcement.'
-				: 'Diseñado para presentaciones con alto impacto visual. Incluye proyector de alto brillo, pantalla de formato adecuado y refuerzo de sonido.',
-			includes: i18n.lang === 'en'
-				? ['1 Front projection screen', '1 HD Projector (5000 lumens)', 'Venue sound system & speakers', '1 Wireless handheld microphone']
-				: ['1 Pantalla de proyección frontal', '1 Proyector HD (5000 lúmenes)', 'Sistema de sonido y altavoces para el lugar', '1 Micrófono inalámbrico de mano']
-		},
-		{
-			id: 'mice-basic',
-			name: 'Basic MICE',
-			price: '295.00',
-			desc: i18n.lang === 'en'
-				? 'Essential setup for small events and speeches, featuring projection, microfonía, and professional setup.'
-				: 'Configuración esencial para eventos pequeños y discursos, con proyección, microfonía y montaje profesional.',
-			includes: i18n.lang === 'en'
-				? ['2x2m Screen with 3000 lm projector', 'Basic sound system for up to 40 people', '1 Gooseneck microphone']
-				: ['Pantalla de 2x2m con proyector de 3000 lm', 'Sistema de sonido básico para hasta 40 personas', '1 Micrófono de cuello de cisne'],
-			optional: i18n.lang === 'en'
-				? ['On-site technical support (+240€/day)']
-				: ['Soporte técnico en sitio (+240€/día)']
-		},
-		{
-			id: 'mice-full',
-			name: 'Full MICE',
-			price: '490.00',
-			desc: i18n.lang === 'en'
-				? 'Comprehensive corporate package featuring a large-format display, premium sound, microphone setup, and a dedicated live technical assistant.'
-				: 'Paquete corporativo integral con pantalla de gran formato, sonido premium, configuración de micrófonos y técnico en vivo dedicado.',
-			includes: i18n.lang === 'en'
-				? ['Premium 60-inch LED screen', 'Venue sound system & professional speakers', '1 Gooseneck mic & 1 wireless handheld mic', '1 Specialized technician (max 6 hours)']
-				: ['Pantalla LED premium de 60 pulgadas', 'Sistema de sonido del lugar y altavoces profesionales', '1 Micrófono de cuello de cisne y 1 inalámbrico', '1 Técnico especializado (máximo 6 horas)'],
-			optional: i18n.lang === 'en'
-				? ['Extra technical support hour (+40€/h)', 'Premium acrylic podium (+50€)', 'Stage platforms (+35€/m²)']
-				: ['Hora de soporte técnico extra (+40€/h)', 'Atril de acrílico premium (+50€)', 'Tarimas de escenario (+35€/m²)']
-		}
-	]);
+	// Localized plan specifications computed from the centralized packages data store
+	let plans = $derived(
+		packages.map((pkg) => ({
+			id: pkg.id,
+			name: pkg.name,
+			price: pkg.price.toFixed(2),
+			desc: pkg.desc[i18n.lang],
+			includes: pkg.includes[i18n.lang],
+			optional: pkg.optional ? pkg.optional[i18n.lang] : undefined,
+			popular: pkg.popular,
+			image: pkg.image
+		}))
+	);
 </script>
 
 <!-- SEO Head & JSON-LD Injection -->
