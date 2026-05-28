@@ -2,6 +2,7 @@
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { slide } from 'svelte/transition';
 
 	let contactSchema = $derived({
 		'@context': 'https://schema.org',
@@ -338,7 +339,7 @@
 				<div class="glass-panel rounded-xl overflow-hidden transition-colors duration-300">
 					<button 
 						onclick={() => toggleFaq(i)}
-						class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group"
+						class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none group"
 						aria-expanded={isOpen}
 					>
 						<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
@@ -350,7 +351,10 @@
 					</button>
 					
 					{#if isOpen}
-						<div class="px-6 pb-5 text-on-surface-variant font-body-md text-body-md animate-fade-in border-t border-border-glass/30 pt-3">
+						<div 
+							transition:slide={{ duration: 250 }}
+							class="px-6 pb-5 text-on-surface-variant font-body-md text-body-md border-t border-border-glass/30 pt-3"
+						>
 							<p>{faq.a}</p>
 						</div>
 					{/if}

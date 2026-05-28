@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { slide } from 'svelte/transition';
 
 	let faqSchema = $derived({
 		'@context': 'https://schema.org',
@@ -122,25 +123,25 @@
 	<div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
 		<button 
 			onclick={() => { activeCategory = 'all'; openIndex = null; }}
-			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 {activeCategory === 'all' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
+			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none {activeCategory === 'all' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
 		>
 			{i18n.lang === 'en' ? 'All Questions' : 'Todas'}
 		</button>
 		<button 
 			onclick={() => { activeCategory = 'services'; openIndex = null; }}
-			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 {activeCategory === 'services' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
+			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none {activeCategory === 'services' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
 		>
 			{i18n.lang === 'en' ? 'Services & Gear' : 'Servicios y Equipos'}
 		</button>
 		<button 
 			onclick={() => { activeCategory = 'logistics'; openIndex = null; }}
-			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 {activeCategory === 'logistics' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
+			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none {activeCategory === 'logistics' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
 		>
 			{i18n.lang === 'en' ? 'Logistics & Areas' : 'Logística y Áreas'}
 		</button>
 		<button 
 			onclick={() => { activeCategory = 'booking'; openIndex = null; }}
-			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 {activeCategory === 'booking' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
+			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none {activeCategory === 'booking' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
 		>
 			{i18n.lang === 'en' ? 'Booking & Timelines' : 'Reservas y Plazos'}
 		</button>
@@ -153,7 +154,7 @@
 			<div class="glass-panel rounded-xl overflow-hidden transition-colors duration-300 reveal">
 				<button 
 					onclick={() => toggleFaq(i)}
-					class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors group"
+					class="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-white/5 transition-colors focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none group"
 					aria-expanded={isOpen}
 				>
 					<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
@@ -165,7 +166,10 @@
 				</button>
 				
 				{#if isOpen}
-					<div class="px-6 pb-6 text-on-surface-variant font-body-md text-body-md animate-fade-in border-t border-border-glass/30 pt-4">
+					<div 
+						transition:slide={{ duration: 250 }}
+						class="px-6 pb-6 text-on-surface-variant font-body-md text-body-md border-t border-border-glass/30 pt-4"
+					>
 						<p>{faq.a}</p>
 					</div>
 				{/if}
