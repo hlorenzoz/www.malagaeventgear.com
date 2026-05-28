@@ -334,7 +334,7 @@
 	<section class="mt-32 max-w-4xl mx-auto">
 		<h2 class="font-headline-md text-headline-md text-center mb-12 text-on-background">{i18n.t.contact.faqTitle}</h2>
 		<div class="space-y-4">
-			{#each faqs as faq, i}
+			{#each faqs as faq, i (faq.q)}
 				{@const isOpen = openFaqIndex === i}
 				<div class="glass-panel rounded-xl overflow-hidden transition-colors duration-300">
 					<button 

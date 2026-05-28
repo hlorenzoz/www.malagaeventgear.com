@@ -27,9 +27,40 @@
 			});
 		}, observerOptions);
 
-		// Observar elementos con reveal
-		const revealElements = document.querySelectorAll('.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured');
-		revealElements.forEach(el => observer.observe(el));
+		const observeRevealElements = (root: ParentNode = document) => {
+			const revealElements = root.querySelectorAll('.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured');
+			revealElements.forEach(el => observer.observe(el));
+		};
+
+		// Observar elementos iniciales
+		observeRevealElements();
+
+		// Observar cambios futuros en el DOM para nuevos elementos reveal
+		const mutationObserver = new MutationObserver((mutations) => {
+			mutations.forEach(mutation => {
+				mutation.addedNodes.forEach(node => {
+					if (node.nodeType === 1) { // Node.ELEMENT_NODE
+						const element = node as HTMLElement;
+						const selector = '.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured';
+						if (element.matches(selector)) {
+							observer.observe(element);
+						}
+						const nested = element.querySelectorAll(selector);
+						nested.forEach(el => observer.observe(el));
+					}
+				});
+			});
+		});
+
+		mutationObserver.observe(document.body, {
+			childList: true,
+			subtree: true
+		});
+
+		return () => {
+			mutationObserver.disconnect();
+			observer.disconnect();
+		};
 	});
 </script>
 

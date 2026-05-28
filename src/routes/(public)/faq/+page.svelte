@@ -149,7 +149,7 @@
 
 	<!-- Accordion List -->
 	<div class="space-y-4">
-		{#each filteredFaqs as faq, i}
+		{#each filteredFaqs as faq, i (faq.q)}
 			{@const isOpen = openIndex === i}
 			<div class="glass-panel rounded-xl overflow-hidden transition-colors duration-300 reveal">
 				<button 
