@@ -96,3 +96,6 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 
 ### 8. Pruebas E2E Obligatorias (Mandatorio)
 - **Pruebas de integración:** Para cada nueva implementación, diseño, refactorización o adición de páginas, se deben crear o actualizar las pruebas E2E correspondientes (usando Playwright bajo la carpeta `tests/`) para asegurar la completa integridad, responsividad y correcto funcionamiento libre de regresiones.
+
+### 9. Registro de Cambios Obligatorio (Mandatorio)
+- **Registro en CHANGELOG.md**: Cada vez que se agregue, elimine o actualice alguna funcionalidad, lógica de negocio o componente, es **estrictamente mandatorio** documentar detalladamente el cambio en **[.agents/CHANGELOG.md](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/.agents/CHANGELOG.md)**.
