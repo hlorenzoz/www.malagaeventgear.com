@@ -1,6 +1,7 @@
 <script lang="ts">
 	import TopNavBar from '$lib/components/navigation/TopNavBar.svelte';
 	import Footer from '$lib/components/navigation/Footer.svelte';
+	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { page } from '$app/stores';
@@ -90,6 +91,7 @@
 
 	<!-- Contenido principal canvas -->
 	<main class="flex-grow pt-[73px] md:pt-[73px] overflow-hidden">
+		<Breadcrumbs />
 		{@render children()}
 	</main>
 
