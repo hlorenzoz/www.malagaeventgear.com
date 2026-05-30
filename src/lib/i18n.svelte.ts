@@ -9,6 +9,7 @@ export const translations = {
 		nav: {
 			equipment: 'Equipment',
 			pricing: 'Pricing',
+			blog: 'Blog',
 			contact: 'Contact',
 			bookNow: 'Book Now',
 			brand: 'Malaga Event Gear'
@@ -171,6 +172,7 @@ export const translations = {
 		nav: {
 			equipment: 'Equipos',
 			pricing: 'Precios',
+			blog: 'Blog',
 			contact: 'Contacto',
 			bookNow: 'Reservar Ahora',
 			brand: 'Malaga Event Gear'

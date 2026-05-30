@@ -61,6 +61,7 @@
 	let navLinks = $derived([
 		{ href: '/services/', label: i18n.t.nav.equipment },
 		{ href: '/packages/', label: i18n.t.nav.pricing },
+		{ href: '/blog/', label: i18n.t.nav.blog },
 		{ href: '/contact/', label: i18n.t.nav.contact }
 	]);
 </script>

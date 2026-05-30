@@ -8,6 +8,10 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Added
+- **Premium Multilingual Blog Page**: Created the `/blog/` page (`src/routes/(public)/blog/+page.svelte`) with a localized responsive layout, glassmorphic styling details, and high-fidelity presentation explaining the technical SEO transition, fully integrated with navigation menus (Footer and TopNavBar).
+- **Dynamic XML Sitemaps Endpoints**: Developed a dynamic 5-sitemap network resolving directly at the root: `sitemap_index.xml` (main index), `page-sitemap.xml` (dynamic pages sitemap featuring active static routes and catalog packages with strict trailing slashes and Google Image extensions), `post-sitemap.xml` (safe empty post catalog preventing crawl budget drops), `category-sitemap.xml` (dynamic categories), and `author-sitemap.xml` (dynamic authors).
+- **Edge-Compatible 301 Redirects and Trailing Slash Middleware**: Created SvelteKit server hooks (`src/hooks.server.ts`) running on the Cloudflare network edge to instantly handle permanent 301 redirections from legacy WordPress URL packages (e.g. `/wedding-pack/` -> `/packages/wedding/`) and enforce trailing slashes across all public HTML navigation paths.
+- **AGENTS Sitemap Update Rule**: Added the mandatory rule in `AGENTS.md` forcing the manual review and update of sitemap xml endpoints whenever public pages or blog posts are created or changed.
 - **Decoupled Structured Data Architecture**: Implemented a highly structured two-level Schema.org integration. Added site metadata configuration source (`src/lib/data/site.ts`) and unified schema builders (`src/lib/utils/schema.ts`).
 - **Global Dynamic Metadata Injection**: Configured public layout (`src/routes/(public)/+layout.svelte`) to automatically inject reactive `LocalBusiness` and dynamic `BreadcrumbList` schemas across all pages.
 - **Specific Content Schema Refactoring**: Refactored page routes (`packages`, `packages/[slug]`, `services`) to consume the centralized metadata source and dynamic builders via `SeoHead.svelte`, avoiding data duplication and resolving a sutil visual schema bug in the catalog.
