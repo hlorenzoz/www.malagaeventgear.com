@@ -2,44 +2,22 @@
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 
-	// Structured JSON-LD schema for the catalog of rental services
-	let servicesSchema = $derived({
-		'@context': 'https://schema.org',
-		'@type': 'ItemList',
-		'name': i18n.lang === 'en' 
-			? 'Audiovisual Equipment Rental Catalog - Malaga Event Gear'
-			: 'Catálogo de Alquiler de Equipos Audiovisuales - Malaga Event Gear',
-		'description': i18n.lang === 'en'
-			? 'High-end audiovisual equipment for rental in corporate events, weddings, and parties in Malaga.'
-			: 'Equipos audiovisuales de alta gama para alquiler en eventos corporativos, bodas y fiestas en Málaga.',
-		'numberOfItems': 4,
-		'itemListElement': [
-			{
-				'@type': 'ListItem',
-				'position': 1,
-				'name': i18n.t.categories.soundTitle,
-				'description': i18n.t.categories.soundText
-			},
-			{
-				'@type': 'ListItem',
-				'position': 2,
-				'name': i18n.t.categories.lightTitle,
-				'description': i18n.t.categories.lightText
-			},
-			{
-				'@type': 'ListItem',
-				'position': 3,
-				'name': i18n.t.categories.soundTitle,
-				'description': i18n.t.categories.visualText
-			},
-			{
-				'@type': 'ListItem',
-				'position': 4,
-				'name': i18n.t.categories.fxTitle,
-				'description': i18n.t.categories.fxText
-			}
-		]
-	});
+	import { buildItemListSchema } from '$lib/utils/schema';
+
+	// Esquema de catálogo de servicios (SEO Generativo)
+	let servicesSchema = $derived(
+		buildItemListSchema(
+			[
+				{ name: i18n.t.categories.soundTitle, url: '/services/' },
+				{ name: i18n.t.categories.lightTitle, url: '/services/' },
+				{ name: i18n.t.categories.visualTitle, url: '/services/' },
+				{ name: i18n.t.categories.fxTitle, url: '/services/' }
+			],
+			i18n.lang === 'en'
+				? 'Audiovisual Equipment Rental Catalog - Malaga Event Gear'
+				: 'Catálogo de Alquiler de Equipos Audiovisuales - Malaga Event Gear'
+		)
+	);
 </script>
 
 <!-- SEO Head & JSON-LD Injection -->

@@ -3,35 +3,18 @@
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
 
-	// Structured JSON-LD schema of product/service offers for Generative SEO
-	let pricingSchema = $derived({
-		'@context': 'https://schema.org',
-		'@type': 'Product',
-		'name': 'Audiovisual Rental Packages - Malaga Event Gear',
-		'description':
-			'Tailored packages for sound, lighting, and projection for events in Malaga. Options for weddings, conferences, and parties.',
-		'image': 'https://www.malagaeventgear.com/screen.png',
-		'offers': {
-			'@type': 'AggregateOffer',
-			'priceCurrency': 'EUR',
-			'lowPrice': '290.00',
-			'highPrice': '650.00',
-			'offerCount': '5',
-			'offers': packages.map((pkg) => ({
-				'@type': 'Offer',
-				'name': pkg.name,
-				'price': pkg.price.toFixed(2),
-				'priceCurrency': 'EUR',
-				'priceSpecification': {
-					'@type': 'UnitPriceSpecification',
-					'priceType': 'http://purl.org/goodrelations/v1#ListPrice',
-					'price': pkg.price.toFixed(2),
-					'priceCurrency': 'EUR',
-					'valueAddedTaxIncluded': 'false'
-				}
-			}))
-		}
-	});
+	import { buildItemListSchema } from '$lib/utils/schema';
+
+	// Esquema estructurado ItemList de paquetes de servicios (SEO Generativo)
+	let pricingSchema = $derived(
+		buildItemListSchema(
+			packages.map((pkg) => ({
+				name: pkg.name,
+				url: pkg.route
+			})),
+			'Audiovisual Rental Packages - Malaga Event Gear'
+		)
+	);
 
 	// Per-package visual identity (icon + accent) for the carousel cards
 	const packMeta: Record<string, { icon: string; iconBg: string }> = {

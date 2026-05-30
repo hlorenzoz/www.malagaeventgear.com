@@ -3,8 +3,14 @@
 	import Footer from '$lib/components/navigation/Footer.svelte';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { page } from '$app/stores';
+	import { buildLocalBusinessSchema, buildBreadcrumbsSchema } from '$lib/utils/schema';
 
 	let { children } = $props();
+
+	// Esquemas de datos estructurados globales
+	const localBusinessSchema = buildLocalBusinessSchema();
+	const breadcrumbSchema = $derived(buildBreadcrumbsSchema($page.url.pathname));
 
 	onMount(() => {
 		// Inicializar i18n de forma segura en el cliente (evita desajustes de hidratación)
@@ -72,6 +78,10 @@
 	
 	<!-- Material Icons -->
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+
+	<!-- Datos Estructurados Globales (SEO Técnico) -->
+	{@html `<script type="application/ld+json">${JSON.stringify(localBusinessSchema)}<\/script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}<\/script>`}
 </svelte:head>
 
 <div class="bg-background text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-primary transition-colors duration-300">

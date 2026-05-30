@@ -8,6 +8,12 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Added
+- **Decoupled Structured Data Architecture**: Implemented a highly structured two-level Schema.org integration. Added site metadata configuration source (`src/lib/data/site.ts`) and unified schema builders (`src/lib/utils/schema.ts`).
+- **Global Dynamic Metadata Injection**: Configured public layout (`src/routes/(public)/+layout.svelte`) to automatically inject reactive `LocalBusiness` and dynamic `BreadcrumbList` schemas across all pages.
+- **Specific Content Schema Refactoring**: Refactored page routes (`packages`, `packages/[slug]`, `services`) to consume the centralized metadata source and dynamic builders via `SeoHead.svelte`, avoiding data duplication and resolving a sutil visual schema bug in the catalog.
+- **AGENTS Structured Data Enforcements**: Documented strict Schema.org integration policies in `AGENTS.md` requiring unified metadata consumptions.
+- **E2E Structured Data Validation**: Built specialized Playwright E2E tests (`tests/schema.spec.ts`) validating precise schema injections and JSON-LD structural formats, and integrated automated `webServer` (using `bun run dev` on port 5173) in `playwright.config.ts` to prevent `ERR_CONNECTION_REFUSED` errors during local and CI test runs.
+- **Structured Data Architecture Documentation**: Added `.agents/STRUCTURED_DATA.md` documenting core Schema.org structures and recommended Google mappings (LocalBusiness, Service, ItemList, FAQPage, Article, BreadcrumbList) for local service business optimization.
 - **Global Routing Trailing Slash**: Created global routing configuration file (`src/routes/+layout.ts`) enforcing trailing slashes across all public SvelteKit routes for Technical SEO.
 - **AGENTS Rule Enforcement**: Documented mandatory rule in `AGENTS.md` requiring all internal relative URLs to terminate with trailing slashes.
 - **Centralized FAQ Data Store**:

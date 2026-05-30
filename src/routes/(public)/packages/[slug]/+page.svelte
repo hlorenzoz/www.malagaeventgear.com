@@ -7,54 +7,17 @@
 	let pkg = $derived(data.pkg);
 	let landing = $derived(pkg.landing);
 
-	let seoSchema = $derived({
-		'@context': 'https://schema.org',
-		'@graph': [
-			{
-				'@type': 'Place',
-				'@id': 'https://malagaeventgear.com/#place',
-				'address': {
-					'@type': 'PostalAddress',
-					'streetAddress': 'Avenida de Barcelona, 34',
-					'addressRegion': 'Malaga',
-					'postalCode': '29009',
-					'addressCountry': 'ES',
-					'addressLocality': 'Distrito Centro'
-				}
-			},
-			{
-				'@type': 'LocalBusiness',
-				'@id': 'https://malagaeventgear.com/#organization',
-				'name': 'Malaga Event Gear',
-				'url': 'https://malagaeventgear.com',
-				'email': 'contact@malagaeventgear.com',
-				'telephone': '+34 600 42 87 50',
-				'priceRange': '290€ - 650€',
-				'openingHours': ['Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday 08:00-20:00'],
-				'location': { '@id': 'https://malagaeventgear.com/#place' }
-			},
-			{
-				'@type': 'Service',
-				'@id': `https://malagaeventgear.com${pkg.route}/#service`,
-				'name': pkg.seo.serviceName,
-				'description': pkg.desc[i18n.lang],
-				'serviceType': pkg.seo.serviceType,
-				'provider': { '@id': 'https://malagaeventgear.com/#organization' },
-				'offers': {
-					'@type': 'Offer',
-					'price': pkg.price.toFixed(2),
-					'priceCurrency': 'EUR',
-					'priceSpecification': {
-						'@type': 'UnitPriceSpecification',
-						'priceType': 'http://purl.org/goodrelations/v1#ListPrice',
-						'price': pkg.price.toFixed(2),
-						'priceCurrency': 'EUR',
-						'valueAddedTaxIncluded': 'false'
-					}
-				}
-			}
-		]
-	});
+	import { buildServiceSchema } from '$lib/utils/schema';
+
+	let seoSchema = $derived(
+		buildServiceSchema({
+			name: pkg.name,
+			description: pkg.desc[i18n.lang],
+			price: pkg.price,
+			url: pkg.route,
+			category: pkg.seo.serviceType
+		}, i18n.lang)
+	);
 </script>
 
 <SeoHead
