@@ -60,52 +60,71 @@
 		{ num: '04', title: i18n.t.process.s4Title, desc: i18n.t.process.s4Desc, icon: 'celebration' }
 	]);
 
-	// Dynamic featured plans mapped directly from our centralized storage
-	let pricingPlans = $derived(
-		packages
-			.filter((pkg) => ['eco', 'wedding', 'mice-full'].includes(pkg.id))
-			.map((pkg) => ({
-				id: pkg.id,
-				route: pkg.route,
-				name: pkg.name,
-				price: pkg.price.toString(),
-				features: pkg.includes[i18n.lang].slice(0, 3), // show first 3 features
-				checkIconClass: pkg.id === 'eco' 
-					? 'text-electric-blue' 
-					: pkg.id === 'wedding' 
-						? 'text-secondary' 
-						: 'text-primary',
-				popular: pkg.popular
-			}))
-	);
+	// Per-package visual identity (icon + accent colors) for the showcase cards
+	const packMeta: Record<string, { icon: string; iconBg: string; checkIconClass: string }> = {
+		eco: { icon: 'eco', iconBg: 'bg-electric-blue/20 text-electric-blue', checkIconClass: 'text-electric-blue' },
+		wedding: { icon: 'favorite', iconBg: 'bg-secondary/20 text-secondary', checkIconClass: 'text-secondary' },
+		presentation: { icon: 'co_present', iconBg: 'bg-primary/20 text-primary', checkIconClass: 'text-primary' },
+		'mice-basic': { icon: 'groups', iconBg: 'bg-electric-blue/20 text-electric-blue', checkIconClass: 'text-electric-blue' },
+		'mice-full': { icon: 'business_center', iconBg: 'bg-primary/20 text-primary', checkIconClass: 'text-primary' }
+	};
 
-	// Localized featured packages for the homepage showcase section
+	const fallbackMeta = { icon: 'inventory_2', iconBg: 'bg-primary/20 text-primary', checkIconClass: 'text-primary' };
+
+	// Localized featured packages (full catalog) for the unified pricing carousel
 	let homepagePacks = $derived(
-		packages
-			.filter((pkg) => ['eco', 'wedding', 'mice-full'].includes(pkg.id))
-			.map((pkg) => ({
+		packages.map((pkg) => {
+			const meta = packMeta[pkg.id] ?? fallbackMeta;
+			return {
 				id: pkg.id,
 				route: pkg.route,
 				name: pkg.name,
 				price: pkg.price.toString(),
 				desc: pkg.desc[i18n.lang],
 				features: pkg.includes[i18n.lang].slice(0, 3), // select first 3 key specs
-				icon: pkg.id === 'eco' 
-					? 'eco' 
-					: pkg.id === 'wedding' 
-						? 'favorite' 
-						: 'business_center',
-				iconBg: pkg.id === 'eco' 
-					? 'bg-electric-blue/20 text-electric-blue' 
-					: pkg.id === 'wedding' 
-						? 'bg-secondary/20 text-secondary' 
-						: 'bg-primary/20 text-primary',
+				icon: meta.icon,
+				iconBg: meta.iconBg,
+				checkIconClass: meta.checkIconClass,
 				popular: pkg.popular,
-				borderClass: pkg.popular 
-					? 'border border-primary/30' 
-					: ''
-			}))
+				borderClass: pkg.popular ? 'border border-primary/30' : ''
+			};
+		})
 	);
+
+	// Carousel state for the pricing showcase — mirrors the Testimonials pattern:
+	// native CSS scroll-snap with arrows that reflect overflow and disable at edges.
+	let track = $state<HTMLDivElement | null>(null);
+	let scrollable = $state(false);
+	let atStart = $state(true);
+	let atEnd = $state(false);
+
+	function updateScrollState() {
+		if (!track) return;
+		const max = track.scrollWidth - track.clientWidth;
+		scrollable = max > 1;
+		atStart = track.scrollLeft <= 1;
+		atEnd = track.scrollLeft >= max - 1;
+	}
+
+	function scrollByCard(direction: 1 | -1) {
+		if (!track) return;
+		const card = track.querySelector<HTMLElement>('[data-testid="package-card"]');
+		const amount = card ? card.offsetWidth + 24 : track.clientWidth * 0.8;
+		track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+	}
+
+	$effect(() => {
+		if (!track) return;
+		updateScrollState();
+		const el = track;
+		el.addEventListener('scroll', updateScrollState, { passive: true });
+		const ro = new ResizeObserver(updateScrollState);
+		ro.observe(el);
+		return () => {
+			el.removeEventListener('scroll', updateScrollState);
+			ro.disconnect();
+		};
+	});
 </script>
 
 <!-- SEO Head & JSON-LD Injection -->
@@ -144,10 +163,10 @@
 				{i18n.t.hero.subtitle}
 			</p>
 			<div class="flex flex-wrap gap-4 pt-4">
-				<a class="bg-gradient-to-r from-secondary-container to-secondary text-on-secondary px-8 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(255,180,164,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200" href="/pricing">
+				<a class="bg-gradient-to-r from-secondary-container to-secondary text-on-secondary px-8 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(255,180,164,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200" href="/packages/">
 					{i18n.t.hero.viewPricing}
 				</a>
-				<a class="glass-panel text-on-surface px-8 py-4 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all flex items-center gap-2 active:scale-95 duration-200" href="/contact">
+				<a class="glass-panel text-on-surface px-8 py-4 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all flex items-center gap-2 active:scale-95 duration-200" href="/contact/">
 					{i18n.t.hero.contactUs} <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
 				</a>
 			</div>
@@ -285,65 +304,12 @@
 					</p>
 				</div>
 				<a
-					href="/services"
+					href="/services/"
 					class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 				>
 					<span class="material-symbols-outlined text-[32px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
 				</a>
 			</div>
-		</div>
-	</div>
-</section>
-
-<!-- Packages Showcase Section -->
-<section class="py-32 px-margin-mobile md:px-margin-desktop">
-	<div class="max-w-container-max mx-auto">
-		<div class="text-center mb-20">
-			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-secondary uppercase tracking-widest mb-4">
-				{i18n.t.packages.badge}
-			</span>
-			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background mb-4">{i18n.t.packages.title}</h2>
-			<p class="font-body-lg text-on-surface-variant max-w-xl mx-auto">{i18n.t.packages.subtitle}</p>
-		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-			{#each homepagePacks as pack (pack.id)}
-				<div class="glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col relative overflow-hidden {pack.borderClass}">
-					{#if pack.popular}
-						<div class="absolute top-4 right-4">
-							<span class="px-3 py-1 rounded-full bg-primary/20 text-primary font-label-sm text-[11px] uppercase tracking-widest">
-								{i18n.t.pricing.mostPopular}
-							</span>
-						</div>
-					{/if}
-					<div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 {pack.iconBg}">
-						<span class="material-symbols-outlined">{pack.icon}</span>
-					</div>
-					<h3 class="font-headline-md text-[22px] text-on-surface mb-1 hover:text-electric-blue transition-colors">
-						<a href={pack.route}>{pack.name}</a>
-					</h3>
-					<div class="text-[28px] font-bold mb-4 {pack.popular ? '' : 'text-on-surface'}">
-						{#if pack.popular}
-							<span class="text-gradient">{pack.price} €</span>
-						{:else}
-							<span>{pack.price} €</span>
-						{/if}
-						<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
-					</div>
-					<p class="font-body-md text-on-surface-variant text-sm mb-6">{pack.desc}</p>
-					<ul class="space-y-2 mb-8 flex-1">
-						{#each pack.features as feature}
-							<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
-								<span class="material-symbols-outlined text-[18px] {pack.id === 'eco' ? 'text-electric-blue' : pack.id === 'wedding' ? 'text-secondary' : 'text-primary'}">check</span>
-								{feature}
-							</li>
-						{/each}
-					</ul>
-					<a href="/contact-us?pack={pack.id}" class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
-						{i18n.t.packages.enquire}
-					</a>
-				</div>
-			{/each}
 		</div>
 	</div>
 </section>
@@ -385,39 +351,83 @@
 			<p class="font-body-lg text-on-surface-variant max-w-lg mx-auto">{i18n.t.pricingPreview.subtitle}</p>
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-			{#each pricingPlans as plan}
-				<div class="glass-panel p-8 rounded-2xl reveal active is-revealed flex flex-col {plan.popular ? 'border border-secondary/30 relative pt-10' : ''}">
-					{#if plan.popular}
-						<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-							<span class="px-4 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-[11px] uppercase tracking-widest whitespace-nowrap">
-								{i18n.t.pricing.mostPopular}
-							</span>
+		<div class="relative mb-12">
+			<div
+				bind:this={track}
+				data-testid="packages-carousel-track"
+				class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
+			>
+				{#each homepagePacks as pack (pack.id)}
+					<div
+						data-testid="package-card"
+						class="snap-start shrink-0 w-[320px] sm:w-[360px] glass-card p-8 rounded-2xl ambient-shadow reveal active is-revealed flex flex-col relative overflow-hidden {pack.borderClass}"
+					>
+						{#if pack.popular}
+							<div class="absolute top-4 right-4">
+								<span class="px-3 py-1 rounded-full bg-primary/20 text-primary font-label-sm text-[11px] uppercase tracking-widest">
+									{i18n.t.pricing.mostPopular}
+								</span>
+							</div>
+						{/if}
+						<div class="w-12 h-12 rounded-full flex items-center justify-center mb-6 {pack.iconBg}">
+							<span class="material-symbols-outlined">{pack.icon}</span>
 						</div>
-					{/if}
-					<h3 class="font-headline-md text-[20px] text-on-surface mb-3">{plan.name}</h3>
-					<div class="flex items-baseline gap-1 mb-6">
-						<span class="font-label-sm text-on-surface-variant">{i18n.t.pricing.from}</span>
-						<span class="text-[36px] font-bold text-on-surface">€{plan.price}</span>
-						<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+						<h3 class="font-headline-md text-[22px] text-on-surface mb-1 hover:text-electric-blue transition-colors">
+							<a href={pack.route}>{pack.name}</a>
+						</h3>
+						<div class="text-[28px] font-bold mb-4 {pack.popular ? '' : 'text-on-surface'}">
+							{#if pack.popular}
+								<span class="text-gradient">{pack.price} €</span>
+							{:else}
+								<span>{pack.price} €</span>
+							{/if}
+							<span class="font-body-sm text-sm text-on-surface-variant">{i18n.t.pricing.plusVat}</span>
+						</div>
+						<p class="font-body-md text-on-surface-variant text-sm mb-6">{pack.desc}</p>
+						<ul class="space-y-2 mb-8 flex-1">
+							{#each pack.features as feature}
+								<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
+									<span class="material-symbols-outlined text-[18px] {pack.checkIconClass}">check</span>
+									{feature}
+								</li>
+							{/each}
+						</ul>
+						<a href={pack.route} class="glass-panel text-on-surface px-6 py-3 rounded-full font-label-lg text-center hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+							{i18n.t.packages.enquire}
+						</a>
 					</div>
-					<ul class="space-y-3 mb-8 flex-1">
-						{#each plan.features as f}
-							<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
-								<span class="material-symbols-outlined text-[18px] {plan.checkIconClass}">check_circle</span>
-								{f}
-							</li>
-						{/each}
-					</ul>
-					<a href="/pricing#{plan.id}" class="text-center px-6 py-3 rounded-full font-label-lg border border-border-glass hover:bg-on-surface/5 transition-all active:scale-95 duration-200 text-on-surface">
-						{i18n.t.pricing.bookPack}
-					</a>
+				{/each}
+			</div>
+
+			<!-- Nav arrows only appear when the track actually overflows -->
+			{#if scrollable}
+				<div class="flex justify-center gap-3 mt-6">
+					<button
+						data-testid="packages-carousel-prev"
+						type="button"
+						aria-label={i18n.t.testimonials.prevAria}
+						disabled={atStart}
+						onclick={() => scrollByCard(-1)}
+						class="w-11 h-11 rounded-full glass-panel border border-border-glass flex items-center justify-center text-on-surface hover:bg-on-surface/10 active:scale-90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-electric-blue disabled:opacity-30 disabled:pointer-events-none"
+					>
+						<span class="material-symbols-outlined">chevron_left</span>
+					</button>
+					<button
+						data-testid="packages-carousel-next"
+						type="button"
+						aria-label={i18n.t.testimonials.nextAria}
+						disabled={atEnd}
+						onclick={() => scrollByCard(1)}
+						class="w-11 h-11 rounded-full glass-panel border border-border-glass flex items-center justify-center text-on-surface hover:bg-on-surface/10 active:scale-90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-electric-blue disabled:opacity-30 disabled:pointer-events-none"
+					>
+						<span class="material-symbols-outlined">chevron_right</span>
+					</button>
 				</div>
-			{/each}
+			{/if}
 		</div>
 
 		<div class="text-center">
-			<a href="/pricing" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-10 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+			<a href="/packages/" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-10 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 				{i18n.t.pricingPreview.viewAll}
 				<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
 			</a>
@@ -465,11 +475,11 @@
 				{i18n.lang === 'en' ? 'Have more questions?' : '¿Tenés más preguntas?'}
 			</p>
 			<div class="flex flex-wrap items-center justify-center gap-4">
-				<a href="/faq" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-8 py-3 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+				<a href="/faq/" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-8 py-3 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 					{i18n.lang === 'en' ? 'See all FAQs' : 'Ver todas las preguntas frecuentes'}
 					<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
 				</a>
-				<a href="/contact" class="glass-panel text-on-surface px-8 py-3 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+				<a href="/contact/" class="glass-panel text-on-surface px-8 py-3 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 					{i18n.t.contact.title}
 				</a>
 			</div>

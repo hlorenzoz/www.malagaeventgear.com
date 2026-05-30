@@ -41,7 +41,7 @@ async function getFaqPageSchema(page: Page): Promise<{ mainEntity: unknown[] } |
 
 test.describe('FAQ Filter Verification', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/faq');
+		await page.goto('/faq/');
 		await page.waitForLoadState('networkidle');
 	});
 
@@ -87,7 +87,7 @@ test.describe('FAQ Filter Verification', () => {
 
 test.describe('FAQ structured data (JSON-LD FAQPage)', () => {
 	test(`/faq schema mainEntity must cover all ${TOTAL_FAQS} questions`, async ({ page }) => {
-		await page.goto('/faq');
+		await page.goto('/faq/');
 		await page.waitForLoadState('networkidle');
 
 		const schema = await getFaqPageSchema(page);
@@ -108,7 +108,7 @@ test.describe('FAQ structured data (JSON-LD FAQPage)', () => {
 		await page.goto('/');
 		await page.waitForLoadState('networkidle');
 
-		const faqLink = page.locator('a[href="/faq"]', {
+		const faqLink = page.locator('a[href="/faq/"]', {
 			hasText: /See all FAQs|Ver todas las preguntas frecuentes/
 		});
 		await faqLink.scrollIntoViewIfNeeded();

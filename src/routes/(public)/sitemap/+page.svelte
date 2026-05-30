@@ -63,15 +63,15 @@
 							<span class="material-symbols-outlined text-[18px]">home</span>
 							Home Page
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/">
 							<span class="material-symbols-outlined text-[18px]">payments</span>
 							Pricing & Packages
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/services">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/services/">
 							<span class="material-symbols-outlined text-[18px]">grid_view</span>
 							Services Catalog
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact/">
 							<span class="material-symbols-outlined text-[18px]">mail</span>
 							Book Now / Contact
 						</a>
@@ -85,23 +85,23 @@
 						Event Packs
 					</h3>
 					<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/eco-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/eco/">
 							<span class="material-symbols-outlined text-[18px]">eco</span>
 							Eco Pack (290 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/wedding-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/wedding/">
 							<span class="material-symbols-outlined text-[18px]">favorite</span>
 							Wedding Pack (650 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/product-presentation-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/product-presentation/">
 							<span class="material-symbols-outlined text-[18px]">co_present</span>
 							Product Presentation (310 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/basic-mice-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/basic-mice/">
 							<span class="material-symbols-outlined text-[18px]">groups</span>
 							Basic MICE Pack (295 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/mice-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/mice/">
 							<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
 							MICE Pack (490 €)
 						</a>
@@ -116,33 +116,33 @@
 					</h3>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/about-us">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/about-us/">
 								<span class="material-symbols-outlined text-[18px]">info</span>
 								About Our Agency
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/meet-the-team">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/meet-the-team/">
 								<span class="material-symbols-outlined text-[18px]">groups</span>
 								Our Expert Team
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/faq">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/faq/">
 								<span class="material-symbols-outlined text-[18px]">help</span>
 								Frequently Asked Questions
 							</a>
 						</nav>
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/terms-of-service">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/terms-of-service/">
 								<span class="material-symbols-outlined text-[18px]">policy</span>
 								Terms of Service
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/privacy-policy">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/privacy-policy/">
 								<span class="material-symbols-outlined text-[18px]">shield</span>
 								Privacy Policy
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/cookie-policy">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/cookie-policy/">
 								<span class="material-symbols-outlined text-[18px]">cookie</span>
 								Cookie Policy
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/gdpr">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/gdpr/">
 								<span class="material-symbols-outlined text-[18px]">verified_user</span>
 								GDPR Compliance
 							</a>
@@ -173,15 +173,15 @@
 							<span class="material-symbols-outlined text-[18px]">home</span>
 							Página de Inicio
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/pricing">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/">
 							<span class="material-symbols-outlined text-[18px]">payments</span>
 							Precios y Paquetes
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/services">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/services/">
 							<span class="material-symbols-outlined text-[18px]">grid_view</span>
 							Catálogo de Servicios
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact/">
 							<span class="material-symbols-outlined text-[18px]">mail</span>
 							Reservar / Contacto
 						</a>
@@ -195,23 +195,23 @@
 						Paquetes de Eventos
 					</h3>
 					<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/eco-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/eco/">
 							<span class="material-symbols-outlined text-[18px]">eco</span>
 							Eco Pack (290 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/wedding-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/wedding/">
 							<span class="material-symbols-outlined text-[18px]">favorite</span>
 							Wedding Pack (650 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/product-presentation-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/product-presentation/">
 							<span class="material-symbols-outlined text-[18px]">co_present</span>
 							Product Presentation (310 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/basic-mice-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/basic-mice/">
 							<span class="material-symbols-outlined text-[18px]">groups</span>
 							Basic MICE Pack (295 €)
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/mice-pack">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/mice/">
 							<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
 							MICE Pack (490 €)
 						</a>
@@ -226,33 +226,33 @@
 					</h3>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/about-us">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/about-us/">
 								<span class="material-symbols-outlined text-[18px]">info</span>
 								Sobre Nuestra Agencia
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/meet-the-team">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/meet-the-team/">
 								<span class="material-symbols-outlined text-[18px]">groups</span>
 								Nuestro Equipo de Expertos
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/faq">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/faq/">
 								<span class="material-symbols-outlined text-[18px]">help</span>
 								Preguntas Frecuentes
 							</a>
 						</nav>
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/terms-of-service">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/terms-of-service/">
 								<span class="material-symbols-outlined text-[18px]">policy</span>
 								Términos del Servicio
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/privacy-policy">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/privacy-policy/">
 								<span class="material-symbols-outlined text-[18px]">shield</span>
 								Política de Privacidad
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/cookie-policy">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/cookie-policy/">
 								<span class="material-symbols-outlined text-[18px]">cookie</span>
 								Política de Cookies
 							</a>
-							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/gdpr">
+							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/gdpr/">
 								<span class="material-symbols-outlined text-[18px]">verified_user</span>
 								Cumplimiento del RGPD
 							</a>

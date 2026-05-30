@@ -29,34 +29,34 @@
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/">
 						{i18n.lang === 'en' ? 'Home' : 'Inicio'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/pricing">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/packages/">
 						{i18n.lang === 'en' ? 'Pricing' : 'Precios'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/about-us">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/about-us/">
 						{i18n.lang === 'en' ? 'About Us' : 'Sobre Nosotros'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/meet-the-team">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/meet-the-team/">
 						{i18n.lang === 'en' ? 'Meet The Team' : 'Nuestro Equipo'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/contact-us">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/contact-us/">
 						{i18n.lang === 'en' ? 'Contact Us' : 'Contáctanos'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/terms-of-service">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/terms-of-service/">
 						{i18n.lang === 'en' ? 'Terms of Service' : 'Términos del Servicio'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/privacy-policy">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/privacy-policy/">
 						{i18n.lang === 'en' ? 'Privacy Policy' : 'Política de Privacidad'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/cookie-policy">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/cookie-policy/">
 						{i18n.lang === 'en' ? 'Cookie Policy' : 'Política de Cookies'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/gdpr">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/gdpr/">
 						{i18n.lang === 'en' ? 'GDPR' : 'RGPD'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/faq">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/faq/">
 						{i18n.lang === 'en' ? 'FAQ' : 'Preguntas Frecuentes'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/sitemap">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/sitemap/">
 						{i18n.lang === 'en' ? 'Sitemap' : 'Mapa del Sitio'}
 					</a>
 				</nav>

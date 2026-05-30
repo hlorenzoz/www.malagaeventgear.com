@@ -49,7 +49,7 @@ bun-debug.log*
 # AI Agents & Local Skills
 # ------------------------------------------------------------------------------
 # Ignore locally downloaded or symlinked agent skills (re-creatable via skills-lock.json)
-.agents/
+.agents/skills/
 
 # ------------------------------------------------------------------------------
 # IDEs, Editors & System Files

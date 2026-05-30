@@ -1,0 +1,9 @@
+# Permanent 301 redirects from the legacy production URLs to the new /packages/* structure.
+# Cloudflare Pages serves these at the edge as real HTTP 301s, so search engines crawl the
+# old URL, receive the 301, and transfer ranking/authority to the new canonical URL.
+/pricing                       /packages                          301
+/eco-pack                      /packages/eco                      301
+/wedding-pack                  /packages/wedding                  301
+/product-presentation-pack     /packages/product-presentation     301
+/basic-mice-pack               /packages/basic-mice               301
+/mice-pack                     /packages/mice                     301

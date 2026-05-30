@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Added
+- **Global Routing Trailing Slash**: Created global routing configuration file (`src/routes/+layout.ts`) enforcing trailing slashes across all public SvelteKit routes for Technical SEO.
+- **AGENTS Rule Enforcement**: Documented mandatory rule in `AGENTS.md` requiring all internal relative URLs to terminate with trailing slashes.
 - **Centralized FAQ Data Store**:
   - Implemented `src/lib/data/faq.ts` validating all FAQ items with Zod schemas.
   - Implemented standard localized values (English/Spanish) for every FAQ item.
@@ -21,6 +23,8 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
   - Developed and expanded test coverage (`tests/faq.spec.ts` and others) verifying category filtering, animation visibility, JSON-LD schema generation, and responsive layouts.
 
 ### Changed
+- **Codebase Link Harmonization**: Rewrote all static relative navigation links, footer URLs, dynamic packages data routes, and internal references across pages (homepage, services, about, packages, sitemap) to terminate with a trailing slash.
+- **E2E Test Compliance**: Updated Playwright E2E tests (`packages.spec.ts` and `faq.spec.ts`) to conform with trailing slash URL routing standards.
 - **Page Refactoring**:
   - Rewrote `+page.svelte` (Homepage) and `faq/+page.svelte` to dynamically consume the centralized FAQ store, eliminating all duplicated inline questions and text assets.
   - Refactored pricing structures to consume the centralized Zod-validated packages store in `src/lib/data/packages.ts`.

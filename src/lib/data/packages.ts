@@ -12,9 +12,43 @@ const LocalizedListSchema = z.object({
 	es: z.array(z.string())
 });
 
+// Per-package landing page copy — every piece of bespoke, localized presentational
+// content lives here so the single dynamic /packages/[slug] route stays data-driven
+// while preserving full SEO/content parity with the original standalone pages.
+const LandingSchema = z.object({
+	badge: LocalizedTextSchema,
+	rateLabel: LocalizedTextSchema,
+	vatNote: LocalizedTextSchema,
+	specIcon: z.string(),
+	specTitle: LocalizedTextSchema,
+	specBody: LocalizedTextSchema,
+	highlightIcon: z.string().optional(),
+	highlightTitle: LocalizedTextSchema,
+	highlightBody: LocalizedTextSchema,
+	includesLabel: LocalizedTextSchema,
+	optionalLabel: LocalizedTextSchema.optional(),
+	note: z
+		.object({
+			title: LocalizedTextSchema,
+			body: LocalizedTextSchema
+		})
+		.optional(),
+	ctaHeading: LocalizedTextSchema,
+	ctaBody: LocalizedTextSchema,
+	ctaButton: LocalizedTextSchema
+});
+
+// SEO metadata per package (page title + JSON-LD Service descriptors)
+const SeoSchema = z.object({
+	title: LocalizedTextSchema,
+	serviceName: z.string(),
+	serviceType: z.string()
+});
+
 // Main package Zod schema
 export const PackageSchema = z.object({
 	id: z.string(),
+	slug: z.string(),
 	route: z.string(),
 	name: z.string(),
 	price: z.number(), // in EUR (excluding VAT)
@@ -23,7 +57,9 @@ export const PackageSchema = z.object({
 	optional: LocalizedListSchema.optional(),
 	maxGuests: z.number().optional(),
 	popular: z.boolean().optional(),
-	image: z.string().optional()
+	image: z.string().optional(),
+	seo: SeoSchema,
+	landing: LandingSchema
 });
 
 export type EventPackage = z.infer<typeof PackageSchema>;
@@ -32,7 +68,8 @@ export type EventPackage = z.infer<typeof PackageSchema>;
 const packagesData: EventPackage[] = [
 	{
 		id: 'eco',
-		route: '/eco-pack',
+		slug: 'eco',
+		route: '/packages/eco/',
 		name: 'Eco Pack',
 		price: 290,
 		desc: {
@@ -54,21 +91,54 @@ const packagesData: EventPackage[] = [
 			]
 		},
 		optional: {
-			en: [
-				'Projector & projection screen (+50€)',
-				'Professional smoke/fog machine (+20€)'
-			],
+			en: ['Projector & projection screen (+50€)', 'Professional smoke/fog machine (+20€)'],
 			es: [
 				'Proyector y pantalla de proyección (+50€)',
 				'Máquina de humo/niebla profesional (+20€)'
 			]
 		},
 		maxGuests: 50,
-		popular: false
+		popular: false,
+		seo: {
+			title: {
+				en: 'Eco Pack Speaker & Lighting Rental | Malaga Event Gear',
+				es: 'Eco Pack Alquiler de Sonido e Iluminación | Malaga Event Gear'
+			},
+			serviceName: 'Eco Pack Rental Malaga - Malaga Event Gear (MEG)',
+			serviceType: 'Audio visual event rentals for private parties'
+		},
+		landing: {
+			badge: { en: 'Small Events & Parties', es: 'Eventos Pequeños y Fiestas' },
+			rateLabel: { en: 'Affordable All-Inclusive Rate', es: 'Tarifa Todo Incluido Asequible' },
+			vatNote: {
+				en: '(+21% VAT) — Setup & transport included',
+				es: '(+21% IVA) — Montaje y transporte incluidos'
+			},
+			specIcon: 'group',
+			specTitle: { en: 'Up to 50 Guests', es: 'Hasta 50 Personas' },
+			specBody: {
+				en: 'Perfect for villas, gardens, and private rooms.',
+				es: 'Perfecto para villas, jardines y salas privadas.'
+			},
+			highlightTitle: { en: 'Stress-Free Service', es: 'Servicio Libre de Estrés' },
+			highlightBody: {
+				en: 'We operate as a delivery-only model with direct setups. We bring the gear, install it professionally, test the sound and lights, and retrieve everything after the event.',
+				es: 'Operamos como un modelo exclusivo de entrega y montaje directo. Llevamos los equipos, los instalamos profesionalmente, probamos el sonido y las luces, y retiramos todo después del evento.'
+			},
+			includesLabel: { en: 'What is Included', es: 'Qué Incluye' },
+			optionalLabel: { en: 'Optional Extras', es: 'Extras Opcionales' },
+			ctaHeading: { en: 'Secure Your Booking Today', es: 'Asegurá tu Reserva Hoy' },
+			ctaBody: {
+				en: 'Fill out our quick technical quote request to check package availability for your date. We reply in under 2 hours!',
+				es: 'Completá nuestra solicitud rápida de presupuesto técnico para consultar disponibilidad del paquete en tu fecha. ¡Respondemos en menos de 2 horas!'
+			},
+			ctaButton: { en: 'Book This Package', es: 'Reservar Este Paquete' }
+		}
 	},
 	{
 		id: 'wedding',
-		route: '/wedding-pack',
+		slug: 'wedding',
+		route: '/packages/wedding/',
 		name: 'Wedding Pack',
 		price: 650,
 		desc: {
@@ -97,11 +167,51 @@ const packagesData: EventPackage[] = [
 		},
 		maxGuests: 80,
 		popular: true,
-		image: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop'
+		image:
+			'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',
+		seo: {
+			title: {
+				en: 'Wedding Pack Sound & Romantic Lighting | Malaga Event Gear',
+				es: 'Pack Bodas Sonido e Iluminación Romántica | Malaga Event Gear'
+			},
+			serviceName: 'Wedding Pack Audio & Lighting Rental Malaga - Malaga Event Gear (MEG)',
+			serviceType: 'Audio visual wedding celebrations rentals'
+		},
+		landing: {
+			badge: {
+				en: 'Our Most Popular Celebration Pack',
+				es: 'Nuestro Pack de Celebración Más Elegido'
+			},
+			rateLabel: { en: 'Premium All-Inclusive Rate', es: 'Tarifa Todo Incluido Premium' },
+			vatNote: {
+				en: '(+21% VAT) — Setup & live support included',
+				es: '(+21% IVA) — Montaje y técnico incluidos'
+			},
+			specIcon: 'group',
+			specTitle: { en: 'Up to 80 Guests', es: 'Hasta 80 Personas' },
+			specBody: {
+				en: 'Perfect for beautiful villas, fincas, and wedding hotels.',
+				es: 'Perfecto para villas hermosas, fincas y hoteles de boda.'
+			},
+			highlightIcon: 'engineering',
+			highlightTitle: { en: 'Live On-Site Technician', es: 'Técnico en Vivo en el Sitio' },
+			highlightBody: {
+				en: 'Never worry about microphone feedback or visual issues. This package includes full live on-site technical monitoring and acoustic adjustments throughout your banquet and speeches.',
+				es: 'No te preocupes por acoples de micrófonos o fallos visuales. Este paquete incluye soporte técnico y monitoreo en directo durante el banquete y los discursos.'
+			},
+			includesLabel: { en: 'Premium Inclusions', es: 'Servicios Premium Incluidos' },
+			ctaHeading: { en: 'Make Your Celebration Magic', es: 'Hacé tu Celebración Mágica' },
+			ctaBody: {
+				en: 'Bookings for weddings fill up quickly. Secure your date with our technical crew today to guarantee the finest sound and romantic lighting on your special day.',
+				es: 'Las reservas de bodas se completan rápidamente. Asegurá tu fecha con nuestro equipo técnico hoy para garantizar el mejor sonido e iluminación romántica en tu gran día.'
+			},
+			ctaButton: { en: 'Book This Wedding Pack', es: 'Reservar Este Pack Bodas' }
+		}
 	},
 	{
 		id: 'presentation',
-		route: '/product-presentation-pack',
+		slug: 'product-presentation',
+		route: '/packages/product-presentation/',
 		name: 'Product Presentation Pack',
 		price: 310,
 		desc: {
@@ -122,11 +232,56 @@ const packagesData: EventPackage[] = [
 				'1 Micrófono inalámbrico de mano premium para oradores'
 			]
 		},
-		popular: false
+		popular: false,
+		seo: {
+			title: {
+				en: 'Product Presentation Pack Laser Projection & Audio | Malaga Event Gear',
+				es: 'Pack Lanzamiento de Productos Proyección y Audio | Malaga Event Gear'
+			},
+			serviceName: 'Product Presentation Pack Projection & Audio Malaga - Malaga Event Gear (MEG)',
+			serviceType: 'Audio visual product showcase and launch rentals'
+		},
+		landing: {
+			badge: {
+				en: 'High Visual Impact Corporate Solutions',
+				es: 'Soluciones Corporativas de Alto Impacto Visual'
+			},
+			rateLabel: { en: 'Presentation Pack Flat Rate', es: 'Tarifa Plana de Pack Lanzamientos' },
+			vatNote: {
+				en: '(+21% VAT) — Laser projector & screen included',
+				es: '(+21% IVA) — Proyector láser y pantalla incluidos'
+			},
+			specIcon: 'videocam',
+			specTitle: { en: 'High-Brightness Laser', es: 'Láser de Alto Brillo' },
+			specBody: {
+				en: '5000-Lumen HD Projector ideal for lit rooms.',
+				es: 'Proyector HD de 5000 lúmenes ideal para salas iluminadas.'
+			},
+			highlightTitle: { en: 'Flawless Corporate Branding', es: 'Branding Corporativo Impecable' },
+			highlightBody: {
+				en: 'Maximize the attention of your dealership launch, hotel press release, or product showcase. Our professional setup aligns pristine graphic detail with high-performance speech amplification.',
+				es: 'Maximizá la atención de tu lanzamiento en concesionario, rueda de prensa en hotel o exhibición de producto. Nuestro montaje alinea un detalle gráfico impecable con amplificación de voz de alto rendimiento.'
+			},
+			includesLabel: { en: 'What is Included', es: 'Qué Incluye' },
+			note: {
+				title: { en: 'Setup & Connection Support', es: 'Soporte de Conexión y Montaje' },
+				body: {
+					en: 'We provide all necessary adapters (HDMI, USB-C) and audio interfaces to connect your company laptops, tablets, or players seamlessly.',
+					es: 'Proporcionamos todos los adaptadores necesarios (HDMI, USB-C) e interfaces de audio para conectar tus laptops, tablets o reproductores corporativos sin problemas.'
+				}
+			},
+			ctaHeading: { en: 'Elevate Your Product Showcase', es: 'Elevá el Lanzamiento de tu Producto' },
+			ctaBody: {
+				en: 'Give your audience the visual clarity and professional sound they deserve. Contact our technical team today to confirm availability.',
+				es: 'Dale a tu audiencia la claridad visual y el sonido profesional que merecen. Contactá a nuestro equipo técnico hoy para confirmar disponibilidad.'
+			},
+			ctaButton: { en: 'Book This Presentation Pack', es: 'Reservar Este Pack Lanzamientos' }
+		}
 	},
 	{
 		id: 'mice-basic',
-		route: '/basic-mice-pack',
+		slug: 'basic-mice',
+		route: '/packages/basic-mice/',
 		name: 'Basic MICE Pack',
 		price: 295,
 		desc: {
@@ -148,19 +303,54 @@ const packagesData: EventPackage[] = [
 			]
 		},
 		optional: {
-			en: [
-				'Dedicated on-site live technical assistant (+240€/day)'
-			],
-			es: [
-				'Asistente técnico especializado en directo en el sitio (+240€/día)'
-			]
+			en: ['Dedicated on-site live technical assistant (+240€/day)'],
+			es: ['Asistente técnico especializado en directo en el sitio (+240€/día)']
 		},
 		maxGuests: 40,
-		popular: false
+		popular: false,
+		seo: {
+			title: {
+				en: 'Basic MICE Pack Corporate Meeting AV | Malaga Event Gear',
+				es: 'Pack MICE Básico Equipamiento de Reuniones | Malaga Event Gear'
+			},
+			serviceName: 'Basic MICE Pack Speaker & Projector Rental - Malaga Event Gear (MEG)',
+			serviceType: 'Audio visual MICE corporate meeting rentals'
+		},
+		landing: {
+			badge: {
+				en: 'Essential Executive Meeting Packages',
+				es: 'Paquetes de Reunión Ejecutiva Esenciales'
+			},
+			rateLabel: { en: 'Corporate Meeting Flat Rate', es: 'Tarifa Plana de Reuniones Corporativas' },
+			vatNote: {
+				en: '(+21% VAT) — Setup & transport included',
+				es: '(+21% IVA) — Montaje y transporte incluidos'
+			},
+			specIcon: 'group',
+			specTitle: { en: 'Up to 40 Guests', es: 'Hasta 40 Personas' },
+			specBody: {
+				en: 'Designed for boardrooms, private salons, and hotel suites.',
+				es: 'Diseñado para salas de juntas, salones privados y suites de hotel.'
+			},
+			highlightTitle: { en: 'Clear Speech Intelligibility', es: 'Inteligibilidad de Voz Clara' },
+			highlightBody: {
+				en: 'Professional gooseneck microphone configuration guarantees absolute clarity for board addresses, press announcements, or investor panels without echo or feedback.',
+				es: 'La configuración de micrófono de cuello de cisne profesional garantiza una claridad absoluta para discursos de junta directiva, anuncios de prensa o paneles de inversores.'
+			},
+			includesLabel: { en: 'What is Included', es: 'Qué Incluye' },
+			optionalLabel: { en: 'Optional Support', es: 'Soporte Opcional' },
+			ctaHeading: { en: 'Plan Your Executive Meeting', es: 'Planificá tu Reunión Ejecutiva' },
+			ctaBody: {
+				en: 'Coordinate seamless corporate AV logistics with Malaga Event Gear. Connect with our experts to secure a professional boardroom experience.',
+				es: 'Coordiná una logística audiovisual corporativa fluida con Malaga Event Gear. Conectate con nuestros expertos para asegurar una experiencia de sala de juntas profesional.'
+			},
+			ctaButton: { en: 'Book Basic MICE Pack', es: 'Reservar Pack MICE Básico' }
+		}
 	},
 	{
 		id: 'mice-full',
-		route: '/mice-pack',
+		slug: 'mice',
+		route: '/packages/mice/',
 		name: 'MICE Pack',
 		price: 490,
 		desc: {
@@ -195,7 +385,49 @@ const packagesData: EventPackage[] = [
 				'Tarimas de escenario modulares / plataformas (+35€ por metro cuadrado)'
 			]
 		},
-		popular: false
+		popular: false,
+		seo: {
+			title: {
+				en: 'MICE Pack Large Display & Audio Rental | Malaga Event Gear',
+				es: 'Pack MICE Pantalla Gigante y Sonido | Malaga Event Gear'
+			},
+			serviceName: 'MICE Pack LED Display & Sound Rental Malaga - Malaga Event Gear (MEG)',
+			serviceType: 'Audio visual MICE corporate congress and forum rentals'
+		},
+		landing: {
+			badge: {
+				en: 'Professional Medium & Large Corporate Events',
+				es: 'Eventos Corporativos Medianos y Grandes Profesionales'
+			},
+			rateLabel: {
+				en: 'Complete Corporate AV Flat Rate',
+				es: 'Tarifa Plana de AV Corporativo Completo'
+			},
+			vatNote: {
+				en: '(+21% VAT) — LED Screen & technician included',
+				es: '(+21% IVA) — Pantalla LED y técnico incluidos'
+			},
+			specIcon: 'desktop_windows',
+			specTitle: { en: 'Premium 60" LED Screen', es: 'Pantalla LED Premium de 60"' },
+			specBody: {
+				en: 'Includes heavy-duty designer floor stand.',
+				es: 'Incluye soporte de suelo de diseño resistente.'
+			},
+			highlightIcon: 'engineering',
+			highlightTitle: { en: 'AV Technician Included', es: 'Técnico Audiovisual Incluido' },
+			highlightBody: {
+				en: 'This package includes up to 6 hours of continuous, live technical support. An AV specialist will handle setup, connection testing, microfonía control, and live slide changes for a flawless presentation.',
+				es: 'Este paquete incluye hasta 6 horas de soporte técnico en directo. Un especialista en AV se encargará del montaje, pruebas de conexión, control de microfonía y cambios de diapositivas.'
+			},
+			includesLabel: { en: 'What is Included', es: 'Qué Incluye' },
+			optionalLabel: { en: 'Optional Staging & Extras', es: 'Escenario y Extras Opcionales' },
+			ctaHeading: { en: 'Coordinate Flawless MICE AV', es: 'Coordiná un MICE AV Impecable' },
+			ctaBody: {
+				en: 'Give your corporate forum, congress, or summit the executive visual polish and acoustic prestige it deserves. Reach out to our technical team today.',
+				es: 'Dale a tu foro corporativo, congreso o cumbre el pulido visual ejecutivo y el prestigio acústico que se merece. Ponete en contacto con nuestro equipo técnico hoy.'
+			},
+			ctaButton: { en: 'Book MICE Package', es: 'Reservar Paquete MICE' }
+		}
 	}
 ];
 
@@ -209,10 +441,6 @@ export const packages: EventPackage[] = packagesData.map((pkg) => {
 	return result.data;
 });
 
-export const getPackageById = (id: string): EventPackage | undefined => {
-	return packages.find((pkg) => pkg.id === id);
-};
-
-export const getPackageByRoute = (route: string): EventPackage | undefined => {
-	return packages.find((pkg) => pkg.route === route);
+export const getPackageBySlug = (slug: string): EventPackage | undefined => {
+	return packages.find((pkg) => pkg.slug === slug);
 };

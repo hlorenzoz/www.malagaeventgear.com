@@ -1,9 +1,11 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
-	import { getPackageById } from '$lib/data/packages';
+	import type { PageData } from './$types';
 
-	let pkg = $derived(getPackageById('mice-full')!);
+	let { data }: { data: PageData } = $props();
+	let pkg = $derived(data.pkg);
+	let landing = $derived(pkg.landing);
 
 	let seoSchema = $derived({
 		'@context': 'https://schema.org',
@@ -33,10 +35,10 @@
 			},
 			{
 				'@type': 'Service',
-				'@id': 'https://malagaeventgear.com/mice-pack/#service',
-				'name': 'MICE Pack LED Display & Sound Rental Malaga - Malaga Event Gear (MEG)',
+				'@id': `https://malagaeventgear.com${pkg.route}/#service`,
+				'name': pkg.seo.serviceName,
 				'description': pkg.desc[i18n.lang],
-				'serviceType': 'Audio visual MICE corporate congress and forum rentals',
+				'serviceType': pkg.seo.serviceType,
 				'provider': { '@id': 'https://malagaeventgear.com/#organization' },
 				'offers': {
 					'@type': 'Offer',
@@ -56,9 +58,9 @@
 </script>
 
 <SeoHead
-	title={i18n.lang === 'en' ? 'MICE Pack Large Display & Audio Rental | Malaga Event Gear' : 'Pack MICE Pantalla Gigante y Sonido | Malaga Event Gear'}
+	title={pkg.seo.title[i18n.lang]}
 	description={pkg.desc[i18n.lang]}
-	canonicalUrl="https://malagaeventgear.com/mice-pack"
+	canonicalUrl={`https://malagaeventgear.com${pkg.route}`}
 	jsonLdSchema={seoSchema}
 />
 
@@ -66,7 +68,7 @@
 	<!-- Hero Header -->
 	<div class="text-center mb-16 reveal active is-revealed">
 		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
-			{i18n.lang === 'en' ? 'Professional Medium & Large Corporate Events' : 'Eventos Corporativos Medianos y Grandes Profesionales'}
+			{landing.badge[i18n.lang]}
 		</span>
 		<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-6 text-on-background">
 			{pkg.name}
@@ -78,49 +80,54 @@
 
 	<!-- Bento Details Layout -->
 	<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch mb-20">
-		<!-- Pricing & Visual Display Card -->
+		<!-- Pricing & Capacity Card -->
 		<div class="lg:col-span-5 flex flex-col gap-6">
 			<!-- Glowing Price Card -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col justify-between relative overflow-hidden shadow-2xl">
 				<div class="absolute -top-24 -left-24 w-64 h-64 bg-electric-blue/10 rounded-full blur-3xl pointer-events-none"></div>
 				<div>
+					{#if pkg.popular}
+						<span class="inline-block bg-electric-blue text-white px-3 py-1 rounded-full font-label-sm tracking-wider uppercase mb-3">
+							{i18n.lang === 'en' ? 'Most Popular' : 'Más Popular'}
+						</span>
+					{/if}
 					<span class="font-label-md text-on-surface-variant uppercase tracking-wider block mb-2">
-						{i18n.lang === 'en' ? 'Complete Corporate AV Flat Rate' : 'Tarifa Plana de AV Corporativo Completo'}
+						{landing.rateLabel[i18n.lang]}
 					</span>
 					<span class="text-display-lg font-bold text-electric-blue block">
 						{pkg.price} €
 					</span>
 					<span class="text-sm text-on-surface-variant block mt-1">
-						{i18n.lang === 'en' ? '(+21% VAT) — LED Screen & technician included' : '(+21% IVA) — Pantalla LED y técnico incluidos'}
+						{landing.vatNote[i18n.lang]}
 					</span>
 				</div>
 				<div class="mt-8 border-t border-border-glass pt-6">
 					<div class="flex items-center gap-3">
-						<span class="material-symbols-outlined text-electric-blue text-[24px]">desktop_windows</span>
+						<span class="material-symbols-outlined text-electric-blue text-[24px]">{landing.specIcon}</span>
 						<div>
 							<span class="font-label-lg text-on-surface block">
-								{i18n.lang === 'en' ? 'Premium 60" LED Screen' : 'Pantalla LED Premium de 60"'}
+								{landing.specTitle[i18n.lang]}
 							</span>
 							<p class="text-sm text-on-surface-variant">
-								{i18n.lang === 'en' ? 'Includes heavy-duty designer floor stand.' : 'Incluye soporte de suelo de diseño resistente.'}
+								{landing.specBody[i18n.lang]}
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<!-- Dynamic Live Engineering Support Card -->
+			<!-- Dynamic Highlight / Support Card -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col justify-center">
 				<div class="flex items-center gap-3 mb-3">
-					<span class="material-symbols-outlined text-electric-blue text-[28px]">engineering</span>
+					{#if landing.highlightIcon}
+						<span class="material-symbols-outlined text-electric-blue text-[28px]">{landing.highlightIcon}</span>
+					{/if}
 					<h3 class="font-headline-sm text-headline-sm text-on-surface">
-						{i18n.lang === 'en' ? 'AV Technician Included' : 'Técnico Audiovisual Incluido'}
+						{landing.highlightTitle[i18n.lang]}
 					</h3>
 				</div>
 				<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-					{i18n.lang === 'en'
-						? 'This package includes up to 6 hours of continuous, live technical support. An AV specialist will handle setup, connection testing, microfonía control, and live slide changes for a flawless presentation.'
-						: 'Este paquete incluye hasta 6 horas de soporte técnico en directo. Un especialista en AV se encargará del montaje, pruebas de conexión, control de microfonía y cambios de diapositivas.'}
+					{landing.highlightBody[i18n.lang]}
 				</p>
 			</div>
 		</div>
@@ -130,8 +137,22 @@
 			<div class="glass-panel rounded-xl p-8 md:p-12 w-full flex flex-col justify-between relative overflow-hidden">
 				<div class="absolute -bottom-24 -right-24 w-64 h-64 bg-electric-blue/5 rounded-full blur-3xl pointer-events-none"></div>
 				<div>
+					{#if pkg.image}
+						<div class="w-full h-48 rounded-lg overflow-hidden mb-8 relative">
+							<img
+								alt={pkg.name}
+								class="object-cover w-full h-full opacity-90"
+								src={pkg.image}
+								loading="lazy"
+								decoding="async"
+								width="600"
+								height="400"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
+						</div>
+					{/if}
 					<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-border-glass pb-4">
-						{i18n.lang === 'en' ? 'What is Included' : 'Qué Incluye'}
+						{landing.includesLabel[i18n.lang]}
 					</h3>
 					<ul class="space-y-4 mb-8">
 						{#each pkg.includes[i18n.lang] as item}
@@ -142,9 +163,9 @@
 						{/each}
 					</ul>
 
-					{#if pkg.optional}
+					{#if pkg.optional && landing.optionalLabel}
 						<h4 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-4">
-							{i18n.lang === 'en' ? 'Optional Staging & Extras' : 'Escenario y Extras Opcionales'}
+							{landing.optionalLabel[i18n.lang]}
 						</h4>
 						<ul class="space-y-3">
 							{#each pkg.optional[i18n.lang] as extra}
@@ -155,6 +176,17 @@
 							{/each}
 						</ul>
 					{/if}
+
+					{#if landing.note}
+						<div class="p-4 rounded bg-on-surface/5 border border-border-glass">
+							<span class="font-label-md text-on-surface uppercase tracking-wider block mb-1">
+								{landing.note.title[i18n.lang]}
+							</span>
+							<p class="text-sm text-on-surface-variant leading-relaxed">
+								{landing.note.body[i18n.lang]}
+							</p>
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>
@@ -164,22 +196,20 @@
 	<div class="glass-panel rounded-xl p-8 md:p-12 text-center relative overflow-hidden reveal active is-revealed">
 		<div class="absolute -bottom-24 -right-24 w-64 h-64 bg-electric-blue/10 rounded-full blur-3xl pointer-events-none"></div>
 		<h2 class="font-headline-md text-headline-md mb-4 text-on-surface">
-			{i18n.lang === 'en' ? 'Coordinate Flawless MICE AV' : 'Coordiná un MICE AV Impecable'}
+			{landing.ctaHeading[i18n.lang]}
 		</h2>
 		<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-8">
-			{i18n.lang === 'en'
-				? 'Give your corporate forum, congress, or summit the executive visual polish and acoustic prestige it deserves. Reach out to our technical team today.'
-				: 'Dale a tu foro corporativo, congreso o cumbre el pulido visual ejecutivo y el prestigio acústico que se merece. Ponete en contacto con nuestro equipo técnico hoy.'}
+			{landing.ctaBody[i18n.lang]}
 		</p>
 		<div class="flex flex-wrap justify-center gap-4">
-			<a 
-				href="/contact-us?pack={pkg.id}"
+			<a
+				href="/contact-us/?pack={pkg.id}"
 				class="px-8 py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-95 transition-all duration-300"
 			>
-				{i18n.lang === 'en' ? 'Book MICE Package' : 'Reservar Paquete MICE'}
+				{landing.ctaButton[i18n.lang]}
 			</a>
-			<a 
-				href="/pricing"
+			<a
+				href="/packages/"
 				class="px-8 py-3 rounded-full border border-border-glass bg-on-surface/5 hover:bg-on-surface/10 text-on-surface font-label-lg active:scale-95 transition-all"
 			>
 				{i18n.lang === 'en' ? 'Compare All Packages' : 'Comparar Todos los Paquetes'}

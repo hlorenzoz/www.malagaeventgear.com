@@ -72,6 +72,8 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 
 ### 2. Arquitectura SEO (Mandatorio)
 - Las directrices técnicas de arquitectura y optimización SEO (cero errores de rastreo, inyección JSON-LD estructurado, optimización de imágenes y rendimiento LCP) se han consolidado y se mantienen bajo control estricto en **[SEO.md](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/SEO.md)**. Es obligatorio que el desarrollador/asistente de IA consulte y aplique dichas directrices para toda ruta pública del sitio.
+- **Estandarización de URLs**: Cada URL interna debe terminar estrictamente en `/` (trailing slash) (por ejemplo, `/packages/`, `/about-us/`, `/contact-us/`). Esto es mandatorio para garantizar la consistencia en el rastreo SEO, evitar duplicidad de contenido y alinear la navegación.
+
 
 ### 3. Restricciones de Cloudflare
 - El proyecto utiliza `@sveltejs/adapter-cloudflare`.

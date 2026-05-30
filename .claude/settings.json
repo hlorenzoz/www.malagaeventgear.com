@@ -9,7 +9,20 @@
       "Bash(bunx playwright *)",
       "Bash(grep -vE \"DEP0205|trace-deprecation|^\\\\s*$\")",
       "Bash(curl -s -o /dev/null -w \"dev:%{http_code}\\\\n\" http://localhost:5173/)",
-      "Bash(bat -p \"test-results/faq-FAQ-Filter-Verificatio-\"*\"-Contact-category-chromium/error-context.md\")"
+      "Bash(bat -p \"test-results/faq-FAQ-Filter-Verificatio-\"*\"-Contact-category-chromium/error-context.md\")",
+      "Bash(bat -pp tests/packages.spec.ts)",
+      "Bash(rg -n 'h3 class=\"font-headline-sm|leading-relaxed\">' 'src/routes/\\(public\\)/__TRACKED_VAR__/+page.svelte' -A2)",
+      "Bash(rg -n 'lang === '\\\\''es'\\\\''|: '\\\\''|\\\\? '\\\\''' 'src/routes/\\(public\\)/__TRACKED_VAR__/+page.svelte')",
+      "Bash(sed -n '112,130p' \"src/routes/\\(public\\)/wedding-pack/+page.svelte\")",
+      "Bash(sed -n '112,123p' \"src/routes/\\(public\\)/product-presentation-pack/+page.svelte\")",
+      "Bash(sed -n '112,123p' \"src/routes/\\(public\\)/basic-mice-pack/+page.svelte\")",
+      "Bash(sed -n '112,126p' \"src/routes/\\(public\\)/mice-pack/+page.svelte\")",
+      "Bash(rg -n 'border-b border-border-glass pb-4\">' 'src/routes/\\(public\\)/__TRACKED_VAR__/+page.svelte' -A1)",
+      "Bash(rg -n \"/eco-pack|/wedding-pack|/mice-pack|/basic-mice-pack|/product-presentation-pack|['\\\\\"\\\\\\\\\\(]/pricing|href=\\\\\"/pricing\\\\\"|'/pricing'\" src)",
+      "Bash(fd -e ts -e js . tests e2e)",
+      "Bash(rg -ln \"eco-pack|wedding-pack|mice-pack|product-presentation-pack|/pricing|getPackageByRoute\" tests e2e)",
+      "Bash(bat static/_redirects)",
+      "Bash(bat TODO.txt)"
     ]
   }
 }

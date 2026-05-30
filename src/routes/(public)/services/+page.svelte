@@ -130,7 +130,7 @@
 					</div>
 					<a 
 						class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 ml-auto flex items-center justify-center gap-2"
-						href="/contact?pack=mice"
+						href="/contact/?pack=mice"
 					>
 						{i18n.lang === 'en' ? 'Request Info' : 'Solicitar Info'} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 					</a>
@@ -237,7 +237,7 @@
 				</p>
 				<a 
 					class="flex items-center gap-2 text-electric-blue font-label-lg group-hover:translate-x-2 transition-all duration-300 active:scale-95 w-fit"
-					href="/contact?category=effects"
+					href="/contact/?category=effects"
 				>
 					{i18n.t.categories.bookEquipment} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 				</a>
@@ -258,7 +258,7 @@
 				</p>
 			</div>
 			<a 
-				href="/services"
+				href="/services/"
 				class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 			>
 				<span class="material-symbols-outlined text-[32px] group-hover:translate-x-1 transition-transform">arrow_forward</span>

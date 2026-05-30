@@ -27,3 +27,8 @@ install:
 # Formatea todo el código fuente utilizando Prettier de forma consistente con bunx
 format:
     bunx prettier --write .
+
+# Ejecuta las pruebas de integración E2E con Playwright
+playwright:
+    bunx playwright test
+

@@ -1,0 +1,97 @@
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+
+
+-- ❌ ✅
+
+OpenGraph
+
+Añade soporte global para OpenGraph según se define en OpenGraph.
+
+
+-- ❌ ✅
+
+Datos estructurados
+---
+
+Añadir a .agents/STRUCTURED_DATA.md lo siguiente las siguientes referencias para los datos estructurados:
+
+
+---
+
+Hay datos estructurados que son globales (a nivel de sitio web, y otros a nivel de página/post/paquete, etc). Hay que crear un mecanismo para gestionar esta estructura.
+
+Hace falta crear una una especie de fichero de configuración que contenga la información necesaria para llenar los datos estructurados.
+
+---
+
+Cada tipo de contenido tiene sí o sí que llevar los siguietnes datos estructurados según se relaciona en __utils/STRUCTURED_DATA.md.
+
+La información debe ser tomada del un úncio fichero de configuración que contenga toda la información necesaria del sitio para llenar los datos estructurados.
+
+
+-- ❌ ✅
+
+Añade la regla al @AGENTS.md  que cada URL debe terminar en /
+
+Corrige las URLs actuales y sus respectivas referencias
+
+-- ❌ ✅
+
+Descarga en __utils/sitemaps/
+
+https://malagaeventgear.com/sitemap_index.xml
+https://malagaeventgear.com/post-sitemap.xml
+https://malagaeventgear.com/page-sitemap.xml
+https://malagaeventgear.com/category-sitemap.xml
+https://malagaeventgear.com/author-sitemap.xml
+
+Crea la misma estructura para los sitemaps del sitio
+
+
+-- ✅
+
+Tenemos que implementar la siguiente estructura de URL para los paquetes:
+
+/packages/
+/packages/eco/
+/packages/wedding/
+/packages/product-presentation/
+/packages/basic-mice/
+/packages/mice/
+
+En /packages/ hacer un directorio con los diferentes paquetes con la misma información que en /pricing pero presentados en forma de carrusel
+
+Actualizar todas las referencias existentes.
+
+Ten en cuenta que este proyecto es una migración de un sitio que está en producción y que tiene sus URLs propias, por lo que hay que implementar algún mecanismo donde se persistan todas las redirecciones permanentes (301) desde las URL antiguas a las nuevas. 
+

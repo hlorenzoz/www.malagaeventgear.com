@@ -4,11 +4,11 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 	const packageIds = ['eco', 'wedding', 'presentation', 'mice-basic', 'mice-full'];
 	
 	const packageDetails = [
-		{ id: 'eco', route: '/eco-pack', name: 'Eco Pack', price: '290' },
-		{ id: 'wedding', route: '/wedding-pack', name: 'Wedding Pack', price: '650' },
-		{ id: 'presentation', route: '/product-presentation-pack', name: 'Product Presentation Pack', price: '310' },
-		{ id: 'mice-basic', route: '/basic-mice-pack', name: 'Basic MICE Pack', price: '295' },
-		{ id: 'mice-full', route: '/mice-pack', name: 'MICE Pack', price: '490' }
+		{ id: 'eco', route: '/packages/eco/', name: 'Eco Pack', price: '290' },
+		{ id: 'wedding', route: '/packages/wedding/', name: 'Wedding Pack', price: '650' },
+		{ id: 'presentation', route: '/packages/product-presentation/', name: 'Product Presentation Pack', price: '310' },
+		{ id: 'mice-basic', route: '/packages/basic-mice/', name: 'Basic MICE Pack', price: '295' },
+		{ id: 'mice-full', route: '/packages/mice/', name: 'MICE Pack', price: '490' }
 	];
 
 	test.beforeEach(async ({ page }) => {
@@ -33,14 +33,15 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 		}
 	});
 
-	test('should verify pricing page display and direct navigation links', async ({ page }) => {
-		await page.goto('/pricing');
+	test('should verify packages carousel display and direct navigation links', async ({ page }) => {
+		await page.goto('/packages/');
 		await page.waitForLoadState('networkidle');
 
-		// Pricing page should contain all 5 packages
+		// Packages carousel should contain all 5 packages
 		for (const pkg of packageDetails) {
-			// Verify name
-			const card = page.locator(`.glass-card:has-text("${pkg.name}")`);
+			// Scope to the card by its unique detail route link (avoids "MICE Pack" vs
+			// "Basic MICE Pack" substring ambiguity)
+			const card = page.locator(`[data-testid="package-card"]:has(a[href="${pkg.route}"])`);
 			await expect(card).toBeVisible();
 
 			// Verify correct price displays on card
@@ -63,7 +64,7 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 			await expect(priceText).toBeVisible();
 
 			// Verify the Book/CTA button maps to the correct contact pre-selection URL
-			const ctaButton = page.locator(`a[href="/contact-us?pack=${pkg.id}"]`);
+			const ctaButton = page.locator(`a[href="/contact-us/?pack=${pkg.id}"]`);
 			await expect(ctaButton).toBeVisible();
 		}
 	});

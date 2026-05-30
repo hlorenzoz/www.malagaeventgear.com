@@ -59,9 +59,9 @@
 
 	// Enlaces de navegación reactivos
 	let navLinks = $derived([
-		{ href: '/services', label: i18n.t.nav.equipment },
-		{ href: '/pricing', label: i18n.t.nav.pricing },
-		{ href: '/contact', label: i18n.t.nav.contact }
+		{ href: '/services/', label: i18n.t.nav.equipment },
+		{ href: '/packages/', label: i18n.t.nav.pricing },
+		{ href: '/contact/', label: i18n.t.nav.contact }
 	]);
 </script>
 
@@ -113,7 +113,7 @@
 			<!-- Action Button -->
 			<a
 				class="hidden md:inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/20 active:scale-95 transition-all duration-300"
-				href="/contact"
+				href="/contact/"
 			>
 				{i18n.t.nav.bookNow}
 			</a>
@@ -151,7 +151,7 @@
 			<a
 				onclick={closeMobileMenu}
 				class="w-full text-center py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg active:scale-98 transition-all"
-				href="/contact"
+				href="/contact/"
 			>
 				{i18n.t.nav.bookNow}
 			</a>
