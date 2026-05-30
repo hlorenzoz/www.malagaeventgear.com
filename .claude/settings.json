@@ -3,7 +3,12 @@
     "allow": [
       "mcp__plugin_engram_engram__mem_update",
       "Skill(git-commit)",
-      "Skill(git-commit:*)"
+      "Skill(git-commit:*)",
+      "mcp__svelte__svelte-autofixer",
+      "Read(//private/tmp/**)",
+      "Bash(bunx playwright *)",
+      "Bash(grep -vE \"DEP0205|trace-deprecation|^\\\\s*$\")",
+      "Bash(curl -s -o /dev/null -w \"dev:%{http_code}\\\\n\" http://localhost:5173/)"
     ]
   }
 }

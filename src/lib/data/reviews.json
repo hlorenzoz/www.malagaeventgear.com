@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "averageRating": 5.0,
+    "totalCount": 8,
+    "fetchedAt": "2026-05-30T00:00:00.000Z"
+  },
+  "testimonials": [
+    {
+      "id": "anna-wisser",
+      "author": "Anna Wisser",
+      "rating": 5,
+      "relativeTime": "December 2025",
+      "text": "We recently used Málaga Event Gear for our End of Season Party, and the service was outstanding. The sound and equipment were top quality, and we had a dedicated technician on-site the entire time to assist with everything we needed. Fantastic experience — highly recommended.",
+      "lang": "en",
+      "source": "google"
+    },
+    {
+      "id": "carlos-gottsch",
+      "author": "Carlos Göttsch",
+      "rating": 5,
+      "relativeTime": "September 2025",
+      "text": "Gracias a Málaga Event Gear por su ayuda rápida y totalmente fiable. Sin vosotros, nuestra fiesta no habría sido posible.",
+      "lang": "es",
+      "translation": {
+        "es": "Gracias a Málaga Event Gear por su ayuda rápida y totalmente fiable. Sin vosotros, nuestra fiesta no habría sido posible.",
+        "en": "I would like to thank Malaga Event Gear for their prompt and absolutely reliable assistance. Without you, our party would not have been possible."
+      },
+      "source": "google"
+    },
+    {
+      "id": "gines-de-biedma",
+      "author": "Gines de Biedma",
+      "rating": 5,
+      "relativeTime": "June 2025",
+      "text": "Profesionales y eficientes, muy en el detalle, equipo altamente cualificado.",
+      "lang": "es",
+      "source": "google"
+    },
+    {
+      "id": "ting-ting-yu",
+      "author": "Ting Ting Yu",
+      "rating": 5,
+      "relativeTime": "April 2025",
+      "text": "专业的团队，高效快速的解决方案，在众多的合作伙伴中值得放心和托付，并且无限次推荐给客户和朋友，谢谢Sergio和团队。",
+      "lang": "zh",
+      "source": "google"
+    },
+    {
+      "id": "daniel-gombar",
+      "author": "Dániel Gombár",
+      "rating": 5,
+      "relativeTime": "March 2025",
+      "text": "I am really satisfied with this team, they exceeded my expectations. Having a meeting in Malaga, it was a huge help that I did not have to care about the visual solutions and the sound, they made it easy and smooth. They answered all my questions and delivered a high quality equipment to the meeting. Totally worth it!",
+      "lang": "en",
+      "source": "google"
+    },
+    {
+      "id": "carlos-batlles",
+      "author": "Carlos Batlles",
+      "rating": 5,
+      "relativeTime": "March 2025",
+      "text": "This team delivered a flawless experience! Their MICE pack made everything easy for our event, and the team was both professional and reliable. The sound and lighting were top-notch, and you can tell they truly care about their work. Highly recommended!",
+      "lang": "en",
+      "source": "google"
+    },
+    {
+      "id": "rocio-plaza-gamez",
+      "author": "Rocio Plaza Gámez",
+      "rating": 5,
+      "relativeTime": "March 2025",
+      "text": "Completamente recomendable, Fácil, ágil, rápido... económico. Tenía un poco de miedo usar esta empresa por que era todo muy digital y transparente, y no había histórico, pero... un completo acierto.",
+      "lang": "es",
+      "source": "google"
+    }
+  ]
+}

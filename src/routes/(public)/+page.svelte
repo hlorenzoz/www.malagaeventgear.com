@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
 
@@ -236,6 +237,9 @@
 		</div>
 	</div>
 </section>
+
+<!-- Testimonials Section (Google Reviews) -->
+<Testimonials />
 
 <!-- Services Section (Bento Grid) -->
 <section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">

@@ -150,6 +150,20 @@ export const translations = {
 		faq: {
 			badge: 'FAQ',
 			title: 'Common Questions'
+		},
+		// Testimonials (Google reviews)
+		testimonials: {
+			badge: 'Client Reviews',
+			title: 'Real Stories from Real Events',
+			subtitle: 'Verified Google reviews from clients across the Costa del Sol.',
+			ratingLabel: 'EXCELLENT',
+			basedOn: 'Based on {n} reviews',
+			poweredBy: 'Showing our latest reviews',
+			readMore: 'Read more',
+			readLess: 'Read less',
+			seeAll: 'See all reviews',
+			prevAria: 'Previous review',
+			nextAria: 'Next review'
 		}
 	},
 	es: {
@@ -298,6 +312,20 @@ export const translations = {
 		faq: {
 			badge: 'FAQ',
 			title: 'Preguntas Frecuentes'
+		},
+		// Testimonials (reseñas de Google)
+		testimonials: {
+			badge: 'Reseñas de Clientes',
+			title: 'Historias Reales de Eventos Reales',
+			subtitle: 'Reseñas verificadas de Google de clientes en toda la Costa del Sol.',
+			ratingLabel: 'EXCELENTE',
+			basedOn: 'Basado en {n} reseñas',
+			poweredBy: 'Mostrando nuestras últimas reseñas',
+			readMore: 'Leer más',
+			readLess: 'Leer menos',
+			seeAll: 'Ver todas las reseñas',
+			prevAria: 'Reseña anterior',
+			nextAria: 'Reseña siguiente'
 		}
 	}
 } as const;
