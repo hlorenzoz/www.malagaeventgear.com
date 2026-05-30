@@ -92,9 +92,9 @@
 			<button
 				onclick={toggleLang}
 				class="flex items-center justify-center px-3 py-1.5 h-10 rounded-full glass-panel hover:bg-white/10 text-on-surface font-label-sm text-sm hover:text-electric-blue transition-colors duration-300"
-				aria-label="Toggle language"
+				aria-label="Change language to {i18n.lang === 'en' ? 'Spanish' : 'English'}"
 			>
-				{i18n.lang.toUpperCase()}
+				{i18n.lang === 'en' ? 'ES' : 'EN'}
 			</button>
 
 			<!-- Theme Toggle Button -->
