@@ -99,6 +99,20 @@ export interface BlogPostingSchema extends BaseLdContext {
 	image?: string | string[];
 }
 
+export interface FaqQuestionSchema {
+	'@type': 'Question';
+	name: string;
+	acceptedAnswer: {
+		'@type': 'Answer';
+		text: string;
+	};
+}
+
+export interface FaqPageSchema extends BaseLdContext {
+	'@type': 'FAQPage';
+	mainEntity: FaqQuestionSchema[];
+}
+
 /**
  * Tipo de unión que representa esquemas JSON-LD soportados o un registro genérico Schema.org.
  */
@@ -106,4 +120,5 @@ export type JsonLdSchema =
 	| WebSiteSchema
 	| OrganizationSchema
 	| BlogPostingSchema
+	| FaqPageSchema
 	| Record<string, unknown>;

@@ -8,7 +8,8 @@
       "Read(//private/tmp/**)",
       "Bash(bunx playwright *)",
       "Bash(grep -vE \"DEP0205|trace-deprecation|^\\\\s*$\")",
-      "Bash(curl -s -o /dev/null -w \"dev:%{http_code}\\\\n\" http://localhost:5173/)"
+      "Bash(curl -s -o /dev/null -w \"dev:%{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(bat -p \"test-results/faq-FAQ-Filter-Verificatio-\"*\"-Contact-category-chromium/error-context.md\")"
     ]
   }
 }

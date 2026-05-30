@@ -3,6 +3,7 @@
 	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
+	import { getHomepageFaqs, buildFaqSchema } from '$lib/data/faq';
 
 	// Structured JSON-LD schema for Generative SEO
 	const homeSchema = {
@@ -44,38 +45,13 @@
 
 	let openFaqIndex = $state<number | null>(null);
 
-	let faqs = $derived([
-		{
-			q: i18n.lang === 'en' ? 'How does the booking process work?' : '¿Cómo funciona el proceso de reserva?',
-			a: i18n.lang === 'en'
-				? 'Simple: select a pack, fill out our quote form, and our team contacts you within 2 hours to confirm details. We handle setup, run the show, and pack up post-event.'
-				: 'Simple: elegís un pack, completás nuestro formulario, y nuestro equipo te contacta en 2 horas para confirmar detalles. Nos encargamos del montaje, el show y el desmontaje post-evento.'
-		},
-		{
-			q: i18n.lang === 'en' ? 'Where do you offer your services?' : '¿Dónde ofrecen sus servicios?',
-			a: i18n.lang === 'en'
-				? 'We cover the full Costa del Sol — Malaga, Marbella, Torremolinos, Fuengirola, Benalmadena, and Estepona. We also travel to Seville, Granada, and Cordoba for specific projects.'
-				: 'Cubrimos toda la Costa del Sol — Málaga, Marbella, Torremolinos, Fuengirola, Benalmádena y Estepona. También viajamos a Sevilla, Granada y Córdoba para proyectos específicos.'
-		},
-		{
-			q: i18n.lang === 'en' ? 'What types of events do you cover?' : '¿Qué tipos de eventos cubren?',
-			a: i18n.lang === 'en'
-				? 'Weddings, private parties, corporate conferences, product launches, MICE events, cultural festivals, and private celebrations of any scale.'
-				: 'Bodas, fiestas privadas, conferencias corporativas, lanzamientos de productos, eventos MICE, festivales culturales y celebraciones privadas de cualquier escala.'
-		},
-		{
-			q: i18n.lang === 'en' ? 'What makes MEG different from other rental companies?' : '¿Qué diferencia a MEG de otras empresas de alquiler?',
-			a: i18n.lang === 'en'
-				? 'Over 27 years of experience, a dedicated on-site technician for every booking, premium brand equipment (Shure, QSC, Martin), and 2,500+ successful events — all at transparent, all-inclusive pricing.'
-				: 'Más de 27 años de experiencia, técnico dedicado en sitio en cada reserva, equipamiento de marcas premium (Shure, QSC, Martin) y más de 2.500 eventos exitosos — a precios transparentes y todo incluido.'
-		},
-		{
-			q: i18n.lang === 'en' ? 'Can I customize a package for my specific needs?' : '¿Puedo personalizar un paquete para mis necesidades?',
-			a: i18n.lang === 'en'
-				? "Absolutely. Every pack can be extended with add-ons like extra microphones, fog machines, projectors, and LED uplighting. Contact us with your requirements and we'll build a perfect quote."
-				: 'Por supuesto. Cada pack se puede ampliar con complementos como micrófonos adicionales, máquinas de humo, proyectores e iluminación LED. Contactanos con tus requerimientos y armamos un presupuesto a tu medida.'
-		}
-	]);
+	// Top 5 conversion-oriented FAQs, sourced from the centralized FAQ store
+	let faqs = $derived(
+		getHomepageFaqs().map((item) => ({
+			q: item.question[i18n.lang],
+			a: item.answer[i18n.lang]
+		}))
+	);
 
 	let steps = $derived([
 		{ num: '01', title: i18n.t.process.s1Title, desc: i18n.t.process.s1Desc, icon: 'package_2' },
@@ -137,7 +113,7 @@
 	title="Premium Audiovisual Equipment Rental in Malaga | MEG"
 	description="Malaga Event Gear (MEG) offers premium sound system, spectacular lighting, projector, and screen rentals for weddings, corporate events, and parties in Malaga."
 	canonicalUrl="https://www.malagaeventgear.com/"
-	jsonLdSchema={homeSchema}
+	jsonLdSchema={[homeSchema, buildFaqSchema(getHomepageFaqs())]}
 />
 
 <!-- Hero Section -->
@@ -488,9 +464,15 @@
 			<p class="text-on-surface-variant font-body-md mb-4">
 				{i18n.lang === 'en' ? 'Have more questions?' : '¿Tenés más preguntas?'}
 			</p>
-			<a href="/contact" class="glass-panel text-on-surface px-8 py-3 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
-				{i18n.t.contact.title}
-			</a>
+			<div class="flex flex-wrap items-center justify-center gap-4">
+				<a href="/faq" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-8 py-3 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+					{i18n.lang === 'en' ? 'See all FAQs' : 'Ver todas las preguntas frecuentes'}
+					<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+				</a>
+				<a href="/contact" class="glass-panel text-on-surface px-8 py-3 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+					{i18n.t.contact.title}
+				</a>
+			</div>
 		</div>
 	</div>
 </section>

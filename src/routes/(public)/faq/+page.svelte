@@ -1,91 +1,27 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { faqs, buildFaqSchema } from '$lib/data/faq';
 	import { slide } from 'svelte/transition';
 
-	let faqSchema = $derived({
-		'@context': 'https://schema.org',
-		'@type': 'FAQPage',
-		'@id': 'https://malagaeventgear.com/faq/#webpage',
-		'mainEntity': [
-			{
-				'@type': 'Question',
-				'name': 'What is Malaga Event Gear (MEG), and what services do they offer?',
-				'acceptedAnswer': {
-					'@type': 'Answer',
-					'text': 'Malaga Event Gear (MEG) is based in Malaga, Spain, specializing in renting professional audiovisual, lighting, and event equipment. Our services include sound systems, projectors, screens, stages, live technical assistance, smoke machines, and microphones.'
-				}
-			},
-			{
-				'@type': 'Question',
-				'name': 'Where does Malaga Event Gear (MEG) offer its services?',
-				'acceptedAnswer': {
-					'@type': 'Answer',
-					'text': 'We primarily operate across Malaga and the Costa del Sol (including Marbella, Fuengirola, Torremolinos, Estepona, etc.). We also cover Seville and Granada, though Granada is limited to bookings exceeding 400 euros.'
-				}
-			},
-			{
-				'@type': 'Question',
-				'name': 'How does the booking process work?',
-				'acceptedAnswer': {
-					'@type': 'Answer',
-					'text': '1. Select Your Package. 2. Request Your Quote via our inquiry form. 3. Our team contacts you to finalize details. 4. We handle the transport, setup, and pickup.'
-				}
-			}
-		]
-	});
+	// FAQPage JSON-LD generated from the same source as the rendered content,
+	// so the structured data always matches every visible question.
+	let faqSchema = buildFaqSchema(faqs);
 
 	let activeCategory = $state('all');
 	let openIndex = $state<number | null>(null);
 
-	let faqList = $derived([
-		{
-			category: 'services',
-			q: i18n.lang === 'en' ? 'What is Malaga Event Gear (MEG), and what services do they offer?' : '¿Qué es Malaga Event Gear (MEG) y qué servicios ofrecen?',
-			a: i18n.lang === 'en'
-				? 'Malaga Event Gear (MEG) is a premium event rental provider based in Malaga, Spain. We specialize in sound systems, microphones (wired, wireless, gooseneck), projection systems, large screens, ambient lighting, smoke machines, and stage platforms. We also offer specialized services like multi-camera recording, live streaming, and live technical engineering.'
-				: 'Malaga Event Gear (MEG) es un proveedor premium de alquiler para eventos con sede en Málaga, España. Nos especializamos en sistemas de sonido, micrófonos (con cable, inalámbricos, flexo), sistemas de proyección, pantallas grandes, iluminación ambiental, máquinas de humo y tarimas de escenario. También ofrecemos servicios especializados como grabación multicámara, transmisión en vivo e ingeniería técnica en directo.'
-		},
-		{
-			category: 'logistics',
-			q: i18n.lang === 'en' ? 'Where does Malaga Event Gear (MEG) offer its services?' : '¿Dónde ofrece sus servicios Malaga Event Gear (MEG)?',
-			a: i18n.lang === 'en'
-				? 'We primarily deliver across the Costa del Sol, including Malaga capital, Marbella, Torremolinos, Fuengirola, Benalmadena, Nerja, Estepona, and Sevilla. For Granada, we require a minimum rental value of 400.00 € due to out-of-province single-day logistical travel.'
-				: 'Entregamos principalmente en la Costa del Sol, incluyendo Málaga capital, Marbella, Torremolinos, Fuengirola, Benalmádena, Nerja, Estepona y Sevilla. Para Granada, requerimos un valor de alquiler mínimo de 400,00 € debido al traslado logístico de un día fuera de la provincia.'
-		},
-		{
-			category: 'booking',
-			q: i18n.lang === 'en' ? 'How does the booking process work with Malaga Event Gear?' : '¿Cómo funciona el proceso de reserva con Malaga Event Gear?',
-			a: i18n.lang === 'en'
-				? 'Our streamlined workflow has four steps: 1. Select Your Package. 2. Request Your Quote using our quick inquiry form. 3. Our technical team contacts you to finalize details. 4. Enjoy your event while we handle delivery, professional setup, configuration, and teardown.'
-				: 'Nuestro flujo de trabajo optimizado tiene cuatro pasos: 1. Elegí tu paquete. 2. Solicitá tu presupuesto usando nuestro formulario rápido. 3. Nuestro equipo técnico te contacta para detallar. 4. Disfrutá de tu evento mientras nos encargamos de la entrega, montaje profesional, calibración y desmontaje.'
-		},
-		{
-			category: 'services',
-			q: i18n.lang === 'en' ? 'Do you offer delivery and setup for sound and lighting equipment?' : '¿Ofrecen entrega y montaje de equipos de sonido e iluminación?',
-			a: i18n.lang === 'en'
-				? 'Yes! We operate under a delivery-only model (no pickup option is available to guarantee pristine calibration). Our expert team provides free delivery within Malaga, followed by professional setup, cable concealment, and sound/lighting checks.'
-				: '¡Sí! Operamos bajo un modelo exclusivo de entrega (no hay opción de recogida para garantizar una calibración perfecta). Nuestro equipo experto ofrece entrega gratuita en Málaga, seguida de montaje profesional, ocultación de cableado y pruebas de sonido/iluminación.'
-		},
-		{
-			category: 'booking',
-			q: i18n.lang === 'en' ? 'What are your operational hours and language preferences?' : '¿Cuáles son sus horarios de atención e idioma de comunicación?',
-			a: i18n.lang === 'en'
-				? 'We are available 24/7 for technical setups and live event monitoring. For commercial inquiries and customer support, we are active from 8:00 AM to 8:00 PM daily. All communications are conducted exclusively in English to serve our international clientele.'
-				: 'Estamos disponibles las 24 horas, los 7 días de la semana para montajes técnicos y control en vivo de eventos. Para consultas comerciales y atención al cliente, estamos activos de 8:00 AM a 8:00 PM todos los días. Todas las comunicaciones se realizan exclusivamente en inglés para atender a nuestra clientela internacional.'
-		},
-		{
-			category: 'booking',
-			q: i18n.lang === 'en' ? 'What is the required notice time for a booking?' : '¿Con cuánta antelación se debe realizar la reserva?',
-			a: i18n.lang === 'en'
-				? 'All event gear rentals and technical services must be contracted with a minimum of 24 hours\' advance notice to guarantee scheduling and logistical availability.'
-				: 'Todos los alquileres de equipos y servicios técnicos para eventos deben contratarse con un mínimo de 24 horas de antelación para garantizar la programación y la disponibilidad logística.'
-		}
-	]);
+	let faqList = $derived(
+		faqs.map((item) => ({
+			category: item.category,
+			q: item.question[i18n.lang],
+			a: item.answer[i18n.lang]
+		}))
+	);
 
 	let filteredFaqs = $derived(
-		activeCategory === 'all' 
-			? faqList 
+		activeCategory === 'all'
+			? faqList
 			: faqList.filter(item => item.category === activeCategory)
 	);
 
@@ -139,11 +75,17 @@
 		>
 			{i18n.lang === 'en' ? 'Logistics & Areas' : 'Logística y Áreas'}
 		</button>
-		<button 
+		<button
 			onclick={() => { activeCategory = 'booking'; openIndex = null; }}
 			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none {activeCategory === 'booking' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
 		>
 			{i18n.lang === 'en' ? 'Booking & Timelines' : 'Reservas y Plazos'}
+		</button>
+		<button
+			onclick={() => { activeCategory = 'contact'; openIndex = null; }}
+			class="px-6 py-2.5 rounded-full font-label-md text-sm border border-border-glass transition-all duration-300 focus-visible:ring-2 focus-visible:ring-electric-blue focus-visible:outline-none {activeCategory === 'contact' ? 'bg-electric-blue text-white shadow-[0_0_15px_rgba(77,140,255,0.3)]' : 'bg-surface-glass text-on-surface hover:bg-on-surface/5 active:scale-95'}"
+		>
+			{i18n.lang === 'en' ? 'Contact' : 'Contacto'}
 		</button>
 	</div>
 
