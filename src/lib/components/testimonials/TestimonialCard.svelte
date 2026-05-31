@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { i18n } from '$lib/i18n.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import type { Testimonial } from '$lib/data/testimonials';
 
 	let { testimonial }: { testimonial: Testimonial } = $props();
@@ -70,9 +71,7 @@
 		class="flex items-center gap-0.5 mb-3 text-[#fbbf24]"
 	>
 		{#each Array(5) as _, i (i)}
-			<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">
-				{i < testimonial.rating ? 'star' : 'star_border'}
-			</span>
+			<Icon name={i < testimonial.rating ? 'star' : 'star_border'} size="18" />
 		{/each}
 	</div>
 

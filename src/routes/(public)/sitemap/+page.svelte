@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 
 	let sitemapSchema = $derived({
@@ -45,7 +46,7 @@
 		<!-- ================= ENGLISH VERSION ================= -->
 		<section class="flex flex-col gap-8" lang="en">
 			<div class="flex items-center gap-3 border-b border-border-glass pb-4">
-				<span class="material-symbols-outlined text-[32px] text-electric-blue">flag</span>
+				<Icon name="flag" size="32" className="text-electric-blue" />
 				<h2 class="font-headline-md text-headline-md text-on-surface">
 					English Version
 				</h2>
@@ -55,24 +56,24 @@
 				<!-- Core Portals -->
 				<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
 					<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
-						<span class="material-symbols-outlined text-[22px]">explore</span>
+						<Icon name="explore" size="22" />
 						Primary Portals
 					</h3>
 					<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/">
-							<span class="material-symbols-outlined text-[18px]">home</span>
+							<Icon name="home" size="18" />
 							Home Page
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/">
-							<span class="material-symbols-outlined text-[18px]">payments</span>
+							<Icon name="payments" size="18" />
 							Pricing & Packages
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/equipment/">
-							<span class="material-symbols-outlined text-[18px]">grid_view</span>
+							<Icon name="grid_view" size="18" />
 							Equipment Catalog
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact/">
-							<span class="material-symbols-outlined text-[18px]">mail</span>
+							<Icon name="mail" size="18" />
 							Book Now / Contact
 						</a>
 					</nav>
@@ -81,28 +82,28 @@
 				<!-- Event Packs -->
 				<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
 					<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
-						<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+						<Icon name="inventory_2" size="22" />
 						Event Packs
 					</h3>
 					<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/eco/">
-							<span class="material-symbols-outlined text-[18px]">eco</span>
+							<Icon name="eco" size="18" />
 							Eco Pack (290 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/wedding/">
-							<span class="material-symbols-outlined text-[18px]">favorite</span>
+							<Icon name="favorite" size="18" />
 							Wedding Pack (650 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/product-presentation/">
-							<span class="material-symbols-outlined text-[18px]">co_present</span>
+							<Icon name="co_present" size="18" />
 							Product Presentation (310 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/basic-mice/">
-							<span class="material-symbols-outlined text-[18px]">groups</span>
+							<Icon name="groups" size="18" />
 							Basic MICE Pack (295 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/mice/">
-							<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
+							<Icon name="corporate_fare" size="18" />
 							MICE Pack (490 €)
 						</a>
 					</nav>
@@ -111,39 +112,39 @@
 				<!-- Legal & About Us -->
 				<div class="glass-panel rounded-xl p-6 flex flex-col gap-4 md:col-span-2">
 					<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
-						<span class="material-symbols-outlined text-[22px]">gavel</span>
+						<Icon name="gavel" size="22" />
 						Information & Legal
 					</h3>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/about-us/">
-								<span class="material-symbols-outlined text-[18px]">info</span>
+								<Icon name="info" size="18" />
 								About Our Agency
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/meet-the-team/">
-								<span class="material-symbols-outlined text-[18px]">groups</span>
+								<Icon name="groups" size="18" />
 								Our Expert Team
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/faq/">
-								<span class="material-symbols-outlined text-[18px]">help</span>
+								<Icon name="help" size="18" />
 								Frequently Asked Questions
 							</a>
 						</nav>
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/terms-of-service/">
-								<span class="material-symbols-outlined text-[18px]">policy</span>
+								<Icon name="policy" size="18" />
 								Terms of Service
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/privacy-policy/">
-								<span class="material-symbols-outlined text-[18px]">shield</span>
+								<Icon name="shield" size="18" />
 								Privacy Policy
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/cookie-policy/">
-								<span class="material-symbols-outlined text-[18px]">cookie</span>
+								<Icon name="cookie" size="18" />
 								Cookie Policy
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/gdpr/">
-								<span class="material-symbols-outlined text-[18px]">verified_user</span>
+								<Icon name="verified_user" size="18" />
 								GDPR Compliance
 							</a>
 						</nav>
@@ -155,7 +156,7 @@
 		<!-- ================= VERSÍON EN ESPAÑOL ================= -->
 		<section class="flex flex-col gap-8" lang="es">
 			<div class="flex items-center gap-3 border-b border-border-glass pb-4">
-				<span class="material-symbols-outlined text-[32px] text-electric-blue">flag</span>
+				<Icon name="flag" size="32" className="text-electric-blue" />
 				<h2 class="font-headline-md text-headline-md text-on-surface">
 					Versión en Español
 				</h2>
@@ -165,24 +166,24 @@
 				<!-- Portales Principales -->
 				<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
 					<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
-						<span class="material-symbols-outlined text-[22px]">explore</span>
+						<Icon name="explore" size="22" />
 						Portales Principales
 					</h3>
 					<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/">
-							<span class="material-symbols-outlined text-[18px]">home</span>
+							<Icon name="home" size="18" />
 							Página de Inicio
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/">
-							<span class="material-symbols-outlined text-[18px]">payments</span>
+							<Icon name="payments" size="18" />
 							Precios y Paquetes
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/equipment/">
-							<span class="material-symbols-outlined text-[18px]">grid_view</span>
+							<Icon name="grid_view" size="18" />
 							Catálogo de Equipos
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact/">
-							<span class="material-symbols-outlined text-[18px]">mail</span>
+							<Icon name="mail" size="18" />
 							Reservar / Contacto
 						</a>
 					</nav>
@@ -191,28 +192,28 @@
 				<!-- Paquetes de Eventos -->
 				<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
 					<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
-						<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+						<Icon name="inventory_2" size="22" />
 						Paquetes de Eventos
 					</h3>
 					<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/eco/">
-							<span class="material-symbols-outlined text-[18px]">eco</span>
+							<Icon name="eco" size="18" />
 							Eco Pack (290 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/wedding/">
-							<span class="material-symbols-outlined text-[18px]">favorite</span>
+							<Icon name="favorite" size="18" />
 							Wedding Pack (650 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/product-presentation/">
-							<span class="material-symbols-outlined text-[18px]">co_present</span>
+							<Icon name="co_present" size="18" />
 							Product Presentation (310 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/basic-mice/">
-							<span class="material-symbols-outlined text-[18px]">groups</span>
+							<Icon name="groups" size="18" />
 							Basic MICE Pack (295 €)
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/packages/mice/">
-							<span class="material-symbols-outlined text-[18px]">corporate_fare</span>
+							<Icon name="corporate_fare" size="18" />
 							MICE Pack (490 €)
 						</a>
 					</nav>
@@ -221,39 +222,39 @@
 				<!-- Información y Legales -->
 				<div class="glass-panel rounded-xl p-6 flex flex-col gap-4 md:col-span-2">
 					<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
-						<span class="material-symbols-outlined text-[22px]">gavel</span>
+						<Icon name="gavel" size="22" />
 						Información y Legales
 					</h3>
 					<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/about-us/">
-								<span class="material-symbols-outlined text-[18px]">info</span>
+								<Icon name="info" size="18" />
 								Sobre Nuestra Agencia
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/meet-the-team/">
-								<span class="material-symbols-outlined text-[18px]">groups</span>
+								<Icon name="groups" size="18" />
 								Nuestro Equipo de Expertos
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/faq/">
-								<span class="material-symbols-outlined text-[18px]">help</span>
+								<Icon name="help" size="18" />
 								Preguntas Frecuentes
 							</a>
 						</nav>
 						<nav class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/terms-of-service/">
-								<span class="material-symbols-outlined text-[18px]">policy</span>
+								<Icon name="policy" size="18" />
 								Términos del Servicio
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/privacy-policy/">
-								<span class="material-symbols-outlined text-[18px]">shield</span>
+								<Icon name="shield" size="18" />
 								Política de Privacidad
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/cookie-policy/">
-								<span class="material-symbols-outlined text-[18px]">cookie</span>
+								<Icon name="cookie" size="18" />
 								Política de Cookies
 							</a>
 							<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/gdpr/">
-								<span class="material-symbols-outlined text-[18px]">verified_user</span>
+								<Icon name="verified_user" size="18" />
 								Cumplimiento del RGPD
 							</a>
 						</nav>

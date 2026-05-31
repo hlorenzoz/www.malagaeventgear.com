@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { i18n } from '$lib/i18n.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import TestimonialCard from './TestimonialCard.svelte';
 	import {
 		getReviewsMeta,
@@ -97,9 +98,7 @@
 			</span>
 			<div class="flex items-center gap-0.5 text-[#fbbf24]">
 				{#each Array(5) as _, i (i)}
-					<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">
-						{i < Math.round(meta.averageRating) ? 'star' : 'star_border'}
-					</span>
+					<Icon name={i < Math.round(meta.averageRating) ? 'star' : 'star_border'} size="22" />
 				{/each}
 			</div>
 			<p class="font-body-md text-sm text-on-surface-variant">{basedOn}</p>
@@ -143,7 +142,7 @@
 							onclick={() => scrollByCard(-1)}
 							class="w-11 h-11 rounded-full glass-panel border border-border-glass flex items-center justify-center text-on-surface hover:bg-on-surface/10 active:scale-90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-electric-blue disabled:opacity-30 disabled:pointer-events-none"
 						>
-							<span class="material-symbols-outlined">chevron_left</span>
+							<Icon name="chevron_left" />
 						</button>
 						<button
 							data-testid="carousel-next"
@@ -153,7 +152,7 @@
 							onclick={() => scrollByCard(1)}
 							class="w-11 h-11 rounded-full glass-panel border border-border-glass flex items-center justify-center text-on-surface hover:bg-on-surface/10 active:scale-90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-electric-blue disabled:opacity-30 disabled:pointer-events-none"
 						>
-							<span class="material-symbols-outlined">chevron_right</span>
+							<Icon name="chevron_right" />
 						</button>
 					</div>
 				{/if}
@@ -176,7 +175,7 @@
 					<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38Z"/>
 				</svg>
 				{i18n.t.testimonials.seeAll}
-				<span class="material-symbols-outlined text-[20px]">arrow_outward</span>
+				<Icon name="arrow_outward" size="20" />
 			</a>
 		</div>
 	</div>

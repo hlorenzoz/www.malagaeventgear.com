@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 
 	// Structured Data Schema for the Blog Catalog page (SEO/GEO chatbot visibility)
@@ -57,7 +58,7 @@
 		
 		<div class="relative z-10 flex flex-col items-center text-center">
 			<div class="w-16 h-16 rounded-full bg-primary-container/40 border border-electric-blue/30 flex items-center justify-center mb-6">
-				<span class="material-symbols-outlined text-primary text-[32px] animate-pulse">engineering</span>
+				<Icon name="engineering" size="32" className="text-primary animate-pulse" />
 			</div>
 			
 			<h2 class="font-headline-md text-headline-md text-on-surface mb-4">
@@ -78,27 +79,27 @@
 				
 				<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
 					<div class="p-4 rounded-xl bg-background/50 border border-border-glass backdrop-blur-md flex flex-col items-center">
-						<span class="material-symbols-outlined text-primary mb-2">favorite</span>
+						<Icon name="favorite" className="text-primary mb-2" />
 						<span class="font-label-sm text-on-surface">{i18n.lang === 'en' ? 'Weddings' : 'Bodas'}</span>
 					</div>
 					<div class="p-4 rounded-xl bg-background/50 border border-border-glass backdrop-blur-md flex flex-col items-center">
-						<span class="material-symbols-outlined text-primary mb-2">business</span>
+						<Icon name="business" className="text-primary mb-2" />
 						<span class="font-label-sm text-on-surface">{i18n.lang === 'en' ? 'Corporate AV' : 'MICE Corporativo'}</span>
 					</div>
 					<div class="p-4 rounded-xl bg-background/50 border border-border-glass backdrop-blur-md flex flex-col items-center">
-						<span class="material-symbols-outlined text-primary mb-2">speaker</span>
+						<Icon name="speaker" className="text-primary mb-2" />
 						<span class="font-label-sm text-on-surface">{i18n.lang === 'en' ? 'Sound Acoustics' : 'Acústica y Sonido'}</span>
 					</div>
 					<div class="p-4 rounded-xl bg-background/50 border border-border-glass backdrop-blur-md flex flex-col items-center">
-						<span class="material-symbols-outlined text-primary mb-2">highlight</span>
+						<Icon name="highlight" className="text-primary mb-2" />
 						<span class="font-label-sm text-on-surface">{i18n.lang === 'en' ? 'Scenic Lights' : 'Luces Escénicas'}</span>
 					</div>
 					<div class="p-4 rounded-xl bg-background/50 border border-border-glass backdrop-blur-md flex flex-col items-center">
-						<span class="material-symbols-outlined text-primary mb-2">videocam</span>
+						<Icon name="videocam" className="text-primary mb-2" />
 						<span class="font-label-sm text-on-surface">{i18n.lang === 'en' ? 'Laser Projection' : 'Proyección Láser'}</span>
 					</div>
 					<div class="p-4 rounded-xl bg-background/50 border border-border-glass backdrop-blur-md flex flex-col items-center">
-						<span class="material-symbols-outlined text-primary mb-2">celebration</span>
+						<Icon name="celebration" className="text-primary mb-2" />
 						<span class="font-label-sm text-on-surface">{i18n.lang === 'en' ? 'Private Parties' : 'Fiestas Privadas'}</span>
 					</div>
 				</div>
@@ -109,7 +110,7 @@
 					href="/contact/"
 					class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2"
 				>
-					{i18n.lang === 'en' ? 'Get Technical Advice' : 'Asesoramiento Técnico Gratis'} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+					{i18n.lang === 'en' ? 'Get Technical Advice' : 'Asesoramiento Técnico Gratis'} <Icon name="arrow_forward" size="18" />
 				</a>
 				<a 
 					href="/packages/"

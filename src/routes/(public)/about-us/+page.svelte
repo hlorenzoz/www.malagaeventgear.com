@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 
 	let aboutSchema = $derived({
@@ -137,7 +138,7 @@
 			<!-- Sound Systems -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col gap-4">
 				<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue w-fit">
-					<span class="material-symbols-outlined text-[24px]">volume_up</span>
+					<Icon name="volume_up" size="24" />
 				</div>
 				<h3 class="font-headline-sm text-headline-sm text-on-surface">
 					{i18n.lang === 'en' ? 'Sound Systems' : 'Sistemas de Sonido'}
@@ -152,7 +153,7 @@
 			<!-- Lighting -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col gap-4">
 				<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue w-fit">
-					<span class="material-symbols-outlined text-[24px]">lightbulb</span>
+					<Icon name="lightbulb" size="24" />
 				</div>
 				<h3 class="font-headline-sm text-headline-sm text-on-surface">
 					{i18n.lang === 'en' ? 'Lighting' : 'Iluminación'}
@@ -167,7 +168,7 @@
 			<!-- Screens and Projectors -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col gap-4">
 				<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue w-fit">
-					<span class="material-symbols-outlined text-[24px]">videocam</span>
+					<Icon name="videocam" size="24" />
 				</div>
 				<h3 class="font-headline-sm text-headline-sm text-on-surface">
 					{i18n.lang === 'en' ? 'Screens and Projectors' : 'Pantallas y Proyectores'}
@@ -182,7 +183,7 @@
 			<!-- Microphones -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col gap-4">
 				<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue w-fit">
-					<span class="material-symbols-outlined text-[24px]">mic</span>
+					<Icon name="mic" size="24" />
 				</div>
 				<h3 class="font-headline-sm text-headline-sm text-on-surface">
 					{i18n.lang === 'en' ? 'Microphones' : 'Microfonía'}
@@ -197,7 +198,7 @@
 			<!-- Event Technicians -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col gap-4">
 				<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue w-fit">
-					<span class="material-symbols-outlined text-[24px]">engineering</span>
+					<Icon name="engineering" size="24" />
 				</div>
 				<h3 class="font-headline-sm text-headline-sm text-on-surface">
 					{i18n.lang === 'en' ? 'Event Technicians' : 'Técnicos para Eventos'}
@@ -212,7 +213,7 @@
 			<!-- Special Effects -->
 			<div class="glass-panel rounded-xl p-8 flex flex-col gap-4">
 				<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue w-fit">
-					<span class="material-symbols-outlined text-[24px]">cyclone</span>
+					<Icon name="cyclone" size="24" />
 				</div>
 				<h3 class="font-headline-sm text-headline-sm text-on-surface">
 					{i18n.lang === 'en' ? 'Special Effects' : 'Efectos Especiales'}

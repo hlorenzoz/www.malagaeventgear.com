@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { getContactFaqs, buildFaqSchema } from '$lib/data/faq';
@@ -117,7 +118,7 @@
 					<div class="space-y-6">
 						<div class="flex items-start space-x-4">
 							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
-								<span class="material-symbols-outlined">call</span>
+								<Icon name="call" />
 							</div>
 							<div>
 								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">{i18n.t.contact.phone}</p>
@@ -129,7 +130,7 @@
 						
 						<div class="flex items-start space-x-4">
 							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
-								<span class="material-symbols-outlined">chat</span>
+								<Icon name="chat" />
 							</div>
 							<div>
 								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">{i18n.t.contact.whatsapp}</p>
@@ -141,7 +142,7 @@
 						
 						<div class="flex items-start space-x-4">
 							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
-								<span class="material-symbols-outlined">mail</span>
+								<Icon name="mail" />
 							</div>
 							<div>
 								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">{i18n.t.contact.email}</p>
@@ -153,7 +154,7 @@
 						
 						<div class="flex items-start space-x-4">
 							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
-								<span class="material-symbols-outlined">location_on</span>
+								<Icon name="location_on" />
 							</div>
 							<div>
 								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">{i18n.t.contact.location}</p>
@@ -167,7 +168,7 @@
 						
 						<div class="flex items-start space-x-4">
 							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
-								<span class="material-symbols-outlined">schedule</span>
+								<Icon name="schedule" />
 							</div>
 							<div>
 								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">{i18n.t.contact.hours}</p>
@@ -190,7 +191,7 @@
 				{#if isSubmitted}
 					<div class="text-center py-12 space-y-6 animate-fade-in relative z-10">
 						<div class="w-20 h-20 bg-electric-blue/20 text-electric-blue rounded-full flex items-center justify-center mx-auto mb-4 border border-electric-blue/30">
-							<span class="material-symbols-outlined text-[48px]">check_circle</span>
+							<Icon name="check_circle" size="48" />
 						</div>
 						<h2 class="font-headline-md text-headline-md text-on-surface">{i18n.t.contact.successTitle}</h2>
 						<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md mx-auto">
@@ -299,7 +300,7 @@
 								<option class="bg-surface" value="conference">{i18n.t.contact.formTypeMice}</option>
 								<option class="bg-surface" value="other">{i18n.t.contact.formTypeOther}</option>
 							</select>
-							<span class="material-symbols-outlined absolute right-0 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+							<Icon name="expand_more" className="absolute right-0 top-3 text-on-surface-variant pointer-events-none" />
 						</div>
 
 						<!-- Message -->
@@ -348,9 +349,7 @@
 						<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
 							{faq.q}
 						</span>
-						<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}">
-							{#if isOpen}remove{:else}add{/if}
-						</span>
+						<Icon name={isOpen ? 'remove' : 'add'} className="text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}" />
 					</button>
 					
 					{#if isOpen}

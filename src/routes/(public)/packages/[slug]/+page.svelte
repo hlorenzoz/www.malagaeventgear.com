@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import type { PageData } from './$types';
 
@@ -66,7 +67,7 @@
 				</div>
 				<div class="mt-8 border-t border-border-glass pt-6">
 					<div class="flex items-center gap-3">
-						<span class="material-symbols-outlined text-electric-blue text-[24px]">{landing.specIcon}</span>
+						<Icon name={landing.specIcon} size="24" className="text-electric-blue" />
 						<div>
 							<span class="font-label-lg text-on-surface block">
 								{landing.specTitle[i18n.lang]}
@@ -83,7 +84,7 @@
 			<div class="glass-panel rounded-xl p-8 flex flex-col justify-center">
 				<div class="flex items-center gap-3 mb-3">
 					{#if landing.highlightIcon}
-						<span class="material-symbols-outlined text-electric-blue text-[28px]">{landing.highlightIcon}</span>
+						<Icon name={landing.highlightIcon} size="28" className="text-electric-blue" />
 					{/if}
 					<h2 class="font-headline-sm text-headline-sm text-on-surface">
 						{landing.highlightTitle[i18n.lang]}
@@ -120,7 +121,7 @@
 					<ul class="space-y-4 mb-8">
 						{#each pkg.includes[i18n.lang] as item}
 							<li class="flex items-start gap-3">
-								<span class="material-symbols-outlined text-electric-blue text-[20px] mt-0.5">check_circle</span>
+								<Icon name="check_circle" size="20" className="text-electric-blue mt-0.5" />
 								<span class="font-body-md text-body-md text-on-surface-variant leading-relaxed">{item}</span>
 							</li>
 						{/each}
@@ -133,7 +134,7 @@
 						<ul class="space-y-3">
 							{#each pkg.optional[i18n.lang] as extra}
 								<li class="flex items-center gap-3 p-3 rounded bg-on-surface/5">
-									<span class="material-symbols-outlined text-on-surface-variant text-[18px]">add_circle</span>
+									<Icon name="add_circle" size="18" className="text-on-surface-variant" />
 									<span class="font-body-md text-body-md text-on-surface">{extra}</span>
 								</li>
 							{/each}

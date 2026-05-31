@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
@@ -130,13 +131,13 @@
 
 					<!-- Icon chip -->
 					<div class="absolute bottom-4 left-6 w-14 h-14 rounded-2xl glass-panel flex items-center justify-center {plan.iconBg} shadow-lg">
-						<span class="material-symbols-outlined text-[28px]">{plan.icon}</span>
+						<Icon name={plan.icon} size="28" />
 					</div>
 
 					<!-- Guest capacity pill -->
 					{#if plan.maxGuests}
 						<span class="absolute bottom-4 right-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full glass-panel font-label-sm text-on-surface">
-							<span class="material-symbols-outlined text-[16px]">group</span>
+							<Icon name="group" size="16" />
 							{plan.maxGuests}
 						</span>
 					{/if}
@@ -171,7 +172,7 @@
 					<ul class="space-y-3 mb-6">
 						{#each plan.includes as inc (inc)}
 							<li class="flex items-start">
-								<span class="material-symbols-outlined text-electric-blue mr-2 text-sm mt-0.5">check_circle</span>
+								<Icon name="check_circle" size="16" className="text-electric-blue mr-2 mt-0.5" />
 								<span class="text-on-surface text-sm">{inc}</span>
 							</li>
 						{/each}
@@ -184,7 +185,7 @@
 						<ul class="space-y-3 mb-6">
 							{#each plan.optional as opt (opt)}
 								<li class="flex items-start">
-									<span class="material-symbols-outlined text-on-surface-variant mr-2 text-sm mt-0.5">add</span>
+									<Icon name="add" size="16" className="text-on-surface-variant mr-2 mt-0.5" />
 									<span class="text-on-surface-variant text-sm">{opt}</span>
 								</li>
 							{/each}
@@ -197,7 +198,7 @@
 						href={plan.route}
 					>
 						{i18n.t.pricing.bookPack} {plan.name}
-						<span class="material-symbols-outlined text-[20px] transition-transform duration-300 group-hover/cta:translate-x-1">arrow_forward</span>
+						<Icon name="arrow_forward" size="20" className="transition-transform duration-300 group-hover/cta:translate-x-1" />
 					</a>
 				</div>
 			</article>
@@ -228,9 +229,7 @@
 			<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
 				{i18n.lang === 'en' ? 'Are your package prices inclusive of VAT?' : '¿Los precios de los paquetes incluyen IVA?'}
 			</span>
-			<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 {faqOpen ? 'rotate-180' : ''}">
-				{faqOpen ? 'remove' : 'add'}
-			</span>
+			<Icon name={faqOpen ? 'remove' : 'add'} className="text-on-surface-variant transition-transform duration-300 {faqOpen ? 'rotate-180' : ''}" />
 		</button>
 		{#if faqOpen}
 			<div class="px-6 pb-5 text-on-surface-variant font-body-md text-body-md border-t border-border-glass/30 pt-3">

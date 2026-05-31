@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { faqs, buildFaqSchema } from '$lib/data/faq';
 	import { slide } from 'svelte/transition';
@@ -102,9 +103,7 @@
 					<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
 						{faq.q}
 					</span>
-					<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}">
-						{#if isOpen}remove{:else}add{/if}
-					</span>
+					<Icon name={isOpen ? 'remove' : 'add'} className="text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}" />
 				</button>
 				
 				{#if isOpen}

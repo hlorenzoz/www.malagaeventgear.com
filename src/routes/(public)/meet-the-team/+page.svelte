@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 
 	let teamSchema = $derived({
@@ -62,7 +63,7 @@
 			<div class="absolute -top-24 -right-24 w-48 h-48 bg-electric-blue/5 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
 			<div class="flex flex-col items-center">
 				<div class="w-24 h-24 rounded-full bg-surface-glass border border-border-glass flex items-center justify-center text-electric-blue mb-6">
-					<span class="material-symbols-outlined text-[48px]">engineering</span>
+					<Icon name="engineering" size="48" />
 				</div>
 				<h2 class="font-headline-sm text-headline-sm text-on-surface mb-2">
 					{i18n.lang === 'en' ? 'Technical Personnel' : 'Personal Técnico'}
@@ -83,7 +84,7 @@
 			<div class="absolute -top-24 -right-24 w-48 h-48 bg-electric-blue/5 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
 			<div class="flex flex-col items-center">
 				<div class="w-24 h-24 rounded-full bg-surface-glass border border-border-glass flex items-center justify-center text-electric-blue mb-6">
-					<span class="material-symbols-outlined text-[48px]">support_agent</span>
+					<Icon name="support_agent" size="48" />
 				</div>
 				<h2 class="font-headline-sm text-headline-sm text-on-surface mb-2">
 					{i18n.lang === 'en' ? 'Sales Team' : 'Equipo Comercial'}
@@ -104,7 +105,7 @@
 			<div class="absolute -top-24 -right-24 w-48 h-48 bg-electric-blue/5 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-500"></div>
 			<div class="flex flex-col items-center">
 				<div class="w-24 h-24 rounded-full bg-surface-glass border border-border-glass flex items-center justify-center text-electric-blue mb-6 overflow-hidden">
-					<span class="material-symbols-outlined text-[48px]">person</span>
+					<Icon name="person" size="48" />
 				</div>
 				<h2 class="font-headline-sm text-headline-sm text-on-surface mb-2">
 					Hector Luis Lorenzo
