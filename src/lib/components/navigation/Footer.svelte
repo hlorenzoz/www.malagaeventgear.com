@@ -10,9 +10,9 @@
 		<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-12">
 			<!-- Col 1: Brand Info -->
 			<div class="md:col-span-4 flex flex-col gap-4">
-				<span class="font-display-lg text-headline-md text-primary tracking-tight">
-					{i18n.t.nav.brand}
-				</span>
+				<!-- Brand logo (theme-aware via data-theme CSS swap) -->
+				<img src="/logo-light.svg" alt={i18n.t.nav.brand} width="250" height="75" class="brand-logo brand-logo--light h-9 w-auto" />
+				<img src="/logo-dark.svg" alt={i18n.t.nav.brand} width="250" height="75" class="brand-logo brand-logo--dark h-9 w-auto" />
 				<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mt-2">
 					{i18n.lang === 'en' 
 						? 'Premium sound, lighting, and screen rentals for exclusive events in Malaga and the Costa del Sol. State-of-the-art equipment and tailored technical support.'
@@ -105,3 +105,16 @@
 		</div>
 	</div>
 </footer>
+
+<style>
+	/* Default theme is dark → show the light (white) logo. */
+	.brand-logo--dark {
+		display: none;
+	}
+	:global([data-theme='light']) .brand-logo--light {
+		display: none;
+	}
+	:global([data-theme='light']) .brand-logo--dark {
+		display: block;
+	}
+</style>

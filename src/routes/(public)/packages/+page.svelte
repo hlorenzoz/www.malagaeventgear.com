@@ -144,7 +144,7 @@
 
 					<!-- Most-popular ribbon -->
 					{#if plan.popular}
-						<div class="absolute top-4 right-4 bg-electric-blue text-white px-3 py-1 rounded-full font-label-sm tracking-wider uppercase shadow-lg shadow-electric-blue/30">
+						<div class="absolute top-4 right-4 bg-electric-blue-strong text-white px-3 py-1 rounded-full font-label-sm tracking-wider uppercase shadow-lg shadow-electric-blue/30">
 							{i18n.t.pricing.mostPopular}
 						</div>
 					{/if}

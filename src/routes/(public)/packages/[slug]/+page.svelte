@@ -51,7 +51,7 @@
 				<div class="absolute -top-24 -left-24 w-64 h-64 bg-electric-blue/10 rounded-full blur-3xl pointer-events-none"></div>
 				<div>
 					{#if pkg.popular}
-						<span class="inline-block bg-electric-blue text-white px-3 py-1 rounded-full font-label-sm tracking-wider uppercase mb-3">
+						<span class="inline-block bg-electric-blue-strong text-white px-3 py-1 rounded-full font-label-sm tracking-wider uppercase mb-3">
 							{i18n.lang === 'en' ? 'Most Popular' : 'Más Popular'}
 						</span>
 					{/if}

@@ -50,7 +50,22 @@
       "Bash(just --list)",
       "Bash(just --summary)",
       "Bash(ls -la .claude/commands/)",
-      "Bash(ls -la .claude/)"
+      "Bash(ls -la .claude/)",
+      "Bash(just test-lighthouse *)",
+      "Bash(node -e ' *)",
+      "Bash(rg -n \"icon-192|icon-512|manifest\" src/ vite.config.* svelte.config.js)",
+      "Bash(bat -pp static/manifest.webmanifest)",
+      "Bash(bat -pp src/lib/assets/favicon.svg)",
+      "Bash(rg -rln \"Malaga Event Gear|MEG\" src/lib/components/navigation src/lib/components/**/Header* src/lib/components/**/Nav*)",
+      "Bash(rg -rln \"Malaga Event Gear\" src/lib/components)",
+      "Bash(rg -rln \"Malaga Event Gear|brand|logo\" src/lib/components/navigation)",
+      "Bash(bunx @lhci/cli assert --config=.lighthouserc.json)",
+      "Bash(rm -rf .lighthouseci)",
+      "Bash(bunx @lhci/cli autorun --config=.lighthouserc.json)",
+      "Bash(rg -rn \"bg-electric-blue\" src --no-heading)",
+      "Bash(rg -rln \"bg-electric-blue\" src)",
+      "Bash(rg -rc \"bg-electric-blue\" src)",
+      "Bash(awk -F: '{s+=$2} END{print s}')"
     ]
   }
 }

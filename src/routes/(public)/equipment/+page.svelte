@@ -108,7 +108,7 @@
 						<span class="font-headline-md text-[28px] text-primary">490.00 € <span class="text-[14px] text-on-surface-variant">{i18n.t.pricing.plusVatShort}</span></span>
 					</div>
 					<a 
-						class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 ml-auto flex items-center justify-center gap-2"
+						class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue-strong text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 ml-auto flex items-center justify-center gap-2"
 						href="/packages/mice/"
 					>
 						{i18n.lang === 'en' ? 'Request Info' : 'Solicitar Info'} <Icon name="arrow_forward" size="18" />

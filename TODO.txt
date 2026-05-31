@@ -22,13 +22,31 @@
 -- ❌ ✅
 
 
+En la página Packages, actualmetne las tarjetas se muestran de forma estática (simepre son las mismas)
+
+Quiero añadir la funcionalidad que se muestren de forma dinámica mediante unos filtros que van a estar en la parte derecha como si fuera un ecommerce
+
+1. Hace fala crear una estructura de datos persistente donde se almacene la información de cada paquete (nombre, precio, descripción, imágenes, etc.). Estas van a servir como filtros.
+2. 
+
+
 
 -- ❌ ✅
 
+PWA Installer.
+
+Añade full support para PWA
+
+Crea un PWA Installer (widget) que va a salir debajo del widget de WhatsApp y encima de la Cookie bar, pero solamente 3 segundos luego que el usuario haya hecho scroll below the fold (debajo de la sección header).
 
 
 -- ❌ ✅
 
+Cookie bar con configuración (toggles) en la página `/cookie-policy/
+
+Vamos a utilizar Cloudflare Zaraz para gestionar las cookies y los tags.
+
+Actualiza la información referente e integra la funcionalidad según la preferencia del usuario. 
 
 
 -- ❌ ✅
@@ -51,7 +69,7 @@ https://malagaeventgear.com/author-sitemap.xml
 Crea la misma estructura para los sitemaps del sitio
 
 
--- ❌ ✅
+-- ✅
 
 Datos estructurados
 ---

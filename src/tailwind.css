@@ -38,7 +38,9 @@
   --on-error-container: #ffdad6;
   --surface-variant: #333535;
   --electric-blue: #4D8CFF;
-  
+  /* Darker accent for solid backgrounds with white text (WCAG AA: white = 5.17:1) */
+  --electric-blue-strong: #2563EB;
+
   --surface-glass: rgba(255, 255, 255, 0.05);
   --border-glass: rgba(255, 255, 255, 0.12);
   --border-glass-highlight: rgba(255, 255, 255, 0.2);
@@ -83,7 +85,8 @@
   
   --surface-variant: #e7e0ec;
   --electric-blue: #1d66e5;
-  
+  --electric-blue-strong: #1d4ed8;
+
   --surface-glass: rgba(255, 255, 255, 0.7);
   --border-glass: rgba(0, 0, 0, 0.12);
   --border-glass-highlight: rgba(255, 255, 255, 0.6);
@@ -127,7 +130,8 @@
   --color-on-background: var(--on-background);
   --color-surface-variant: var(--surface-variant);
   --color-electric-blue: var(--electric-blue);
-  
+  --color-electric-blue-strong: var(--electric-blue-strong);
+
   --color-surface-glass: var(--surface-glass);
   --color-border-glass: var(--border-glass);
   --color-border-glass-highlight: var(--border-glass-highlight);

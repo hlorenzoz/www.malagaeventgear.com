@@ -105,4 +105,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /lighthouse-report.json
 /lighthouse-report.html
 .lighthouse/
+.lighthouseci/
 

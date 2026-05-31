@@ -388,7 +388,7 @@
 
 							<!-- Most popular badge -->
 							{#if pack.popular}
-								<div class="absolute top-3 right-4 bg-electric-blue text-white px-2.5 py-0.5 rounded-full font-label-sm text-[10px] tracking-wider uppercase shadow-md shadow-electric-blue/20">
+								<div class="absolute top-3 right-4 bg-electric-blue-strong text-white px-2.5 py-0.5 rounded-full font-label-sm text-[10px] tracking-wider uppercase shadow-md shadow-electric-blue/20">
 									{i18n.t.pricing.mostPopular}
 								</div>
 							{/if}

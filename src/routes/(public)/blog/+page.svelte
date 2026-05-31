@@ -108,7 +108,7 @@
 			<div class="flex flex-col sm:flex-row items-center gap-4 mt-10 w-full justify-center">
 				<a 
 					href="/contact/"
-					class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2"
+					class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue-strong text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2"
 				>
 					{i18n.lang === 'en' ? 'Get Technical Advice' : 'Asesoramiento Técnico Gratis'} <Icon name="arrow_forward" size="18" />
 				</a>

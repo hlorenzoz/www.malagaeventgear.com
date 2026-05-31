@@ -17,14 +17,13 @@ Antes de tocar nada, **cargá el skill `/lighthouse`** y tené disponible **`chr
 1. **Cargar el skill `/lighthouse`** para tener a mano la referencia del CLI y la interpretación
    de métricas.
 
-2. **Compilar y auditar** con Lighthouse CI (levanta el preview SSR y audita las 18 URLs de
-   `.lighthouserc.json` ×3 runs):
+2. **Compilar y auditar** con Lighthouse CI (borrando previamente la carpeta `.lighthouseci` para conservar únicamente los reportes más recientes, levantando luego el preview SSR y auditando las 18 URLs de `.lighthouserc.json` ×3 runs):
 
    ```sh
-   just test-lighthouse
+   rm -rf .lighthouseci && just test-lighthouse
    ```
 
-   (equivale a `bun run build && bunx @lhci/cli autorun`)
+   (equivale a eliminar `.lighthouseci`, compilar con `bun run build` y ejecutar `bunx @lhci/cli autorun`)
 
 3. **Leer el reporte**: revisá el resumen de asserts. El umbral es `performance >= 0.9` y
    `accessibility / best-practices / seo = 1`. Anotá qué URLs fallan y por qué métrica

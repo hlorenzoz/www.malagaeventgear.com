@@ -7,7 +7,16 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Changed
+- **Lighthouse CI Command Report Auto-Cleanup**: Modified the `test-lighthouse` recipe in `justfile` to run `rm -rf .lighthouseci` prior to running the Lighthouse auditor. Also updated the interactive command definitions in `.agents/commands/test-lighthouse.md` and `.claude/commands/test-lighthouse.md` to explicitly state and execute this cleanup step, ensuring only the freshest audit reports are stored.
+
+### Added
+- **Full PWA & SEO Favicon Suite Generation**: Generated optimized raster icons (`favicon.ico` at 32x32, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png` at 180x180, `icon-192.png` at 192x192, and `icon-512.png` at 512x512) directly from the user's `static/favicon.webp` utilizing macOS native `sips` tool.
+- **Global Favicons & PWA Setup in app.html**: Integrated all static favicons, Apple touch icon, theme-color metadata, and PWA manifest links globally inside `src/app.html` for instant cross-device caching and PWA installs.
+- **Vector Favicon Copy**: Copied `$lib/assets/favicon.svg` to `static/favicon.svg` to serve it as a static fallback at the root level.
+
 ### Fixed
+- **Cleaned Up Duplicate Head Icon Links**: Cleaned up the redundant favicon import and `<svelte:head>` icon block from `src/routes/+layout.svelte` and removed the duplicate manifest link from `src/lib/components/seo/SeoHead.svelte` to optimize crawler efficiency and eliminate duplicate network declarations.
 - **Heading Sequence Conformity on Contact Page**: Changed the sidebar "Contact Details" title from `<h3>` to `<h2>` in `contact/+page.svelte`. This resolves the WCAG/SEO heading level skipping issue where the page jumped from `<h1>` to `<h3>` without any intervening `<h2>` headings, establishing a clean sequentially-descending hierarchy.
 - **Language Toggle Accessibility Label Compliance**: Refactored the `aria-label` attribute on the language toggle button in `TopNavBar.svelte` to prepend the visible text label ("ES - Change language to Spanish" / "EN - Change language to English"). This resolves the WCAG `label-content-name-mismatch` rule, ensuring screen readers receive an accessible name that begins with the visible button text.
 - **Material Symbols Asynchronous Restructure**: Resolved icon rendering failures on internal pages (e.g. `/equipment/`, `/packages/`) caused by the full removal of Material Symbols. Integrated the Material Symbols stylesheet back into `+layout.svelte` using an asynchronous print stylesheet pattern with client-side JavaScript activation, preserving Green Core Web Vitals performance while restoring universal icon support across the entire catalog and testimonials.

@@ -70,9 +70,15 @@
 <!-- TopNavBar Shared Component -->
 <header class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 transition-colors duration-300">
 	<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
-		<!-- Brand Logo -->
-		<a class="font-display-lg text-[22px] md:text-headline-md text-primary tracking-tight transition-transform active:scale-95 duration-200" href="/" onclick={closeMobileMenu}>
-			{i18n.t.nav.brand}
+		<!-- Brand Logo (theme-aware: light logo on dark theme, dark logo on light theme) -->
+		<a class="transition-transform active:scale-95 duration-200" href="/" onclick={closeMobileMenu} aria-label={i18n.t.nav.brand}>
+			<img
+				src={currentTheme === 'dark' ? '/logo-light.svg' : '/logo-dark.svg'}
+				alt={i18n.t.nav.brand}
+				width="250"
+				height="75"
+				class="h-8 md:h-9 w-auto"
+			/>
 		</a>
 
 		<!-- Navigation Links (Desktop) -->

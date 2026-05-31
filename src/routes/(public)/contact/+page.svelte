@@ -288,8 +288,9 @@
 
 						<!-- Event Type -->
 						<div class="relative">
-							<select 
+							<select
 								id="eventType"
+								aria-label={i18n.t.contact.formType}
 								bind:value={eventType}
 								class="w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors appearance-none"
 							>

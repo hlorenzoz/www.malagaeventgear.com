@@ -33,7 +33,6 @@
 	<title>{title}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={canonicalUrl} />
-	<link rel="manifest" href="/manifest.webmanifest" />
 
 	<!-- Open Graph Protocol -->
 	<meta property="og:title" content={openGraph.title || title} />

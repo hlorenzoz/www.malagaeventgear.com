@@ -34,5 +34,6 @@ playwright:
 
 # Compila y audita el rendimiento de todas las páginas con Lighthouse CI (.lighthouserc.json)
 test-lighthouse: build
-    bunx @lhci/cli autorun
+	rm -rf .lighthouseci
+	bunx @lhci/cli autorun
 
