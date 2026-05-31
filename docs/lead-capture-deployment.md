@@ -9,6 +9,15 @@ Cloudflare y Resend, y cargar secrets. Hacelos en orden.
 
 > Prerrequisito: estar logueado en Cloudflare → `bunx wrangler login`.
 
+> ⚠️ **Autenticación entre cuentas (importante).** El sitio se buildea y deploya en la CI de
+> Cloudflare bajo la cuenta **`cc26ab18f887fb1c63c19e17a0bb313f`** (sale en el log del build).
+> La CLI SOLO puede operar (migrar, cargar secrets) una cuenta de la que tu login sea **miembro**.
+> Si `wrangler whoami` no lista esa cuenta, vas a recibir `Authentication error 10000` o
+> `code 7403`. Solución: `bunx wrangler logout && bunx wrangler login` con el **email dueño de
+> esa cuenta** (el mismo con el que creás la D1 en el dashboard), o pedir ser agregado como
+> miembro. Como fallback sin CLI, todo se puede hacer desde el dashboard de esa cuenta
+> (D1 → Console para el SQL; Worker → Settings → Variables and Secrets para los secrets).
+
 ---
 
 ## 1. Crear la base de datos D1
@@ -166,6 +175,25 @@ bunx wrangler deploy
 5. Revisar `email_messages` y `lead_events` para el `lead_id`.
 6. Secuencia de reseñas: se agenda automáticamente para el día siguiente al `event_date`.
    El clic en `/r/[token]` marca `clicked` y detiene los recordatorios (máx 3, un día de por medio).
+
+---
+
+## Atajos con `just`
+
+Las operaciones recurrentes están en el [`Justfile`](../Justfile) (requieren CLI autenticada en la
+cuenta dueña del sitio, ver el aviso de arriba):
+
+```sh
+just migrate-local    # migraciones → D1 local (SQLite/miniflare, desarrollo)
+just migrate          # migraciones → D1 remota (producción)
+just db-tables        # lista las tablas de la D1 remota (verificación)
+just secrets          # carga RESEND_API_KEY, RESEND_FROM, TURNSTILE_SECRET_KEY (app)
+just secrets-worker   # carga RESEND_API_KEY en el worker meg-review-reminders
+just deploy           # build + deploy de la app principal
+just deploy-worker    # deploy del worker de cron de recordatorios
+just test             # Vitest (lógica de servidor)
+just playwright       # E2E
+```
 
 ---
 
