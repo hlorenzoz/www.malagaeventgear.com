@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Fixed
+- **Material Symbols Asynchronous Restructure**: Resolved icon rendering failures on internal pages (e.g. `/equipment/`, `/packages/`) caused by the full removal of Material Symbols. Integrated the Material Symbols stylesheet back into `+layout.svelte` using an asynchronous print stylesheet pattern with client-side JavaScript activation, preserving Green Core Web Vitals performance while restoring universal icon support across the entire catalog and testimonials.
 - **Google Fonts Compiler Crash Fix**: Refactored the inline `onload="this.media='all'"` event in `+layout.svelte` into a safe `<script>`-based client-side execution block. Inline HTML event handlers inside Svelte components cause compilation failures under Svelte 5 and Rolldown/Vite 6 parsers in Cloudflare's build environment.
 - **Cloudflare Build Crash Mitigation**: Adjusted the `package.json` build script to run `wrangler types` instead of `wrangler types --check`. This prevents deployment build failures caused by environment, hash, or platform-specific micro-version mismatches of generated type definitions in Cloudflare's CI/CD pipelines, while keeping type safety active.
 - **Commitment of Static Images**: Removed `/static/images/` from `.gitignore` to ensure the package and service images (such as `/images/packages/eco.webp` and `/images/services/projectors-screens.webp`) are tracked and uploaded. This resolves a prerendering 404 error during Cloudflare deployments.
