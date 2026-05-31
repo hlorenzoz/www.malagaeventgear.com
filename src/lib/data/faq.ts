@@ -16,6 +16,7 @@ export const FaqItemSchema = z.object({
 	id: z.string(),
 	category: FaqCategorySchema,
 	onHomepage: z.boolean(), // surfaced in the homepage FAQ teaser (only the 5 highest-value ones)
+	onContact: z.boolean().optional(), // surfaced on the /contact page (inquiry & quote-oriented)
 	question: LocalizedTextSchema,
 	answer: LocalizedTextSchema
 });
@@ -56,6 +57,7 @@ const faqData: FaqItem[] = [
 		id: 'service-areas',
 		category: 'logistics',
 		onHomepage: true,
+		onContact: true,
 		question: {
 			en: 'Where does Malaga Event Gear (MEG) offer its services?',
 			es: '¿Dónde ofrece sus servicios Malaga Event Gear (MEG)?'
@@ -82,6 +84,7 @@ const faqData: FaqItem[] = [
 		id: 'booking-process',
 		category: 'booking',
 		onHomepage: true,
+		onContact: true,
 		question: {
 			en: 'How does the booking process work with Malaga Event Gear?',
 			es: '¿Cómo funciona el proceso de reserva con Malaga Event Gear?'
@@ -108,6 +111,7 @@ const faqData: FaqItem[] = [
 		id: 'language-hours',
 		category: 'booking',
 		onHomepage: false,
+		onContact: true,
 		question: {
 			en: 'In what language do they communicate with clients, and what are their operating hours?',
 			es: '¿En qué idioma se comunican con los clientes y cuál es su horario de atención?'
@@ -121,6 +125,7 @@ const faqData: FaqItem[] = [
 		id: 'contact-info',
 		category: 'contact',
 		onHomepage: false,
+		onContact: true,
 		question: {
 			en: 'How can customers contact Malaga Event Gear (MEG), and what information should they provide?',
 			es: '¿Cómo pueden contactar con Malaga Event Gear (MEG) y qué información deben facilitar?'
@@ -152,8 +157,8 @@ const faqData: FaqItem[] = [
 			es: '¿Los precios de los paquetes incluyen IVA?'
 		},
 		answer: {
-			en: 'The prices listed in our catalog are shown excluding VAT. Spanish VAT (IVA) is applied on top of the listed package price. Your final quote will always detail the net amount and the applicable VAT separately so the total is fully transparent.',
-			es: 'Los precios que figuran en nuestro catálogo se muestran sin IVA. El IVA español se aplica sobre el precio del paquete indicado. Tu presupuesto final siempre detallará por separado el importe neto y el IVA aplicable para que el total sea totalmente transparente.'
+			en: 'No, the listed prices do not include VAT. As indicated by (+21% VAT) next to the rates, the standard 21% Spanish VAT (IVA) will be applied on top of the package price. Your final quote will show both the net price and the VAT breakdown with 100% transparency.',
+			es: 'No, las tarifas indicadas no incluyen IVA. Como se detalla con (+21% IVA) junto a cada precio, se aplicará el 21% de IVA español sobre el valor base del paquete. Tu presupuesto final detallará por separado el precio neto y el IVA correspondiente con total transparencia.'
 		}
 	},
 	{
@@ -238,6 +243,7 @@ const faqData: FaqItem[] = [
 		id: 'notice-time',
 		category: 'booking',
 		onHomepage: false,
+		onContact: true,
 		question: {
 			en: 'What is the minimum notice time to make a booking?',
 			es: '¿Con cuánta antelación mínima se debe hacer una reserva?'
@@ -251,6 +257,7 @@ const faqData: FaqItem[] = [
 		id: 'minimum-order-granada',
 		category: 'logistics',
 		onHomepage: false,
+		onContact: true,
 		question: {
 			en: 'Is there a minimum order for service outside the Costa del Sol?',
 			es: '¿Hay un pedido mínimo para el servicio fuera de la Costa del Sol?'
@@ -287,6 +294,9 @@ export const faqs: FaqItem[] = faqData.map((item) => {
 
 // FAQs surfaced in the homepage teaser section (highest-value, conversion-oriented)
 export const getHomepageFaqs = (): FaqItem[] => faqs.filter((item) => item.onHomepage);
+
+// FAQs surfaced on the /contact page (inquiry & quote-oriented)
+export const getContactFaqs = (): FaqItem[] => faqs.filter((item) => item.onContact === true);
 
 // FAQs filtered by thematic category (used by the /faq page filter)
 export const getFaqsByCategory = (category: FaqCategory): FaqItem[] =>

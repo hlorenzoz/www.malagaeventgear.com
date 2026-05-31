@@ -2,6 +2,7 @@
 	import TopNavBar from '$lib/components/navigation/TopNavBar.svelte';
 	import Footer from '$lib/components/navigation/Footer.svelte';
 	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
+	import WhatsAppWidget from '$lib/components/navigation/WhatsAppWidget.svelte';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { page } from '$app/stores';
@@ -97,4 +98,7 @@
 
 	<!-- Pie de página unificado -->
 	<Footer />
+
+	<!-- WhatsApp Floating Action Widget -->
+	<WhatsAppWidget />
 </div>

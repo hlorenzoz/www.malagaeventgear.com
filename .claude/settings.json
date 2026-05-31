@@ -22,7 +22,27 @@
       "Bash(fd -e ts -e js . tests e2e)",
       "Bash(rg -ln \"eco-pack|wedding-pack|mice-pack|product-presentation-pack|/pricing|getPackageByRoute\" tests e2e)",
       "Bash(bat static/_redirects)",
-      "Bash(bat TODO.txt)"
+      "Bash(bat TODO.txt)",
+      "Bash(fd -e svelte -e ts . src/routes/\\\\\\(public\\\\\\)/packages)",
+      "Bash(fd -e svelte . src/lib/components/testimonials)",
+      "Bash(rg -l \"Testimonials\" src/routes --type svelte)",
+      "Bash(rg \"Testimonials\" src/routes -n)",
+      "Bash(rg \"\\\\.reveal|is-revealed|@keyframes|--color-electric-blue|glass-card|ambient-shadow\" src/app.css src/**/*.css)",
+      "Bash(rg -n \"webServer|baseURL|command\" playwright.config.*)",
+      "Bash(fd -i changelog -d 1)",
+      "Bash(head -30 CHANGELOG.md)",
+      "Bash(eza -a)",
+      "mcp__plugin_engram_engram__mem_judge",
+      "Bash(rg -rn \"bookEquipment\" src/)",
+      "Bash(bat --style=plain --line-range=30:160 src/lib/data/faq.ts)",
+      "Bash(rg -n 'SeoHead|jsonLdSchema|faq|FAQ|Faq|</section>|<section|</div>\\\\s*$|<h2|<h1|@html|script>|Frequent|Pregunt' \"src/routes/\\(public\\)/contact/+page.svelte\")",
+      "Bash(bat -p -r 250:286 \"src/routes/\\(public\\)/contact/+page.svelte\")",
+      "Bash(bat -p src/lib/components/seo/SeoHead.svelte)",
+      "Bash(bat -p tests/schema.spec.ts)",
+      "Bash(rg -n \"contact-us\" src tests)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(echo \"EXIT=$? \\(1=none\\)\")",
+      "Bash(echo \"EXITCODE=$?\")"
     ]
   }
 }

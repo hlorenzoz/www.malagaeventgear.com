@@ -8,10 +8,10 @@
 	let servicesSchema = $derived(
 		buildItemListSchema(
 			[
-				{ name: i18n.t.categories.soundTitle, url: '/services/' },
-				{ name: i18n.t.categories.lightTitle, url: '/services/' },
-				{ name: i18n.t.categories.visualTitle, url: '/services/' },
-				{ name: i18n.t.categories.fxTitle, url: '/services/' }
+				{ name: i18n.t.categories.soundTitle, url: '/equipment/' },
+				{ name: i18n.t.categories.lightTitle, url: '/equipment/' },
+				{ name: i18n.t.categories.visualTitle, url: '/equipment/' },
+				{ name: i18n.t.categories.fxTitle, url: '/equipment/' }
 			],
 			i18n.lang === 'en'
 				? 'Audiovisual Equipment Rental Catalog - Malaga Event Gear'
@@ -24,7 +24,7 @@
 <SeoHead
 	title="Premium Audiovisual Equipment Rental Catalog | MEG"
 	description="Explore our high-quality inventory of professional sound systems, dynamic lighting, high-definition projectors, and special effects. Premium equipment in Malaga."
-	canonicalUrl="https://www.malagaeventgear.com/services"
+	canonicalUrl="https://www.malagaeventgear.com/equipment"
 	jsonLdSchema={servicesSchema}
 />
 
@@ -59,7 +59,7 @@
 				<img 
 					alt="MICE Audiovisual Pack Setup for Meetings" 
 					class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out opacity-80" 
-					src="https://lh3.googleusercontent.com/aida/ADBb0uhhn7muQzMrOq1OET9-W3b-HkkGO1YqJ0eziICavObri9c3v27TKrh2o7y8lXKu7GvEk4fUSo7ZcNRp9_7Qez7owNCqSP9L0pgURBdXvwSJviS2Bgb7_4Bmbfe1t6KPwFuk8J5W7OWK04ZYuib7ZI5aeQW5M-7Cbk3OENjceK-YLLUH2yYCBGpfzwYJNdMWYIrpZN5YEvJRSE4bvQqCKAIIF5B4I39qHt1372WeZkGL8_T_ZABMvMhAtw"
+					src="/images/packages/mice.webp"
 					loading="lazy"
 					decoding="async"
 					width="800"
@@ -108,7 +108,7 @@
 					</div>
 					<a 
 						class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 ml-auto flex items-center justify-center gap-2"
-						href="/contact/?pack=mice"
+						href="/packages/mice/"
 					>
 						{i18n.lang === 'en' ? 'Request Info' : 'Solicitar Info'} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 					</a>
@@ -179,7 +179,7 @@
 		<!-- Visuals -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal active is-revealed" style="transition-delay: 200ms;">
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540655037529-dec98120b8c7?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+				class="absolute inset-0 bg-[url('/images/services/projectors-screens.webp')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
 			></div>
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
@@ -215,7 +215,7 @@
 				</p>
 				<a 
 					class="flex items-center gap-2 text-electric-blue font-label-lg group-hover:translate-x-2 transition-all duration-300 active:scale-95 w-fit"
-					href="/contact/?category=effects"
+					href="/packages/"
 				>
 					{i18n.t.categories.bookEquipment} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
 				</a>
@@ -236,7 +236,7 @@
 				</p>
 			</div>
 			<a 
-				href="/services/"
+				href="/equipment/"
 				class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 			>
 				<span class="material-symbols-outlined text-[32px] group-hover:translate-x-1 transition-transform">arrow_forward</span>

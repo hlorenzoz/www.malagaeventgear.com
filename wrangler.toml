@@ -1,15 +1,10 @@
-#:schema node_modules/wrangler/config-schema.json
-name = "website"
-compatibility_date = "2026-05-26"
-pages_build_output_dir = ".svelte-kit/cloudflare"
+name = "vicronlopez-es"
+main = ".svelte-kit/cloudflare/_worker.js"
+compatibility_date = "2024-05-02"
 
-# Cloudflare D1 Database Binding
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "meg-website-db"
-# database_id = "your-d1-database-uuid"
+[vars]
+ENVIRONMENT = "production"
 
-# Cloudflare R2 Bucket Binding
-# [[r2_buckets]]
-# binding = "BUCKET"
-# bucket_name = "meg-website-r2"
+[assets]
+directory = ".svelte-kit/cloudflare"
+binding = "ASSETS"

@@ -32,7 +32,7 @@ test.describe('Technical SEO Sitemap & Edge Redirection E2E Tests', () => {
 		// Static routes check
 		expect(text).toContain('https://malagaeventgear.com/');
 		expect(text).toContain('https://malagaeventgear.com/about-us/');
-		expect(text).toContain('https://malagaeventgear.com/contact-us/');
+		expect(text).toContain('https://malagaeventgear.com/contact/');
 		expect(text).toContain('https://malagaeventgear.com/blog/');
 		
 		// Dynamic package routes check

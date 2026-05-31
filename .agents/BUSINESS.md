@@ -126,7 +126,7 @@ We deliver to all major localities across the Malaga province and key Andalusian
 
 Full specifications and real-time availability can be cross-referenced at: [https://malagaeventgear.com/pricing/](https://malagaeventgear.com/pricing/)
 
-| Package Name | Intended Scale / Occasion | Key Included Features | Rate (VAT Incl.) |
+| Package Name | Intended Scale / Occasion | Key Included Features | Rate (VAT Excl.) |
 | :--- | :--- | :--- | :--- |
 | **Eco Pack** | Small parties or events (Up to 50 guests) | 2x Active Speakers, 1x Wired Microphone, 2x RGBW LED Light Bars | **290.00 €** |
 | **Wedding Pack** | Romantic weddings & ceremonies (Up to 80 guests) | Professional high-fidelity PA system, romantic ambient lighting, wireless microphony, free transport in Malaga/suburbs, professional setup, live technician monitoring, and prompt teardown | **650.00 €** |

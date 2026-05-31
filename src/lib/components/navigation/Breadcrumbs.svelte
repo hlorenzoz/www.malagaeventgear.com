@@ -9,7 +9,7 @@
 		'eco': { en: 'Eco Pack', es: 'Pack Eco' },
 		'mice': { en: 'MICE Pack', es: 'Pack MICE' },
 		'blog': { en: 'Blog', es: 'Blog' },
-		'contact-us': { en: 'Contact Us', es: 'Contacto' },
+		'contact': { en: 'Contact', es: 'Contacto' },
 		'about-us': { en: 'About Us', es: 'Sobre Nosotros' },
 		'faq': { en: 'FAQ', es: 'FAQ' },
 		'privacy-policy': { en: 'Privacy Policy', es: 'Política de Privacidad' },

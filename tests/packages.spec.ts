@@ -64,7 +64,7 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 			await expect(priceText).toBeVisible();
 
 			// Verify the Book/CTA button maps to the correct contact pre-selection URL
-			const ctaButton = page.locator(`a[href="/contact-us/?pack=${pkg.id}"]`);
+			const ctaButton = page.locator(`a[href="/contact/?pack=${pkg.id}"]`);
 			await expect(ctaButton).toBeVisible();
 		}
 	});

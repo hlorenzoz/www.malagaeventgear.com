@@ -2,6 +2,7 @@
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import { getContactFaqs, buildFaqSchema } from '$lib/data/faq';
 
 	// Structured JSON-LD schema for the Contact Page
 	let contactSchema = $derived({
@@ -67,26 +68,18 @@
 		isSubmitted = true;
 	}
 
-	let faqs = $derived([
-		{
-			q: i18n.lang === 'en' ? 'How does the booking process work?' : '¿Cómo funciona el proceso de reserva?',
-			a: i18n.lang === 'en'
-				? 'The process is simple: 1. Select your pack or equipment. 2. Fill out our quote form. 3. Our technical team contacts you to confirm specifications. Enjoy a stress-free event while we handle setup and teardown.'
-				: 'El proceso es simple: 1. Elegís tu pack o equipos. 2. Completás nuestro formulario de presupuesto. 3. Nuestro equipo técnico te contacta para confirmar las especificaciones. Disfrutá de un evento sin estrés mientras nos encargamos del montaje y desmontaje.'
-		},
-		{
-			q: i18n.lang === 'en' ? 'Where do you offer your services?' : '¿Dónde ofrecen sus servicios?',
-			a: i18n.lang === 'en'
-				? 'We operate mainly across the Costa del Sol, including Malaga, Marbella, Torremolinos, Fuengirola, Benalmadena, Estepona, and nearby areas. We also cover Seville, Granada, and Cordoba for specific projects.'
-				: 'Operamos principalmente en la Costa del Sol, incluyendo Málaga, Marbella, Torremolinos, Fuengirola, Benalmádena, Estepona y zonas cercanas. También cubrimos Sevilla, Granada y Córdoba para proyectos específicos.'
-		},
-		{
-			q: i18n.lang === 'en' ? 'Do you offer technical support during the event?' : '¿Ofrecen asistencia técnica durante el evento?',
-			a: i18n.lang === 'en'
-				? 'Yes, many of our packages (like the MICE Pack) already include a dedicated technician on-site to manage sound and displays. For smaller packages, you can optionally hire on-site assistance per hour or full day.'
-				: 'Sí, muchos de nuestros paquetes (como el MICE Pack) ya incluyen un técnico dedicado en sitio para gestionar el sonido y las pantallas. Para paquetes más pequeños, podés contratar opcionalmente asistencia en sitio por hora o día completo.'
-		}
-	]);
+	// Inquiry-oriented FAQs sourced from the centralized FAQ store (single source of truth)
+	let contactFaqs = $derived(getContactFaqs());
+	let faqs = $derived(
+		contactFaqs.map((item) => ({
+			q: item.question[i18n.lang],
+			a: item.answer[i18n.lang]
+		}))
+	);
+
+	// FAQPage structured data built from the same FAQs rendered on the page, so the
+	// visible content and JSON-LD can never drift apart (Google rich-result requirement).
+	let faqSchema = $derived(buildFaqSchema(contactFaqs, i18n.lang));
 
 	function toggleFaq(index: number) {
 		openFaqIndex = openFaqIndex === index ? null : index;
@@ -98,7 +91,7 @@
 	title="Contact Us & Audiovisual Quotes | MEG"
 	description="Get in touch with Malaga Event Gear to request quotes for sound, lighting, and screen rentals. 24/7 technical support."
 	canonicalUrl="https://www.malagaeventgear.com/contact"
-	jsonLdSchema={contactSchema}
+	jsonLdSchema={[contactSchema, faqSchema]}
 />
 
 <!-- Main Content Canvas -->

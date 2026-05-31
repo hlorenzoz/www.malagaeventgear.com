@@ -16,7 +16,7 @@ export const en = {
 	},
 	nav: {
 		equipment: "Equipment",
-		pricing: "Pricing",
+		packages: "Packages",
 		contact: "Contact"
 	},
 	home: {
@@ -138,7 +138,7 @@ export const es: typeof en = {
 	},
 	nav: {
 		equipment: "Equipamiento",
-		pricing: "Tarifas",
+		packages: "Paquetes",
 		contact: "Contacto"
 	},
 	home: {

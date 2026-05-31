@@ -72,6 +72,7 @@ const packagesData: EventPackage[] = [
 		route: '/packages/eco/',
 		name: 'Eco Pack',
 		price: 290,
+		image: '/images/packages/eco.webp',
 		desc: {
 			en: 'Ideal for private parties or small events of up to 50 guests. Includes basic solid sound and ambient lighting.',
 			es: 'Ideal para fiestas privadas o eventos pequeños de hasta 50 personas. Incluye configuración básica de sonido e iluminación.'
@@ -167,8 +168,7 @@ const packagesData: EventPackage[] = [
 		},
 		maxGuests: 80,
 		popular: true,
-		image:
-			'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=600&auto=format&fit=crop',
+		image: '/images/packages/wedding.webp',
 		seo: {
 			title: {
 				en: 'Wedding Pack Sound & Romantic Lighting | Malaga Event Gear',
@@ -214,6 +214,7 @@ const packagesData: EventPackage[] = [
 		route: '/packages/product-presentation/',
 		name: 'Product Presentation Pack',
 		price: 310,
+		image: '/images/packages/product-presentation.webp',
 		desc: {
 			en: 'Designed for corporate presentations, dealership showcases, and product launches with high visual impact.',
 			es: 'Diseñado para presentaciones corporativas, exhibiciones en concesionarios y lanzamientos de productos con alto impacto visual.'
@@ -284,6 +285,7 @@ const packagesData: EventPackage[] = [
 		route: '/packages/basic-mice/',
 		name: 'Basic MICE Pack',
 		price: 295,
+		image: '/images/packages/basic-mice.webp',
 		desc: {
 			en: 'Essential, high-performance audiovisual setup for small executive meetings, conferences, and presentations up to 40 guests.',
 			es: 'Configuración audiovisual esencial y de alto rendimiento para pequeñas reuniones ejecutivas, conferencias y discursos de hasta 40 invitados.'
@@ -353,6 +355,7 @@ const packagesData: EventPackage[] = [
 		route: '/packages/mice/',
 		name: 'MICE Pack',
 		price: 490,
+		image: '/images/packages/mice.webp',
 		desc: {
 			en: 'Comprehensive corporate MICE solution featuring a large-format display screen, premium active sound reinforcement, wireless podium microphones, and dedicated live technician support.',
 			es: 'Solución corporativa MICE completa con pantalla de gran formato, refuerzo de sonido activo premium, micrófonos inalámbricos para atril y soporte de técnico en directo dedicado.'

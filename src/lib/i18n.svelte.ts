@@ -8,7 +8,7 @@ export const translations = {
 		// Navigation
 		nav: {
 			equipment: 'Equipment',
-			pricing: 'Pricing',
+			packages: 'Packages',
 			blog: 'Blog',
 			contact: 'Contact',
 			bookNow: 'Book Now',
@@ -52,7 +52,7 @@ export const translations = {
 			visualText: 'Sharp, high-definition visuals for presentations with high visual impact.',
 			fxTitle: 'Special Effects & Fog Machines',
 			fxText: 'Create a stunning atmosphere at your event with our professional-grade special effects and fog machines.',
-			bookEquipment: 'Book Equipment'
+			bookEquipment: 'Book Packages'
 		},
 		// Pricing
 		pricing: {
@@ -171,7 +171,7 @@ export const translations = {
 		// Navigation
 		nav: {
 			equipment: 'Equipos',
-			pricing: 'Precios',
+			packages: 'Paquetes',
 			blog: 'Blog',
 			contact: 'Contacto',
 			bookNow: 'Reservar Ahora',
@@ -215,7 +215,7 @@ export const translations = {
 			visualText: 'Visuales nítidos de alta definición para presentaciones de gran impacto visual.',
 			fxTitle: 'Efectos Especiales y Máquinas de Humo',
 			fxText: 'Creá una atmósfera increíble en tu evento con nuestros efectos especiales y máquinas de humo de grado profesional.',
-			bookEquipment: 'Reservar Equipos'
+			bookEquipment: 'Reservar Paquetes'
 		},
 		// Pricing
 		pricing: {

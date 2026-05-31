@@ -14,7 +14,11 @@ export const handle: Handle = async ({ event, resolve }) => {
 		'/mice-pack': '/packages/mice/',
 		'/mice-pack/': '/packages/mice/',
 		'/basic-mice-pack': '/packages/basic-mice/',
-		'/basic-mice-pack/': '/packages/basic-mice/'
+		'/basic-mice-pack/': '/packages/basic-mice/',
+		'/pricing': '/packages/',
+		'/pricing/': '/packages/',
+		'/contact-us': '/contact/',
+		'/contact-us/': '/contact/'
 	};
 
 	if (legacyRedirects[pathname]) {

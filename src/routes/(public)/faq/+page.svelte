@@ -6,7 +6,7 @@
 
 	// FAQPage JSON-LD generated from the same source as the rendered content,
 	// so the structured data always matches every visible question.
-	let faqSchema = buildFaqSchema(faqs);
+	let faqSchema = $derived(buildFaqSchema(faqs, i18n.lang));
 
 	let activeCategory = $state('all');
 	let openIndex = $state<number | null>(null);

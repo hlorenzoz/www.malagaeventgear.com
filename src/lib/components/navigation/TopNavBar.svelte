@@ -59,8 +59,8 @@
 
 	// Enlaces de navegación reactivos
 	let navLinks = $derived([
-		{ href: '/services/', label: i18n.t.nav.equipment },
-		{ href: '/packages/', label: i18n.t.nav.pricing },
+		{ href: '/equipment/', label: i18n.t.nav.equipment },
+		{ href: '/packages/', label: i18n.t.nav.packages },
 		{ href: '/blog/', label: i18n.t.nav.blog },
 		{ href: '/contact/', label: i18n.t.nav.contact }
 	]);
@@ -111,10 +111,19 @@
 				{/if}
 			</button>
 
+			<!-- Phone Call Button (Direct dial for quick contact) -->
+			<a
+				class="flex items-center justify-center w-10 h-10 rounded-full glass-panel hover:bg-white/10 text-primary hover:text-electric-blue transition-colors duration-300"
+				href="tel:+34600428750"
+				aria-label="Call Malaga Event Gear"
+			>
+				<span class="material-symbols-outlined text-[22px]">call</span>
+			</a>
+
 			<!-- Action Button -->
 			<a
 				class="hidden md:inline-flex items-center justify-center px-6 py-2 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/20 active:scale-95 transition-all duration-300"
-				href="/contact/"
+				href="/packages/"
 			>
 				{i18n.t.nav.bookNow}
 			</a>
@@ -152,7 +161,7 @@
 			<a
 				onclick={closeMobileMenu}
 				class="w-full text-center py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-lg active:scale-98 transition-all"
-				href="/contact/"
+				href="/packages/"
 			>
 				{i18n.t.nav.bookNow}
 			</a>

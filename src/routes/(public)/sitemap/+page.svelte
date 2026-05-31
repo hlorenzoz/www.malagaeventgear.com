@@ -67,9 +67,9 @@
 							<span class="material-symbols-outlined text-[18px]">payments</span>
 							Pricing & Packages
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/services/">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/equipment/">
 							<span class="material-symbols-outlined text-[18px]">grid_view</span>
-							Services Catalog
+							Equipment Catalog
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact/">
 							<span class="material-symbols-outlined text-[18px]">mail</span>
@@ -177,9 +177,9 @@
 							<span class="material-symbols-outlined text-[18px]">payments</span>
 							Precios y Paquetes
 						</a>
-						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/services/">
+						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/equipment/">
 							<span class="material-symbols-outlined text-[18px]">grid_view</span>
-							Catálogo de Servicios
+							Catálogo de Equipos
 						</a>
 						<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/contact/">
 							<span class="material-symbols-outlined text-[18px]">mail</span>

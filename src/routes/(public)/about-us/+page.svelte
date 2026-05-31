@@ -245,7 +245,7 @@
 				{i18n.lang === 'en' ? 'View Pricing Packages' : 'Ver Paquetes de Precios'}
 			</a>
 			<a 
-				href="/contact-us/"
+				href="/contact/"
 				class="px-8 py-3 rounded-full border border-border-glass bg-on-surface/5 hover:bg-on-surface/10 text-on-surface font-label-lg active:scale-95 transition-all"
 			>
 				{i18n.lang === 'en' ? 'Contact Us Directly' : 'Contáctanos Directamente'}

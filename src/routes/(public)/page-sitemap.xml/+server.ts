@@ -5,7 +5,7 @@ export const GET: RequestHandler = async () => {
 	const staticPages = [
 		'',
 		'about-us',
-		'contact-us',
+		'contact',
 		'faq',
 		'privacy-policy',
 		'terms-of-service',
@@ -13,7 +13,7 @@ export const GET: RequestHandler = async () => {
 		'cookie-policy',
 		'meet-the-team',
 		'sitemap',
-		'services',
+		'equipment',
 		'packages',
 		'blog'
 	];

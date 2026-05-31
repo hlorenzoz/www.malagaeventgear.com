@@ -166,7 +166,7 @@
 		</p>
 		<div class="flex flex-wrap justify-center gap-4">
 			<a
-				href="/contact-us/?pack={pkg.id}"
+				href="/contact/?pack={pkg.id}"
 				class="px-8 py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-95 transition-all duration-300"
 			>
 				{landing.ctaButton[i18n.lang]}

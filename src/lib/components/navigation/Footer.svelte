@@ -30,7 +30,7 @@
 						{i18n.lang === 'en' ? 'Home' : 'Inicio'}
 					</a>
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/packages/">
-						{i18n.lang === 'en' ? 'Pricing' : 'Precios'}
+						{i18n.lang === 'en' ? 'Packages' : 'Paquetes'}
 					</a>
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/blog/">
 						{i18n.lang === 'en' ? 'Blog' : 'Blog'}
@@ -41,7 +41,7 @@
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/meet-the-team/">
 						{i18n.lang === 'en' ? 'Meet The Team' : 'Nuestro Equipo'}
 					</a>
-					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/contact-us/">
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/contact/">
 						{i18n.lang === 'en' ? 'Contact Us' : 'Contáctanos'}
 					</a>
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/terms-of-service/">
