@@ -65,7 +65,9 @@
       "Bash(rg -rn \"bg-electric-blue\" src --no-heading)",
       "Bash(rg -rln \"bg-electric-blue\" src)",
       "Bash(rg -rc \"bg-electric-blue\" src)",
-      "Bash(awk -F: '{s+=$2} END{print s}')"
+      "Bash(awk -F: '{s+=$2} END{print s}')",
+      "Bash(rg -rln \"aria-current|breadcrumb|Breadcrumb\" src/lib src/routes/'\\(public\\)'/+layout.svelte)",
+      "Bash(rg -rn \"aria-current\" src/lib -B3 -A1)"
     ]
   }
 }

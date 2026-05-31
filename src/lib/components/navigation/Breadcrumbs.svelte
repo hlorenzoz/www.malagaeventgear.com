@@ -74,7 +74,7 @@
 					<Icon name="chevron_right" className="text-outline opacity-40 select-none" size="16" />
 				{/if}
 				{#if index === items.length - 1}
-					<span class="font-semibold text-electric-blue truncate max-w-[150px] sm:max-w-none" aria-current="page">
+					<span class="font-semibold text-on-surface truncate max-w-[150px] sm:max-w-none" aria-current="page">
 						{item.name}
 					</span>
 				{:else}

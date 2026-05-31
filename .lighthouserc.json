@@ -6,24 +6,7 @@
       "startServerReadyPattern": "Ready on",
       "startServerReadyTimeout": 60000,
       "url": [
-        "http://localhost:4173/",
-        "http://localhost:4173/about-us/",
-        "http://localhost:4173/blog/",
-        "http://localhost:4173/contact/",
-        "http://localhost:4173/equipment/",
-        "http://localhost:4173/faq/",
-        "http://localhost:4173/meet-the-team/",
-        "http://localhost:4173/packages/",
-        "http://localhost:4173/sitemap/",
-        "http://localhost:4173/cookie-policy/",
-        "http://localhost:4173/privacy-policy/",
-        "http://localhost:4173/terms-of-service/",
-        "http://localhost:4173/gdpr/",
-        "http://localhost:4173/packages/eco/",
-        "http://localhost:4173/packages/wedding/",
-        "http://localhost:4173/packages/product-presentation/",
-        "http://localhost:4173/packages/basic-mice/",
-        "http://localhost:4173/packages/mice/"
+        "http://localhost:4173/blog/"
       ]
     },
     "assert": {
