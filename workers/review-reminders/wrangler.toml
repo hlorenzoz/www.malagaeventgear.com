@@ -1,0 +1,18 @@
+name = "meg-review-reminders"
+main = "src/index.ts"
+compatibility_date = "2024-05-02"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "meg-leads"
+database_id = "<placeholder-replace-with-real-database-id>"
+
+[triggers]
+crons = ["0 10 * * *"]   # 10:00 UTC daily (~11:00 CET / 12:00 CEST)
+
+[vars]
+PUBLIC_SITE_URL = "https://malagaeventgear.com"
+RESEND_FROM = "MEG <noreply@malagaeventgear.com>"
+
+# Secrets (set via: wrangler secret put RESEND_API_KEY --name meg-review-reminders)
+# RESEND_API_KEY = "..."  ← do not commit

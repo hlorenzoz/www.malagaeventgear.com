@@ -3,10 +3,17 @@
 declare global {
 	namespace App {
 		interface Platform {
-			env: Env;
+			env: Env & {
+				DB: D1Database;
+				TURNSTILE_SECRET_KEY: string;
+				RESEND_API_KEY: string;
+				RESEND_FROM: string;
+				LEAD_NOTIFY_EMAILS: string;
+				PUBLIC_SITE_URL: string;
+			};
 			ctx: ExecutionContext;
 			caches: CacheStorage;
-			cf?: IncomingRequestCfProperties
+			cf?: IncomingRequestCfProperties;
 		}
 
 		// interface Error {}

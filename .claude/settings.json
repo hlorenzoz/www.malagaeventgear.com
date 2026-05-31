@@ -100,7 +100,34 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/packages/)",
       "Bash(curl -s -o /dev/null -w \"packages page: %{http_code}\\\\n\" http://localhost:5173/packages/)",
       "Bash(bunx svelte-check *)",
-      "Bash(echo \"exit=$?\")"
+      "Bash(echo \"exit=$?\")",
+      "Bash(eza --tree --level=3 openspec)",
+      "Bash(bat --plain openspec/config.yaml)",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/lib/components/forms\")",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/routes/\\(public\\)/thank-you\")",
+      "Bash(rg \"i18n\\\\.t\\\\\\(\" \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src\" --include=\"*.svelte\" -l)",
+      "Bash(eza -la src/lib/components/forms/)",
+      "Bash(eza -la \"src/routes/\\(public\\)/thank-you/\")",
+      "Bash(eza -la tests/e2e/)",
+      "Bash(sd \"\\\\\\(window as Record<string, unknown\\\\[\\\\]>\\\\\\)\" '\\(window as unknown as Record<string, unknown[]>\\)' \"src/routes/\\(public\\)/thank-you/+page.svelte\")",
+      "Bash(sd \"\\\\\\(window as Record<string, unknown>\\\\\\)\" '\\(window as unknown as Record<string, unknown>\\)' \"src/lib/components/forms/LeadForm.svelte\")",
+      "Bash(sd \"^\\(- \\\\[\\) \\(\\\\] 1\\\\.\\)\" '$1x$2' openspec/changes/package-lead-capture-cro/tasks.md)",
+      "Bash(sd \"^\\(- \\\\[\\) \\(\\\\] 1\\\\.\\)\" '${1}x${2}' openspec/changes/package-lead-capture-cro/tasks.md)",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/lib/server/leads\")",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/migrations\")",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/lib/server/db\")",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/routes/api/leads\")",
+      "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/lib/server/email/templates\")",
+      "Bash(eza openspec/changes/package-lead-capture-cro/)",
+      "Bash(eza openspec/changes/archive/package-lead-capture-cro/)"
+    ],
+    "additionalDirectories": [
+      "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/lib/components",
+      "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/routes/(public)",
+      "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/lib/server",
+      "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website",
+      "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/routes/api",
+      "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/lib/server/email"
     ]
   }
 }

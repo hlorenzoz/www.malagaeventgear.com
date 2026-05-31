@@ -11,7 +11,8 @@
 		image,
 		openGraph = {},
 		twitter = {},
-		jsonLdSchema
+		jsonLdSchema,
+		noindex = false
 	}: {
 		title: string;
 		description: string;
@@ -20,6 +21,7 @@
 		openGraph?: OpenGraphMeta;
 		twitter?: TwitterCardMeta;
 		jsonLdSchema?: JsonLdSchema | JsonLdSchema[];
+		noindex?: boolean;
 	} = $props();
 
 	// Simplificación usando el rune $derived de Svelte 5 para evitar condicionales complejos en el template
@@ -48,7 +50,11 @@
 	<!-- SEO Básico -->
 	<title>{title}</title>
 	<meta name="description" content={description} />
-	<link rel="canonical" href={canonicalUrl} />
+	{#if noindex}
+		<meta name="robots" content="noindex, nofollow" />
+	{:else}
+		<link rel="canonical" href={canonicalUrl} />
+	{/if}
 
 	<!-- Open Graph Protocol -->
 	<meta property="og:title" content={openGraph.title || title} />

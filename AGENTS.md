@@ -34,6 +34,49 @@ Toda la información institucional, catálogo de equipos, áreas de servicio log
 
 ---
 
+## Infraestructura: Captura de Leads & Email Lifecycle
+
+El sitio dejó de ser puramente estático: las páginas de paquete (`/packages/[slug]/`) capturan
+leads y disparan correos transaccionales. Antes de tocar cualquier pieza de este flujo, entendé
+la arquitectura. Los pasos de provisioning/deploy están en **[docs/lead-capture-deployment.md](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/docs/lead-capture-deployment.md)** (consultá ese runbook para D1, Resend, Turnstile y secrets).
+
+### Flujo de un lead
+1. El usuario completa `LeadForm.svelte` (embebido en cada página de paquete) → `POST /api/leads`.
+2. El endpoint valida en orden: **Zod → honeypot → Turnstile siteverify (`/turnstile/v0/siteverify`) → rate-limit**, luego inserta el lead.
+3. Se envían 2 correos vía Resend: **confirmación al lead** + **notificación a destinatarios internos**.
+4. Se agenda un `review_request` para el día siguiente al `event_date`.
+5. Post-evento, el Worker de cron (`workers/review-reminders/`) envía el pedido de reseña de Google
+   con un link trackeado `/r/[token]`; máx 3 envíos, un día de por medio, **corte al primer clic**.
+
+### Componentes y reglas
+- **Storage (Cloudflare D1):** binding `DB`, esquema normalizado en `migrations/0001_init.sql`
+  (tablas `leads`, `lead_events`, `email_messages`, `review_requests`, `recipients`). Pensado como
+  base del CRM propio. En desarrollo se simula con SQLite local (`wrangler ... --local`, miniflare).
+  Migraciones: `bunx wrangler d1 migrations apply meg-leads [--local|--remote]`.
+- **Lógica de servidor (`src/lib/server/`):** separá SIEMPRE lo **puro** de lo **I/O**. `reviews/sequence.ts`
+  y `email/templates/*` son funciones puras (testeadas con Vitest sin DB). `db/`, `email/resend.ts`,
+  `leads/service.ts` hacen I/O. `leads/recipients.ts` resuelve destinatarios: **D1 primero, fallback a
+  `LEAD_NOTIFY_EMAILS` (env)**.
+- **Email (Resend):** se usa vía `fetch` (Workers-safe), NO el SDK de Node. Plantillas **bilingües** (EN/ES)
+  reciben `locale` explícito — NO usan el store i18n del cliente. **Fallo de email NO debe revertir el lead**
+  (se persiste estado `failed` en `email_messages` y se devuelve `leadId` igual).
+- **Cron (Worker separado):** `adapter-cloudflare` NO expone handler `scheduled` en su `_worker.js`. Por eso el
+  cron vive en `workers/review-reminders/` con su propio `wrangler.toml`, bindeado a la **misma D1** y al mismo
+  `RESEND_API_KEY`, reutilizando el código compartido de `src/lib/server/`. **Es un segundo target de deploy.**
+- **Anti-spam (Turnstile):** modo managed/invisible. Widget cliente con `PUBLIC_TURNSTILE_SITE_KEY`; verificación
+  server-side con `TURNSTILE_SECRET_KEY` contra **`v0/siteverify`** (NO existe `v1` — usar v0 siempre). Si el secret
+  no está seteado, la verificación se OMITE (modo dev); con el secret presente, se ENFUERZA (fail-closed).
+- **Endpoints dinámicos vs prerender:** `/api/leads` y `/r/[token]` llevan `export const prerender = false;`
+  (las páginas de paquete siguen prerenderizadas). No rompas esa coexistencia.
+- **i18n (gotcha):** el módulo activo es `$lib/i18n.svelte` y `i18n.t` es un **getter** → acceso por propiedad
+  `i18n.t.leadForm.x`, NUNCA como función `i18n.t('...')`. Hay un segundo i18n sin usar en `src/lib/i18n/` — no confundir.
+
+### Secrets / vars (ver runbook para cómo cargarlos)
+`RESEND_API_KEY`, `RESEND_FROM`, `TURNSTILE_SECRET_KEY` (secrets) · `LEAD_NOTIFY_EMAILS`,
+`PUBLIC_SITE_URL`, `PUBLIC_TURNSTILE_SITE_KEY` (vars públicas). Dev: `.dev.vars` (gitignored).
+
+---
+
 ## Router de Skills de IA (AI Skills Router)
 
 Cuando detectes o inicies una tarea en este proyecto, **cargá inmediatamente** la skill relevante según el contexto antes de escribir código o realizar diagnósticos. Esto garantiza que apliquemos de manera estricta los mejores estándares de desarrollo:

@@ -11,7 +11,45 @@
 
 
 
--- ❌ ✅
+-- ❌ ✅ Tracking Google Analytics & Cloudflare Zaraz
+
+
+
+
+
+-- ❌ ✅ Package (redesign)
+
+En la página específica de cada uno de los paquetes hace falta
+
+Rediseñar el layout enfocado en conversiones (CRO)
+
+Añadir un formulario de contacto para la solicitud del servicio
+
+Guardar la información de cada uno de los leads que entren por los formularios
+
+Crear una Thank You page (con un diseño profesional) para traquear cada conversión. Luego se va a integrar con el CRM, Cloudflare Zaraz y Google Analytics.
+
+El storage que se utilice debe estar normalizado para ser utilizado posteriormente en el CRM. En el futuro vamos a implementar nuestro propio CRM, por el momento hay que garantizar que se vayan guardando los leads. Vamos a utilizar Resend (resend.com) tanto para el CRM como para el envío del correo mediante el formulario. Implementar integración con sus respectivos tests desde ahora.
+
+Se debe almacenar toda la información del lead entrante (formulario de solicitud)
+
+Se debe de crear una especie de plantilla para enviar el correo según la información proporcionada por el lead a 1+ destinatarios.
+
+Una vez que el lead entre en el formulario, se va a enviar:
+
+1. Correo para el lead confirmando la recepción del formulario
+2. Correo a 1+ destinatarios con la información del lead (hace falta poder definir de alguna manera los destinatarios)
+
+En el futuro se pueden añadir más pasos, así que hace falta implementar algún sistema de trackeo del estado de cada uno de los pasos por lead
+
+Al día siguiente del evento, se va a enviar un correo a los leads que han contratado el servicio preguntando por una reseña en Google My Business (link para solicitar review: https://g.page/r/Cc8g7neiciATEBM/review).
+QR para pedir reseña física en static/gmb_review.jpeg
+
+Hace falta un sistema que trackee si el cliente hace clic en el link de review para no seguir mandándoselo, de lo contrario, mandarle un recordatorio al día siguiente. Hacerlo durante 3 días máximo con un día de por medio.
+
+Antes del footer, hace falta incluir una sección con los reviews de Google My Business en forma de carrusel. Reutilizar el existente en el Home.
+
+Usa SDD: Automático + openspec
 
 
 

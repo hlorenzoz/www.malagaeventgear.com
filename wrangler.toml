@@ -4,7 +4,25 @@ compatibility_date = "2024-05-02"
 
 [vars]
 ENVIRONMENT = "production"
+# Non-sensitive public vars — safe to commit
+LEAD_NOTIFY_EMAILS = ""      # Comma-separated fallback notification emails, e.g. "team@meg.com"
+PUBLIC_SITE_URL = "https://malagaeventgear.com"
+PUBLIC_TURNSTILE_SITE_KEY = "" # Cloudflare Turnstile site key (dev: 1x00000000000000000000AA)
 
 [assets]
 directory = ".svelte-kit/cloudflare"
 binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "meg-leads"
+database_id = "YOUR_D1_DATABASE_ID_HERE" # Fill after: wrangler d1 create meg-leads
+
+# Secrets — do NOT commit values; set via wrangler CLI or CF dashboard:
+# wrangler secret put RESEND_API_KEY
+# wrangler secret put RESEND_FROM
+# wrangler secret put TURNSTILE_SECRET_KEY
+# Dev override: set in .dev.vars (gitignored)
+#   RESEND_API_KEY=re_...
+#   RESEND_FROM=Malaga Event Gear <hola@malagaeventgear.com>
+#   TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA  (dev always-pass key)

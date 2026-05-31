@@ -1,6 +1,37 @@
 export type TranslationKeys = typeof en;
 
 export const en = {
+	leadForm: {
+		title: "Request a Free Quote",
+		subtitle: "Fill in the form and we'll get back to you in under 2 hours.",
+		nameLabelInput: "Full Name *",
+		emailLabelInput: "Email Address *",
+		phoneLabelInput: "Phone / WhatsApp *",
+		eventDateLabel: "Event Date *",
+		commentsLabel: "Questions or Comments",
+		commentsPlaceholder: "Tell us about your event — venue, number of guests, special requirements...",
+		submitBtn: "Get My Quote",
+		submitting: "Sending...",
+		errorRequired: "This field is required.",
+		errorEmail: "Please enter a valid email address.",
+		errorPhone: "Please enter a valid phone number.",
+		errorDateFuture: "The event date must be in the future.",
+		errorMinLength: "Must be at least 2 characters.",
+		errorMaxLength: "Maximum 1000 characters allowed.",
+		errorHoneypot: "Spam detected.",
+		errorSubmit: "Something went wrong. Please try again or contact us directly.",
+		countryCode: "Country Code",
+		responseTime: "We respond in under 2 hours",
+		trustBadge: "Trusted by 500+ events in Málaga"
+	},
+	thankYou: {
+		headline: "Thank you! Your request is on its way.",
+		subheadline: "We've received your enquiry and will get back to you within 2 hours.",
+		responseTime: "Expected response: within 2 business hours",
+		backToPackages: "Browse all packages",
+		whatsappCta: "Or reach us now on WhatsApp",
+		leadLabel: "Reference"
+	},
 	common: {
 		brand: "Malaga Event Gear",
 		tagline: "Premium sound, lighting, and screen rentals for exclusive events in Malaga and the Costa del Sol. State-of-the-art equipment and tailored technical support.",
@@ -123,6 +154,37 @@ export const en = {
 };
 
 export const es: typeof en = {
+	leadForm: {
+		title: "Solicitá tu Presupuesto Gratis",
+		subtitle: "Completá el formulario y te respondemos en menos de 2 horas.",
+		nameLabelInput: "Nombre Completo *",
+		emailLabelInput: "Correo Electrónico *",
+		phoneLabelInput: "Teléfono / WhatsApp *",
+		eventDateLabel: "Fecha del Evento *",
+		commentsLabel: "Preguntas o Comentarios",
+		commentsPlaceholder: "Contanos sobre tu evento — espacio, cantidad de invitados, requerimientos especiales...",
+		submitBtn: "Solicitar Presupuesto",
+		submitting: "Enviando...",
+		errorRequired: "Este campo es obligatorio.",
+		errorEmail: "Por favor ingresá un correo electrónico válido.",
+		errorPhone: "Por favor ingresá un número de teléfono válido.",
+		errorDateFuture: "La fecha del evento debe ser en el futuro.",
+		errorMinLength: "Debe tener al menos 2 caracteres.",
+		errorMaxLength: "Máximo 1000 caracteres permitidos.",
+		errorHoneypot: "Spam detectado.",
+		errorSubmit: "Algo salió mal. Por favor intentá de nuevo o contactanos directamente.",
+		countryCode: "Código de País",
+		responseTime: "Respondemos en menos de 2 horas",
+		trustBadge: "Confiado por más de 500 eventos en Málaga"
+	},
+	thankYou: {
+		headline: "¡Gracias! Tu solicitud está en camino.",
+		subheadline: "Recibimos tu consulta y te responderemos dentro de las 2 horas.",
+		responseTime: "Respuesta esperada: en menos de 2 horas hábiles",
+		backToPackages: "Ver todos los paquetes",
+		whatsappCta: "O contactanos ahora por WhatsApp",
+		leadLabel: "Referencia"
+	},
 	common: {
 		brand: "Malaga Event Gear",
 		tagline: "Alquiler premium de sonido, iluminación y pantallas para eventos exclusivos en Málaga y la Costa del Sol. Equipamiento de última tecnología y soporte técnico a tu medida.",

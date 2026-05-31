@@ -1,0 +1,50 @@
+# openspec/config.yaml
+schema: spec-driven
+
+context: |
+  Tech stack: SvelteKit 2 + Svelte 5 (runes), TypeScript, Tailwind v4, Zod, PWA.
+  Hosting: Cloudflare via @sveltejs/adapter-cloudflare (Web APIs only, no Node built-ins).
+  Architecture: prerendered static site; data in src/lib/data/*.ts (Zod-validated); i18n EN/ES.
+  Testing: Playwright E2E (tests/); Vitest to be added for server-lib unit tests.
+  Style: <script lang="ts">, runes only, UI text via i18n, SeoHead for JSON-LD.
+
+strict_tdd: true
+
+rules:
+  proposal:
+    - Include rollback plan for risky changes
+    - Identify affected modules/packages
+  specs:
+    - Use Given/When/Then format for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Include sequence diagrams for complex flows
+    - Document architecture decisions with rationale
+  tasks:
+    - Group tasks by phase (infrastructure, implementation, testing)
+    - Use hierarchical numbering (1.1, 1.2, etc.)
+    - Keep tasks small enough to complete in one session
+  apply:
+    - Follow existing code patterns and conventions
+    - Load relevant coding skills for the project stack
+  verify:
+    - Run tests if test infrastructure exists
+    - Compare implementation against every spec scenario
+  archive:
+    - Warn before merging destructive deltas (large removals)
+
+testing:
+  strict_tdd: true
+  detected: 2026-05-31
+  test_runner:
+    framework: Vitest (to be added) + Playwright (present)
+    command: "bun run test (to be added) / bunx playwright test"
+  layers:
+    unit: { available: false, tool: "Vitest — to be added in this change" }
+    integration: { available: false, tool: "miniflare local D1 — to be added" }
+    e2e: { available: true, tool: "Playwright" }
+  coverage: { available: false, command: "—" }
+  quality:
+    linter: { available: false, command: "—" }
+    type_checker: { available: true, command: "bun run check (svelte-check + tsc)" }
+    formatter: { available: false, command: "—" }
