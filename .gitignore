@@ -99,3 +99,10 @@ pnpm-debug.log*
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /test-results/
 
+# ------------------------------------------------------------------------------
+# Lighthouse Reports
+# ------------------------------------------------------------------------------
+/lighthouse-report.json
+/lighthouse-report.html
+.lighthouse/
+
