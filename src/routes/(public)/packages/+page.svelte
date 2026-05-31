@@ -123,7 +123,8 @@
 						<img
 							src={plan.image}
 							alt={plan.name}
-							loading="lazy"
+							loading={i === 0 ? 'eager' : 'lazy'}
+							fetchpriority={i === 0 ? 'high' : 'auto'}
 							class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:scale-105"
 						/>
 						<div class="absolute inset-0 bg-linear-to-t from-surface-container via-surface-container/30 to-transparent"></div>

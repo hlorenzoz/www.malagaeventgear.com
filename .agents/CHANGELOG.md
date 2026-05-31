@@ -8,6 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Changed
+- **Display Typography Fallback and CLS Mitigation**: Added a synthetic `@font-face` definition for `'Playfair Fallback'` utilizing `Georgia` as the local system font with precision metric overrides (`size-adjust: 112%`, `ascent-override: 96.52%`, `descent-override: 22.41%`, `line-gap-override: 0%`) to perfectly match Playfair Display's dimensions. Updated display typography tokens (`--font-display-lg`, `--font-headline-lg`, `--font-headline-md`, `--font-headline-lg-mobile`) in `src/tailwind.css` to include the fallback font, eliminating Cumulative Layout Shift (CLS) during web font swap.
+- **Above-Fold LCP Image Loading Optimization**: Configured critical above-the-fold images to load eagerly and with high fetch priority instead of lazily. Optimized the featured MICE pack image on `/equipment/` and the first package card image on `/packages/` with `loading="eager"` and `fetchpriority="high"`, reducing the Largest Contentful Paint (LCP) blockages.
 - **Lighthouse CI Command Report Auto-Cleanup**: Modified the `test-lighthouse` recipe in `justfile` to run `rm -rf .lighthouseci` prior to running the Lighthouse auditor. Also updated the interactive command definitions in `.agents/commands/test-lighthouse.md` and `.claude/commands/test-lighthouse.md` to explicitly state and execute this cleanup step, ensuring only the freshest audit reports are stored.
 
 ### Added
