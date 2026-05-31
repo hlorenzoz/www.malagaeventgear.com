@@ -4,6 +4,7 @@
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
 	import { getHomepageFaqs, buildFaqSchema } from '$lib/data/faq';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 
 	// Structured JSON-LD schema for Generative SEO
 	const homeSchema = {
@@ -140,15 +141,19 @@
 <!-- Hero Section -->
 <section class="relative min-h-[90vh] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-24 overflow-hidden">
 	<div class="absolute inset-0 z-0">
-		<img
-			alt="Stage Background with Professional Event Lights"
-			class="w-full h-full object-cover opacity-30 dark:opacity-40 transition-opacity duration-300"
-			src="/premium_event_stage.png"
-			loading="eager"
-			fetchpriority="high"
-			width="1920"
-			height="1080"
-		/>
+		<picture>
+			<source media="(max-width: 767px)" srcset="/premium_event_stage_mobile.webp" type="image/webp" />
+			<source media="(min-width: 768px)" srcset="/premium_event_stage.webp" type="image/webp" />
+			<img
+				alt="Stage Background with Professional Event Lights"
+				class="w-full h-full object-cover opacity-30 dark:opacity-40 transition-opacity duration-300"
+				src="/premium_event_stage.webp"
+				loading="eager"
+				fetchpriority="high"
+				width="1024"
+				height="1024"
+			/>
+		</picture>
 		<div class="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background transition-colors duration-300"></div>
 	</div>
 	
@@ -169,7 +174,7 @@
 					{i18n.t.hero.viewPricing}
 				</a>
 				<a class="glass-panel text-on-surface px-8 py-4 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all flex items-center gap-2 active:scale-95 duration-200" href="/contact/">
-					{i18n.t.hero.contactUs} <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+					{i18n.t.hero.contactUs} <Icon name="arrow_forward" size="20" />
 				</a>
 			</div>
 		</div>
@@ -178,7 +183,7 @@
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 lg:mt-0">
 			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300 reveal active is-revealed">
 				<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center mb-4">
-					<span class="material-symbols-outlined text-electric-blue">build</span>
+					<Icon name="build" className="text-electric-blue" />
 				</div>
 				<h3 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card1Title}</h3>
 				<p class="font-body-md text-on-surface-variant text-sm">
@@ -188,7 +193,7 @@
 			
 			<div class="glass-card p-6 rounded-xl ambient-shadow sm:translate-y-8 hover:translate-y-6 transition-transform duration-300 reveal active is-revealed">
 				<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
-					<span class="material-symbols-outlined text-primary">inventory_2</span>
+					<Icon name="inventory_2" className="text-primary" />
 				</div>
 				<h3 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card2Title}</h3>
 				<p class="font-body-md text-on-surface-variant text-sm">
@@ -198,7 +203,7 @@
 			
 			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300 sm:col-span-2 sm:w-[80%] mx-auto sm:mt-8 reveal active is-revealed">
 				<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-4">
-					<span class="material-symbols-outlined text-secondary">memory</span>
+					<Icon name="memory" className="text-secondary" />
 				</div>
 				<h3 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card3Title}</h3>
 				<p class="font-body-md text-on-surface-variant text-sm">
@@ -252,11 +257,11 @@
 		<div class="glass-panel rounded-2xl overflow-hidden relative group md:col-span-2 md:row-span-2 reveal active is-revealed">
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10"></div>
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+				class="absolute inset-0 bg-[url('/images/services/sound.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
 			></div>
 			<div class="absolute bottom-0 left-0 p-8 z-20 w-full">
 				<div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center mb-4 backdrop-blur-md text-on-surface">
-					<span class="material-symbols-outlined">speaker</span>
+					<Icon name="speaker" />
 				</div>
 				<h3 class="font-headline-md text-headline-md text-on-surface mb-2">{i18n.t.categories.soundTitle}</h3>
 				<p class="font-body-md text-on-surface-variant max-w-md">
@@ -269,11 +274,11 @@
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+				class="absolute inset-0 bg-[url('/images/services/lighting.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
 			></div>
 			<div class="absolute bottom-0 left-0 p-6 z-20 w-full">
 				<div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center mb-3 backdrop-blur-md text-on-surface">
-					<span class="material-symbols-outlined">lightbulb</span>
+					<Icon name="lightbulb" />
 				</div>
 				<h3 class="font-headline-md text-[24px] text-on-surface mb-1">{i18n.t.categories.lightTitle}</h3>
 				<p class="font-body-md text-sm text-on-surface-variant">{i18n.t.categories.lightText}</p>
@@ -284,11 +289,11 @@
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+				class="absolute inset-0 bg-[url('/images/services/visuals.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
 			></div>
 			<div class="absolute bottom-0 left-0 p-6 z-20 w-full">
 				<div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center mb-3 backdrop-blur-md text-on-surface">
-					<span class="material-symbols-outlined">videocam</span>
+					<Icon name="videocam" />
 				</div>
 				<h3 class="font-headline-md text-[24px] text-on-surface mb-1">{i18n.t.categories.visualTitle}</h3>
 				<p class="font-body-md text-sm text-on-surface-variant">{i18n.t.categories.visualText}</p>
@@ -309,7 +314,7 @@
 					href="/equipment/"
 					class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 				>
-					<span class="material-symbols-outlined text-[32px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+					<Icon name="arrow_forward" size="32" className="group-hover:translate-x-1 transition-transform" />
 				</a>
 			</div>
 		</div>
@@ -331,7 +336,7 @@
 			{#each steps as step, i}
 				<div class="flex flex-col items-center text-center reveal active is-revealed" style="transition-delay: {i * 0.1}s">
 					<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center mb-4 relative z-10 border border-border-glass">
-						<span class="material-symbols-outlined text-electric-blue">{step.icon}</span>
+						<Icon name={step.icon} className="text-electric-blue" />
 					</div>
 					<div class="font-bold text-[40px] text-gradient opacity-30 mb-2 leading-none">{step.num}</div>
 					<h3 class="font-headline-sm text-[18px] text-on-surface mb-2">{step.title}</h3>
@@ -378,7 +383,7 @@
 
 							<!-- Icon chip -->
 							<div class="absolute bottom-3 left-6 w-11 h-11 rounded-xl glass-panel flex items-center justify-center {pack.iconBg} shadow-md">
-								<span class="material-symbols-outlined text-[22px]">{pack.icon}</span>
+								<Icon name={pack.icon} size="22" />
 							</div>
 
 							<!-- Most popular badge -->
@@ -406,7 +411,7 @@
 							<ul class="space-y-2 mb-8 flex-1">
 								{#each pack.features as feature}
 									<li class="flex items-center gap-2 text-sm text-on-surface-variant font-body-md">
-										<span class="material-symbols-outlined text-[18px] {pack.checkIconClass}">check</span>
+										<Icon name="check" size="18" className={pack.checkIconClass} />
 										{feature}
 									</li>
 								{/each}
@@ -430,7 +435,7 @@
 						onclick={() => scrollByCard(-1)}
 						class="w-11 h-11 rounded-full glass-panel border border-border-glass flex items-center justify-center text-on-surface hover:bg-on-surface/10 active:scale-90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-electric-blue disabled:opacity-30 disabled:pointer-events-none"
 					>
-						<span class="material-symbols-outlined">chevron_left</span>
+						<Icon name="chevron_left" />
 					</button>
 					<button
 						data-testid="packages-carousel-next"
@@ -440,7 +445,7 @@
 						onclick={() => scrollByCard(1)}
 						class="w-11 h-11 rounded-full glass-panel border border-border-glass flex items-center justify-center text-on-surface hover:bg-on-surface/10 active:scale-90 transition-all duration-200 focus-visible:outline-2 focus-visible:outline-electric-blue disabled:opacity-30 disabled:pointer-events-none"
 					>
-						<span class="material-symbols-outlined">chevron_right</span>
+						<Icon name="chevron_right" />
 					</button>
 				</div>
 			{/if}
@@ -449,7 +454,7 @@
 		<div class="text-center">
 			<a href="/packages/" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-10 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 				{i18n.t.pricingPreview.viewAll}
-				<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+				<Icon name="arrow_forward" size="20" />
 			</a>
 		</div>
 	</div>
@@ -477,8 +482,12 @@
 						<span class="font-body-lg text-body-lg font-semibold group-hover:text-electric-blue transition-colors text-on-surface">
 							{faq.q}
 						</span>
-						<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}">
-							{#if isOpen}remove{:else}add{/if}
+						<span class="text-on-surface-variant transition-transform duration-300 {isOpen ? 'rotate-180' : ''}">
+							{#if isOpen}
+								<Icon name="remove" />
+							{:else}
+								<Icon name="add" />
+							{/if}
 						</span>
 					</button>
 					{#if isOpen}
@@ -497,7 +506,7 @@
 			<div class="flex flex-wrap items-center justify-center gap-4">
 				<a href="/faq/" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-8 py-3 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 					{i18n.lang === 'en' ? 'See all FAQs' : 'Ver todas las preguntas frecuentes'}
-					<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+					<Icon name="arrow_forward" size="20" />
 				</a>
 				<a href="/contact/" class="glass-panel text-on-surface px-8 py-3 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 					{i18n.t.contact.title}

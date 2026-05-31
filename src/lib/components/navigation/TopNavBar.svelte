@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 
 	// Estado reactivo con runes de Svelte 5
 	let mobileMenuOpen = $state(false);
@@ -105,9 +106,9 @@
 				aria-label="Toggle color theme"
 			>
 				{#if currentTheme === 'dark'}
-					<span class="material-symbols-outlined text-[22px]">light_mode</span>
+					<Icon name="light_mode" size="22" />
 				{:else}
-					<span class="material-symbols-outlined text-[22px]">dark_mode</span>
+					<Icon name="dark_mode" size="22" />
 				{/if}
 			</button>
 
@@ -117,7 +118,7 @@
 				href="tel:+34600428750"
 				aria-label="Call Malaga Event Gear"
 			>
-				<span class="material-symbols-outlined text-[22px]">call</span>
+				<Icon name="call" size="22" />
 			</a>
 
 			<!-- Action Button -->
@@ -135,9 +136,9 @@
 				aria-label="Open navigation menu"
 			>
 				{#if mobileMenuOpen}
-					<span class="material-symbols-outlined text-[28px]">close</span>
+					<Icon name="close" size="28" />
 				{:else}
-					<span class="material-symbols-outlined text-[28px]">menu</span>
+					<Icon name="menu" size="28" />
 				{/if}
 			</button>
 		</div>

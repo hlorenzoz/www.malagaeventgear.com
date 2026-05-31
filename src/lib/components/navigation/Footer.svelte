@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 </script>
 
 <!-- Footer Shared Component -->
@@ -91,14 +92,14 @@
 					href="mailto:contact@malagaeventgear.com"
 					aria-label="Send email"
 				>
-					<span class="material-symbols-outlined text-[20px]">mail</span>
+					<Icon name="mail" size="20" />
 				</a>
 				<a 
 					class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-primary hover:text-electric-blue hover:bg-white/10 active:scale-95 transition-all duration-300" 
 					href="tel:+34600428750"
 					aria-label="Call by phone"
 				>
-					<span class="material-symbols-outlined text-[20px]">call</span>
+					<Icon name="call" size="20" />
 				</a>
 			</div>
 		</div>

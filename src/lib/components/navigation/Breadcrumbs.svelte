@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { i18n } from '$lib/i18n.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 
 	// Translation dictionary for public routes
 	const routeTranslations: Record<string, { en: string; es: string }> = {
@@ -70,7 +71,7 @@
 		<div class="inline-flex flex-wrap items-center gap-2 px-4 py-2 rounded-full border border-border-glass bg-surface-glass backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.1)] text-on-surface-variant font-body-md text-xs sm:text-sm">
 			{#each items as item, index}
 				{#if index > 0}
-					<span class="material-symbols-outlined text-[16px] text-outline opacity-40 select-none" aria-hidden="true">chevron_right</span>
+					<Icon name="chevron_right" className="text-outline opacity-40 select-none" size="16" />
 				{/if}
 				{#if index === items.length - 1}
 					<span class="font-semibold text-electric-blue truncate max-w-[150px] sm:max-w-none" aria-current="page">

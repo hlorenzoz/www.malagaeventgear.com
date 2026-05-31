@@ -1,6 +1,5 @@
-# Disable indexing for Google bots and all other search engine scrapers
-User-agent: Googlebot
-Disallow: /
-
+# Enable indexing for Google bots and all other search engines for testing purposes
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://www.malagaeventgear.com/sitemap_index.xml
