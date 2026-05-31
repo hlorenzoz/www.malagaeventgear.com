@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Fixed
+- **Cloudflare Build Crash Mitigation**: Adjusted the `package.json` build script to run `wrangler types` instead of `wrangler types --check`. This prevents deployment build failures caused by environment, hash, or platform-specific micro-version mismatches of generated type definitions in Cloudflare's CI/CD pipelines, while keeping type safety active.
+
 ### Added
 - **Desactivación de Indexación para Bots de Google**: Configurado el archivo `static/robots.txt` para desautorizar explícitamente a `Googlebot` y al resto de motores de búsqueda (`*`) el rastreo e indexación del sitio web, protegiendo el entorno de staging/desarrollo.
 - **Optimización de Exclusiones en .gitignore**: Añadidos patrones para ignorar dinámicamente los archivos generados por wrangler (`*-export.ts`) y el directorio temporal local de imágenes (`/static/images/`), manteniendo limpio el flujo de control de git.
