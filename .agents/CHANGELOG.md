@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Fixed
+- **Google Fonts Compiler Crash Fix**: Refactored the inline `onload="this.media='all'"` event in `+layout.svelte` into a safe `<script>`-based client-side execution block. Inline HTML event handlers inside Svelte components cause compilation failures under Svelte 5 and Rolldown/Vite 6 parsers in Cloudflare's build environment.
 - **Cloudflare Build Crash Mitigation**: Adjusted the `package.json` build script to run `wrangler types` instead of `wrangler types --check`. This prevents deployment build failures caused by environment, hash, or platform-specific micro-version mismatches of generated type definitions in Cloudflare's CI/CD pipelines, while keeping type safety active.
 - **Commitment of Static Images**: Removed `/static/images/` from `.gitignore` to ensure the package and service images (such as `/images/packages/eco.webp` and `/images/services/projectors-screens.webp`) are tracked and uploaded. This resolves a prerendering 404 error during Cloudflare deployments.
 - **Relocated _redirects to Root**: Moved `_redirects` from `static/` to the project root directory. `@sveltejs/adapter-cloudflare` requires `_redirects` to sit at the root level to adapt edge redirects correctly, otherwise the deployment fails during SvelteKit build.
