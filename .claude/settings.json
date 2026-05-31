@@ -42,7 +42,9 @@
       "Bash(rg -n \"contact-us\" src tests)",
       "Bash(echo \"EXIT=$?\")",
       "Bash(echo \"EXIT=$? \\(1=none\\)\")",
-      "Bash(echo \"EXITCODE=$?\")"
+      "Bash(echo \"EXITCODE=$?\")",
+      "Bash(rg -o \"'\\([a-z_]+\\)'\" -r '$1')",
+      "Bash(magick identify *)"
     ]
   }
 }
