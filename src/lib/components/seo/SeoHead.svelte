@@ -1,11 +1,14 @@
 <script lang="ts">
 	import type { OpenGraphMeta, TwitterCardMeta, JsonLdSchema } from '$lib/types/seo';
+	import { siteConfig } from '$lib/data/site';
+	import { i18n } from '$lib/i18n.svelte';
 
 	// Props con Runes de Svelte 5
 	let {
 		title,
 		description,
 		canonicalUrl,
+		image,
 		openGraph = {},
 		twitter = {},
 		jsonLdSchema
@@ -13,6 +16,7 @@
 		title: string;
 		description: string;
 		canonicalUrl: string;
+		image?: string;
 		openGraph?: OpenGraphMeta;
 		twitter?: TwitterCardMeta;
 		jsonLdSchema?: JsonLdSchema | JsonLdSchema[];
@@ -26,6 +30,18 @@
 				: [jsonLdSchema]
 			: []
 	);
+
+	// Función para asegurar URLs absolutas en og:image y twitter:image
+	const getAbsoluteImageUrl = (imgUrl: string | undefined): string => {
+		if (!imgUrl) return `${siteConfig.url}/premium_event_stage.webp`;
+		if (imgUrl.startsWith('http://') || imgUrl.startsWith('https://')) return imgUrl;
+		const cleanPath = imgUrl.startsWith('/') ? imgUrl : `/${imgUrl}`;
+		return `${siteConfig.url}${cleanPath}`;
+	};
+
+	let ogImage = $derived(getAbsoluteImageUrl(image || openGraph.images?.[0]?.url));
+	let ogLocale = $derived(i18n.lang === 'es' ? 'es_ES' : 'en_US');
+	let ogAlternateLocales = $derived(i18n.lang === 'es' ? ['en_US'] : ['es_ES']);
 </script>
 
 <svelte:head>
@@ -39,20 +55,16 @@
 	<meta property="og:description" content={openGraph.description || description} />
 	<meta property="og:url" content={openGraph.url || canonicalUrl} />
 	<meta property="og:type" content={openGraph.type || 'website'} />
-	{#if openGraph.siteName}
-		<meta property="og:site_name" content={openGraph.siteName} />
-	{/if}
-	{#if openGraph.locale}
-		<meta property="og:locale" content={openGraph.locale} />
-	{/if}
-	{#if openGraph.alternateLocales}
-		{#each openGraph.alternateLocales as altLocale}
-			<meta property="og:locale:alternate" content={altLocale} />
-		{/each}
-	{/if}
+	<meta property="og:site_name" content={openGraph.siteName || siteConfig.brandName} />
+	<meta property="og:locale" content={openGraph.locale || ogLocale} />
+	
+	{#each (openGraph.alternateLocales || ogAlternateLocales) as altLocale}
+		<meta property="og:locale:alternate" content={altLocale} />
+	{/each}
+
 	{#if openGraph.images && openGraph.images.length > 0}
 		{#each openGraph.images as img}
-			<meta property="og:image" content={img.url} />
+			<meta property="og:image" content={getAbsoluteImageUrl(img.url)} />
 			{#if img.width}
 				<meta property="og:image:width" content={img.width.toString()} />
 			{/if}
@@ -66,23 +78,25 @@
 				<meta property="og:image:type" content={img.type} />
 			{/if}
 		{/each}
+	{:else}
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1024" />
+		<meta property="og:image:height" content="1024" />
+		<meta property="og:image:alt" content={openGraph.images?.[0]?.alt || title} />
+		<meta property="og:image:type" content="image/webp" />
 	{/if}
 
 	<!-- Twitter Cards -->
 	<meta name="twitter:card" content={twitter.card || 'summary_large_image'} />
 	<meta name="twitter:title" content={twitter.title || openGraph.title || title} />
 	<meta name="twitter:description" content={twitter.description || openGraph.description || description} />
+	<meta name="twitter:image" content={getAbsoluteImageUrl(twitter.image || ogImage)} />
+	<meta name="twitter:image:alt" content={twitter.imageAlt || openGraph.images?.[0]?.alt || title} />
 	{#if twitter.site}
 		<meta name="twitter:site" content={twitter.site} />
 	{/if}
 	{#if twitter.creator}
 		<meta name="twitter:creator" content={twitter.creator} />
-	{/if}
-	{#if twitter.image || (openGraph.images && openGraph.images.length > 0)}
-		<meta name="twitter:image" content={twitter.image || openGraph.images?.[0]?.url} />
-		{#if twitter.imageAlt || (openGraph.images && openGraph.images[0]?.alt)}
-			<meta name="twitter:image:alt" content={twitter.imageAlt || openGraph.images?.[0]?.alt} />
-		{/if}
 	{/if}
 
 	<!-- SEO Generativo: Inyección de JSON-LD estructurado -->

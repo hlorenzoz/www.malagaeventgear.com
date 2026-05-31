@@ -25,6 +25,7 @@
 	title={pkg.seo.title[i18n.lang]}
 	description={pkg.desc[i18n.lang]}
 	canonicalUrl={`https://malagaeventgear.com${pkg.route}`}
+	image={pkg.image}
 	jsonLdSchema={seoSchema}
 />
 

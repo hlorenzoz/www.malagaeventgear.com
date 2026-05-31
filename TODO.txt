@@ -19,7 +19,7 @@
 
 
 
--- ❌ ✅ Packages / (filtros)
+-- ✅ Packages / (filtros)
 
 En la página Packages, actualmetne las tarjetas se muestran de forma estática (siempre son las mismas)
 
@@ -32,32 +32,28 @@ Quiero añadir la funcionalidad que se muestren de forma dinámica mediante unos
 3. Las tarjetas se van a renderizar en función de los valores de los filtros. Inicialmente no hay filtros aplicados, por lo que se mostrarán todos los paquetes.
 
 
--- ❌ ✅
-
-PWA Installer.
+-- ❌ ✅ PWA Installer.
 
 Añade full support para PWA
 
 Crea un PWA Installer (widget) que va a salir debajo del widget de WhatsApp y encima de la Cookie bar, pero solamente 3 segundos luego que el usuario haya hecho scroll below the fold (debajo de la sección header).
 
 
--- ❌ ✅
+-- ❌ ✅  Cookie Banner
 
-Cookie bar con configuración (toggles) en la página `/cookie-policy/
+Cookie Banner con configuración (toggles) en la página `/cookie-policy/
 
 Vamos a utilizar Cloudflare Zaraz para gestionar las cookies y los tags.
 
 Actualiza la información referente e integra la funcionalidad según la preferencia del usuario. 
 
 
--- ❌ ✅
+-- ❌ ✅ OpenGraph
 
-OpenGraph
-
-Añade soporte global para OpenGraph según se define en OpenGraph.
+Añade soporte para OpenGraph según corresponda.
 
 
--- ✅
+-- ✅ Sitemaps
 
 Descarga en __utils/sitemaps/
 
@@ -70,13 +66,9 @@ https://malagaeventgear.com/author-sitemap.xml
 Crea la misma estructura para los sitemaps del sitio
 
 
--- ✅
-
-Datos estructurados
----
+-- ✅ Datos estructurados
 
 Añadir a .agents/STRUCTURED_DATA.md lo siguiente las siguientes referencias para los datos estructurados:
-
 
 ---
 

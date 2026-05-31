@@ -26,6 +26,7 @@
 	title="Premium Audiovisual Equipment Rental Catalog | MEG"
 	description="Explore our high-quality inventory of professional sound systems, dynamic lighting, high-definition projectors, and special effects. Premium equipment in Malaga."
 	canonicalUrl="https://www.malagaeventgear.com/equipment"
+	image="/images/packages/mice.webp"
 	jsonLdSchema={servicesSchema}
 />
 
