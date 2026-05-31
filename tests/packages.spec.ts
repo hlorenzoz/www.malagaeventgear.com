@@ -69,3 +69,86 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 		}
 	});
 });
+
+test.describe('Dynamic E-commerce Filters on /packages/', () => {
+	// Card visible by its unique detail-route link (avoids name-substring ambiguity)
+	const cardByRoute = (page: import('@playwright/test').Page, route: string) =>
+		page.locator(`[data-testid="package-card"]:has(a[href="${route}"])`);
+
+	const routes = {
+		eco: '/packages/eco/',
+		wedding: '/packages/wedding/',
+		presentation: '/packages/product-presentation/',
+		miceBasic: '/packages/basic-mice/',
+		miceFull: '/packages/mice/'
+	};
+
+	test.beforeEach(async ({ page }) => {
+		// Desktop viewport so the sticky sidebar (lg:block) is rendered
+		await page.setViewportSize({ width: 1440, height: 900 });
+		await page.goto('/packages/');
+		await page.waitForLoadState('networkidle');
+	});
+
+	test('1. initial render shows all 5 packages and "5 of 5" counter', async ({ page }) => {
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(5);
+		await expect(page.getByTestId('results-count')).toContainText('5');
+	});
+
+	test('2. event type "Weddings" shows only the Wedding Pack', async ({ page }) => {
+		await page.getByTestId('filter-purpose-wedding').click();
+		await expect(cardByRoute(page, routes.wedding)).toBeVisible();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(1);
+	});
+
+	test('3. capacity "Small" shows only packages up to 50 guests', async ({ page }) => {
+		await page.getByTestId('filter-capacity-small').click();
+		// eco (50) and mice-basic (40) qualify; wedding (80), presentation (none), mice-full (120) excluded
+		await expect(cardByRoute(page, routes.eco)).toBeVisible();
+		await expect(cardByRoute(page, routes.miceBasic)).toBeVisible();
+		await expect(cardByRoute(page, routes.wedding)).toHaveCount(0);
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(2);
+	});
+
+	test('4. price "500€ and up" shows only the Wedding Pack', async ({ page }) => {
+		await page.getByTestId('filter-price-high').click();
+		await expect(cardByRoute(page, routes.wedding)).toBeVisible();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(1);
+	});
+
+	test('5. equipment "Live Technician" shows Wedding + MICE Pack', async ({ page }) => {
+		await page.getByTestId('filter-include-technician').click();
+		await expect(cardByRoute(page, routes.wedding)).toBeVisible();
+		await expect(cardByRoute(page, routes.miceFull)).toBeVisible();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(2);
+	});
+
+	test('6. optional "Smoke Machine" shows only the Eco Pack', async ({ page }) => {
+		await page.getByTestId('filter-optional-smoke-machine').click();
+		await expect(cardByRoute(page, routes.eco)).toBeVisible();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(1);
+	});
+
+	test('7. combined "Corporate" + "Screen" shows the 3 corporate AV packages', async ({ page }) => {
+		await page.getByTestId('filter-purpose-corporate').click();
+		await page.getByTestId('filter-include-screen').click();
+		await expect(cardByRoute(page, routes.presentation)).toBeVisible();
+		await expect(cardByRoute(page, routes.miceBasic)).toBeVisible();
+		await expect(cardByRoute(page, routes.miceFull)).toBeVisible();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(3);
+	});
+
+	test('8. reset restores all 5 packages', async ({ page }) => {
+		await page.getByTestId('filter-purpose-wedding').click();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(1);
+		await page.getByTestId('filter-reset').click();
+		await expect(page.locator('[data-testid="package-card"]')).toHaveCount(5);
+	});
+
+	test('9. sort "Price: High to Low" puts Wedding first and Eco last', async ({ page }) => {
+		await page.getByTestId('filter-sort').selectOption('price-desc');
+		const cards = page.locator('[data-testid="package-card"]');
+		await expect(cards.first()).toContainText('Wedding Pack');
+		await expect(cards.last()).toContainText('Eco Pack');
+	});
+});

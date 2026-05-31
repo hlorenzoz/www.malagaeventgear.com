@@ -43,9 +43,7 @@ const SeoSchema = z.object({
 	title: LocalizedTextSchema,
 	serviceName: z.string(),
 	serviceType: z.string()
-});
-
-// Main package Zod schema
+});// Main package Zod schema
 export const PackageSchema = z.object({
 	id: z.string(),
 	slug: z.string(),
@@ -59,7 +57,16 @@ export const PackageSchema = z.object({
 	popular: z.boolean().optional(),
 	image: z.string().optional(),
 	seo: SeoSchema,
-	landing: LandingSchema
+	landing: LandingSchema,
+	category: z.enum(['social', 'corporate']),
+	// Granular e-commerce filtering metadata (single source of truth for /packages/ filters)
+	purpose: z.array(z.enum(['party', 'wedding', 'corporate', 'presentation', 'meeting'])),
+	includeTags: z.array(
+		z.enum(['transport', 'screen', 'sound', 'microphone', 'lighting', 'technician'])
+	),
+	optionalTags: z
+		.array(z.enum(['projector', 'smoke-machine', 'technical-assistant', 'lectern', 'staging']))
+		.optional()
 });
 
 export type EventPackage = z.infer<typeof PackageSchema>;
@@ -100,6 +107,10 @@ const packagesData: EventPackage[] = [
 		},
 		maxGuests: 50,
 		popular: false,
+		category: 'social',
+		purpose: ['party'],
+		includeTags: ['sound', 'microphone', 'lighting', 'transport'],
+		optionalTags: ['projector', 'smoke-machine'],
 		seo: {
 			title: {
 				en: 'Eco Pack Speaker & Lighting Rental | Malaga Event Gear',
@@ -169,6 +180,9 @@ const packagesData: EventPackage[] = [
 		maxGuests: 80,
 		popular: true,
 		image: '/images/packages/wedding.webp',
+		category: 'social',
+		purpose: ['wedding', 'party'],
+		includeTags: ['sound', 'microphone', 'lighting', 'transport', 'technician'],
 		seo: {
 			title: {
 				en: 'Wedding Pack Sound & Romantic Lighting | Malaga Event Gear',
@@ -234,6 +248,9 @@ const packagesData: EventPackage[] = [
 			]
 		},
 		popular: false,
+		category: 'corporate',
+		purpose: ['presentation', 'corporate'],
+		includeTags: ['sound', 'microphone', 'screen'],
 		seo: {
 			title: {
 				en: 'Product Presentation Pack Laser Projection & Audio | Malaga Event Gear',
@@ -310,6 +327,10 @@ const packagesData: EventPackage[] = [
 		},
 		maxGuests: 40,
 		popular: false,
+		category: 'corporate',
+		purpose: ['corporate', 'meeting'],
+		includeTags: ['sound', 'microphone', 'screen', 'transport'],
+		optionalTags: ['technical-assistant'],
 		seo: {
 			title: {
 				en: 'Basic MICE Pack Corporate Meeting AV | Malaga Event Gear',
@@ -388,46 +409,48 @@ const packagesData: EventPackage[] = [
 				'Tarimas de escenario modulares / plataformas (+35€ por metro cuadrado)'
 			]
 		},
+		maxGuests: 120,
 		popular: false,
+		category: 'corporate',
+		purpose: ['corporate', 'meeting'],
+		includeTags: ['sound', 'microphone', 'screen', 'transport', 'technician'],
+		optionalTags: ['lectern', 'staging', 'technical-assistant'],
 		seo: {
 			title: {
-				en: 'MICE Pack Large Display & Audio Rental | Malaga Event Gear',
-				es: 'Pack MICE Pantalla Gigante y Sonido | Malaga Event Gear'
+				en: 'MICE Pack Corporate AV with LED Display & Technician | Malaga Event Gear',
+				es: 'Pack MICE Corporativo con Pantalla LED y Técnico | Malaga Event Gear'
 			},
-			serviceName: 'MICE Pack LED Display & Sound Rental Malaga - Malaga Event Gear (MEG)',
-			serviceType: 'Audio visual MICE corporate congress and forum rentals'
+			serviceName: 'MICE Pack LED Display, Sound & Live Technician Rental - Malaga Event Gear (MEG)',
+			serviceType: 'Audio visual MICE corporate event rentals with live technician'
 		},
 		landing: {
 			badge: {
-				en: 'Professional Medium & Large Corporate Events',
-				es: 'Eventos Corporativos Medianos y Grandes Profesionales'
+				en: 'Premium Corporate MICE Experience',
+				es: 'Experiencia MICE Corporativa Premium'
 			},
-			rateLabel: {
-				en: 'Complete Corporate AV Flat Rate',
-				es: 'Tarifa Plana de AV Corporativo Completo'
-			},
+			rateLabel: { en: 'All-Inclusive Corporate Rate', es: 'Tarifa Corporativa Todo Incluido' },
 			vatNote: {
-				en: '(+21% VAT) — LED Screen & technician included',
-				es: '(+21% IVA) — Pantalla LED y técnico incluidos'
+				en: '(+21% VAT) — LED display, sound & live technician included',
+				es: '(+21% IVA) — Pantalla LED, sonido y técnico en directo incluidos'
 			},
-			specIcon: 'desktop_windows',
-			specTitle: { en: 'Premium 60" LED Screen', es: 'Pantalla LED Premium de 60"' },
+			specIcon: 'connected_tv',
+			specTitle: { en: '60-inch LED Display', es: 'Pantalla LED de 60 Pulgadas' },
 			specBody: {
-				en: 'Includes heavy-duty designer floor stand.',
-				es: 'Incluye soporte de suelo de diseño resistente.'
+				en: 'High-definition large-format screen for impactful corporate visuals.',
+				es: 'Pantalla de gran formato en alta definición para visuales corporativos de impacto.'
 			},
 			highlightIcon: 'engineering',
-			highlightTitle: { en: 'AV Technician Included', es: 'Técnico Audiovisual Incluido' },
+			highlightTitle: { en: 'Dedicated Live Technician', es: 'Técnico en Directo Dedicado' },
 			highlightBody: {
-				en: 'This package includes up to 6 hours of continuous, live technical support. An AV specialist will handle setup, connection testing, microfonía control, and live slide changes for a flawless presentation.',
-				es: 'Este paquete incluye hasta 6 horas de soporte técnico en directo. Un especialista en AV se encargará del montaje, pruebas de conexión, control de microfonía y cambios de diapositivas.'
+				en: 'A specialized AV technician runs your event for up to 6 continuous hours, guaranteeing flawless sound, visuals, and microphone management throughout your summit, conference, or product launch.',
+				es: 'Un técnico audiovisual especializado opera tu evento durante hasta 6 horas continuas, garantizando sonido, visuales y gestión de micrófonos impecables durante tu cumbre, conferencia o lanzamiento.'
 			},
-			includesLabel: { en: 'What is Included', es: 'Qué Incluye' },
-			optionalLabel: { en: 'Optional Staging & Extras', es: 'Escenario y Extras Opcionales' },
-			ctaHeading: { en: 'Coordinate Flawless MICE AV', es: 'Coordiná un MICE AV Impecable' },
+			includesLabel: { en: 'Premium Inclusions', es: 'Servicios Premium Incluidos' },
+			optionalLabel: { en: 'Optional Add-ons', es: 'Extras Opcionales' },
+			ctaHeading: { en: 'Power Your Corporate Event', es: 'Potenciá tu Evento Corporativo' },
 			ctaBody: {
-				en: 'Give your corporate forum, congress, or summit the executive visual polish and acoustic prestige it deserves. Reach out to our technical team today.',
-				es: 'Dale a tu foro corporativo, congreso o cumbre el pulido visual ejecutivo y el prestigio acústico que se merece. Ponete en contacto con nuestro equipo técnico hoy.'
+				en: 'Deliver a flawless corporate experience with premium AV and dedicated technical support. Contact our team today to confirm availability for your date.',
+				es: 'Brindá una experiencia corporativa impecable con audiovisual premium y soporte técnico dedicado. Contactá a nuestro equipo hoy para confirmar disponibilidad en tu fecha.'
 			},
 			ctaButton: { en: 'Book MICE Package', es: 'Reservar Paquete MICE' }
 		}
