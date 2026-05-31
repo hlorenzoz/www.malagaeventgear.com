@@ -5,7 +5,7 @@ compatibility_date = "2024-05-02"
 [[d1_databases]]
 binding = "DB"
 database_name = "meg-leads"
-database_id = "<placeholder-replace-with-real-database-id>"
+database_id = "1a9bdaca-c4bc-4cdf-817a-88008c51b610"
 
 [triggers]
 crons = ["0 10 * * *"]   # 10:00 UTC daily (~11:00 CET / 12:00 CEST)

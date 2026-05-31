@@ -16,7 +16,7 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "meg-leads"
-database_id = "YOUR_D1_DATABASE_ID_HERE" # Fill after: wrangler d1 create meg-leads
+database_id = "1a9bdaca-c4bc-4cdf-817a-88008c51b610" # Fill after: wrangler d1 create meg-leads
 
 # Secrets — do NOT commit values; set via wrangler CLI or CF dashboard:
 # wrangler secret put RESEND_API_KEY
