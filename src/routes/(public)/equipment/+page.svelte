@@ -144,9 +144,19 @@
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[400px]">
 		<!-- Audio -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal active is-revealed">
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/sound.webp')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
-			></div>
+			<picture class="absolute inset-0 w-full h-full opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/sound-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/sound-desktop.webp" type="image/webp" />
+				<img 
+					alt="Professional sound rental equipment" 
+					class="w-full h-full object-cover" 
+					src="/images/services/sound-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
 			<div class="absolute inset-0 bg-surface-glass backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -165,9 +175,19 @@
 
 		<!-- Lighting -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal active is-revealed" style="transition-delay: 100ms;">
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/lighting.webp')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
-			></div>
+			<picture class="absolute inset-0 w-full h-full opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/lighting-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/lighting-desktop.webp" type="image/webp" />
+				<img 
+					alt="Spectacular event lighting rental equipment" 
+					class="w-full h-full object-cover" 
+					src="/images/services/lighting-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
@@ -185,9 +205,19 @@
 
 		<!-- Visuals -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal active is-revealed" style="transition-delay: 200ms;">
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/projectors-screens.webp')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
-			></div>
+			<picture class="absolute inset-0 w-full h-full opacity-30 group-hover:opacity-50 transition-opacity duration-500 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/projectors-screens-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/projectors-screens-desktop.webp" type="image/webp" />
+				<img 
+					alt="HD projectors and screen rental equipment" 
+					class="w-full h-full object-cover" 
+					src="/images/services/projectors-screens-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
@@ -205,9 +235,19 @@
 
 		<!-- Special Effects -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal active is-revealed" style="transition-delay: 300ms;">
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/fx.webp')] bg-cover bg-center opacity-25 group-hover:opacity-40 transition-opacity duration-500"
-			></div>
+			<picture class="absolute inset-0 w-full h-full opacity-25 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/fx-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/fx-desktop.webp" type="image/webp" />
+				<img 
+					alt="Special effects low-lying fog and confetti rental machines" 
+					class="w-full h-full object-cover" 
+					src="/images/services/fx-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent"></div>
 			<div class="absolute top-0 left-0 w-full h-full p-8 flex flex-col justify-center z-10 max-w-lg">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">

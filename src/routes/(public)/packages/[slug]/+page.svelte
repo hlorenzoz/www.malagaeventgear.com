@@ -103,17 +103,23 @@
 				<div class="absolute -bottom-24 -right-24 w-64 h-64 bg-electric-blue/5 rounded-full blur-3xl pointer-events-none"></div>
 				<div>
 					{#if pkg.image}
+						{@const mobileImage = pkg.image.replace('.webp', '-mobile.webp')}
+						{@const desktopImage = pkg.image.replace('.webp', '-desktop.webp')}
 						<div class="w-full h-48 rounded-lg overflow-hidden mb-8 relative">
-							<img
-								alt={pkg.name}
-								class="object-cover w-full h-full opacity-90"
-								src={pkg.image}
-								loading="lazy"
-								decoding="async"
-								width="600"
-								height="400"
-							/>
-							<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
+							<picture class="absolute inset-0 w-full h-full">
+								<source media="(max-width: 767px)" srcset={mobileImage} type="image/webp" />
+								<source media="(min-width: 768px)" srcset={desktopImage} type="image/webp" />
+								<img
+									alt={pkg.name}
+									class="w-full h-full object-cover opacity-90"
+									src={desktopImage}
+									loading="lazy"
+									decoding="async"
+									width="800"
+									height="380"
+								/>
+							</picture>
+							<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent pointer-events-none"></div>
 						</div>
 					{/if}
 					<h2 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-border-glass pb-4">

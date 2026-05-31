@@ -256,9 +256,19 @@
 		<!-- Sound System (Large) -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group md:col-span-2 md:row-span-2 reveal active is-revealed">
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10"></div>
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/sound.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-			></div>
+			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/sound-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/sound-desktop.webp" type="image/webp" />
+				<img 
+					alt="Professional sound system rental" 
+					class="w-full h-full object-cover" 
+					src="/images/services/sound-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute bottom-0 left-0 p-8 z-20 w-full">
 				<div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center mb-4 backdrop-blur-md text-on-surface">
 					<Icon name="speaker" />
@@ -273,9 +283,19 @@
 		<!-- Lighting -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/lighting.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-			></div>
+			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/lighting-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/lighting-desktop.webp" type="image/webp" />
+				<img 
+					alt="Spectacular event lighting rental" 
+					class="w-full h-full object-cover" 
+					src="/images/services/lighting-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute bottom-0 left-0 p-6 z-20 w-full">
 				<div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center mb-3 backdrop-blur-md text-on-surface">
 					<Icon name="lightbulb" />
@@ -288,9 +308,19 @@
 		<!-- Visuals/Projectors -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
-			<div 
-				class="absolute inset-0 bg-[url('/images/services/visuals.webp')] bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-			></div>
+			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
+				<source media="(max-width: 767px)" srcset="/images/services/visuals-mobile.webp" type="image/webp" />
+				<source media="(min-width: 768px)" srcset="/images/services/visuals-desktop.webp" type="image/webp" />
+				<img 
+					alt="HD event visuals and projectors rental" 
+					class="w-full h-full object-cover" 
+					src="/images/services/visuals-desktop.webp"
+					loading="lazy"
+					decoding="async"
+					width="600"
+					height="400"
+				/>
+			</picture>
 			<div class="absolute bottom-0 left-0 p-6 z-20 w-full">
 				<div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center mb-3 backdrop-blur-md text-on-surface">
 					<Icon name="videocam" />
@@ -372,13 +402,21 @@
 						<!-- Visual header with image and gradient -->
 						<div class="relative h-40 overflow-hidden bg-linear-to-br {pack.gradient}">
 							{#if pack.image}
-								<img
-									src={pack.image}
-									alt={pack.name}
-									loading="lazy"
-									class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/card:scale-105"
-								/>
-								<div class="absolute inset-0 bg-linear-to-t from-surface-container via-surface-container/30 to-transparent"></div>
+								{@const mobileImage = pack.image.replace('.webp', '-mobile.webp')}
+								{@const desktopImage = pack.image.replace('.webp', '-desktop.webp')}
+								<picture class="absolute inset-0 w-full h-full">
+									<source media="(max-width: 767px)" srcset={mobileImage} type="image/webp" />
+									<source media="(min-width: 768px)" srcset={desktopImage} type="image/webp" />
+									<img
+										src={desktopImage}
+										alt={pack.name}
+										loading="lazy"
+										class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover/card:scale-105"
+										width="800"
+										height="380"
+									/>
+								</picture>
+								<div class="absolute inset-0 bg-linear-to-t from-surface-container via-surface-container/30 to-transparent pointer-events-none"></div>
 							{/if}
 
 							<!-- Icon chip -->
