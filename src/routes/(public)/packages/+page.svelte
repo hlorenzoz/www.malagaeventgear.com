@@ -489,7 +489,7 @@
 	type="button"
 	data-testid="filter-drawer-trigger"
 	onclick={() => (isMobileDrawerOpen = true)}
-	class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] rounded-full bg-electric-blue text-white font-label-lg shadow-xl shadow-electric-blue/40 ring-1 ring-white/20 active:scale-[0.98] transition-transform duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric-blue"
+	class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] rounded-full bg-electric-blue-strong text-white font-label-lg shadow-xl shadow-electric-blue/40 ring-1 ring-white/20 active:scale-[0.98] transition-transform duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric-blue"
 	aria-haspopup="dialog"
 	aria-expanded={isMobileDrawerOpen}
 >
