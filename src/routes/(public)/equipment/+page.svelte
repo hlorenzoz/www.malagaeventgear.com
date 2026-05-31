@@ -57,16 +57,20 @@
 		<div class="relative grid grid-cols-1 lg:grid-cols-2 gap-0">
 			<!-- Featured Image -->
 			<div class="relative h-[400px] lg:h-auto overflow-hidden">
-				<img 
-					alt="MICE Audiovisual Pack Setup for Meetings" 
-					class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out opacity-80" 
-					src="/images/packages/mice.webp"
-					loading="eager"
-					fetchpriority="high"
-					decoding="async"
-					width="800"
-					height="600"
-				/>
+				<picture class="absolute inset-0 w-full h-full">
+					<source media="(max-width: 1023px)" srcset="/images/packages/mice-mobile.webp" type="image/webp" />
+					<source media="(min-width: 1024px)" srcset="/images/packages/mice.webp" type="image/webp" />
+					<img 
+						alt="MICE Audiovisual Pack Setup for Meetings" 
+						class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out opacity-80" 
+						src="/images/packages/mice.webp"
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+						width="800"
+						height="600"
+					/>
+				</picture>
 				<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent lg:bg-gradient-to-r"></div>
 				<div class="absolute top-6 left-6 bg-surface-glass backdrop-blur-md border border-border-glass rounded-full px-4 py-1.5 flex items-center gap-2">
 					<div class="w-2 h-2 rounded-full bg-electric-blue animate-pulse"></div>
