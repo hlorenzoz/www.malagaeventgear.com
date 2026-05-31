@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ### Fixed
 - **Cloudflare Build Crash Mitigation**: Adjusted the `package.json` build script to run `wrangler types` instead of `wrangler types --check`. This prevents deployment build failures caused by environment, hash, or platform-specific micro-version mismatches of generated type definitions in Cloudflare's CI/CD pipelines, while keeping type safety active.
+- **Commitment of Static Images**: Removed `/static/images/` from `.gitignore` to ensure the package and service images (such as `/images/packages/eco.webp` and `/images/services/projectors-screens.webp`) are tracked and uploaded. This resolves a prerendering 404 error during Cloudflare deployments.
 
 ### Added
 - **Desactivación de Indexación para Bots de Google**: Configurado el archivo `static/robots.txt` para desautorizar explícitamente a `Googlebot` y al resto de motores de búsqueda (`*`) el rastreo e indexación del sitio web, protegiendo el entorno de staging/desarrollo.

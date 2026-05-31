@@ -24,7 +24,6 @@ bun-debug.log*
 
 # Generated exports & local temporary media
 *-export.ts
-/static/images/
 
 # ------------------------------------------------------------------------------
 # Cloudflare / Wrangler & D1 Local State
