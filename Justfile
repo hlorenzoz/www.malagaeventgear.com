@@ -32,3 +32,7 @@ format:
 playwright:
     bunx playwright test
 
+# Compila y audita el rendimiento de todas las páginas con Lighthouse CI (.lighthouserc.json)
+test-lighthouse: build
+    bunx @lhci/cli autorun
+
