@@ -44,7 +44,13 @@
       "Bash(echo \"EXIT=$? \\(1=none\\)\")",
       "Bash(echo \"EXITCODE=$?\")",
       "Bash(rg -o \"'\\([a-z_]+\\)'\" -r '$1')",
-      "Bash(magick identify *)"
+      "Bash(magick identify *)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('.lighthouserc.json'\\)\\); JSON.parse\\(require\\('fs'\\).readFileSync\\('.mcp.json'\\)\\); console.log\\('both JSON valid'\\)\")",
+      "Bash(node -e \"console.log\\(JSON.parse\\(require\\('fs'\\).readFileSync\\('.lighthouserc.json'\\)\\).ci.collect.url.length, 'urls'\\)\")",
+      "Bash(just --list)",
+      "Bash(just --summary)",
+      "Bash(ls -la .claude/commands/)",
+      "Bash(ls -la .claude/)"
     ]
   }
 }
