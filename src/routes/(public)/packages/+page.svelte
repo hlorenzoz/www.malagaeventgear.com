@@ -212,6 +212,7 @@
 	title="Rates & Tailored Rental Packages | MEG"
 	description="Discover our transparent rates and tailored sound, lighting, and screen rental packages in Malaga. Perfect options for weddings, corporate events, and parties."
 	canonicalUrl="https://www.malagaeventgear.com/packages"
+	image="/images/packages/wedding.webp"
 	jsonLdSchema={[pricingSchema, faqSchema]}
 />
 
@@ -479,14 +480,14 @@
 	type="button"
 	data-testid="filter-drawer-trigger"
 	onclick={() => (isMobileDrawerOpen = true)}
-	class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] rounded-full glass-panel text-on-surface font-label-lg shadow-xl shadow-black/30 active:scale-[0.98] transition-transform duration-300 focus-visible:outline-2 focus-visible:outline-electric-blue"
+	class="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] rounded-full bg-electric-blue text-white font-label-lg shadow-xl shadow-electric-blue/40 ring-1 ring-white/20 active:scale-[0.98] transition-transform duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric-blue"
 	aria-haspopup="dialog"
 	aria-expanded={isMobileDrawerOpen}
 >
-	<Icon name="tune" size="20" className="text-electric-blue" />
+	<Icon name="tune" size="20" className="text-white" />
 	{i18n.t.filters.openFilters}
 	{#if activeFilterCount > 0}
-		<span class="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full bg-electric-blue text-white text-xs font-bold">{activeFilterCount}</span>
+		<span class="ml-1 inline-flex items-center justify-center w-6 h-6 rounded-full bg-white text-electric-blue text-xs font-bold">{activeFilterCount}</span>
 	{/if}
 </button>
 
