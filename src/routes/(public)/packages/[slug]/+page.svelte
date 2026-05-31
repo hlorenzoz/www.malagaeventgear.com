@@ -85,9 +85,9 @@
 					{#if landing.highlightIcon}
 						<span class="material-symbols-outlined text-electric-blue text-[28px]">{landing.highlightIcon}</span>
 					{/if}
-					<h3 class="font-headline-sm text-headline-sm text-on-surface">
+					<h2 class="font-headline-sm text-headline-sm text-on-surface">
 						{landing.highlightTitle[i18n.lang]}
-					</h3>
+					</h2>
 				</div>
 				<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
 					{landing.highlightBody[i18n.lang]}
@@ -114,9 +114,9 @@
 							<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent"></div>
 						</div>
 					{/if}
-					<h3 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-border-glass pb-4">
+					<h2 class="font-headline-md text-headline-md text-on-surface mb-6 border-b border-border-glass pb-4">
 						{landing.includesLabel[i18n.lang]}
-					</h3>
+					</h2>
 					<ul class="space-y-4 mb-8">
 						{#each pkg.includes[i18n.lang] as item}
 							<li class="flex items-start gap-3">
@@ -127,9 +127,9 @@
 					</ul>
 
 					{#if pkg.optional && landing.optionalLabel}
-						<h4 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-4">
+						<h3 class="font-label-lg text-label-lg text-on-surface uppercase tracking-wider mb-4">
 							{landing.optionalLabel[i18n.lang]}
-						</h4>
+						</h3>
 						<ul class="space-y-3">
 							{#each pkg.optional[i18n.lang] as extra}
 								<li class="flex items-center gap-3 p-3 rounded bg-on-surface/5">

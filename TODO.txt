@@ -38,7 +38,7 @@ OpenGraph
 Añade soporte global para OpenGraph según se define en OpenGraph.
 
 
--- ❌ ✅
+-- ✅
 
 Descarga en __utils/sitemaps/
 

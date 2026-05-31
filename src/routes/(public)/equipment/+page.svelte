@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 
 	import { buildItemListSchema } from '$lib/utils/schema';
 
@@ -84,19 +85,19 @@
 				
 				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
 					<div class="flex items-start gap-3">
-						<span class="material-symbols-outlined text-electric-blue">tv</span>
+						<Icon name="inventory_2" className="text-electric-blue" size="20" />
 						<span class="font-label-sm text-label-sm text-on-surface">{i18n.lang === 'en' ? '60" LED Screen' : 'Pantalla LED de 60"'}</span>
 					</div>
 					<div class="flex items-start gap-3">
-						<span class="material-symbols-outlined text-electric-blue">mic</span>
+						<Icon name="call" className="text-electric-blue" size="20" />
 						<span class="font-label-sm text-label-sm text-on-surface">{i18n.lang === 'en' ? 'Wireless Audio' : 'Audio Inalámbrico'}</span>
 					</div>
 					<div class="flex items-start gap-3">
-						<span class="material-symbols-outlined text-electric-blue">engineering</span>
+						<Icon name="build" className="text-electric-blue" size="20" />
 						<span class="font-label-sm text-label-sm text-on-surface">{i18n.lang === 'en' ? 'Technical Support Included' : 'Soporte Técnico Incluido'}</span>
 					</div>
 					<div class="flex items-start gap-3">
-						<span class="material-symbols-outlined text-electric-blue">speaker</span>
+						<Icon name="speaker" className="text-electric-blue" size="20" />
 						<span class="font-label-sm text-label-sm text-on-surface">{i18n.lang === 'en' ? 'Premium Sound' : 'Sonido Premium'}</span>
 					</div>
 				</div>
@@ -110,7 +111,7 @@
 						class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 ml-auto flex items-center justify-center gap-2"
 						href="/packages/mice/"
 					>
-						{i18n.lang === 'en' ? 'Request Info' : 'Solicitar Info'} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+						{i18n.lang === 'en' ? 'Request Info' : 'Solicitar Info'} <Icon name="arrow_forward" size="18" />
 					</a>
 				</div>
 			</div>
@@ -138,13 +139,13 @@
 		<!-- Audio -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal active is-revealed">
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+				class="absolute inset-0 bg-[url('/images/services/sound.webp')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
 			></div>
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
 			<div class="absolute inset-0 bg-surface-glass backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-electric-blue/30 flex items-center justify-center mb-4 backdrop-blur-md">
-					<span class="material-symbols-outlined text-primary">speaker</span>
+					<Icon name="speaker" className="text-primary" />
 				</div>
 				<h3 class="font-headline-md text-[28px] text-on-surface mb-2">{i18n.t.categories.soundTitle}</h3>
 				<p class="font-body-md text-body-md text-on-surface-variant max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
@@ -159,12 +160,12 @@
 		<!-- Lighting -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal active is-revealed" style="transition-delay: 100ms;">
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
+				class="absolute inset-0 bg-[url('/images/services/lighting.webp')] bg-cover bg-center opacity-30 group-hover:opacity-50 transition-opacity duration-500"
 			></div>
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
-					<span class="material-symbols-outlined text-primary">lightbulb</span>
+					<Icon name="lightbulb" className="text-primary" />
 				</div>
 				<h3 class="font-headline-md text-[24px] text-on-surface mb-2">{i18n.t.categories.lightTitle}</h3>
 				<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">
@@ -184,7 +185,7 @@
 			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
-					<span class="material-symbols-outlined text-primary">videocam</span>
+					<Icon name="videocam" className="text-primary" />
 				</div>
 				<h3 class="font-headline-md text-[24px] text-on-surface mb-2">{i18n.t.categories.visualTitle}</h3>
 				<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">
@@ -199,12 +200,12 @@
 		<!-- Special Effects -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal active is-revealed" style="transition-delay: 300ms;">
 			<div 
-				class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?q=80&w=1974&auto=format&fit=crop')] bg-cover bg-center opacity-25 group-hover:opacity-40 transition-opacity duration-500"
+				class="absolute inset-0 bg-[url('/images/services/fx.webp')] bg-cover bg-center opacity-25 group-hover:opacity-40 transition-opacity duration-500"
 			></div>
 			<div class="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent"></div>
 			<div class="absolute top-0 left-0 w-full h-full p-8 flex flex-col justify-center z-10 max-w-lg">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
-					<span class="material-symbols-outlined text-primary">air</span>
+					<Icon name="memory" className="text-primary" />
 				</div>
 				<h3 class="font-headline-md text-[28px] text-on-surface mb-4">{i18n.lang === 'en' ? 'Special Effects' : 'Efectos Especiales'}</h3>
 				<p class="font-body-md text-body-md text-on-surface-variant mb-6">
@@ -217,7 +218,7 @@
 					class="flex items-center gap-2 text-electric-blue font-label-lg group-hover:translate-x-2 transition-all duration-300 active:scale-95 w-fit"
 					href="/packages/"
 				>
-					{i18n.t.categories.bookEquipment} <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+					{i18n.t.categories.bookEquipment} <Icon name="arrow_forward" size="18" />
 				</a>
 			</div>
 		</div>
@@ -230,7 +231,7 @@
 		<div class="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-electric-blue/10 to-transparent opacity-50"></div>
 		<div class="relative z-20 flex w-full justify-between items-center">
 			<div>
-				<h3 class="font-headline-md text-headline-md text-on-surface mb-2">{i18n.t.categories.fxTitle}</h3>
+				<h2 class="font-headline-md text-headline-md text-on-surface mb-2">{i18n.t.categories.fxTitle}</h2>
 				<p class="font-body-md text-on-surface-variant max-w-lg">
 					{i18n.t.categories.fxText}
 				</p>
@@ -239,7 +240,7 @@
 				href="/equipment/"
 				class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 			>
-				<span class="material-symbols-outlined text-[32px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+				<Icon name="arrow_forward" size="32" className="group-hover:translate-x-1 transition-transform" />
 			</a>
 		</div>
 	</div>

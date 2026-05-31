@@ -181,31 +181,31 @@
 
 		<!-- Bento Info Cards -->
 		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 lg:mt-0">
-			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300 reveal active is-revealed">
+			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300">
 				<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center mb-4">
 					<Icon name="build" className="text-electric-blue" />
 				</div>
-				<h3 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card1Title}</h3>
+				<h2 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card1Title}</h2>
 				<p class="font-body-md text-on-surface-variant text-sm">
 					{i18n.t.bento.card1Text}
 				</p>
 			</div>
 			
-			<div class="glass-card p-6 rounded-xl ambient-shadow sm:translate-y-8 hover:translate-y-6 transition-transform duration-300 reveal active is-revealed">
+			<div class="glass-card p-6 rounded-xl ambient-shadow sm:translate-y-8 hover:translate-y-6 transition-transform duration-300">
 				<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
 					<Icon name="inventory_2" className="text-primary" />
 				</div>
-				<h3 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card2Title}</h3>
+				<h2 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card2Title}</h2>
 				<p class="font-body-md text-on-surface-variant text-sm">
 					{i18n.t.bento.card2Text}
 				</p>
 			</div>
 			
-			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300 sm:col-span-2 sm:w-[80%] mx-auto sm:mt-8 reveal active is-revealed">
+			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300 sm:col-span-2 sm:w-[80%] mx-auto sm:mt-8">
 				<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-4">
 					<Icon name="memory" className="text-secondary" />
 				</div>
-				<h3 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card3Title}</h3>
+				<h2 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card3Title}</h2>
 				<p class="font-body-md text-on-surface-variant text-sm">
 					{i18n.t.bento.card3Text}
 				</p>

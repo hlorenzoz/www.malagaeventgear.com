@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.malagaeventgear.com/sitemap_index.xml
+Sitemap: https://nuevo.malagaeventgear.com/sitemap_index.xml

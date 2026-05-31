@@ -113,7 +113,7 @@
 		<div class="lg:col-span-4 flex">
 			<div class="glass-panel rounded-xl p-8 w-full flex flex-col justify-between">
 				<div>
-					<h3 class="font-headline-md text-headline-md mb-8 text-on-surface">{i18n.t.contact.detailsTitle}</h3>
+					<h2 class="font-headline-md text-headline-md mb-8 text-on-surface">{i18n.t.contact.detailsTitle}</h2>
 					<div class="space-y-6">
 						<div class="flex items-start space-x-4">
 							<div class="bg-surface-glass p-3 rounded-lg border border-border-glass text-electric-blue flex items-center justify-center">
