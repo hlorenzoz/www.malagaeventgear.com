@@ -122,7 +122,10 @@
       "Bash(eza openspec/changes/archive/package-lead-capture-cro/)",
       "Bash(bunx wrangler *)",
       "Bash(rg -n 'PUBLIC_TURNSTILE|dynamic/public|\\\\$env' src/lib/components/forms/LeadForm.svelte)",
-      "Bash(eza -la .env .env.local .dev.vars)"
+      "Bash(eza -la .env .env.local .dev.vars)",
+      "Bash(eza -la .wrangler/state/v3/d1/miniflare-D1DatabaseObject/)",
+      "Bash(just db-open *)",
+      "Bash(pbpaste)"
     ],
     "additionalDirectories": [
       "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/lib/components",
