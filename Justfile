@@ -57,6 +57,13 @@ migrate:
 db-tables:
     bunx wrangler d1 execute meg-leads --remote --command "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;"
 
+# Resuelve la ruta del archivo SQLite de la D1 LOCAL y la copia al portapapeles (para abrir en DB Browser / TablePlus)
+db-open:
+    @path=$(fd -HI -e sqlite . .wrangler/state/v3/d1/miniflare-D1DatabaseObject --exclude metadata.sqlite -a | head -1); \
+    if [ -z "$path" ]; then echo "No se encontró la D1 local. Corré 'just migrate-local' y enviá un lead primero."; exit 1; fi; \
+    printf '%s' "$path" | pbcopy; \
+    echo "📋 Ruta copiada al portapapeles:"; echo "$path"
+
 # Carga los secrets de la app principal (Resend + Turnstile) — pide cada valor de forma interactiva
 secrets:
     bunx wrangler secret put RESEND_API_KEY
