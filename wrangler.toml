@@ -5,9 +5,9 @@ compatibility_date = "2024-05-02"
 [vars]
 ENVIRONMENT = "production"
 # Non-sensitive public vars — safe to commit
-LEAD_NOTIFY_EMAILS = ""      # Comma-separated fallback notification emails, e.g. "team@meg.com"
+LEAD_NOTIFY_EMAILS = "malagaeventgear@gmail.com"      # Comma-separated fallback notification emails, e.g. "team@meg.com"
 PUBLIC_SITE_URL = "https://malagaeventgear.com"
-PUBLIC_TURNSTILE_SITE_KEY = "" # Cloudflare Turnstile site key (dev: 1x00000000000000000000AA)
+PUBLIC_TURNSTILE_SITE_KEY = "0x4AAAAAADdwuCX-HZK0twRi" # Cloudflare Turnstile site key (dev: 1x00000000000000000000AA)
 
 [assets]
 directory = ".svelte-kit/cloudflare"

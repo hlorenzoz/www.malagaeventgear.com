@@ -119,7 +119,10 @@
       "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/routes/api/leads\")",
       "Bash(mkdir -p \"/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear \\(malagaeventgear.com\\)]/projects/website/src/lib/server/email/templates\")",
       "Bash(eza openspec/changes/package-lead-capture-cro/)",
-      "Bash(eza openspec/changes/archive/package-lead-capture-cro/)"
+      "Bash(eza openspec/changes/archive/package-lead-capture-cro/)",
+      "Bash(bunx wrangler *)",
+      "Bash(rg -n 'PUBLIC_TURNSTILE|dynamic/public|\\\\$env' src/lib/components/forms/LeadForm.svelte)",
+      "Bash(eza -la .env .env.local .dev.vars)"
     ],
     "additionalDirectories": [
       "/Users/hlorenzoz/databank/Development/[MEG - Malaga Event Gear (malagaeventgear.com)]/projects/website/src/lib/components",
