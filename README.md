@@ -53,6 +53,10 @@ migraciones, verificar dominio en Resend, cargar secrets de Turnstile/Resend, de
 
 ➡️ **[docs/lead-capture-deployment.md](docs/lead-capture-deployment.md)**
 
+Guías relacionadas:
+- **[docs/lead-capture-deployment.md](docs/lead-capture-deployment.md)** — provisioning y deploy (D1, Resend, Turnstile, secrets).
+- **[docs/dmarc-hardening.md](docs/dmarc-hardening.md)** — plan por etapas para endurecer DMARC (monitoreo → quarantine → reject).
+
 ### Piezas clave
 
 | Pieza | Ruta |
