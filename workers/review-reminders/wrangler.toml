@@ -12,7 +12,8 @@ crons = ["0 10 * * *"]   # 10:00 UTC daily (~11:00 CET / 12:00 CEST)
 
 [vars]
 PUBLIC_SITE_URL = "https://malagaeventgear.com"
-RESEND_FROM = "MEG <noreply@malagaeventgear.com>"
+RESEND_FROM = "MEG <contact@malagaeventgear.com>"
+# RESEND_FROM = "MEG <noreply@malagaeventgear.com>"
 
 # Secrets (set via: wrangler secret put RESEND_API_KEY --name meg-review-reminders)
 # RESEND_API_KEY = "..."  ← do not commit
