@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { getContactFaqs, buildFaqSchema } from '$lib/data/faq';
+	import { siteConfig } from '$lib/data/site';
 
 	// Structured JSON-LD schema for the Contact Page
 	let contactSchema = $derived({
@@ -158,11 +159,9 @@
 							</div>
 							<div>
 								<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-1">{i18n.t.contact.location}</p>
-								<p class="font-body-md text-body-md text-on-surface-variant">
-									Av. de Barcelona, 34, 3B<br />
-									District Centro<br />
-									29009 Malaga, Spain
-								</p>
+								<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue transition-colors" href={siteConfig.googleBusinessProfile} target="_blank" rel="noopener noreferrer">
+									{siteConfig.displayAddress}
+								</a>
 							</div>
 						</div>
 						

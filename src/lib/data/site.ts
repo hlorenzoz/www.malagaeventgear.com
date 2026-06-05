@@ -19,6 +19,23 @@ export const siteConfig = {
 	contactPhone: '+34 600 42 87 50',
 	phoneCallUrl: 'tel:+34600428750',
 	whatsappUrl: 'https://wa.me/34600428750',
+	// Dirección de display (footer), idéntica a la ficha de Google Maps / GMB (NAP consistente).
+	displayAddress: 'Av. de Barcelona, 34, Distrito Centro, 29009 Málaga',
+	// Perfil de Google My Business — destino de todos los links de dirección del sitio.
+	googleBusinessProfile: 'https://share.google/NVAtkdc4y0WJyF8cJ',
+	emails: {
+		hire: 'hire@malagaeventgear.com',
+		contact: 'contact@malagaeventgear.com',
+		legal: 'legal@malagaeventgear.com'
+	},
+	listings: {
+		googleMyBusiness: 'https://share.google/kDiD1FgyJHt9fldoA',
+		bingPlaces: 'https://www.bing.com/maps?ss=ypid.YN6317A92429033E45&mkt=en-ES'
+	},
+	onlinePresence: {
+		medium: 'https://medium.com/@malagaeventgear',
+		pinterest: 'https://es.pinterest.com/malagaeventgear/'
+	},
 	operatingHours: {
 		opens: '08:00',
 		closes: '20:00',
@@ -33,7 +50,7 @@ export const siteConfig = {
 		]
 	},
 	address: {
-		streetAddress: 'Avenida de Barcelona, 34, 3B, Distrito Centro',
+		streetAddress: 'Av. de Barcelona, 34, Distrito Centro',
 		addressLocality: 'Málaga',
 		addressRegion: 'Málaga',
 		postalCode: '29009',
