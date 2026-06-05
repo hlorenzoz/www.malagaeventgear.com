@@ -44,6 +44,17 @@
 		}
 	};
 
+	// Cheapest package price for the "What does it cost?" answer (kept in sync with packages data)
+	let minPrice = $derived(Math.min(...packages.map((p) => p.price)));
+
+	// "At a Glance" Q&A block (answer-engine optimization). Question text rendered as <h2>.
+	let overview = $derived([
+		{ q: i18n.t.overview.sellQ, a: i18n.t.overview.sellA, icon: 'inventory_2' },
+		{ q: i18n.t.overview.whoQ, a: i18n.t.overview.whoA, icon: 'groups' },
+		{ q: i18n.t.overview.costQ, a: i18n.t.overview.costA, icon: 'sell', cost: true },
+		{ q: i18n.t.overview.howQ, a: i18n.t.overview.howA, icon: 'route' }
+	]);
+
 	let openFaqIndex = $state<number | null>(null);
 
 	// Top 5 conversion-oriented FAQs, sourced from the centralized FAQ store
@@ -211,6 +222,34 @@
 				</p>
 			</div>
 		</div>
+	</div>
+</section>
+
+<!-- At a Glance Section (answer-engine optimization: questions as h2) -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+	<div class="text-center mb-16">
+		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+			{i18n.t.overview.badge}
+		</span>
+	</div>
+
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+		{#each overview as item}
+			<div class="glass-card p-8 rounded-xl ambient-shadow hover:-translate-y-1 transition-transform duration-300">
+				<div class="flex items-center gap-4 mb-4">
+					<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center shrink-0">
+						<Icon name={item.icon} className="text-electric-blue" />
+					</div>
+					<h2 class="font-headline-md text-[22px] text-on-surface">{item.q}</h2>
+				</div>
+				<p class="font-body-md text-body-md text-on-surface-variant">
+					{#if item.cost}
+						<strong class="text-on-surface">{i18n.t.overview.costFrom} {minPrice} € {i18n.t.pricing.plusVat}.</strong>
+					{/if}
+					{item.a}
+				</p>
+			</div>
+		{/each}
 	</div>
 </section>
 

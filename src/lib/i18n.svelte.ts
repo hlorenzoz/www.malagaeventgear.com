@@ -33,6 +33,19 @@ export const translations = {
 			card3Title: '#3 Cutting-Edge Tech',
 			card3Text: 'Enjoy state-of-the-art audiovisual gear that elevates the visual and sound quality of your production.'
 		},
+		// Overview (At a Glance — answer-engine optimization)
+		overview: {
+			badge: 'At a Glance',
+			sellQ: 'What do we sell?',
+			sellA: 'We rent premium audiovisual equipment — professional sound systems, stage lighting, projectors and screens — for events across Malaga and the Costa del Sol, including delivery, setup and on-site technical support.',
+			whoQ: 'Who is it for?',
+			whoA: 'Couples planning weddings, companies running conferences and corporate events, and anyone hosting a party or private celebration who wants flawless sound and lighting without buying the gear.',
+			costQ: 'What does it cost?',
+			costA: 'fixed-price packages with no hidden fees, scaled to your event size, plus tailored quotes for larger productions.',
+			costFrom: 'From',
+			howQ: 'How does it work?',
+			howA: 'Four simple steps: pick your package, request a quote, we confirm and prepare your gear, and our team delivers and sets everything up on the day of your event.'
+		},
 		// Impact
 		impact: {
 			title: 'Our Impact in Numbers',
@@ -269,6 +282,19 @@ export const translations = {
 			card2Text: 'Paquetes de alquiler flexibles diseñados para adaptarse perfectamente a cualquier tamaño de evento, lugar y presupuesto.',
 			card3Title: '#3 Tecnología de Punta',
 			card3Text: 'Disfrutá de equipos audiovisuales de última generación que elevan la calidad visual y acústica de tu producción.'
+		},
+		// Overview (De un Vistazo — answer-engine optimization)
+		overview: {
+			badge: 'De un Vistazo',
+			sellQ: '¿Qué vendemos?',
+			sellA: 'Alquilamos equipos audiovisuales premium — sistemas de sonido profesional, iluminación de escenario, proyectores y pantallas — para eventos en Málaga y la Costa del Sol, con entrega, montaje y soporte técnico in situ.',
+			whoQ: '¿Para quién es?',
+			whoA: 'Parejas que organizan su boda, empresas con conferencias y eventos corporativos, y cualquiera que organice una fiesta o celebración privada y quiera sonido e iluminación impecables sin comprar el equipo.',
+			costQ: '¿Cuánto cuesta?',
+			costA: 'paquetes de precio fijo sin costos ocultos, escalados según el tamaño del evento, más presupuestos a medida para producciones grandes.',
+			costFrom: 'Desde',
+			howQ: '¿Cómo funciona?',
+			howA: 'Cuatro pasos simples: elegís tu paquete, pedís presupuesto, confirmamos y preparamos el equipo, y nuestro equipo entrega y monta todo el día de tu evento.'
 		},
 		// Impact
 		impact: {
