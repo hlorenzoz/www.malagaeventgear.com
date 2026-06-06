@@ -241,7 +241,7 @@
 		<div class="flex flex-wrap justify-center gap-4">
 			<a
 				href="/packages/"
-				class="px-8 py-3 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-95 transition-all duration-300"
+				class="px-8 py-3 rounded-full bg-electric-blue-strong text-white font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-95 transition-all duration-300"
 			>
 				{i18n.lang === 'en' ? 'View Pricing Packages' : 'Ver Paquetes de Precios'}
 			</a>

@@ -82,7 +82,7 @@
 		<span class="font-label-lg text-on-surface truncate">{pkg.name}</span>
 		<button
 			onclick={scrollToForm}
-			class="shrink-0 rounded-full bg-gradient-to-r from-electric-blue to-primary-container px-6 py-2 font-label-md uppercase tracking-wider text-white hover:shadow-[0_0_16px_rgba(77,140,255,0.4)] active:scale-95 transition-all duration-200"
+			class="shrink-0 rounded-full bg-electric-blue-strong px-6 py-2 font-label-md uppercase tracking-wider text-white hover:shadow-[0_0_16px_rgba(77,140,255,0.4)] active:scale-95 transition-all duration-200"
 		>
 			{landing.ctaButton[i18n.lang]}
 		</button>
@@ -104,7 +104,7 @@
 		<!-- Primary CTA: scroll to form -->
 		<button
 			onclick={scrollToForm}
-			class="px-10 py-4 rounded-full bg-gradient-to-r from-electric-blue to-primary-container text-white font-label-lg uppercase tracking-wider hover:shadow-[0_0_24px_rgba(77,140,255,0.45)] active:scale-95 transition-all duration-300"
+			class="px-10 py-4 rounded-full bg-electric-blue-strong text-white font-label-lg uppercase tracking-wider hover:shadow-[0_0_24px_rgba(77,140,255,0.45)] active:scale-95 transition-all duration-300"
 		>
 			{landing.ctaButton[i18n.lang]}
 		</button>
@@ -175,7 +175,7 @@
 							height="380"
 						/>
 					</picture>
-					<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent pointer-events-none"></div>
+					<div class="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent pointer-events-none"></div>
 				</div>
 			{/if}
 

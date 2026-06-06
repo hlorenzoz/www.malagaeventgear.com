@@ -304,7 +304,7 @@
 		<button
 			type="submit"
 			disabled={isLoading}
-			class="w-full rounded-full bg-gradient-to-r from-electric-blue to-primary-container px-8 py-4 font-label-lg uppercase tracking-wider text-white transition-all duration-300 hover:shadow-[0_0_24px_rgba(77,140,255,0.45)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
+			class="w-full rounded-full bg-electric-blue-strong px-8 py-4 font-label-lg uppercase tracking-wider text-white transition-all duration-300 hover:shadow-[0_0_24px_rgba(77,140,255,0.45)] active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
 		>
 			{isLoading ? i18n.t.leadForm.submitting : i18n.t.leadForm.submitBtn}
 		</button>

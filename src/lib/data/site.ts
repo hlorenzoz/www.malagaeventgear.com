@@ -21,7 +21,8 @@ export const siteConfig = {
 	whatsappUrl: 'https://wa.me/34600428750',
 	// Dirección de display (footer), idéntica a la ficha de Google Maps / GMB (NAP consistente).
 	displayAddress: 'Av. de Barcelona, 34, Distrito Centro, 29009 Málaga',
-	// Perfil de Google My Business — destino de todos los links de dirección del sitio.
+	// Perfil de Google My Business — ÚNICA fuente para todos los links al perfil del sitio
+	// (direcciones del footer/contacto y el listing "Google My Business").
 	googleBusinessProfile: 'https://share.google/NVAtkdc4y0WJyF8cJ',
 	emails: {
 		hire: 'hire@malagaeventgear.com',
@@ -29,7 +30,6 @@ export const siteConfig = {
 		legal: 'legal@malagaeventgear.com'
 	},
 	listings: {
-		googleMyBusiness: 'https://share.google/kDiD1FgyJHt9fldoA',
 		bingPlaces: 'https://www.bing.com/maps?ss=ypid.YN6317A92429033E45&mkt=en-ES'
 	},
 	onlinePresence: {
@@ -61,8 +61,8 @@ export const siteConfig = {
 		longitude: -4.4373
 	},
 	socials: [
-		'https://share.google/n4JrrhAnJttnN7ADs', // Google My Business Profile
-		'https://g.page/r/Cc8g7neiciATEBM/review', // GMB Reviews
+		'https://share.google/NVAtkdc4y0WJyF8cJ', // Google My Business Profile (= googleBusinessProfile)
+		'https://g.page/r/Cc8g7neiciATEBM/review', // GMB Reviews (link específico para dejar reseña)
 		'https://wa.me/34600428750' // WhatsApp
 	],
 	foundingYear: 1996,

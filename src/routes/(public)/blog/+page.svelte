@@ -54,7 +54,7 @@
 <section class="px-margin-mobile md:px-margin-desktop pb-24 max-w-4xl mx-auto reveal active is-revealed" style="transition-delay: 150ms;">
 	<div class="relative bg-surface-container-low border border-border-glass rounded-[28px] p-8 md:p-12 overflow-hidden group">
 		<!-- Hover micro-glow -->
-		<div class="absolute -inset-1 bg-gradient-to-r from-electric-blue/15 to-primary-container/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+		<div class="absolute -inset-1 bg-gradient-to-r from-electric-blue/15 to-electric-blue-strong/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
 		
 		<div class="relative z-10 flex flex-col items-center text-center">
 			<div class="w-16 h-16 rounded-full bg-primary-container/40 border border-electric-blue/30 flex items-center justify-center mb-6">

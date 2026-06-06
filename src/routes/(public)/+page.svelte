@@ -157,7 +157,7 @@
 			<source media="(min-width: 768px)" srcset="/premium_event_stage.webp" type="image/webp" />
 			<img
 				alt="Stage Background with Professional Event Lights"
-				class="w-full h-full object-cover opacity-30 dark:opacity-40 transition-opacity duration-300"
+				class="w-full h-full object-cover opacity-60 dark:opacity-70 transition-opacity duration-300"
 				src="/premium_event_stage.webp"
 				loading="eager"
 				fetchpriority="high"
@@ -165,7 +165,7 @@
 				height="1024"
 			/>
 		</picture>
-		<div class="absolute inset-0 bg-gradient-to-b from-background/90 via-background/60 to-background transition-colors duration-300"></div>
+		<div class="absolute inset-0 bg-gradient-to-b from-background/55 via-background/15 to-background transition-colors duration-300"></div>
 	</div>
 	
 	<div class="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
@@ -181,7 +181,7 @@
 				{i18n.t.hero.subtitle}
 			</p>
 			<div class="flex flex-wrap gap-4 pt-4">
-				<a class="bg-gradient-to-r from-secondary-container to-secondary text-on-secondary px-8 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(255,180,164,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200" href="/packages/">
+				<a class="bg-electric-blue-strong text-white px-8 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200" href="/packages/">
 					{i18n.t.hero.viewPricing}
 				</a>
 				<a class="glass-panel text-on-surface px-8 py-4 rounded-full font-label-lg hover:bg-on-surface/10 hover:-translate-y-0.5 transition-all flex items-center gap-2 active:scale-95 duration-200" href="/contact/">
@@ -294,7 +294,7 @@
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
 		<!-- Sound System (Large) -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group md:col-span-2 md:row-span-2 reveal active is-revealed">
-			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10"></div>
+			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent z-10"></div>
 			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
 				<source media="(max-width: 767px)" srcset="/images/services/sound-mobile.webp" type="image/webp" />
 				<source media="(min-width: 768px)" srcset="/images/services/sound-desktop.webp" type="image/webp" />
@@ -321,7 +321,7 @@
 
 		<!-- Lighting -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
-			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
+			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent z-10"></div>
 			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
 				<source media="(max-width: 767px)" srcset="/images/services/lighting-mobile.webp" type="image/webp" />
 				<source media="(min-width: 768px)" srcset="/images/services/lighting-desktop.webp" type="image/webp" />
@@ -346,7 +346,7 @@
 
 		<!-- Visuals/Projectors -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
-			<div class="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent z-10"></div>
+			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent z-10"></div>
 			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
 				<source media="(max-width: 767px)" srcset="/images/services/visuals-mobile.webp" type="image/webp" />
 				<source media="(min-width: 768px)" srcset="/images/services/visuals-desktop.webp" type="image/webp" />
@@ -529,7 +529,7 @@
 		</div>
 
 		<div class="text-center">
-			<a href="/packages/" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-10 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+			<a href="/packages/" class="inline-flex items-center gap-2 bg-electric-blue-strong text-white px-10 py-4 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 				{i18n.t.pricingPreview.viewAll}
 				<Icon name="arrow_forward" size="20" />
 			</a>
@@ -581,7 +581,7 @@
 				{i18n.lang === 'en' ? 'Have more questions?' : '¿Tenés más preguntas?'}
 			</p>
 			<div class="flex flex-wrap items-center justify-center gap-4">
-				<a href="/faq/" class="inline-flex items-center gap-2 bg-gradient-to-r from-electric-blue to-primary-container text-white px-8 py-3 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
+				<a href="/faq/" class="inline-flex items-center gap-2 bg-electric-blue-strong text-white px-8 py-3 rounded-full font-label-lg hover:shadow-[0_0_30px_rgba(77,140,255,0.3)] hover:-translate-y-0.5 transition-all active:scale-95 duration-200">
 					{i18n.lang === 'en' ? 'See all FAQs' : 'Ver todas las preguntas frecuentes'}
 					<Icon name="arrow_forward" size="20" />
 				</a>

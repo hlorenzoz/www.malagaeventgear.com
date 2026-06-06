@@ -97,7 +97,7 @@
 						{i18n.lang === 'en' ? 'Listings' : 'Directorios'}
 					</span>
 					<nav class="flex flex-col gap-2">
-						<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href={siteConfig.listings.googleMyBusiness} target="_blank" rel="noopener noreferrer">
+						<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href={siteConfig.googleBusinessProfile} target="_blank" rel="noopener noreferrer">
 							Google My Business
 						</a>
 						<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href={siteConfig.listings.bingPlaces} target="_blank" rel="noopener noreferrer">

@@ -42,6 +42,12 @@
 	let errorMessage = $state('');
 	let openFaqIndex = $state<number | null>(null);
 
+	// Earliest selectable event date = tomorrow (today and past dates are not bookable).
+	// Built from local date parts to avoid UTC off-by-one from toISOString().
+	const tomorrow = new Date();
+	tomorrow.setDate(tomorrow.getDate() + 1);
+	const minDate = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
+
 	onMount(() => {
 		// Capture query parameters if the user clicked from a specific pack
 		const params = new URLSearchParams(window.location.search);
@@ -64,6 +70,13 @@
 		e.preventDefault();
 		if (!name.trim() || !email.trim() || !message.trim()) {
 			errorMessage = i18n.t.contact.formRequiredError;
+			return;
+		}
+		// Guard against a past/today event date typed manually (native min only guards the picker).
+		if (date && date < minDate) {
+			errorMessage = i18n.lang === 'en'
+				? 'Please choose an event date after today.'
+				: 'Elegí una fecha de evento posterior a hoy.';
 			return;
 		}
 		errorMessage = '';
@@ -270,10 +283,11 @@
 
 							<!-- Date -->
 							<div class="relative">
-								<input 
-									type="date" 
+								<input
+									type="date"
 									id="date"
 									bind:value={date}
+									min={minDate}
 									class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface-variant focus:ring-0 focus:border-electric-blue transition-colors text-on-surface"
 								/>
 								<label 
@@ -313,9 +327,9 @@
 								placeholder="Message"
 								class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent resize-none"
 							></textarea>
-							<label 
+							<label
 								for="message"
-								class="absolute left-0 -top-3.5 text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-label-sm peer-focus:text-electric-blue"
+								class="absolute left-0 -top-3.5 bg-surface-container px-1.5 rounded text-on-surface-variant font-label-sm text-label-sm transition-all peer-placeholder-shown:bg-transparent peer-placeholder-shown:px-0 peer-placeholder-shown:text-body-md peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:bg-surface-container peer-focus:px-1.5 peer-focus:text-label-sm peer-focus:text-electric-blue"
 							>
 								{i18n.t.contact.formMessage}
 							</label>
@@ -324,7 +338,7 @@
 						<!-- Submit Button -->
 						<button 
 							type="submit"
-							class="w-full bg-gradient-to-r from-electric-blue to-primary-container text-white py-4 rounded-lg font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-[0.98] transition-all duration-300"
+							class="w-full bg-electric-blue-strong text-white py-4 rounded-lg font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-[0.98] transition-all duration-300"
 						>
 							{i18n.t.contact.formSubmit}
 						</button>

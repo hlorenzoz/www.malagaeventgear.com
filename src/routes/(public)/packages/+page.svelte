@@ -367,7 +367,7 @@
 				<button
 					type="button"
 					onclick={resetFilters}
-					class="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-full bg-linear-to-r from-electric-blue to-primary-container text-white font-label-lg hover:shadow-lg hover:shadow-electric-blue/25 active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-electric-blue"
+					class="inline-flex items-center gap-2 px-6 py-3 min-h-[44px] rounded-full bg-electric-blue-strong text-white font-label-lg hover:shadow-lg hover:shadow-electric-blue/25 active:scale-[0.98] transition-all duration-300 focus-visible:outline-2 focus-visible:outline-electric-blue"
 				>
 					<Icon name="restart_alt" size="20" />
 					{i18n.t.filters.resetFilters}
@@ -470,7 +470,7 @@
 
 					<!-- CTA pinned to the bottom so every card aligns -->
 					<a
-						class="group/cta mt-auto w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-linear-to-r from-electric-blue to-primary-container text-white font-label-lg hover:shadow-lg hover:shadow-electric-blue/25 active:scale-[0.98] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+						class="group/cta mt-auto w-full flex items-center justify-center gap-2 py-3.5 rounded-full bg-electric-blue-strong text-white font-label-lg hover:shadow-lg hover:shadow-electric-blue/25 active:scale-[0.98] transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
 						href={plan.route}
 					>
 						{i18n.t.pricing.bookPack} {plan.name}
@@ -524,7 +524,7 @@
 		<button
 			type="button"
 			onclick={() => (isMobileDrawerOpen = false)}
-			class="mt-6 w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-full bg-linear-to-r from-electric-blue to-primary-container text-white font-label-lg active:scale-[0.98] transition-transform duration-300 focus-visible:outline-2 focus-visible:outline-electric-blue"
+			class="mt-6 w-full flex items-center justify-center gap-2 py-3.5 min-h-[44px] rounded-full bg-electric-blue-strong text-white font-label-lg active:scale-[0.98] transition-transform duration-300 focus-visible:outline-2 focus-visible:outline-electric-blue"
 		>
 			{i18n.t.filters.done} ({filteredPlans.length})
 		</button>
