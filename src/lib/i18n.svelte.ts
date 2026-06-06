@@ -152,7 +152,7 @@ export const translations = {
 			successTitle: 'Quote Requested!',
 			successText1: 'Hi',
 			successText2: 'we received your request successfully. Our technical team in Malaga will evaluate it and contact you by email (',
-			successText3: ') in less than 2 hours.',
+			successText3: ') as soon as possible.',
 			successButton: 'Send another request',
 			faqTitle: 'Frequently Asked Questions'
 		},
@@ -188,7 +188,7 @@ export const translations = {
 			s1Title: 'Select Your Pack',
 			s1Desc: 'Browse our packages and pick the one that fits your event size and style.',
 			s2Title: 'Request a Quote',
-			s2Desc: 'Fill out our quick form. We respond in under 2 hours with full availability.',
+			s2Desc: 'Fill out our quick form. We respond as soon as possible with full availability.',
 			s3Title: 'Confirm & Plan',
 			s3Desc: 'Our team confirms logistics, venue access, and every technical detail.',
 			s4Title: 'Enjoy Your Event',
@@ -223,7 +223,7 @@ export const translations = {
 		// Lead capture form
 		leadForm: {
 			title: 'Request a Free Quote',
-			subtitle: "Fill in the form and we'll get back to you in under 2 hours.",
+			subtitle: "Fill in the form and we'll get back to you as soon as possible.",
 			nameLabelInput: 'Full Name *',
 			emailLabelInput: 'Email Address *',
 			phoneLabelInput: 'Phone / WhatsApp *',
@@ -241,14 +241,14 @@ export const translations = {
 			errorHoneypot: 'Spam detected.',
 			errorSubmit: 'Something went wrong. Please try again or contact us directly.',
 			countryCode: 'Country Code',
-			responseTime: 'We respond in under 2 hours',
+			responseTime: 'We respond as soon as possible',
 			trustBadge: 'Trusted by 500+ events in Málaga'
 		},
 		// Thank-you page
 		thankYou: {
 			headline: 'Thank you! Your request is on its way.',
-			subheadline: "We've received your enquiry and will get back to you within 2 hours.",
-			responseTime: 'Expected response: within 2 business hours',
+			subheadline: "We've received your enquiry and will get back to you as soon as possible.",
+			responseTime: 'Expected response: as soon as possible',
 			backToPackages: 'Browse all packages',
 			whatsappCta: 'Or reach us now on WhatsApp',
 			leadLabel: 'Reference'
@@ -402,7 +402,7 @@ export const translations = {
 			successTitle: '¡Presupuesto Solicitado!',
 			successText1: 'Hola',
 			successText2: 'recibimos tu solicitud con éxito. Nuestro equipo técnico en Málaga la evaluará y te contactará por email (',
-			successText3: ') en menos de 2 horas.',
+			successText3: ') lo antes posible.',
 			successButton: 'Enviar otra solicitud',
 			faqTitle: 'Preguntas Frecuentes'
 		},
@@ -438,7 +438,7 @@ export const translations = {
 			s1Title: 'Elegí Tu Pack',
 			s1Desc: 'Explorá nuestros paquetes y elegí el que mejor se adapta al tamaño y estilo de tu evento.',
 			s2Title: 'Solicitá Presupuesto',
-			s2Desc: 'Completá nuestro formulario rápido. Respondemos en menos de 2 horas con disponibilidad completa.',
+			s2Desc: 'Completá nuestro formulario rápido. Respondemos lo antes posible con disponibilidad completa.',
 			s3Title: 'Confirmamos & Planificamos',
 			s3Desc: 'Nuestro equipo confirma la logística, el acceso al lugar y cada detalle técnico.',
 			s4Title: 'Disfrutá Tu Evento',
@@ -473,7 +473,7 @@ export const translations = {
 		// Lead capture form
 		leadForm: {
 			title: 'Solicitá tu Presupuesto Gratis',
-			subtitle: 'Completá el formulario y te respondemos en menos de 2 horas.',
+			subtitle: 'Completá el formulario y te respondemos lo antes posible.',
 			nameLabelInput: 'Nombre Completo *',
 			emailLabelInput: 'Correo Electrónico *',
 			phoneLabelInput: 'Teléfono / WhatsApp *',
@@ -491,14 +491,14 @@ export const translations = {
 			errorHoneypot: 'Spam detectado.',
 			errorSubmit: 'Algo salió mal. Por favor intentá de nuevo o contactanos directamente.',
 			countryCode: 'Código de País',
-			responseTime: 'Respondemos en menos de 2 horas',
+			responseTime: 'Respondemos lo antes posible',
 			trustBadge: 'Confiado por más de 500 eventos en Málaga'
 		},
 		// Thank-you page
 		thankYou: {
 			headline: '¡Gracias! Tu solicitud está en camino.',
-			subheadline: 'Recibimos tu consulta y te responderemos dentro de las 2 horas.',
-			responseTime: 'Respuesta esperada: en menos de 2 horas hábiles',
+			subheadline: 'Recibimos tu consulta y te responderemos lo antes posible.',
+			responseTime: 'Respuesta esperada: lo antes posible',
 			backToPackages: 'Ver todos los paquetes',
 			whatsappCta: 'O contactanos ahora por WhatsApp',
 			leadLabel: 'Referencia'

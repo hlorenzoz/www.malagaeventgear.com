@@ -141,8 +141,8 @@ const packagesData: EventPackage[] = [
 			optionalLabel: { en: 'Optional Extras', es: 'Extras Opcionales' },
 			ctaHeading: { en: 'Secure Your Booking Today', es: 'Asegurá tu Reserva Hoy' },
 			ctaBody: {
-				en: 'Fill out our quick technical quote request to check package availability for your date. We reply in under 2 hours!',
-				es: 'Completá nuestra solicitud rápida de presupuesto técnico para consultar disponibilidad del paquete en tu fecha. ¡Respondemos en menos de 2 horas!'
+				en: 'Fill out our quick technical quote request to check package availability for your date. We get back to you as soon as possible!',
+				es: 'Completá nuestra solicitud rápida de presupuesto técnico para consultar disponibilidad del paquete en tu fecha. ¡Respondemos lo antes posible!'
 			},
 			ctaButton: { en: 'Book This Package', es: 'Reservar Este Paquete' }
 		}

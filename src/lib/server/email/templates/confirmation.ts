@@ -22,7 +22,7 @@ const copy = {
 	en: {
 		subject: (name: string) => `We received your request, ${name}!`,
 		greeting: (name: string) => `Hi ${name},`,
-		body: 'Thank you for contacting Malaga Event Gear. We have received your request and will get back to you within 24 hours.',
+		body: 'Thank you for contacting Malaga Event Gear. We have received your request and will get back to you as soon as possible.',
 		details: 'Your request details:',
 		package: 'Package',
 		eventDate: 'Event date',
@@ -34,7 +34,7 @@ const copy = {
 	es: {
 		subject: (name: string) => `¡Recibimos tu solicitud, ${name}!`,
 		greeting: (name: string) => `Hola ${name},`,
-		body: 'Gracias por contactar a Malaga Event Gear. Recibimos tu solicitud y nos pondremos en contacto contigo dentro de las próximas 24 horas.',
+		body: 'Gracias por contactar a Malaga Event Gear. Recibimos tu solicitud y nos pondremos en contacto contigo lo antes posible.',
 		details: 'Detalles de tu solicitud:',
 		package: 'Paquete',
 		eventDate: 'Fecha del evento',

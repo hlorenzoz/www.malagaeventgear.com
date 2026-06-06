@@ -3,7 +3,7 @@ export type TranslationKeys = typeof en;
 export const en = {
 	leadForm: {
 		title: "Request a Free Quote",
-		subtitle: "Fill in the form and we'll get back to you in under 2 hours.",
+		subtitle: "Fill in the form and we'll get back to you as soon as possible.",
 		nameLabelInput: "Full Name *",
 		emailLabelInput: "Email Address *",
 		phoneLabelInput: "Phone / WhatsApp *",
@@ -21,13 +21,13 @@ export const en = {
 		errorHoneypot: "Spam detected.",
 		errorSubmit: "Something went wrong. Please try again or contact us directly.",
 		countryCode: "Country Code",
-		responseTime: "We respond in under 2 hours",
+		responseTime: "We respond as soon as possible",
 		trustBadge: "Trusted by 500+ events in Málaga"
 	},
 	thankYou: {
 		headline: "Thank you! Your request is on its way.",
-		subheadline: "We've received your enquiry and will get back to you within 2 hours.",
-		responseTime: "Expected response: within 2 business hours",
+		subheadline: "We've received your enquiry and will get back to you as soon as possible.",
+		responseTime: "Expected response: as soon as possible",
 		backToPackages: "Browse all packages",
 		whatsappCta: "Or reach us now on WhatsApp",
 		leadLabel: "Reference"
@@ -134,7 +134,7 @@ export const en = {
 		hoursValue: "Technical support and logistics 24 hours, 7 days a week.",
 		formTitle: "Request a Quote",
 		successTitle: "Quote Requested!",
-		successDesc: "Hi {name}, we received your request successfully. Our technical team in Malaga will evaluate it and contact you by email ({email}) in less than 2 hours.",
+		successDesc: "Hi {name}, we received your request successfully. Our technical team in Malaga will evaluate it and contact you by email ({email}) as soon as possible.",
 		sendAnother: "Send another request",
 		nameLabel: "Full Name *",
 		emailLabelInput: "Email Address *",
@@ -156,7 +156,7 @@ export const en = {
 export const es: typeof en = {
 	leadForm: {
 		title: "Solicitá tu Presupuesto Gratis",
-		subtitle: "Completá el formulario y te respondemos en menos de 2 horas.",
+		subtitle: "Completá el formulario y te respondemos lo antes posible.",
 		nameLabelInput: "Nombre Completo *",
 		emailLabelInput: "Correo Electrónico *",
 		phoneLabelInput: "Teléfono / WhatsApp *",
@@ -174,13 +174,13 @@ export const es: typeof en = {
 		errorHoneypot: "Spam detectado.",
 		errorSubmit: "Algo salió mal. Por favor intentá de nuevo o contactanos directamente.",
 		countryCode: "Código de País",
-		responseTime: "Respondemos en menos de 2 horas",
+		responseTime: "Respondemos lo antes posible",
 		trustBadge: "Confiado por más de 500 eventos en Málaga"
 	},
 	thankYou: {
 		headline: "¡Gracias! Tu solicitud está en camino.",
-		subheadline: "Recibimos tu consulta y te responderemos dentro de las 2 horas.",
-		responseTime: "Respuesta esperada: en menos de 2 horas hábiles",
+		subheadline: "Recibimos tu consulta y te responderemos lo antes posible.",
+		responseTime: "Respuesta esperada: lo antes posible",
 		backToPackages: "Ver todos los paquetes",
 		whatsappCta: "O contactanos ahora por WhatsApp",
 		leadLabel: "Referencia"
@@ -287,7 +287,7 @@ export const es: typeof en = {
 		hoursValue: "Soporte técnico y logística las 24 horas, los 7 días de la semana.",
 		formTitle: "Solicitar Presupuesto",
 		successTitle: "¡Presupuesto Solicitado!",
-		successDesc: "Hola {name}, recibimos tu solicitud correctamente. Nuestro equipo técnico en Málaga la evaluará y te contactará por correo ({email}) en menos de 2 horas.",
+		successDesc: "Hola {name}, recibimos tu solicitud correctamente. Nuestro equipo técnico en Málaga la evaluará y te contactará por correo ({email}) lo antes posible.",
 		sendAnother: "Enviar otra solicitud",
 		nameLabel: "Nombre Completo *",
 		emailLabelInput: "Correo Electrónico *",
