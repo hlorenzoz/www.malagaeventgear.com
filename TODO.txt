@@ -145,5 +145,18 @@ En /packages/ hacer un directorio con los diferentes paquetes con la misma infor
 
 Actualizar todas las referencias existentes.
 
-Ten en cuenta que este proyecto es una migración de un sitio que está en producción y que tiene sus URLs propias, por lo que hay que implementar algún mecanismo donde se persistan todas las redirecciones permanentes (301) desde las URL antiguas a las nuevas. 
+Ten en cuenta que este proyecto es una migración de un sitio que está en producción y que tiene sus URLs propias, por lo que hay que implementar algún mecanismo donde se persistan todas las redirecciones permanentes (301) desde las URL antiguas a las nuevas.
+
+
+-- ✅ Performance páginas de paquete (CRO) + Forced reflow
+
+Optimización de performance de /packages/[slug]/ (críticas para conversión). Score mobile 71 -> muy mejorado.
+
+Aplicado (repo): inlineStyleThreshold 102400 (inline del CSS de ~83KB sin comprimir, cero render-blocking), defer de IntersectionObservers a rAF + eliminado el MutationObserver global, self-host de fuentes (woff2 latin) + preload de ambas + font-display: optional, fuera Google Fonts/gstatic. Commits: 355645b, de263ad, 010b714, 5e2d17f, 08aefd3.
+
+Forced reflow (Unscored): TODO lo del repo está resuelto y verificado (trace local 4x CPU + Slow 4G, incluso en frío/aislado, no lo reproduce; 0 patrones write->read de geometría en el código). El residual [unattributed] ~44ms es del EDGE de Cloudflare: el challenge-platform de Bot Fight Mode / JavaScript Detections (/cdn-cgi/challenge-platform/, "Private Access Token challenge"), cross-origin -> por eso [unattributed] y prod-only.
+
+PENDIENTE (Cloudflare dashboard, NO repo): si no se necesita -> Security > Bots > Bot Fight Mode: Off (y/o Security > Settings > JavaScript Detections: Off). Confirmar re-corriendo PageSpeed, o midiendo el mismo build en la URL *.workers.dev sin proxy naranja. Es Unscored: no afecta el score.
+
+Detalle completo en docs/forced-reflow-investigation.md
 
