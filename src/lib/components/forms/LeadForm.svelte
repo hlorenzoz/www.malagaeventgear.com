@@ -23,13 +23,13 @@
 	// Turnstile token (populated by CF callback)
 	let turnstileToken = $state('');
 
+	// Form root — used to lazy-load Turnstile only when the form approaches the viewport
+	let formEl = $state<HTMLElement | null>(null);
+
 	// Turnstile site key — gracefully absent in dev
 	const TURNSTILE_SITE_KEY = env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
-	// Mount Turnstile script once
-	$effect(() => {
-		if (!TURNSTILE_SITE_KEY || typeof window === 'undefined') return;
-
+	function injectTurnstileScript() {
 		// Expose callback for Turnstile managed widget
 		(window as unknown as Record<string, unknown>)['_tsCallback'] = (token: string) => {
 			turnstileToken = token;
@@ -43,6 +43,29 @@
 			script.setAttribute('data-turnstile', '1');
 			document.head.appendChild(script);
 		}
+	}
+
+	// Defer the Turnstile third-party script until the form nears the viewport. On package pages the
+	// form sits below the fold (mobile), so loading it eagerly competed with LCP for network/main-thread.
+	$effect(() => {
+		if (!TURNSTILE_SITE_KEY || typeof window === 'undefined' || !formEl) return;
+
+		if (!('IntersectionObserver' in window)) {
+			injectTurnstileScript();
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries.some((e) => e.isIntersecting)) {
+					injectTurnstileScript();
+					observer.disconnect();
+				}
+			},
+			{ rootMargin: '200px' }
+		);
+		observer.observe(formEl);
+		return () => observer.disconnect();
 	});
 
 	// Today in YYYY-MM-DD for min date attribute
@@ -148,6 +171,7 @@
 </script>
 
 <section
+	bind:this={formEl}
 	id="lead-form"
 	class="glass-panel rounded-2xl p-8 md:p-12 relative overflow-hidden scroll-mt-24"
 	aria-labelledby="lead-form-title"
