@@ -6,44 +6,6 @@
 	import { getHomepageFaqs, buildFaqSchema } from '$lib/data/faq';
 	import Icon from '$lib/components/navigation/Icon.svelte';
 
-	// Structured JSON-LD schema for Generative SEO
-	const homeSchema = {
-		'@context': 'https://schema.org',
-		'@type': 'LocalBusiness',
-		'name': 'Malaga Event Gear',
-		'image': 'https://www.malagaeventgear.com/screen.png',
-		'@id': 'https://www.malagaeventgear.com/#organization',
-		'url': 'https://www.malagaeventgear.com/',
-		'telephone': '+34600428750',
-		'priceRange': '$$',
-		'address': {
-			'@type': 'PostalAddress',
-			'streetAddress': 'Av. de Barcelona, 34',
-			'addressLocality': 'Malaga',
-			'postalCode': '29009',
-			'addressCountry': 'ES'
-		},
-		'geo': {
-			'@type': 'GeoCoordinates',
-			'latitude': 36.7212,
-			'longitude': -4.4217
-		},
-		'openingHoursSpecification': {
-			'@type': 'OpeningHoursSpecification',
-			'dayOfWeek': [
-				'Monday',
-				'Tuesday',
-				'Wednesday',
-				'Thursday',
-				'Friday',
-				'Saturday',
-				'Sunday'
-			],
-			'opens': '00:00',
-			'closes': '23:59'
-		}
-	};
-
 	// Cheapest package price for the "What does it cost?" answer (kept in sync with packages data)
 	let minPrice = $derived(Math.min(...packages.map((p) => p.price)));
 
@@ -145,8 +107,8 @@
 <SeoHead
 	title="Premium Audiovisual Equipment Rental in Malaga | MEG"
 	description="Malaga Event Gear (MEG) offers premium sound system, spectacular lighting, projector, and screen rentals for weddings, corporate events, and parties in Malaga."
-	canonicalUrl="https://www.malagaeventgear.com/"
-	jsonLdSchema={[homeSchema, buildFaqSchema(getHomepageFaqs())]}
+	canonicalUrl="https://malagaeventgear.com/"
+	jsonLdSchema={[buildFaqSchema(getHomepageFaqs())]}
 />
 
 <!-- Hero Section -->

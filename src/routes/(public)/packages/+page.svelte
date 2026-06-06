@@ -211,7 +211,7 @@
 <SeoHead
 	title="Rates & Tailored Rental Packages | MEG"
 	description="Discover our transparent rates and tailored sound, lighting, and screen rental packages in Malaga. Perfect options for weddings, corporate events, and parties."
-	canonicalUrl="https://www.malagaeventgear.com/packages"
+	canonicalUrl="https://malagaeventgear.com/packages"
 	image="/images/packages/wedding.webp"
 	jsonLdSchema={[pricingSchema, faqSchema]}
 />

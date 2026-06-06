@@ -14,20 +14,9 @@
 		'description': i18n.lang === 'en'
 			? 'Contact the technical team at Malaga Event Gear to request custom quotes for sound, lighting, and screen rentals.'
 			: 'Contactá al equipo técnico de Malaga Event Gear para solicitar presupuestos personalizados de alquiler de sonido, iluminación y pantallas.',
-		'url': 'https://www.malagaeventgear.com/contact',
-		'mainEntity': {
-			'@type': 'LocalBusiness',
-			'name': 'Malaga Event Gear',
-			'telephone': '+34600428750',
-			'email': 'contact@malagaeventgear.com',
-			'address': {
-				'@type': 'PostalAddress',
-				'streetAddress': 'Av. de Barcelona, 34',
-				'addressLocality': 'Malaga',
-				'postalCode': '29009',
-				'addressCountry': 'ES'
-			}
-		}
+		'url': 'https://malagaeventgear.com/contact',
+		// Referencia al nodo de organización global (#organization) para no duplicar la entidad.
+		'mainEntity': { '@id': 'https://malagaeventgear.com/#organization' }
 	});
 
 	// Reactive states managed by Svelte 5 Runes
@@ -105,7 +94,7 @@
 <SeoHead
 	title="Contact Us & Audiovisual Quotes | MEG"
 	description="Get in touch with Malaga Event Gear to request quotes for sound, lighting, and screen rentals. 24/7 technical support."
-	canonicalUrl="https://www.malagaeventgear.com/contact"
+	canonicalUrl="https://malagaeventgear.com/contact"
 	jsonLdSchema={[contactSchema, faqSchema]}
 />
 

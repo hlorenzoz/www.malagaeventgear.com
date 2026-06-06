@@ -6,12 +6,13 @@
 	import { onMount } from 'svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { page } from '$app/stores';
-	import { buildLocalBusinessSchema, buildBreadcrumbsSchema } from '$lib/utils/schema';
+	import { buildLocalBusinessSchema, buildBreadcrumbsSchema, buildWebSiteSchema } from '$lib/utils/schema';
 
 	let { children } = $props();
 
 	// Esquemas de datos estructurados globales
 	const localBusinessSchema = buildLocalBusinessSchema();
+	const webSiteSchema = buildWebSiteSchema();
 	const breadcrumbSchema = $derived(buildBreadcrumbsSchema($page.url.pathname));
 
 	onMount(() => {
@@ -94,6 +95,7 @@
 
 	<!-- Datos Estructurados Globales (SEO Técnico) -->
 	{@html `<script type="application/ld+json">${JSON.stringify(localBusinessSchema)}<\/script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(webSiteSchema)}<\/script>`}
 	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}<\/script>`}
 </svelte:head>
 

@@ -55,6 +55,21 @@ export function buildLocalBusinessSchema(): Record<string, any> {
 }
 
 /**
+ * Genera el nodo WebSite del grafo de entidades. Resuelve las referencias `@id .../#website`
+ * usadas por otras páginas (about-us, blog) y enlaza la publicación a la organización (#organization).
+ */
+export function buildWebSiteSchema(): Record<string, any> {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		'@id': `${siteConfig.url}/#website`,
+		'name': siteConfig.brandName,
+		'url': `${siteConfig.url}/`,
+		'publisher': { '@id': `${siteConfig.url}/#organization` }
+	};
+}
+
+/**
  * Genera el esquema de BreadcrumbList de manera dinámica basado en el path de la URL activa.
  * Respeta de forma estricta las trailing slashes.
  */
