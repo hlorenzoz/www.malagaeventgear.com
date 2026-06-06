@@ -95,7 +95,7 @@
 		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
 			{landing.badge[i18n.lang]}
 		</span>
-		<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg mb-6 text-on-background">
+		<h1 class="font-headline-lg-mobile md:font-headline-lg text-[40px] md:text-display-lg leading-tight mb-6 text-on-background">
 			{pkg.name}
 		</h1>
 		<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto leading-relaxed mb-10">
