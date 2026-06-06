@@ -58,30 +58,10 @@
 </script>
 
 <svelte:head>
-	<!-- Google Fonts (text only) — Asynchronous Non-blocking Preload Strategy.
-	     Material Symbols icon font removed: icons are now inline SVG via Icon.svelte. -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" />
-	<link id="gfonts-css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" media="print" />
-	<script>
-		// Activa la hoja de fuentes (print → all) tras el primer paint vía requestAnimationFrame,
-		// para que el recálculo de estilos que provoca no caiga en el render crítico (forced reflow).
-		try {
-			const activate = () => {
-				const linkFonts = document.getElementById('gfonts-css');
-				if (linkFonts) linkFonts.media = 'all';
-			};
-			if ('requestAnimationFrame' in window) {
-				requestAnimationFrame(activate);
-			} else {
-				activate();
-			}
-		} catch (_) {}
-	</script>
-	<noscript>
-		<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet" />
-	</noscript>
+	<!-- Fuentes self-hosted (woff2, latin). El @font-face vive en tailwind.css (inline en el <head>).
+	     Preload de Playfair Display: es la fuente del LCP (h1), así está lista antes del primer paint
+	     → sin swap-relayout (forced reflow) ni dependencia de fonts.gstatic.com. -->
+	<link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-display-latin-wght-normal.woff2" crossorigin="anonymous" />
 
 	<!-- Datos Estructurados Globales (SEO Técnico) -->
 	{@html `<script type="application/ld+json">${JSON.stringify(localBusinessSchema)}<\/script>`}

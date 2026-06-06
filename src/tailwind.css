@@ -9,6 +9,24 @@
   line-gap-override: 0%;
 }
 
+/* Self-hosted variable fonts (latin subset, woff2). Servidas desde /fonts con preload de Playfair
+   (fuente del LCP) → disponibles antes del primer paint, sin swap-relayout (forced reflow) ni
+   round-trip a fonts.gstatic.com. */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/playfair-display-latin-wght-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2-variations');
+}
+
 :root {
   color-scheme: dark;
   --background: #121414;

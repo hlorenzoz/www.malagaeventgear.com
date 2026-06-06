@@ -1,0 +1,4 @@
+# Cloudflare Workers Assets headers
+# Fuentes self-hosted: nombre de archivo estable + contenido fijo → cache inmutable de 1 año.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
