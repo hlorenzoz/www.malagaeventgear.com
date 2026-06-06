@@ -58,10 +58,12 @@
 </script>
 
 <svelte:head>
-	<!-- Fuentes self-hosted (woff2, latin). El @font-face vive en tailwind.css (inline en el <head>).
-	     Preload de Playfair Display: es la fuente del LCP (h1), así está lista antes del primer paint
-	     → sin swap-relayout (forced reflow) ni dependencia de fonts.gstatic.com. -->
+	<!-- Fuentes self-hosted (woff2, latin). El @font-face vive en tailwind.css (inline en el <head>),
+	     con font-display: optional → sin período de swap, por lo que la llegada tardía de una fuente
+	     NO re-hace layout (elimina el forced reflow [unattributed]). Preload de ambas (h1 + body) para
+	     maximizar la chance de que estén listas dentro de la ventana de bloqueo de `optional`. -->
 	<link rel="preload" as="font" type="font/woff2" href="/fonts/playfair-display-latin-wght-normal.woff2" crossorigin="anonymous" />
+	<link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-latin-wght-normal.woff2" crossorigin="anonymous" />
 
 	<!-- Datos Estructurados Globales (SEO Técnico) -->
 	{@html `<script type="application/ld+json">${JSON.stringify(localBusinessSchema)}<\/script>`}
