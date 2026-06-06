@@ -25,7 +25,13 @@ export function buildLocalBusinessSchema(): Record<string, any> {
 		'email': siteConfig.contactEmail,
 		'priceRange': '€€',
 		'foundingDate': siteConfig.foundingYear.toString(),
-		'sameAs': siteConfig.socials,
+		// sameAs = perfiles oficiales que confirman la identidad de la entidad (Google guidelines).
+		'sameAs': [
+			siteConfig.googleBusinessProfile,
+			siteConfig.onlinePresence.medium,
+			siteConfig.onlinePresence.pinterest,
+			siteConfig.listings.bingPlaces
+		],
 		'address': {
 			'@type': 'PostalAddress',
 			'streetAddress': siteConfig.address.streetAddress,

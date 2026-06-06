@@ -60,11 +60,9 @@ export const siteConfig = {
 		latitude: 36.7243,
 		longitude: -4.4373
 	},
-	socials: [
-		'https://share.google/NVAtkdc4y0WJyF8cJ', // Google My Business Profile (= googleBusinessProfile)
-		'https://g.page/r/Cc8g7neiciATEBM/review', // GMB Reviews (link específico para dejar reseña)
-		'https://wa.me/34600428750' // WhatsApp
-	],
+	// Link específico para DEJAR una reseña en GMB (no es un perfil de identidad → no va en sameAs).
+	// Lo consume el redirect /r/[token].
+	reviewUrl: 'https://g.page/r/Cc8g7neiciATEBM/review',
 	foundingYear: 1996,
 	categories: [
 		'Audio Visual Equipment Hire Service',

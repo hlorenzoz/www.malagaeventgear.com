@@ -14,7 +14,7 @@ import { siteConfig } from '$lib/data/site';
 
 export const prerender = false;
 
-const GMB_URL = siteConfig.socials[1]; // 'https://g.page/r/Cc8g7neiciATEBM/review'
+const GMB_URL = siteConfig.reviewUrl; // 'https://g.page/r/Cc8g7neiciATEBM/review'
 
 export const GET: RequestHandler = async ({ params, platform }) => {
 	const { token } = params;
