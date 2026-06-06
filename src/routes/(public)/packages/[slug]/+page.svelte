@@ -114,7 +114,7 @@
 	<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-16">
 		<div class="glass-panel rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
 			<!-- Price -->
-			<div class="flex items-baseline gap-3">
+			<div class="flex flex-wrap items-center gap-x-3 gap-y-2">
 				<span class="font-label-md text-on-surface-variant uppercase tracking-wider">
 					{landing.rateLabel[i18n.lang]}
 				</span>
