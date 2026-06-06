@@ -55,17 +55,27 @@
 			return;
 		}
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				if (entries.some((e) => e.isIntersecting)) {
-					injectTurnstileScript();
-					observer.disconnect();
-				}
-			},
-			{ rootMargin: '200px' }
-		);
-		observer.observe(formEl);
-		return () => observer.disconnect();
+		const el = formEl;
+		let observer: IntersectionObserver | null = null;
+		// Diferir el observe() al siguiente frame: medir la posición del form durante la hidratación
+		// fuerza layout sincrónico (forced reflow). Tras el primer paint es gratis.
+		const raf = requestAnimationFrame(() => {
+			observer = new IntersectionObserver(
+				(entries) => {
+					if (entries.some((e) => e.isIntersecting)) {
+						injectTurnstileScript();
+						observer?.disconnect();
+					}
+				},
+				{ rootMargin: '200px' }
+			);
+			observer.observe(el);
+		});
+
+		return () => {
+			cancelAnimationFrame(raf);
+			observer?.disconnect();
+		};
 	});
 
 	// Today in YYYY-MM-DD for min date attribute

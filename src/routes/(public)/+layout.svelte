@@ -4,6 +4,7 @@
 	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
 	import WhatsAppWidget from '$lib/components/navigation/WhatsAppWidget.svelte';
 	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 	import { i18n } from '$lib/i18n.svelte';
 	import { page } from '$app/stores';
 	import { buildLocalBusinessSchema, buildBreadcrumbsSchema, buildWebSiteSchema } from '$lib/utils/schema';
@@ -15,61 +16,44 @@
 	const webSiteSchema = buildWebSiteSchema();
 	const breadcrumbSchema = $derived(buildBreadcrumbsSchema($page.url.pathname));
 
+	const REVEAL_SELECTOR = '.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured';
+	let revealObserver: IntersectionObserver | null = null;
+
+	// Observa los elementos reveal aún sin observar. Se invoca SIEMPRE dentro de requestAnimationFrame
+	// (tras el primer paint) para que el cálculo de layout que dispara observe() no caiga en el camino
+	// crítico de la hidratación → evita forced reflow.
+	function scanRevealElements() {
+		if (!revealObserver) return;
+		document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => revealObserver!.observe(el));
+	}
+
 	onMount(() => {
 		// Inicializar i18n de forma segura en el cliente (evita desajustes de hidratación)
 		i18n.init();
 
-		// Inicialización de la animación de Scroll Reveal
-		const observerOptions = {
-			root: null,
-			rootMargin: '0px',
-			threshold: 0.1
-		};
-
-		const observer = new IntersectionObserver((entries, observer) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('active');
-					entry.target.classList.add('is-revealed');
-					observer.unobserve(entry.target);
-				}
-			});
-		}, observerOptions);
-
-		const observeRevealElements = (root: ParentNode = document) => {
-			const revealElements = root.querySelectorAll('.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured');
-			revealElements.forEach(el => observer.observe(el));
-		};
-
-		// Observar elementos iniciales
-		observeRevealElements();
-
-		// Observar cambios futuros en el DOM para nuevos elementos reveal
-		const mutationObserver = new MutationObserver((mutations) => {
-			mutations.forEach(mutation => {
-				mutation.addedNodes.forEach(node => {
-					if (node.nodeType === 1) { // Node.ELEMENT_NODE
-						const element = node as HTMLElement;
-						const selector = '.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured';
-						if (element.matches(selector)) {
-							observer.observe(element);
-						}
-						const nested = element.querySelectorAll(selector);
-						nested.forEach(el => observer.observe(el));
+		revealObserver = new IntersectionObserver(
+			(entries, observer) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('active', 'is-revealed');
+						observer.unobserve(entry.target);
 					}
 				});
-			});
-		});
+			},
+			{ root: null, rootMargin: '0px', threshold: 0.1 }
+		);
 
-		mutationObserver.observe(document.body, {
-			childList: true,
-			subtree: true
-		});
+		// Escaneo inicial diferido al siguiente frame (fuera del critical path).
+		requestAnimationFrame(scanRevealElements);
 
-		return () => {
-			mutationObserver.disconnect();
-			observer.disconnect();
-		};
+		return () => revealObserver?.disconnect();
+	});
+
+	// Re-escanear tras cada navegación SPA (contenido nuevo), también diferido. Reemplaza al
+	// MutationObserver global permanente, que provocaba layout thrashing durante la hidratación.
+	afterNavigate((nav) => {
+		if (nav.type === 'enter') return; // la carga inicial ya la cubre onMount
+		requestAnimationFrame(scanRevealElements);
 	});
 </script>
 
@@ -81,11 +65,17 @@
 	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" />
 	<link id="gfonts-css" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" media="print" />
 	<script>
-		// Safe client-side activation of stylesheets to avoid compiler conflicts with inline onload
+		// Activa la hoja de fuentes (print → all) tras el primer paint vía requestAnimationFrame,
+		// para que el recálculo de estilos que provoca no caiga en el render crítico (forced reflow).
 		try {
-			const linkFonts = document.getElementById('gfonts-css');
-			if (linkFonts) {
-				linkFonts.media = 'all';
+			const activate = () => {
+				const linkFonts = document.getElementById('gfonts-css');
+				if (linkFonts) linkFonts.media = 'all';
+			};
+			if ('requestAnimationFrame' in window) {
+				requestAnimationFrame(activate);
+			} else {
+				activate();
 			}
 		} catch (_) {}
 	</script>

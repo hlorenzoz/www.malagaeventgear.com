@@ -44,20 +44,24 @@
 		};
 
 		let observer: IntersectionObserver | null = null;
-		if (formEl) {
-			observer = new IntersectionObserver(
-				(entries) => {
-					formInView = entries[0].isIntersecting;
-				},
-				{ threshold: 0.15 }
-			);
-			observer.observe(formEl);
-		}
+		// Diferir el observe() al siguiente frame para no forzar layout durante la hidratación.
+		const raf = requestAnimationFrame(() => {
+			if (formEl) {
+				observer = new IntersectionObserver(
+					(entries) => {
+						formInView = entries[0].isIntersecting;
+					},
+					{ threshold: 0.15 }
+				);
+				observer.observe(formEl);
+			}
+		});
 
 		window.addEventListener('scroll', scrollHandler, { passive: true });
 		scrollHandler();
 
 		return () => {
+			cancelAnimationFrame(raf);
 			window.removeEventListener('scroll', scrollHandler);
 			observer?.disconnect();
 		};
