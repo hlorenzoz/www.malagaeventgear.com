@@ -1,0 +1,29 @@
+---
+title: "Welcome to the Malaga Event Gear Blog"
+description: "Your guide to professional audiovisual equipment rental in Malaga and the Costa del Sol. Expert tips on sound, lighting, and event production."
+author: "Hector Lorenzo"
+publishDate: "2025-01-15"
+categories:
+  - "Event Planning"
+tags:
+  - "malaga"
+  - "audiovisual"
+  - "events"
+excerpt: "Welcome to the MEG blog — your go-to resource for professional event production advice on the Costa del Sol."
+coverImage: "https://cdn.malagaeventgear.com/blog-media/2025/01/welcome-cover.webp"
+draft: false
+---
+
+We're thrilled to launch the official MEG blog, your go-to resource for professional audiovisual equipment rental advice in Malaga and the Costa del Sol.
+
+## What You'll Find Here
+
+From acoustic setup guides to lighting design blueprints, our technical team shares hard-won expertise from hundreds of events across Andalucía.
+
+### Topics We Cover
+
+- **Sound Systems**: High-fidelity setups for weddings, conferences, and parties
+- **Stage Lighting**: Romantic ambient lighting and professional stage rigs
+- **Projection**: Laser projectors and screens for corporate presentations
+
+Stay tuned for weekly technical guides from our team.

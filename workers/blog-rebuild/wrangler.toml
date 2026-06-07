@@ -1,0 +1,9 @@
+name = "meg-blog-rebuild"
+main = "src/index.ts"
+compatibility_date = "2024-05-02"
+
+[triggers]
+crons = ["0 6 * * *"]   # 06:00 UTC daily (07:00 CET / 08:00 CEST) — before business hours in Spain
+
+# Secrets (set via: wrangler secret put DEPLOY_HOOK_URL --name meg-blog-rebuild)
+# DEPLOY_HOOK_URL = "https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/..."  ← do not commit

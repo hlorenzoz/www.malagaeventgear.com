@@ -7,6 +7,21 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (wp-blog-migration)
+- **Native mdsvex Blog System**: Implemented a full native blog replacing the WordPress placeholder page. Posts live in `src/content/blog/*.svx` (mdsvex format), validated by `BlogPostSchema` (Zod), read at build time via `import.meta.glob`.
+- **4 Blog Routes (prerendered)**: `/blog/` (index), `/blog/[slug]/` (post detail), `/blog/category/[category]/` (taxonomy), `/blog/author/[author]/` (author landing). All use `prerender = true` + `entries()` generator.
+- **3 Blog Sitemaps**: `post-sitemap.xml` (with `<image:image>` blocks), `category-sitemap.xml`, `author-sitemap.xml`. `<lastmod>` driven by `updated ?? publishDate`.
+- **BlogPost Layout** (`src/lib/layouts/BlogPost.svelte`): Svelte 5 runes, `buildArticleSchema()`, `<SeoHead>`, cover image, category/author links. Receives `BlogPost` object as prop (not mdsvex layout props — ADR-009: `$$props` incompatible with runes mode).
+- **Taxonomy Data Layer** (`src/lib/data/blog.ts` + `blog-pipeline.ts`): `getCategories()`, `getPostsByCategory()`, `getAuthors()`, `getPostsByAuthor()`. Pure pipeline separated for Vitest testability.
+- **`slugify` utility** (`src/lib/utils/slugify.ts`): unicode-safe (NFD + `\p{Mn}` strip), shared by data layer and migration script.
+- **WP → mdsvex Migration Script** (`scripts/migrate-wp/`): 10-module orchestrator; paginated WP REST API; R2 upload via wrangler CLI; HTML→Markdown (turndown + linkedom h1-demote); URL rewriting with variant map; idempotent manifest; HTML-entity decoding for WP non-rendered fields. Dry-run confirmed: 75 posts, 6 categories, 1 author, no slug collisions.
+- **Authoring Helpers**: `scripts/post-new.ts` (scaffold `.svx` with valid frontmatter, validated against `BlogPostSchema`), `scripts/post-touch.ts` (update `updated` field).
+- **Justfile Recipes**: `post-new`, `post-touch`, `migrate-wp-dry-run`, `migrate-wp-run`, `blog-rebuild-deploy`.
+- **Scheduling Cron Worker** (`workers/blog-rebuild/`): fires daily at 08:00 UTC; POSTs to `DEPLOY_HOOK_URL`; throws on non-2xx. Enables build-time `publishDate` filter (ADR-004) to publish scheduled posts automatically.
+- **Documentation**: `.agents/WP_MIGRATION.md` (step-by-step runbook including cross-account R2 gotcha), `docs/blog-architecture.md` (technical reference: mdsvex ADRs, data layer, scheduling latency, R2 CDN, HTML-entity gotcha).
+- **AGENTS.md updated**: MDX references replaced with mdsvex (.svx); "Blog Content Authoring" section added.
+- **205 tests green** (198 existing + 7 new for `post-touch` pure logic).
+
 ### Changed
 - **Integrated Lead Capture in Package Details**: Refactored the `/packages/[slug]/` template (`src/routes/(public)/packages/[slug]/+page.svelte`) to replace standard CTAs with the custom `<LeadForm />` component, optimizing CRO.
 - **Responsive Packages Catalog Image Delivery**: Generated optimized mobile crop (`*-mobile.webp` at 400x190) and desktop crop (`*-desktop.webp` at 800x380) WebP variants for all catalog packages, cutting mobile image sizes from 117.5 KiB to under 22.7 KiB (an **81% reduction** in image payload) and desktop sizes to under 65.5 KiB. Refactored card lists on `/packages/` and `/packages/[slug]/` to serve them conditionally inside responsive `<picture>` elements, achieving maximum LCP improvement and zero Cumulative Layout Shift (CLS).

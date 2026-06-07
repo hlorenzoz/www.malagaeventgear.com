@@ -83,3 +83,28 @@ deploy:
 deploy-worker:
     cd workers/review-reminders && bunx wrangler deploy
 
+# ─── Blog: authoring helpers y migration ──────────────────────────────────────
+# Requiere CLI autenticada en la cuenta correcta para los comandos de R2/deploy.
+# Detalle completo del proceso de migración en .agents/WP_MIGRATION.md
+
+# Crea un nuevo post de blog (.svx) de forma interactiva — pide título, categoría y autor
+post-new:
+    bun scripts/post-new.ts
+
+# Marca un post existente como modificado hoy (actualiza el campo `updated` en el frontmatter)
+post-touch slug:
+    bun scripts/post-touch.ts {{slug}}
+
+# Migración WP → mdsvex en modo DRY-RUN (solo lectura — no escribe archivos ni sube a R2)
+migrate-wp-dry-run:
+    bun scripts/migrate-wp/index.ts --dry-run
+
+# Migración WP → mdsvex REAL (descarga imágenes, sube a R2, emite .svx)
+# ⚠ Asegurate de haber corrido primero: just migrate-wp-dry-run
+migrate-wp-run:
+    bun scripts/migrate-wp/index.ts
+
+# Despliega el cron worker de rebuild del blog (second deploy target)
+blog-rebuild-deploy:
+    cd workers/blog-rebuild && bunx wrangler deploy
+

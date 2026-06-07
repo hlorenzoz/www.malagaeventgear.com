@@ -1,0 +1,18 @@
+---
+title: "Draft Post Test Fixture"
+description: "This is a draft post used as a test fixture. It should never appear on the blog index or sitemaps."
+author: "Hector Lorenzo"
+publishDate: "2025-01-01"
+categories:
+  - "Event Planning"
+tags:
+  - "fixture"
+  - "draft"
+excerpt: "This fixture post has draft:true and should be excluded from all public outputs."
+coverImage: "https://cdn.malagaeventgear.com/blog-media/fixtures/draft-cover.webp"
+draft: true
+---
+
+This post has `draft: true` and should never be included in any public output — not the index, not sitemaps, not category/author pages.
+
+It exists to verify the draft filtering logic.

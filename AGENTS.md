@@ -11,7 +11,7 @@
 1. **Migración del sitio web en WordPress a SvelteKit**: [malagaeventgear.com](https://malagaeventgear.com/)
    - **Páginas**: Migración de todas las páginas del sitio web actual (incluyendo las páginas legales, etc.).
    - **Migración de imágenes**: Transferencia y optimización de imágenes a Cloudflare CDN.
-   - **Migración de todos los posts**: Migración en formato MDX de todos los posts detallados en el [sitemap](https://malagaeventgear.com/sitemap_index.xml).
+   - **Migración de todos los posts**: Migración en formato mdsvex (.svx) de todos los posts detallados en el [sitemap](https://malagaeventgear.com/sitemap_index.xml).
 
 2. **Creación / actualización de contenido**
 
@@ -27,7 +27,7 @@ Toda la información institucional, catálogo de equipos, áreas de servicio log
 
 ## Stack Tecnológico
 - **Frontend/Fullstack:** SvelteKit (Client-side routing para el dashboard, SSR/Prerendering para la web pública).
-- **Procesamiento de Contenido:** MDsveX (Markdown + Svelte) para el blog.
+- **Procesamiento de Contenido:** mdsvex (.svx — Markdown + Svelte) para el blog.
 - **Base de Datos:** Cloudflare D1 (SQLite) - Usaremos Drizzle ORM en el futuro.
 - **Almacenamiento/CDN:** Cloudflare R2 / Cloudflare Images.
 - **Entorno:** Node.js (desarrollo) -> Cloudflare Edge (producción).
@@ -117,13 +117,13 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
 - Las directrices técnicas de arquitectura y optimización SEO (cero errores de rastreo, inyección JSON-LD estructurado, optimización de imágenes y rendimiento LCP) se han consolidado y se mantienen bajo control estricto en **[SEO.md](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/SEO.md)**. Es obligatorio que el desarrollador/asistente de IA consulte y aplique dichas directrices para toda ruta pública del sitio.
 - **Estandarización de URLs**: Cada URL interna debe terminar estrictamente en `/` (trailing slash) (por ejemplo, `/packages/`, `/about-us/`, `/contact-us/`). Esto es mandatorio para garantizar la consistencia en el rastreo SEO, evitar duplicidad de contenido y alinear la navegación.
 - **Estrategia de Datos Estructurados Obligatoria**: Cada página pública debe llevar sus datos estructurados correspondientes según su tipo de contenido, tal y como se detalla en **[.agents/STRUCTURED_DATA.md](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/.agents/STRUCTURED_DATA.md)**. Todos los metadatos deben provenir de la configuración única en `src/lib/data/site.ts` y generarse mediante el helper unificado `src/lib/utils/schema.ts` para evitar la duplicación de datos. El layout principal público gestiona automáticamente los esquemas globales (`LocalBusiness` y el `BreadcrumbList` dinámico), mientras que las páginas específicas inyectan sus esquemas locales correspondientes (`Service`, `ItemList`, `FAQPage`, `Article`) mediante el componente unificado `SeoHead.svelte`.
-- **Actualización Obligatoria de Sitemaps**: Cada vez que se cree, actualice o elimine una página, ruta dinámica de catálogo o artículo de blog (MDX), es estrictamente mandatorio verificar y actualizar su endpoint de sitemap XML correspondiente (ej. `page-sitemap.xml`, `post-sitemap.xml`) para asegurar la indexación inmediata y la consistencia en el presupuesto de rastreo de Google.
+- **Actualización Obligatoria de Sitemaps**: Cada vez que se cree, actualice o elimine una página, ruta dinámica de catálogo o artículo de blog (.svx), es estrictamente mandatorio verificar y actualizar su endpoint de sitemap XML correspondiente (ej. `page-sitemap.xml`, `post-sitemap.xml`) para asegurar la indexación inmediata y la consistencia en el presupuesto de rastreo de Google.
 
 
 ### 3. Restricciones de Cloudflare
 - El proyecto utiliza `@sveltejs/adapter-cloudflare`.
 - **No uses APIs específicas de Node.js** (como `fs`, `path`, `crypto` nativo de node) en los archivos `+page.server.ts` que se ejecutarán en SSR, ya que fallarán en el entorno Edge de Cloudflare Workers. Usa las Web APIs estándar (Fetch, Crypto, URL, etc.).
-- Las lecturas de archivos MDX se harán estrictamente en tiempo de compilación (Prerendering) utilizando las importaciones de Vite (`import.meta.glob`).
+- Las lecturas de archivos mdsvex (.svx) se harán estrictamente en tiempo de compilación (Prerendering) utilizando las importaciones de Vite (`import.meta.glob`).
 
 ### 4. Flujo de Trabajo y Estilo
 - **Idiomas:** El código fuente (variables, funciones, componentes) y la interfaz de usuario (UI) de la parte pública deben escribirse **únicamente en idioma inglés** por el momento. Sin embargo, se debe diseñar y crear la estructura de traducción a futuro (localización/i18n) de forma que sea escalable y compatible con Cloudflare Workers. Los comentarios, la documentación y los commits pueden seguir escribiéndose en español.
@@ -153,3 +153,74 @@ Las directrices visuales completas (paleta de colores, tipografía, espaciado, c
   2. **Usar `chrome-devtools-mcp`** para la medición real en navegador (performance traces, Core Web Vitals, forced reflows, render-blocking, network). El servidor está configurado en [.mcp.json](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/.mcp.json); si no está disponible, instalarlo.
   3. **Validar contra `.lighthouserc.json`** ejecutando `bunx @lhci/cli autorun` (levanta `bun run preview` y audita todas las páginas públicas) antes de dar por cerrada cualquier tarea de performance.
 - **Prohibido optimizar a ciegas:** No se aplican cambios de performance basados solo en intuición; toda optimización debe partir de una medición (`chrome-devtools-mcp` / `lighthouse`) y verificarse con otra medición posterior.
+
+---
+
+## Blog Content Authoring
+
+El blog usa **mdsvex** con archivos `.svx` (Markdown + Svelte). No es MDX — es `.svx`.
+
+### Dónde viven los posts
+
+Todos los posts están en `src/content/blog/*.svx`. Un archivo = un post.
+El slug del post se deriva del nombre del archivo (sin extensión).
+
+### Cómo crear un nuevo post
+
+```bash
+just post-new
+# o con argumentos:
+bun scripts/post-new.ts --title "Mi Post" --category "Events" --author "Hector Luis Lorenzo"
+```
+
+Esto crea `src/content/blog/<slug>.svx` con frontmatter válido y `draft: true`.
+
+### Semántica de fechas
+
+| Campo | Cuándo usarlo |
+|-------|--------------|
+| `publishDate` | Fecha de primera publicación — cuándo el post aparece en el sitio. **Inmutable** después del primer deploy. |
+| `updated` | Última modificación significativa. Actualizar con `just post-touch <slug>`. **Drives sitemap lastmod.** |
+
+No existe un campo `date` en el schema — `publishDate` es la fecha de creación/publicación.
+
+### Reglas del body
+
+1. **NO repetir el título como `<h1>`** — el layout (`BlogPost.svelte`) ya lo renderiza.
+2. Empezar directamente con el contenido (párrafo o `## Subtítulo`).
+3. Las imágenes deben estar en R2 (`cdn.malagaeventgear.com`) o ser URLs absolutas.
+
+### Campos requeridos del frontmatter
+
+```yaml
+title: "Título del post"               # requerido, min 1 char
+description: "Descripción SEO..."      # requerido, min 10 chars
+author: "Hector Luis Lorenzo"          # display name (no slug)
+publishDate: "2026-06-07"              # YYYY-MM-DD
+excerpt: "Resumen visible..."          # requerido, min 10 chars — aparece en listados
+coverImage: "https://cdn.malagaeventgear.com/..."  # requerido — URL completa
+categories:                            # array de strings (display names)
+  - "Events"
+tags: []
+draft: true                            # cambiar a false para publicar
+```
+
+### Publicar un draft
+
+1. Cambiar `draft: true` → `draft: false` en el frontmatter
+2. `git commit` + `git push` → CI trigger → rebuild automático
+
+### Post schedulado (publicación futura)
+
+Poner `publishDate` en el futuro. El post no aparecerá hasta que un build corra después
+de esa fecha. El cron worker (`workers/blog-rebuild/`) hace un rebuild diario a las 08:00 UTC.
+
+### Marcar un post como actualizado
+
+```bash
+just post-touch mi-post-slug
+# Actualiza el campo `updated` en el frontmatter a la fecha de hoy
+```
+
+Documentación técnica completa: [`docs/blog-architecture.md`](docs/blog-architecture.md)
+Runbook de migración WP: [`.agents/WP_MIGRATION.md`](.agents/WP_MIGRATION.md)

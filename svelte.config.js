@@ -15,8 +15,15 @@ const config = {
 		// paquete (primera visita desde ads, sin caché → conversión).
 		inlineStyleThreshold: 102400
 	},
-	preprocess: [mdsvex({ extensions: ['.mdx', '.svx', '.md'] })],
-	extensions: ['.svelte', '.mdx', '.svx', '.md']
+	preprocess: [
+		mdsvex({
+			extensions: ['.svx']
+			// No layout option — mdsvex layout injection uses $$props which is
+			// incompatible with runes mode. The [slug]/+page.svelte wraps post
+			// components explicitly via BlogPost.svelte instead (ADR-009 approach).
+		})
+	],
+	extensions: ['.svelte', '.svx']
 };
 
 export default config;

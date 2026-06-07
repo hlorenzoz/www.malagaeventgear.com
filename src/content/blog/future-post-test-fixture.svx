@@ -1,0 +1,17 @@
+---
+title: "Future Post Test Fixture"
+description: "This is a future-dated post used as a test fixture. It should not appear on the blog index at build time."
+author: "Hector Lorenzo"
+publishDate: "2099-12-31"
+categories:
+  - "Event Planning"
+tags:
+  - "fixture"
+excerpt: "This fixture post has a future publishDate and should be excluded from all public outputs at build time."
+coverImage: "https://cdn.malagaeventgear.com/blog-media/fixtures/future-cover.webp"
+draft: false
+---
+
+This post has a `publishDate` of 2099-12-31 and should be excluded from all public outputs (index, sitemaps, entries generators) at build time.
+
+It exists to verify the scheduled-post filtering logic.

@@ -1,0 +1,262 @@
+import { test, expect } from '@playwright/test';
+
+/**
+ * Blog E2E Tests — Phase 2 (Routes) + Phase 3 (Sitemaps)
+ *
+ * These tests run against the dev server (bun run dev) as configured in playwright.config.ts.
+ * Fixture posts in src/content/blog/ provide test data:
+ *   - welcome-to-meg-blog.svx        (published, category: Event Planning, author: hector-lorenzo)
+ *   - wedding-sound-guide.svx        (published, categories: Weddings + Sound Acoustics)
+ *   - future-post-test-fixture.svx   (publishDate: 2099-12-31 — must be excluded)
+ *   - draft-post-test-fixture.svx    (draft: true — must be excluded)
+ */
+
+test.describe('Blog Index (/blog/)', () => {
+	test('SC-BC-01: returns 200 and shows at least one post card', async ({ page }) => {
+		const response = await page.goto('/blog/');
+		expect(response?.status()).toBe(200);
+		// At least one article/post card should be visible
+		const cards = page.locator('[data-testid="post-card"]');
+		await expect(cards.first()).toBeVisible();
+	});
+
+	test('SC-BC-07: does not contain migration notice text', async ({ page }) => {
+		await page.goto('/blog/');
+		// "Transitioning" (EN) should not appear — migration notice removed
+		const body = await page.content();
+		expect(body.toLowerCase()).not.toContain('transitioning');
+	});
+
+	test('SC-TAX-15: category badges link to /blog/category/*/', async ({ page }) => {
+		await page.goto('/blog/');
+		// Category links from post cards should point to /blog/category/<slug>/
+		const catLink = page.locator('[data-testid="post-card"] a[href^="/blog/category/"]').first();
+		await expect(catLink).toBeVisible();
+		const href = await catLink.getAttribute('href');
+		expect(href).toMatch(/^\/blog\/category\/[a-z0-9-]+\/$/);
+	});
+
+	test('SC-BC-11: EN chrome text is shown (default language)', async ({ page }) => {
+		await page.goto('/blog/');
+		// The blog heading or section label should be in English
+		const content = await page.content();
+		// The blog page should have English text (default lang = 'en')
+		// We check for the blog section label or heading text
+		expect(content).toMatch(/blog|knowledge|inspiration/i);
+	});
+
+	test('future-dated post is NOT shown on /blog/', async ({ page }) => {
+		await page.goto('/blog/');
+		const content = await page.content();
+		// future-post-test-fixture should not appear
+		expect(content).not.toContain('Future Post Test Fixture');
+	});
+
+	test('draft post is NOT shown on /blog/', async ({ page }) => {
+		await page.goto('/blog/');
+		const content = await page.content();
+		expect(content).not.toContain('Draft Post Test Fixture');
+	});
+
+	test('published posts are shown on /blog/', async ({ page }) => {
+		await page.goto('/blog/');
+		const content = await page.content();
+		expect(content).toContain('Welcome to the Malaga Event Gear Blog');
+	});
+});
+
+test.describe('Blog Post Route (/blog/[slug]/)', () => {
+	test('SC-BC-08: post route returns 200 with correct h1', async ({ page }) => {
+		const response = await page.goto('/blog/welcome-to-meg-blog/');
+		expect(response?.status()).toBe(200);
+		// BlogPost.svelte renders the title as the first h1 in the post header
+		const h1 = page.locator('header h1').first();
+		await expect(h1).toContainText('Welcome to the Malaga Event Gear Blog');
+	});
+
+	test('SC-BC-10: post page has BlogPosting JSON-LD schema', async ({ page }) => {
+		await page.goto('/blog/welcome-to-meg-blog/');
+		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+		const hasArticle = scripts.some((s) => {
+			try {
+				const obj = JSON.parse(s);
+				return obj['@type'] === 'BlogPosting';
+			} catch {
+				return false;
+			}
+		});
+		expect(hasArticle).toBe(true);
+	});
+
+	test('SC-BC-09: unknown slug returns 404', async ({ page }) => {
+		const response = await page.goto('/blog/this-slug-does-not-exist/');
+		expect(response?.status()).toBe(404);
+	});
+
+	test('SC-TAX-16: author name links to /blog/author/<slug>/', async ({ page }) => {
+		await page.goto('/blog/welcome-to-meg-blog/');
+		const authorLink = page.locator('a[href^="/blog/author/"]').first();
+		await expect(authorLink).toBeVisible();
+		const href = await authorLink.getAttribute('href');
+		expect(href).toMatch(/^\/blog\/author\/[a-z0-9-]+\/$/);
+	});
+
+	test('SC-TAX-17: category tags link to /blog/category/<slug>/', async ({ page }) => {
+		await page.goto('/blog/welcome-to-meg-blog/');
+		const catLink = page.locator('a[href^="/blog/category/"]').first();
+		await expect(catLink).toBeVisible();
+		const href = await catLink.getAttribute('href');
+		expect(href).toMatch(/^\/blog\/category\/[a-z0-9-]+\/$/);
+	});
+});
+
+test.describe('Category Landing (/blog/category/[category]/)', () => {
+	test('SC-TAX-04: category page returns 200 and lists posts', async ({ page }) => {
+		const response = await page.goto('/blog/category/weddings/');
+		expect(response?.status()).toBe(200);
+		const cards = page.locator('[data-testid="post-card"]');
+		await expect(cards.first()).toBeVisible();
+	});
+
+	test('SC-TAX-06: canonical URL has trailing slash', async ({ page }) => {
+		await page.goto('/blog/category/weddings/');
+		const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+		expect(canonical).toMatch(/\/blog\/category\/weddings\/$/);
+	});
+
+	test('SC-TAX-07: CollectionPage JSON-LD is present', async ({ page }) => {
+		await page.goto('/blog/category/weddings/');
+		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+		const hasCollection = scripts.some((s) => {
+			try {
+				const obj = JSON.parse(s);
+				return obj['@type'] === 'CollectionPage';
+			} catch {
+				return false;
+			}
+		});
+		expect(hasCollection).toBe(true);
+	});
+
+	test('SC-TAX-05: unknown category returns 404', async ({ page }) => {
+		const response = await page.goto('/blog/category/nonexistent-category-xyz/');
+		expect(response?.status()).toBe(404);
+	});
+});
+
+test.describe('Author Landing (/blog/author/[author]/)', () => {
+	test('SC-TAX-11: author page returns 200 and shows posts', async ({ page }) => {
+		const response = await page.goto('/blog/author/hector-lorenzo/');
+		expect(response?.status()).toBe(200);
+		const cards = page.locator('[data-testid="post-card"]');
+		await expect(cards.first()).toBeVisible();
+	});
+
+	test('SC-TAX-13: canonical URL has trailing slash', async ({ page }) => {
+		await page.goto('/blog/author/hector-lorenzo/');
+		const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+		expect(canonical).toMatch(/\/blog\/author\/hector-lorenzo\/$/);
+	});
+
+	test('SC-TAX-14: CollectionPage JSON-LD present', async ({ page }) => {
+		await page.goto('/blog/author/hector-lorenzo/');
+		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+		const hasCollection = scripts.some((s) => {
+			try {
+				const obj = JSON.parse(s);
+				return obj['@type'] === 'CollectionPage';
+			} catch {
+				return false;
+			}
+		});
+		expect(hasCollection).toBe(true);
+	});
+
+	test('SC-TAX-12: unknown author returns 404', async ({ page }) => {
+		const response = await page.goto('/blog/author/nobody-xyz-does-not-exist/');
+		expect(response?.status()).toBe(404);
+	});
+});
+
+test.describe('Post Sitemap (/post-sitemap.xml)', () => {
+	test('SC-SM-01: returns 200 with XML content-type and at least one <url>', async ({ page }) => {
+		const response = await page.goto('/post-sitemap.xml');
+		expect(response?.status()).toBe(200);
+		const contentType = response?.headers()['content-type'];
+		expect(contentType).toContain('application/xml');
+		const body = await page.content();
+		expect(body).toContain('<url>');
+	});
+
+	test('SC-SM-02: post URL uses trailing slash', async ({ page }) => {
+		await page.goto('/post-sitemap.xml');
+		const body = await page.content();
+		expect(body).toContain('<loc>https://malagaeventgear.com/blog/welcome-to-meg-blog/</loc>');
+	});
+
+	test('SC-SM-05: draft posts are excluded', async ({ page }) => {
+		await page.goto('/post-sitemap.xml');
+		const body = await page.content();
+		expect(body).not.toContain('draft-post-test-fixture');
+	});
+
+	test('SC-SM-06: future-dated posts are excluded', async ({ page }) => {
+		await page.goto('/post-sitemap.xml');
+		const body = await page.content();
+		expect(body).not.toContain('future-post-test-fixture');
+	});
+
+	test('SC-SM-07: posts with coverImage include <image:image> block', async ({ page }) => {
+		await page.goto('/post-sitemap.xml');
+		const body = await page.content();
+		expect(body).toContain('<image:image>');
+		expect(body).toContain('<image:loc>');
+	});
+
+	test('SC-SM-10: Content-Type header is application/xml', async ({ page }) => {
+		const response = await page.goto('/post-sitemap.xml');
+		const ct = response?.headers()['content-type'];
+		expect(ct).toContain('application/xml');
+	});
+});
+
+test.describe('Category Sitemap (/category-sitemap.xml)', () => {
+	test('SC-SM-08: returns 200 with category URLs', async ({ page }) => {
+		const response = await page.goto('/category-sitemap.xml');
+		expect(response?.status()).toBe(200);
+		const body = await page.content();
+		expect(body).toContain('/blog/category/');
+	});
+
+	test('SC-SM-08: category URL uses trailing slash', async ({ page }) => {
+		await page.goto('/category-sitemap.xml');
+		const body = await page.content();
+		// Each loc should end with /
+		const matches = body.match(/<loc>([^<]+)<\/loc>/g) ?? [];
+		const catLocs = matches.filter((m) => m.includes('/blog/category/'));
+		expect(catLocs.length).toBeGreaterThan(0);
+		catLocs.forEach((loc) => {
+			expect(loc).toMatch(/\/blog\/category\/[a-z0-9-]+\/<\/loc>$/);
+		});
+	});
+});
+
+test.describe('Author Sitemap (/author-sitemap.xml)', () => {
+	test('SC-SM-09: returns 200 with author URLs', async ({ page }) => {
+		const response = await page.goto('/author-sitemap.xml');
+		expect(response?.status()).toBe(200);
+		const body = await page.content();
+		expect(body).toContain('/blog/author/');
+	});
+
+	test('SC-SM-09: author URL uses trailing slash', async ({ page }) => {
+		await page.goto('/author-sitemap.xml');
+		const body = await page.content();
+		const matches = body.match(/<loc>([^<]+)<\/loc>/g) ?? [];
+		const authorLocs = matches.filter((m) => m.includes('/blog/author/'));
+		expect(authorLocs.length).toBeGreaterThan(0);
+		authorLocs.forEach((loc) => {
+			expect(loc).toMatch(/\/blog\/author\/[a-z0-9-]+\/<\/loc>$/);
+		});
+	});
+});

@@ -1,0 +1,40 @@
+---
+title: "The Complete Wedding Sound Guide for Malaga Venues"
+description: "Everything you need to know about setting up professional sound for your wedding in Malaga. Venue acoustics, speaker placement, and wireless microphone tips."
+author: "Hector Lorenzo"
+publishDate: "2025-03-10"
+updated: "2025-05-01"
+categories:
+  - "Weddings"
+  - "Sound Acoustics"
+tags:
+  - "wedding"
+  - "sound"
+  - "malaga"
+  - "acoustics"
+excerpt: "A comprehensive guide to professional wedding sound in Malaga venues, covering speaker placement, wireless systems, and acoustic considerations."
+coverImage: "https://cdn.malagaeventgear.com/blog-media/2025/03/wedding-sound-cover.webp"
+draft: false
+---
+
+Getting the sound right at a wedding is critical — nothing kills the atmosphere faster than feedback from a microphone or muffled vows that guests can't hear.
+
+## Understanding Venue Acoustics
+
+Malaga's most popular wedding venues — from historic cortijos to beachfront terraces — each present unique acoustic challenges.
+
+### Outdoor Venues
+
+Outdoor spaces on the Costa del Sol require powerful speaker arrays to overcome ambient noise from wind and sea. We recommend:
+
+- A minimum of 2kW total output for ceremonies of 100+ guests
+- Delay towers for long garden layouts
+- Directional cardioid microphones for officiants
+
+### Indoor Venues
+
+Stone and marble interiors common in historic Malaga venues create significant reverberation. Counter-intuitively, this calls for *less* speaker output at higher quality rather than more volume.
+
+## Wireless Microphone Systems
+
+For weddings, we exclusively use UHF digital wireless systems operating on frequencies cleared by CNAF in Spain.
