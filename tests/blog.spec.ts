@@ -27,6 +27,33 @@ test.describe('Blog Index (/blog/)', () => {
 		expect(body.toLowerCase()).not.toContain('transitioning');
 	});
 
+	test('Core Clusters section: heading, 6 clusters, and both CTAs are present', async ({ page }) => {
+		await page.goto('/blog/');
+
+		// Scope to the clusters section (cluster labels overlap with post category badges elsewhere)
+		const section = page.locator('[data-testid="blog-clusters"]');
+		await expect(section).toBeVisible();
+
+		// Heading
+		await expect(section.getByRole('heading', { name: 'Core Clusters We Cover' })).toBeVisible();
+
+		// 6 cluster labels
+		for (const label of [
+			'Weddings',
+			'Corporate AV',
+			'Sound Acoustics',
+			'Scenic Lights',
+			'Laser Projection',
+			'Private Parties'
+		]) {
+			await expect(section.getByText(label, { exact: true })).toBeVisible();
+		}
+
+		// CTAs with correct destinations
+		await expect(section.locator('a[href="/contact/"]', { hasText: 'Get Technical Advice' })).toBeVisible();
+		await expect(section.locator('a[href="/packages/"]', { hasText: 'Explore Packages' })).toBeVisible();
+	});
+
 	test('SC-TAX-15: category badges link to /blog/category/*/', async ({ page }) => {
 		await page.goto('/blog/');
 		// Category links from post cards should point to /blog/category/<slug>/

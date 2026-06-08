@@ -1,8 +1,19 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { slugify } from '$lib/utils/slugify';
 	import type { PageData } from './$types';
+
+	// Clusters temáticos que cubre el blog (decorativos, fieles al diseño original).
+	const clusters = [
+		{ icon: 'favorite', en: 'Weddings', es: 'Bodas' },
+		{ icon: 'business', en: 'Corporate AV', es: 'MICE Corporativo' },
+		{ icon: 'speaker', en: 'Sound Acoustics', es: 'Acústica y Sonido' },
+		{ icon: 'highlight', en: 'Scenic Lights', es: 'Luces Escénicas' },
+		{ icon: 'videocam', en: 'Laser Projection', es: 'Proyección Láser' },
+		{ icon: 'celebration', en: 'Private Parties', es: 'Fiestas Privadas' }
+	];
 
 	let { data }: { data: PageData } = $props();
 
@@ -139,4 +150,43 @@
 			{/each}
 		</div>
 	{/if}
+</section>
+
+<!-- Core Clusters We Cover + CTAs -->
+<section data-testid="blog-clusters" class="px-margin-mobile md:px-margin-desktop py-16 md:py-24 max-w-4xl mx-auto border-t border-border-glass">
+	<div class="relative flex flex-col items-center text-center">
+		<!-- Ambient glow -->
+		<div class="absolute -inset-x-10 -top-10 h-64 bg-electric-blue rounded-full blur-[160px] opacity-10 pointer-events-none"></div>
+
+		<h2 class="relative z-10 font-label-sm text-electric-blue uppercase tracking-widest mb-8">
+			{i18n.lang === 'en' ? 'Core Clusters We Cover' : 'Temáticas Principales que Cubrimos'}
+		</h2>
+
+		<div class="relative z-10 w-full grid grid-cols-2 md:grid-cols-3 gap-4">
+			{#each clusters as cluster}
+				<div class="p-6 rounded-2xl bg-surface-container-low border border-border-glass backdrop-blur-md flex flex-col items-center gap-3 hover:border-electric-blue/40 transition-colors duration-300">
+					<Icon name={cluster.icon} size="28" className="text-on-surface" />
+					<span class="font-label-sm text-on-surface">
+						{i18n.lang === 'en' ? cluster.en : cluster.es}
+					</span>
+				</div>
+			{/each}
+		</div>
+
+		<div class="relative z-10 flex flex-col sm:flex-row items-center gap-4 mt-12 w-full justify-center">
+			<a
+				href="/contact/"
+				class="w-full sm:w-auto px-8 py-3 rounded-full bg-electric-blue-strong text-white font-label-lg uppercase tracking-wider hover:shadow-lg hover:shadow-electric-blue/30 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2"
+			>
+				{i18n.lang === 'en' ? 'Get Technical Advice' : 'Asesoramiento Técnico Gratis'}
+				<Icon name="arrow_forward" size="18" />
+			</a>
+			<a
+				href="/packages/"
+				class="w-full sm:w-auto px-8 py-3 rounded-full border border-border-glass text-on-surface font-label-lg uppercase tracking-wider hover:bg-on-surface/5 active:scale-95 transition-all duration-300 flex items-center justify-center"
+			>
+				{i18n.lang === 'en' ? 'Explore Packages' : 'Explorar Paquetes'}
+			</a>
+		</div>
+	</div>
 </section>
