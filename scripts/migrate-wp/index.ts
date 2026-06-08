@@ -554,6 +554,18 @@ async function main(): Promise<void> {
 
 	for (const post of posts) {
 		const frontmatter = buildFrontmatter(post);
+
+		// Rewrite the cover image (featured media) URL to its CDN equivalent.
+		// rewriteUrls only touches the body; the frontmatter coverImage must be
+		// rewritten too, or covers keep pointing at the old WP domain.
+		if (frontmatter.coverImage && urlVariantMap[frontmatter.coverImage]) {
+			frontmatter.coverImage = urlVariantMap[frontmatter.coverImage];
+		} else if (frontmatter.coverImage.includes('/wp-content/uploads/')) {
+			console.warn(
+				`[migrate-wp] cover image not in manifest, left as WP URL: ${frontmatter.coverImage}`
+			);
+		}
+
 		const rawHtml = post.content.rendered;
 
 		// Convert HTML → Markdown (with h1 demote, shortcode strip)
