@@ -12,9 +12,14 @@
  * Idempotency: the caller checks manifest before calling upload.
  * If the wpId is already in manifest, skip the call entirely.
  * Wrangler `put` is also idempotent (overwrites existing key).
+ *
+ * Retry / backoff (Phase 8):
+ *   uploadWithRetry wraps a spawn call with up to 3 attempts and exponential
+ *   backoff (1s, 2s, 4s). The spawn and sleep functions are injectable for
+ *   testability. uploadToR2 uses this internally.
  */
 
-const R2_BUCKET = 'meg-blog-media';
+const R2_BUCKET = 'images';
 const CDN_BASE = 'https://cdn.malagaeventgear.com';
 const CF_ACCOUNT_ID = 'cc26ab18f887fb1c63c19e17a0bb313f';
 
@@ -50,6 +55,123 @@ export function buildCdnUrl(r2Key: string): string {
 	return `${CDN_BASE}/${r2Key}`;
 }
 
+// ---------------------------------------------------------------------------
+// Retry / backoff helpers
+// ---------------------------------------------------------------------------
+
+/** Maximum number of upload attempts before giving up. */
+const MAX_ATTEMPTS = 3;
+
+/** Base delay in ms for exponential backoff (attempt 1 → 1s, attempt 2 → 2s, …). */
+const BASE_DELAY_MS = 1000;
+
+/**
+ * Spawn result interface for testability.
+ * The real Bun.spawn process implements this via proc.exited + proc.stderr.
+ */
+export interface SpawnResult {
+	exitCode: number;
+	stderr?: string | AsyncIterable<Uint8Array> | ReadableStream<Uint8Array>;
+}
+
+/**
+ * Injectable spawn function type.
+ * In production: wraps Bun.spawn.
+ * In tests: a mock returning { exitCode, stderr }.
+ */
+export type SpawnFn = (cmd: string[]) => Promise<SpawnResult>;
+
+/**
+ * Injectable sleep function type.
+ * In production: Bun.sleep (or a Promise timeout).
+ * In tests: a no-op mock.
+ */
+export type SleepFn = (ms: number) => Promise<void>;
+
+/**
+ * Uploads a file to R2 with up to MAX_ATTEMPTS attempts and exponential backoff.
+ * On every failed attempt, sleeps for BASE_DELAY_MS * 2^(attempt-1) before retrying.
+ * Throws on final failure with the r2Key in the error message for context.
+ *
+ * Pure logic — injectable spawn and sleep allow unit testing without real I/O.
+ *
+ * @param r2Key       The R2 object key (used in the wrangler command)
+ * @param filePath    Absolute path to the local file
+ * @param spawnFn     Inject a spawn implementation (defaults to real Bun.spawn wrapper)
+ * @param sleepFn     Inject a sleep implementation (defaults to real Bun.sleep)
+ */
+export async function uploadWithRetry(
+	r2Key: string,
+	filePath: string,
+	spawnFn: SpawnFn,
+	sleepFn: SleepFn
+): Promise<void> {
+	let lastError = '';
+
+	for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+		const cmd = buildWranglerCommand(r2Key, filePath);
+		const result = await spawnFn(cmd);
+
+		if (result.exitCode === 0) {
+			return; // success
+		}
+
+		// Capture stderr text for error context
+		if (typeof result.stderr === 'string') {
+			lastError = result.stderr;
+		} else if (result.stderr) {
+			try {
+				lastError = await new Response(result.stderr as ReadableStream).text();
+			} catch {
+				lastError = '(stderr unreadable)';
+			}
+		}
+
+		if (attempt < MAX_ATTEMPTS) {
+			const delay = BASE_DELAY_MS * Math.pow(2, attempt - 1);
+			console.warn(
+				`[r2-uploader] Upload failed for ${r2Key} (attempt ${attempt}/${MAX_ATTEMPTS}). ` +
+					`Retrying in ${delay}ms...`
+			);
+			await sleepFn(delay);
+		}
+	}
+
+	throw new Error(
+		`[r2-uploader] Upload failed after ${MAX_ATTEMPTS} attempts for ${r2Key}:\n${lastError}`
+	);
+}
+
+// ---------------------------------------------------------------------------
+// Real Bun spawn/sleep implementations
+// ---------------------------------------------------------------------------
+
+/**
+ * Real spawn wrapper for production use.
+ * Injects CLOUDFLARE_ACCOUNT_ID into the child process environment.
+ */
+async function realSpawn(cmd: string[]): Promise<SpawnResult> {
+	const proc = Bun.spawn(cmd, {
+		env: {
+			...process.env,
+			CLOUDFLARE_ACCOUNT_ID: CF_ACCOUNT_ID,
+		},
+		stdout: 'pipe',
+		stderr: 'pipe',
+	});
+	const exitCode = await proc.exited;
+	return { exitCode, stderr: proc.stderr };
+}
+
+/** Real sleep implementation using Bun's built-in sleep. */
+async function realSleep(ms: number): Promise<void> {
+	await Bun.sleep(ms);
+}
+
+// ---------------------------------------------------------------------------
+// Public upload API
+// ---------------------------------------------------------------------------
+
 /**
  * Uploads a file to R2 using wrangler CLI via Bun.spawn.
  *
@@ -75,27 +197,9 @@ export async function uploadToR2(
 		return { r2Key, r2Url, cdnUrl, skipped: true };
 	}
 
-	const cmd = buildWranglerCommand(r2Key, tempFilePath);
 	console.log(`[r2-uploader] Uploading to R2: ${R2_BUCKET}/${r2Key}`);
 
-	// Bun.spawn is used instead of exec to avoid TTY requirements in CI.
-	// CLOUDFLARE_ACCOUNT_ID env var overrides the wrangler login account.
-	const proc = Bun.spawn(cmd, {
-		env: {
-			...process.env,
-			CLOUDFLARE_ACCOUNT_ID: CF_ACCOUNT_ID,
-		},
-		stdout: 'pipe',
-		stderr: 'pipe',
-	});
-
-	const exitCode = await proc.exited;
-	if (exitCode !== 0) {
-		const stderr = await new Response(proc.stderr).text();
-		throw new Error(
-			`[r2-uploader] wrangler upload failed for ${r2Key} (exit ${exitCode}):\n${stderr}`
-		);
-	}
+	await uploadWithRetry(r2Key, tempFilePath, realSpawn, realSleep);
 
 	console.log(`[r2-uploader] Uploaded: ${cdnUrl}`);
 	return { r2Key, r2Url, cdnUrl, skipped: false };

@@ -6,7 +6,7 @@ import { describe, it, expect } from 'vitest';
 import { buildWranglerCommand, buildCdnUrl } from './r2-uploader';
 
 const CDN_BASE = 'https://cdn.malagaeventgear.com';
-const R2_BUCKET = 'meg-blog-media';
+const R2_BUCKET = 'images';
 
 describe('buildWranglerCommand', () => {
 	it('includes bunx wrangler r2 object put', () => {

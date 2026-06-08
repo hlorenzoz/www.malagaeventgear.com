@@ -43,7 +43,7 @@ describe('createEmptyManifest', () => {
 	it('creates manifest with correct default values', () => {
 		const m = createEmptyManifest();
 		expect(m.version).toBe(1);
-		expect(m.r2Bucket).toBe('meg-blog-media');
+		expect(m.r2Bucket).toBe('images');
 		expect(m.cdnBase).toBe(CDN_BASE);
 		expect(m.sourceUrl).toBe(SOURCE_URL);
 		expect(m.media).toEqual({});

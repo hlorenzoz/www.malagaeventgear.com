@@ -13,10 +13,20 @@
  *   CLOUDFLARE_ACCOUNT_ID - Set automatically in r2-uploader (cc26ab18f887fb1c63c19e17a0bb313f)
  *
  * SC-MIG-01–12, SC-CDN-04–07, W-01, S-01
+ *
+ * Phase 8 changes:
+ *   - Media loop now iterates fetchMedia() (all 173 attachments), not per-post wp:featuredmedia.
+ *     This ensures inline body images (not just featured) are uploaded, preventing
+ *     url-rewriter from throwing on unmapped URLs.
+ *   - WebP conversion: png/jpeg variants are converted to .webp via cwebp before upload.
+ *     svg/avif/webp are uploaded as-is.
+ *   - Incremental manifest checkpoint: manifest written to disk after EACH media attachment
+ *     is fully processed. Re-running after a crash skips already-completed attachments.
  */
-import { fetchPosts, fetchCategories } from './wp-client';
+import { fetchPosts, fetchMedia, fetchCategories } from './wp-client';
 import { downloadImage } from './downloader';
 import { uploadToR2, buildCdnUrl } from './r2-uploader';
+import { convertToWebp } from './webp';
 import { htmlToMarkdown } from './turndown';
 import { rewriteUrls, buildUrlVariantMap } from './url-rewriter';
 import { buildFrontmatter } from './frontmatter';
@@ -28,7 +38,7 @@ import {
 	mergePostEntry,
 } from './manifest';
 import { generateRedirectsContent } from './redirects';
-import type { MediaEntry, PostEntry, WpMedia } from './types';
+import type { MediaEntry, PostEntry, WpMedia, WpPost } from './types';
 import { slugify } from '../../src/lib/utils/slugify';
 import { decodeEntities } from './decode-entities';
 import { readFileSync, writeFileSync, existsSync } from 'fs';
@@ -48,10 +58,10 @@ const isDryRun = process.argv.includes('--dry-run');
 
 /**
  * Builds the R2 key for a WP attachment size variant.
- * Format: <wpId>/<fileName>
+ * Format: blog/<wpId>/<fileName>
  */
 function buildR2Key(wpId: number, fileName: string): string {
-	return `${wpId}/${fileName}`;
+	return `blog/${wpId}/${fileName}`;
 }
 
 /**
@@ -62,18 +72,35 @@ function fileNameFromUrl(url: string): string {
 }
 
 /**
- * Infers the category slug for a media item based on the owning post's categories.
- * Falls back to 'blog' when no category is available.
+ * Builds a lookup map from WP media ID → category slug, derived from posts.
+ * For each post, maps its featured_media ID to the post's first category slug.
+ * Falls back to 'blog' for media not associated with any categorised post.
+ *
+ * This is best-effort metadata — category is not used in R2 keys (Phase 8).
  */
-function inferCategory(post: { _embedded?: { 'wp:term'?: { name: string; taxonomy: string }[][] } }): string {
-	const terms = post._embedded?.['wp:term'] ?? [];
-	const cats = terms[0] ?? [];
-	const firstCat = cats.find((t) => t.taxonomy === 'category');
-	return firstCat ? slugify(decodeEntities(firstCat.name)) : 'blog';
+function buildMediaCategoryMap(posts: WpPost[]): Map<number, string> {
+	const map = new Map<number, string>();
+
+	for (const post of posts) {
+		if (!post.featured_media) continue;
+
+		const terms = post._embedded?.['wp:term'] ?? [];
+		const cats = terms[0] ?? [];
+		const firstCat = cats.find((t) => t.taxonomy === 'category');
+		const category = firstCat ? slugify(decodeEntities(firstCat.name)) : 'blog';
+
+		// Only set once per media ID (first post wins — deterministic)
+		if (!map.has(post.featured_media)) {
+			map.set(post.featured_media, category);
+		}
+	}
+
+	return map;
 }
 
 /**
  * Processes one WP media item (attachment), downloading and uploading all size variants.
+ * Applies WebP conversion for png/jpeg variants.
  * Returns an array of MediaEntry objects (one per size variant).
  */
 async function processMediaItem(
@@ -116,52 +143,103 @@ async function processMediaItem(
 	}
 
 	for (const variant of allVariants) {
-		const r2Key = buildR2Key(wpMedia.id, variant.fileName);
-		const cdnUrl = buildCdnUrl(r2Key);
-
 		let fileSize = variant.fileSize;
 		let mimeType = variant.mimeType;
+		let uploadFileName = variant.fileName;
 
 		if (!dryRun) {
 			// Download the image to a temp file
-			const { tempPath, cleanup, fileSize: downloadedSize, mimeType: downloadedMime } =
-				await downloadImage(variant.url);
+			const {
+				tempPath,
+				cleanup,
+				fileSize: downloadedSize,
+				mimeType: downloadedMime,
+			} = await downloadImage(variant.url);
+
 			fileSize = downloadedSize;
 			mimeType = downloadedMime;
 
-			// Upload to R2
-			await uploadToR2(r2Key, tempPath, false);
+			// Phase 8: Convert png/jpeg to webp before upload
+			const { path: uploadPath, fileName: convertedFileName, converted } =
+				await convertToWebp(tempPath, mimeType, variant.fileName);
+
+			if (converted) {
+				uploadFileName = convertedFileName;
+				mimeType = 'image/webp';
+				console.log(
+					`[webp] Converted ${variant.fileName} → ${convertedFileName}`
+				);
+			}
+
+			const r2Key = buildR2Key(wpMedia.id, uploadFileName);
+			const cdnUrl = buildCdnUrl(r2Key);
+
+			// Upload the (possibly converted) file to R2
+			await uploadToR2(r2Key, uploadPath, false);
 			cleanup();
+
+			const entry: MediaEntry = {
+				wpId: wpMedia.id,
+				r2Key,
+				r2Url: cdnUrl,
+				cdnUrl,
+				category,
+				tags: [],
+				fileName: uploadFileName,
+				title: wpMedia.title?.rendered ?? '',
+				alt: wpMedia.alt_text ?? '',
+				caption: wpMedia.caption?.rendered ?? '',
+				description: wpMedia.description?.rendered ?? '',
+				mimeType,
+				fileSize,
+				width: variant.width,
+				height: variant.height,
+				uploadedOn: wpMedia.date_gmt ?? '',
+				uploadedBy: uploadedByOverride
+					?? decodeEntities(wpMedia._embedded?.author?.[0]?.name ?? 'Unknown Author'),
+				// originalUrl keeps the WP .png/.jpg URL so url-rewriter maps old→new
+				originalUrl: variant.url,
+				excludeFromSitemap: false,
+			};
+
+			entries.push(entry);
 		} else {
-			console.log(`[dry-run] Would upload: ${variant.url} → ${cdnUrl}`);
+			// dry-run: compute what WOULD happen (including webp rename) but do nothing
+			const wouldConvert = ['image/png', 'image/jpeg'].includes(mimeType);
+			const effectiveFileName = wouldConvert
+				? variant.fileName.replace(/\.[a-zA-Z0-9]+$/, '.webp')
+				: variant.fileName;
+			const r2Key = buildR2Key(wpMedia.id, effectiveFileName);
+			const cdnUrl = buildCdnUrl(r2Key);
+			console.log(
+				`[dry-run] Would upload: ${variant.url} → ${cdnUrl}${wouldConvert ? ' (converted to webp)' : ''}`
+			);
+
+			const entry: MediaEntry = {
+				wpId: wpMedia.id,
+				r2Key,
+				r2Url: cdnUrl,
+				cdnUrl,
+				category,
+				tags: [],
+				fileName: effectiveFileName,
+				title: wpMedia.title?.rendered ?? '',
+				alt: wpMedia.alt_text ?? '',
+				caption: wpMedia.caption?.rendered ?? '',
+				description: wpMedia.description?.rendered ?? '',
+				mimeType: wouldConvert ? 'image/webp' : mimeType,
+				fileSize,
+				width: variant.width,
+				height: variant.height,
+				uploadedOn: wpMedia.date_gmt ?? '',
+				uploadedBy: uploadedByOverride
+					?? decodeEntities(wpMedia._embedded?.author?.[0]?.name ?? 'Unknown Author'),
+				originalUrl: variant.url,
+				excludeFromSitemap: false,
+			};
+
+			entries.push(entry);
 		}
-
-		const entry: MediaEntry = {
-			wpId: wpMedia.id,
-			r2Key,
-			r2Url: cdnUrl,
-			cdnUrl,
-			category,
-			tags: [],
-			fileName: variant.fileName,
-			title: wpMedia.title?.rendered ?? '',
-			alt: wpMedia.alt_text ?? '',
-			caption: wpMedia.caption?.rendered ?? '',
-			description: wpMedia.description?.rendered ?? '',
-			mimeType,
-			fileSize,
-			width: variant.width,
-			height: variant.height,
-			uploadedOn: wpMedia.date_gmt ?? '',
-			// W-01: derive uploadedBy from post author display_name (already decoded)
-			// Falls back to media's own embedded author, then 'Unknown Author'
-			uploadedBy: uploadedByOverride
-				?? decodeEntities(wpMedia._embedded?.author?.[0]?.name ?? 'Unknown Author'),
-			originalUrl: variant.url,
-			excludeFromSitemap: false,
-		};
-
-		entries.push(entry);
 	}
 
 	return entries;
@@ -265,16 +343,31 @@ async function main(): Promise<void> {
 		`[migrate-wp] Starting${isDryRun ? ' (DRY-RUN — no files will be written)' : ''}...`
 	);
 
-	// 1. Read existing manifest (for idempotency)
+	// 1. Read existing manifest (for idempotency + resume support)
 	let manifest = readManifest();
+	const priorMediaCount = Object.keys(manifest.media).length;
 	console.log(
-		`[migrate-wp] Manifest loaded: ${Object.keys(manifest.media).length} media, ${manifest.posts.length} posts`
+		`[migrate-wp] Manifest loaded: ${priorMediaCount} media, ${manifest.posts.length} posts`
 	);
+	if (priorMediaCount > 0) {
+		console.log(
+			`[migrate-wp] Resuming: ${priorMediaCount} media already in manifest — will skip those.`
+		);
+	}
 
 	// 2. Fetch all WP data (read-only GET requests)
 	console.log('[migrate-wp] Fetching WordPress data...');
 	const posts = await fetchPosts();
 	const categories = await fetchCategories();
+
+	// Phase 8: fetch full media library (all 173 attachments, media_type=image)
+	// Previously iterated per-post wp:featuredmedia which only captured featured images,
+	// missing all inline body images and causing url-rewriter to throw on unmapped URLs.
+	const allMedia = await fetchMedia();
+	console.log(`[migrate-wp] Full media library: ${allMedia.length} image attachments`);
+
+	// Build mediaId → categorySlug lookup from posts (best-effort — metadata only)
+	const mediaCategoryMap = buildMediaCategoryMap(posts);
 
 	// 2b. Generate redirect rules (pure — no I/O yet)
 	const categorySlugs = categories.map((c) => c.slug);
@@ -291,6 +384,19 @@ async function main(): Promise<void> {
 	if (isDryRun) {
 		runAudit(posts);
 
+		// Show media library info
+		console.log('\n========== MEDIA LIBRARY ==========');
+		console.log(`Total image attachments: ${allMedia.length}`);
+		const byMime: Record<string, number> = {};
+		for (const m of allMedia) {
+			byMime[m.mime_type] = (byMime[m.mime_type] ?? 0) + 1;
+		}
+		for (const [mime, count] of Object.entries(byMime).sort()) {
+			const wouldConvert = ['image/png', 'image/jpeg'].includes(mime);
+			console.log(`  ${mime}: ${count}${wouldConvert ? ' (→ webp)' : ''}`);
+		}
+		console.log('====================================\n');
+
 		// Show redirect generation sample
 		console.log('\n========== REDIRECT PREVIEW ==========');
 		console.log(`Would write ${redirectLineCount} redirect rules to static/_redirects`);
@@ -302,34 +408,47 @@ async function main(): Promise<void> {
 		return;
 	}
 
-	// 4. Process media — download + upload + manifest
+	// 4. Process media — download + (optional webp convert) + upload + manifest
+	// Phase 8: iterate full media library instead of per-post wp:featuredmedia
 	console.log('[migrate-wp] Processing media...');
 	let totalMediaUploaded = 0;
+	let skippedMedia = 0;
 
-	for (const post of posts) {
-		const category = inferCategory(post);
-		const featuredMediaArr = post._embedded?.['wp:featuredmedia'] ?? [];
-		// W-01: derive uploadedBy from the POST author's display_name (decoded)
-		const postAuthorName = decodeEntities(
-			post._embedded?.author?.[0]?.name ?? 'Unknown Author'
+	for (let i = 0; i < allMedia.length; i++) {
+		const wpMedia = allMedia[i];
+
+		// Skip if already in manifest (idempotency / resume support)
+		const isAlreadyDone = Object.values(manifest.media).some(
+			(e) => e.wpId === wpMedia.id
+		);
+		if (isAlreadyDone) {
+			skippedMedia++;
+			continue;
+		}
+
+		const category = mediaCategoryMap.get(wpMedia.id) ?? 'blog';
+
+		// W-01: derive uploadedBy from embedded author
+		const uploadedBy = decodeEntities(
+			wpMedia._embedded?.author?.[0]?.name ?? 'Unknown Author'
 		);
 
-		for (const media of featuredMediaArr as WpMedia[]) {
-			// Skip if already in manifest (idempotency)
-			const existingKey = Object.keys(manifest.media).find(
-				(k) => manifest.media[k].wpId === media.id
-			);
-			if (existingKey) {
-				console.log(`[migrate-wp] Skipping media ${media.id} (already in manifest)`);
-				continue;
-			}
-
-			const entries = await processMediaItem(media, category, isDryRun, postAuthorName);
-			for (const entry of entries) {
-				manifest = mergeMediaEntry(manifest, entry);
-				totalMediaUploaded++;
-			}
+		const entries = await processMediaItem(wpMedia, category, isDryRun, uploadedBy);
+		for (const entry of entries) {
+			manifest = mergeMediaEntry(manifest, entry);
+			totalMediaUploaded++;
 		}
+
+		// Phase 8: incremental manifest checkpoint — write after each attachment
+		// This ensures that re-running after a crash resumes from where we left off.
+		writeManifest(manifest);
+		console.log(
+			`[checkpoint] ${i + 1}/${allMedia.length} media (wpId ${wpMedia.id}) saved`
+		);
+	}
+
+	if (skippedMedia > 0) {
+		console.log(`[migrate-wp] Skipped ${skippedMedia} media (already in manifest).`);
 	}
 
 	// 5. Rebuild URL variant map from all media entries
@@ -369,11 +488,9 @@ async function main(): Promise<void> {
 		totalPostsEmitted++;
 	}
 
-	// 7. Write final manifest
-	if (!isDryRun) {
-		writeManifest(manifest);
-		console.log('[migrate-wp] Manifest written.');
-	}
+	// 7. Write final manifest (also written incrementally above — this is the definitive version)
+	writeManifest(manifest);
+	console.log('[migrate-wp] Manifest written.');
 
 	// 7b. Write static/_redirects (non-dry-run only — already generated above)
 	writeFileSync(REDIRECTS_PATH, redirectsContent, 'utf-8');
@@ -383,7 +500,7 @@ async function main(): Promise<void> {
 	console.log('\n========== MIGRATION SUMMARY ==========');
 	console.log(`Posts processed:  ${posts.length}`);
 	console.log(`Posts emitted:    ${totalPostsEmitted}`);
-	console.log(`Media uploaded:   ${totalMediaUploaded}`);
+	console.log(`Media processed:  ${allMedia.length} (${skippedMedia} skipped, ${totalMediaUploaded} new variants)`);
 	console.log(`Redirect rules:   ${redirectLineCount}`);
 	console.log(`Manifest entries: ${Object.keys(manifest.media).length} media, ${manifest.posts.length} posts`);
 	console.log('=======================================\n');

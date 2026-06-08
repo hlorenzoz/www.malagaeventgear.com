@@ -18,7 +18,7 @@ export const MANIFEST_PATH = resolve(__dirname, 'manifest.json');
 
 const SOURCE_URL = 'https://malagaeventgear.com';
 const CDN_BASE = 'https://cdn.malagaeventgear.com';
-const R2_BUCKET = 'meg-blog-media';
+const R2_BUCKET = 'images';
 
 // ---------------------------------------------------------------------------
 // Pure factory / merge functions (testable without disk)
