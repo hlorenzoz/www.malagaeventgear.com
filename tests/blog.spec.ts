@@ -54,6 +54,12 @@ test.describe('Blog Index (/blog/)', () => {
 		await expect(section.locator('a[href="/packages/"]', { hasText: 'Explore Packages' })).toBeVisible();
 	});
 
+	test('Google reviews carousel is mounted on the blog index', async ({ page }) => {
+		await page.goto('/blog/');
+		// Reused Testimonials component — at least one review card should render
+		await expect(page.locator('[data-testid="testimonial-card"]').first()).toBeVisible();
+	});
+
 	test('SC-TAX-15: category badges link to /blog/category/*/', async ({ page }) => {
 		await page.goto('/blog/');
 		// Category links from post cards should point to /blog/category/<slug>/

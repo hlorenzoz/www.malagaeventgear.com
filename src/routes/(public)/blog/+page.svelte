@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
+	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { slugify } from '$lib/utils/slugify';
 	import type { PageData } from './$types';
@@ -190,3 +191,6 @@
 		</div>
 	</div>
 </section>
+
+<!-- Google My Business reviews carousel (reused component) -->
+<Testimonials />
