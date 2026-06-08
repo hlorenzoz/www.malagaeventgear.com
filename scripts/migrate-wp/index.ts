@@ -28,7 +28,7 @@ import { downloadImage } from './downloader';
 import { uploadToR2, buildCdnUrl } from './r2-uploader';
 import { convertToWebp } from './webp';
 import { htmlToMarkdown } from './turndown';
-import { rewriteUrls, buildUrlVariantMap } from './url-rewriter';
+import { rewriteUrls, buildUrlVariantMap, extractWpUrls, buildOrphanKey, collectOrphanUrls } from './url-rewriter';
 import { buildFrontmatter } from './frontmatter';
 import { emitSvx } from './emitter';
 import {
@@ -397,6 +397,24 @@ async function main(): Promise<void> {
 		}
 		console.log('====================================\n');
 
+		// Show orphan preview in dry-run
+		console.log('\n========== ORPHAN SCAN PREVIEW ==========');
+		const dryRunBodies = posts.map((p) => p.content.rendered);
+		const dryRunVariantMap = buildUrlVariantMap(Object.values(manifest.media));
+		const dryRunOrphans = collectOrphanUrls(dryRunBodies, dryRunVariantMap);
+		if (dryRunOrphans.size > 0) {
+			console.log(`Found ${dryRunOrphans.size} orphan URL(s) not in the media library:`);
+			for (const url of dryRunOrphans) {
+				const alreadyInManifest = manifest.media[url] !== undefined;
+				const converted = ['image/jpeg', 'image/png'].some((m) => url.endsWith('.jpg') || url.endsWith('.jpeg') || url.endsWith('.png'));
+				const r2Key = buildOrphanKey(url, converted);
+				console.log(`  ${alreadyInManifest ? '[SKIP-already-done]' : '[WOULD UPLOAD]'} ${url} → ${r2Key}`);
+			}
+		} else {
+			console.log('No orphan URLs found — all post image URLs are in the media library.');
+		}
+		console.log('==========================================\n');
+
 		// Show redirect generation sample
 		console.log('\n========== REDIRECT PREVIEW ==========');
 		console.log(`Would write ${redirectLineCount} redirect rules to static/_redirects`);
@@ -452,7 +470,83 @@ async function main(): Promise<void> {
 	}
 
 	// 5. Rebuild URL variant map from all media entries
-	const urlVariantMap = buildUrlVariantMap(Object.values(manifest.media));
+	let urlVariantMap = buildUrlVariantMap(Object.values(manifest.media));
+
+	// 5b. Orphan-collection pass — find WP URLs referenced in post bodies that are NOT
+	//     in the manifest (never returned by /wp/v2/media). Download, convert, upload each
+	//     unique orphan URL, merge into the manifest and urlVariantMap before rewriting.
+	//
+	//     Per SC-MIG-18: orphan entries use wpId=0 and orphan=true; resume skip-check is
+	//     by originalUrl (not wpId, since all orphans share wpId=0).
+	console.log('[migrate-wp] Scanning post bodies for orphan WP image URLs...');
+	const rawBodies = posts.map((p) => p.content.rendered);
+	const orphanUrls = collectOrphanUrls(rawBodies, urlVariantMap);
+
+	if (orphanUrls.size > 0) {
+		console.log(`[migrate-wp] Found ${orphanUrls.size} orphan URL(s) — uploading...`);
+		let orphanIdx = 0;
+		for (const orphanUrl of orphanUrls) {
+			orphanIdx++;
+			// Skip if already in the manifest (idempotent resume — keyed by originalUrl)
+			if (manifest.media[orphanUrl] !== undefined) {
+				console.log(`[orphan] Skipping (already in manifest): ${orphanUrl}`);
+				continue;
+			}
+
+			console.log(`[orphan] ${orphanIdx}/${orphanUrls.size}: ${orphanUrl}`);
+
+			const { tempPath, cleanup, fileSize, mimeType } = await downloadImage(orphanUrl);
+
+			const { path: uploadPath, fileName: uploadFileName, converted } =
+				await convertToWebp(tempPath, mimeType, fileNameFromUrl(orphanUrl));
+
+			const effectiveMime = converted ? 'image/webp' : mimeType;
+			if (converted) {
+				console.log(`[orphan/webp] Converted ${fileNameFromUrl(orphanUrl)} → ${uploadFileName}`);
+			}
+
+			const r2Key = buildOrphanKey(orphanUrl, converted);
+			const cdnUrl = buildCdnUrl(r2Key);
+
+			await uploadToR2(r2Key, uploadPath, false);
+			cleanup();
+
+			const orphanEntry: import('./types').MediaEntry = {
+				wpId: 0, // sentinel — orphans have no WP media ID
+				r2Key,
+				r2Url: cdnUrl,
+				cdnUrl,
+				category: 'blog',
+				tags: [],
+				fileName: uploadFileName,
+				title: '',
+				alt: '',
+				caption: '',
+				description: '',
+				mimeType: effectiveMime,
+				fileSize,
+				width: 0,
+				height: 0,
+				uploadedOn: new Date().toISOString(),
+				uploadedBy: 'orphan-pass',
+				originalUrl: orphanUrl,
+				excludeFromSitemap: false,
+				orphan: true,
+			};
+
+			manifest = mergeMediaEntry(manifest, orphanEntry);
+			// Checkpoint: write manifest after each orphan so a re-run can skip done orphans
+			writeManifest(manifest);
+			console.log(`[orphan/checkpoint] ${orphanIdx}/${orphanUrls.size} orphan(s) saved`);
+		}
+
+		// Rebuild the variant map now that orphan entries are in the manifest.
+		// Orphans are mapped by their EXACT originalUrl (not size-suffix variants).
+		urlVariantMap = buildUrlVariantMap(Object.values(manifest.media));
+		console.log(`[migrate-wp] Orphan pass complete. urlVariantMap now has ${Object.keys(urlVariantMap).length} entries.`);
+	} else {
+		console.log('[migrate-wp] No orphan URLs found — all post image URLs are in the manifest.');
+	}
 
 	// 6. Process posts — convert + emit .svx
 	console.log('[migrate-wp] Converting and emitting .svx files...');

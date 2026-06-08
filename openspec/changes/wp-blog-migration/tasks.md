@@ -102,6 +102,20 @@
 - [x] 8.7 Add incremental manifest checkpoint in `index.ts`: call `writeManifest` after EACH media attachment is fully processed. Log `[checkpoint] <n>/<total> media (wpId <id>) saved`.
 - [x] 8.8 Update `.agents/WP_MIGRATION.md` runbook — add "Resuming an interrupted migration" subsection.
 
+### Phase 8.2: Orphan-Collection Pass (2026-06-08)
+
+> Bug fix for production crash: `url-rewriter` threw on orphan WP image URL not in `/wp/v2/media`.
+
+- [x] 8.2.1 **[RED]** Write Vitest tests for `extractWpUrls(body)` in `url-rewriter.test.ts`: markdown image, img tag, multiple URLs, dedup, ignores non-WP URLs, http/www variants, empty body. (8 tests)
+- [x] 8.2.2 **[RED]** Write Vitest tests for `buildOrphanKey(wpUrl, converted)`: converted=true swaps ext to .webp, converted=false keeps ext, strips /wp-content/uploads/, http/www variants, dotted filenames. (8 tests)
+- [x] 8.2.3 **[RED]** Write Vitest tests for `collectOrphanUrls(bodies, map)`: all mapped → empty set; unmapped URL → in result; dedup across posts; multiple orphans; no WP URLs → empty. (5 tests)
+- [x] 8.2.4 Export `WP_URL_PATTERN` from `url-rewriter.ts`. Add `extractWpUrls`, `buildOrphanKey`, `collectOrphanUrls`. Make 8.2.1–8.2.3 green. (21 new tests; total 307)
+- [x] 8.2.5 Add `orphan?: boolean` optional field to `MediaEntry` interface in `types.ts`.
+- [x] 8.2.6 Add orphan-collection pass in `scripts/migrate-wp/index.ts` (between step 5 and step 6): scan bodies → collect orphans → download/convert/upload → mergeMediaEntry + checkpoint → rebuild urlVariantMap. Guard: skip orphan URLs already in manifest (by originalUrl). Import `collectOrphanUrls`, `buildOrphanKey`, `extractWpUrls` from `url-rewriter`.
+- [x] 8.2.7 Add orphan scan preview to dry-run output in `index.ts`.
+- [x] 8.2.8 Add SC-MIG-18 scenario to `openspec/changes/wp-blog-migration/specs/wp-migration-script.md`.
+- [x] 8.2.9 Add ADR-018 design note (§12.6) to `openspec/changes/wp-blog-migration/design.md`.
+
 ---
 
 ## Phase 6: Authoring Helpers, Runbook, Docs

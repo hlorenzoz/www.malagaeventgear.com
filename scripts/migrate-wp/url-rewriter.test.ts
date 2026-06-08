@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildUrlVariantMap, rewriteUrls } from './url-rewriter';
+import { buildUrlVariantMap, rewriteUrls, extractWpUrls, buildOrphanKey, collectOrphanUrls } from './url-rewriter';
 
 const CDN_BASE = 'https://cdn.malagaeventgear.com';
 const WP_BASE = 'https://malagaeventgear.com';
@@ -143,5 +143,159 @@ describe('rewriteUrls', () => {
 		const body = `![a](${sampleEntry.originalUrl}) and ![b](${second.originalUrl})`;
 		const result = rewriteUrls(body, map);
 		expect(result).toBe(`![a](${sampleEntry.r2Url}) and ![b](${second.r2Url})`);
+	});
+});
+
+// ---------------------------------------------------------------------------
+// Phase 8.2: extractWpUrls
+// ---------------------------------------------------------------------------
+
+describe('extractWpUrls', () => {
+	it('extracts a single WP URL from a markdown image', () => {
+		const body = `![alt](${WP_BASE}/wp-content/uploads/2024/09/photo.jpeg)`;
+		expect(extractWpUrls(body)).toEqual([
+			`${WP_BASE}/wp-content/uploads/2024/09/photo.jpeg`,
+		]);
+	});
+
+	it('extracts a URL from a raw <img src="..."> tag', () => {
+		const body = `<img src="${WP_BASE}/wp-content/uploads/2024/01/banner.png" alt="">`;
+		expect(extractWpUrls(body)).toEqual([
+			`${WP_BASE}/wp-content/uploads/2024/01/banner.png`,
+		]);
+	});
+
+	it('extracts multiple WP URLs from the same body', () => {
+		const url1 = `${WP_BASE}/wp-content/uploads/2024/01/a.jpg`;
+		const url2 = `${WP_BASE}/wp-content/uploads/2024/02/b.png`;
+		const body = `![a](${url1}) some text ![b](${url2})`;
+		const result = extractWpUrls(body);
+		expect(result).toHaveLength(2);
+		expect(result).toContain(url1);
+		expect(result).toContain(url2);
+	});
+
+	it('deduplicates repeated occurrences of the same URL', () => {
+		const url = `${WP_BASE}/wp-content/uploads/2024/01/venue.jpg`;
+		const body = `![a](${url}) and again ![b](${url})`;
+		expect(extractWpUrls(body)).toEqual([url]);
+	});
+
+	it('ignores non-WP URLs', () => {
+		const body = `![a](https://example.com/image.jpg) and ![b](https://cdn.malagaeventgear.com/blog/42/photo.webp)`;
+		expect(extractWpUrls(body)).toEqual([]);
+	});
+
+	it('extracts https URL', () => {
+		const url = `https://malagaeventgear.com/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`;
+		expect(extractWpUrls(`![x](${url})`)).toEqual([url]);
+	});
+
+	it('extracts http and www variants', () => {
+		const httpUrl = `http://malagaeventgear.com/wp-content/uploads/2024/01/a.jpg`;
+		const wwwUrl = `https://www.malagaeventgear.com/wp-content/uploads/2024/01/b.jpg`;
+		const body = `${httpUrl} ${wwwUrl}`;
+		const result = extractWpUrls(body);
+		expect(result).toContain(httpUrl);
+		expect(result).toContain(wwwUrl);
+	});
+
+	it('returns empty array when body has no WP URLs', () => {
+		expect(extractWpUrls('No images here, just plain text.')).toEqual([]);
+	});
+});
+
+// ---------------------------------------------------------------------------
+// Phase 8.2: buildOrphanKey
+// ---------------------------------------------------------------------------
+
+describe('buildOrphanKey', () => {
+	it('derives key from WP path with converted=true (swaps ext to .webp)', () => {
+		const wpUrl = `${WP_BASE}/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`;
+		expect(buildOrphanKey(wpUrl, true)).toBe('blog/orphan/2024/09/Methacrylate-lectern.webp');
+	});
+
+	it('derives key from WP path with converted=false (keeps original ext)', () => {
+		const wpUrl = `${WP_BASE}/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`;
+		expect(buildOrphanKey(wpUrl, false)).toBe('blog/orphan/2024/09/Methacrylate-lectern.jpeg');
+	});
+
+	it('strips /wp-content/uploads/ prefix', () => {
+		const wpUrl = `${WP_BASE}/wp-content/uploads/2023/05/some-image.png`;
+		expect(buildOrphanKey(wpUrl, false)).toBe('blog/orphan/2023/05/some-image.png');
+	});
+
+	it('converts .png to .webp when converted=true', () => {
+		const wpUrl = `${WP_BASE}/wp-content/uploads/2024/01/flyer.png`;
+		expect(buildOrphanKey(wpUrl, true)).toBe('blog/orphan/2024/01/flyer.webp');
+	});
+
+	it('keeps .webp extension unchanged when converted=false', () => {
+		const wpUrl = `${WP_BASE}/wp-content/uploads/2024/03/icon.svg`;
+		expect(buildOrphanKey(wpUrl, false)).toBe('blog/orphan/2024/03/icon.svg');
+	});
+
+	it('works with http scheme', () => {
+		const wpUrl = `http://malagaeventgear.com/wp-content/uploads/2024/09/photo.jpg`;
+		expect(buildOrphanKey(wpUrl, true)).toBe('blog/orphan/2024/09/photo.webp');
+	});
+
+	it('works with www. prefix', () => {
+		const wpUrl = `https://www.malagaeventgear.com/wp-content/uploads/2024/11/event.jpg`;
+		expect(buildOrphanKey(wpUrl, true)).toBe('blog/orphan/2024/11/event.webp');
+	});
+
+	it('handles filenames with dots before the extension', () => {
+		const wpUrl = `${WP_BASE}/wp-content/uploads/2024/01/my.photo.v2.jpg`;
+		expect(buildOrphanKey(wpUrl, true)).toBe('blog/orphan/2024/01/my.photo.v2.webp');
+	});
+});
+
+// ---------------------------------------------------------------------------
+// Phase 8.2: collectOrphanUrls
+// ---------------------------------------------------------------------------
+
+describe('collectOrphanUrls', () => {
+	it('returns empty set when all body URLs are mapped', () => {
+		const map = buildUrlVariantMap([sampleEntry]);
+		const bodies = [`![a](${sampleEntry.originalUrl})`];
+		expect(collectOrphanUrls(bodies, map).size).toBe(0);
+	});
+
+	it('returns a URL that is present in the body but absent from the map', () => {
+		const map = buildUrlVariantMap([sampleEntry]);
+		const orphanUrl = `${WP_BASE}/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`;
+		const bodies = [`![x](${orphanUrl})`];
+		const result = collectOrphanUrls(bodies, map);
+		expect(result.size).toBe(1);
+		expect(result.has(orphanUrl)).toBe(true);
+	});
+
+	it('deduplicates the same orphan URL appearing in multiple posts', () => {
+		const map = buildUrlVariantMap([]);
+		const orphanUrl = `${WP_BASE}/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`;
+		const bodies = [`![a](${orphanUrl})`, `![b](${orphanUrl})`];
+		const result = collectOrphanUrls(bodies, map);
+		expect(result.size).toBe(1);
+	});
+
+	it('collects multiple distinct orphan URLs from multiple bodies', () => {
+		const map = buildUrlVariantMap([sampleEntry]);
+		const orphan1 = `${WP_BASE}/wp-content/uploads/2024/09/orphan-a.jpg`;
+		const orphan2 = `${WP_BASE}/wp-content/uploads/2024/10/orphan-b.png`;
+		const bodies = [
+			`![a](${sampleEntry.originalUrl}) ![x](${orphan1})`,
+			`![y](${orphan2})`,
+		];
+		const result = collectOrphanUrls(bodies, map);
+		expect(result.size).toBe(2);
+		expect(result.has(orphan1)).toBe(true);
+		expect(result.has(orphan2)).toBe(true);
+	});
+
+	it('returns empty set when bodies contain no WP URLs at all', () => {
+		const map = buildUrlVariantMap([sampleEntry]);
+		const bodies = ['Just text, no images.', '## Another post'];
+		expect(collectOrphanUrls(bodies, map).size).toBe(0);
 	});
 });

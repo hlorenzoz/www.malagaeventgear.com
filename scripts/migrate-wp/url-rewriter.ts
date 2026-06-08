@@ -106,9 +106,83 @@ function generatePathVariants(path: string): string[] {
 
 /**
  * WP image URL pattern — matches any URL pointing to the WP uploads directory.
+ * Exported so other modules can reuse it (e.g. orphan detection in index.ts).
  */
-const WP_URL_PATTERN =
+export const WP_URL_PATTERN =
 	/https?:\/\/(?:www\.)?malagaeventgear\.com\/wp-content\/uploads\/[^\s"')>]+/g;
+
+/**
+ * Extracts all unique WP upload URLs found in a Markdown/HTML body.
+ *
+ * Reuses WP_URL_PATTERN. The result is deduplicated — each URL appears at most once.
+ * Used by the orphan-collection pass to scan post bodies before rewriting.
+ *
+ * @param body - Raw Markdown or HTML string
+ * @returns Array of unique WP upload URLs found in the body
+ */
+export function extractWpUrls(body: string): string[] {
+	const seen = new Set<string>();
+	// Reset lastIndex before each use (pattern has the /g flag)
+	WP_URL_PATTERN.lastIndex = 0;
+	let match: RegExpExecArray | null;
+	while ((match = WP_URL_PATTERN.exec(body)) !== null) {
+		seen.add(match[0]);
+	}
+	return Array.from(seen);
+}
+
+/**
+ * Derives the R2 key for an orphan WP image URL.
+ *
+ * Formula:
+ *   Strip scheme + host + /wp-content/uploads/
+ *   Prefix with blog/orphan/
+ *   If converted=true, swap the file extension to .webp
+ *
+ * Example:
+ *   https://malagaeventgear.com/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg
+ *   converted=true → blog/orphan/2024/09/Methacrylate-lectern.webp
+ *
+ * @param wpUrl     - Original WP uploads URL (http/https, www/no-www)
+ * @param converted - True if the file was converted to WebP
+ * @returns R2 key string
+ */
+export function buildOrphanKey(wpUrl: string, converted: boolean): string {
+	const match = wpUrl.match(
+		/^https?:\/\/(?:www\.)?malagaeventgear\.com\/wp-content\/uploads\/(.+)$/
+	);
+	if (!match) {
+		throw new Error(`[url-rewriter] buildOrphanKey: not a WP uploads URL: ${wpUrl}`);
+	}
+	const relativePath = match[1]; // e.g. 2024/09/Methacrylate-lectern.jpeg
+	const path = converted ? relativePath.replace(/\.[a-zA-Z0-9]+$/, '.webp') : relativePath;
+	return `blog/orphan/${path}`;
+}
+
+/**
+ * Scans an array of post bodies and collects the SET of WP upload URLs that
+ * are NOT present in urlVariantMap (i.e. orphans — referenced but not uploaded).
+ *
+ * The result is deduplicated across all bodies.
+ *
+ * @param bodies        - Array of post body strings (Markdown or HTML)
+ * @param urlVariantMap - Current map built from manifest entries
+ * @returns Set of orphan WP URLs (unique, ready for upload)
+ */
+export function collectOrphanUrls(
+	bodies: string[],
+	urlVariantMap: Record<string, string>
+): Set<string> {
+	const orphans = new Set<string>();
+	for (const body of bodies) {
+		for (const url of extractWpUrls(body)) {
+			if (urlVariantMap[url] === undefined) {
+				orphans.add(url);
+			}
+		}
+	}
+	return orphans;
+}
 
 /**
  * Replaces every WP image URL in a Markdown body with the CDN URL from urlVariantMap.

@@ -1,8 +1,8 @@
-# Apply Progress: wp-blog-migration — Batches 1+2+3+4+5 (Phases 1-4 + Phase 5 code + Phase 6 + Phase 7 + Phase 8)
+# Apply Progress: wp-blog-migration — Batches 1+2+3+4+5+6 (Phases 1-4 + Phase 5 code + Phase 6 + Phase 7 + Phase 8 + Phase 8.2)
 
-**Date**: 2026-06-08 (batch 5: Phase 8 migration hardening)
-**Status**: COMPLETE (Phases 1, 2, 3, 4, 5-code, 6, 7, 8 done — Task 5.1 manual: R2 bucket + custom domain via Cloudflare dashboard)
-**Test results**: 243/243 Vitest ✓ (prior) + 24 new tests (webp + retry) = expected 267 total
+**Date**: 2026-06-08 (batch 6: Phase 8.2 orphan-collection pass — production crash fix)
+**Status**: COMPLETE (Phases 1, 2, 3, 4, 5-code, 6, 7, 8, 8.2 done — Task 5.1 manual: R2 bucket + custom domain via Cloudflare dashboard)
+**Test results**: 286/286 Vitest ✓ (prior) + 21 new tests (extractWpUrls + buildOrphanKey + collectOrphanUrls) = **307 total, all passing**
 
 ### Post-verify corrections (2026-06-07, batch 1)
 - `src/lib/types/blog.test.ts`: validPost ahora incluye `coverImage` y `excerpt` completo. Test `coverImage is optional` → invertido a `coverImage is required`. Agregados tests `excerpt is required` y `excerpt must be at least 10 chars`.
@@ -226,6 +226,85 @@ have a single lowercase tag name (e.g. `gallery`, `caption`); Markdown link text
 
 ---
 
+### TDD Cycle Evidence (Phase 8.2 — Strict TDD)
+
+| Task | RED (test written) | GREEN (implementation) | REFACTOR |
+|------|--------------------|------------------------|----------|
+| 8.2.1 extractWpUrls | `url-rewriter.test.ts` — 8 tests, all RED (TypeError on import) | `extractWpUrls` added to `url-rewriter.ts` | Reset `lastIndex` before exec loop (regex /g flag) |
+| 8.2.2 buildOrphanKey | `url-rewriter.test.ts` — 8 tests, all RED | `buildOrphanKey` added to `url-rewriter.ts` | N/A — clean on first pass |
+| 8.2.3 collectOrphanUrls | `url-rewriter.test.ts` — 5 tests, all RED | `collectOrphanUrls` added to `url-rewriter.ts` | N/A |
+| 8.2.4 WP_URL_PATTERN export | (covered by 8.2.1 tests using pattern) | `const WP_URL_PATTERN` → `export const` | N/A |
+| 8.2.5 orphan?: boolean type | N/A — type extension | Optional field added to `MediaEntry` | N/A |
+| 8.2.6 orphan pass in index.ts | (no unit test — impure orchestrator) | Orphan pass added between step 5 and 6 | Guard: skip by originalUrl; rebuild urlVariantMap after pass |
+| 8.2.7 dry-run orphan preview | (covered by orphan scan being pure) | Preview added to dry-run section | N/A |
+
+### Test Summary (Phase 8.2)
+- **Tests written**: 21
+- **Tests passing**: 307/307 (full suite)
+- **Layers used**: Unit (21 new)
+- **Pure functions created**: 3 (`extractWpUrls`, `buildOrphanKey`, `collectOrphanUrls`)
+
+---
+
+## Phase 8.2 implementation (2026-06-08, batch 6 — orphan-collection pass)
+
+### Root cause of production crash
+The migration uploaded all 165 media-library images via `fetchMedia()` successfully, then crashed emitting posts: `url-rewriter` threw on `https://malagaeventgear.com/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`. This image returns HTTP 200 directly but is ABSENT from `/wp-json/wp/v2/media` — it was uploaded directly to WP storage without being registered as a media attachment. Such orphan images cannot be discovered by `fetchMedia()`.
+
+### Fix implemented
+
+**1. Three pure helpers exported from `scripts/migrate-wp/url-rewriter.ts`:**
+- `WP_URL_PATTERN` — exported (was private `const`)
+- `extractWpUrls(body)` — finds all WP upload URLs in a body; deduplicates; uses `WP_URL_PATTERN` with `exec` loop + Set
+- `buildOrphanKey(wpUrl, converted)` — strips `/wp-content/uploads/`, prepends `blog/orphan/`, swaps `.ext → .webp` if converted
+- `collectOrphanUrls(bodies, urlVariantMap)` — returns Set of WP URLs present in bodies but absent from the variant map
+
+**2. `orphan?: boolean` added to `MediaEntry` interface in `scripts/migrate-wp/types.ts`**
+
+**3. Orphan-collection pass added in `scripts/migrate-wp/index.ts` (step 5b, between media upload and post emission):**
+- After `buildUrlVariantMap()`, scans all post bodies via `collectOrphanUrls()`
+- For each unique orphan URL (skipping if already in `manifest.media[orphanUrl]`): `downloadImage()` → `convertToWebp()` → `uploadToR2(r2Key, path, false)` → `mergeMediaEntry()` → `writeManifest()` (checkpoint per orphan)
+- Orphan R2 key: `buildOrphanKey(orphanUrl, converted)` → `blog/orphan/2024/09/Methacrylate-lectern.webp`
+- Orphan entry: `wpId: 0`, `orphan: true`, `originalUrl: orphanUrl`
+- After pass: rebuilds `urlVariantMap` from all manifest entries (regular + orphans)
+- `rewriteUrls()` now resolves exact body URL (orphan entries map 1:1, not via size-suffix variants)
+
+**4. Dry-run orphan preview added:** Shows which orphan URLs would be uploaded and their derived R2 keys.
+
+**5. Spec SC-MIG-18 added** to `openspec/changes/wp-blog-migration/specs/wp-migration-script.md`
+
+**6. Design ADR-018 note (§12.6)** added to `openspec/changes/wp-blog-migration/design.md`
+
+### Key decisions
+- **Skip-check by `originalUrl`** (not `wpId`): all orphans share `wpId=0`, so skip must use the manifest key (`originalUrl`). This is already the manifest convention — `manifest.media` is keyed by `originalUrl`.
+- **`blog/orphan/` prefix**: separates orphan uploads from regular `blog/<wpId>/` uploads in R2. Clear at a glance.
+- **No `generateUrlVariants` for orphans**: orphan URLs map 1:1 to their CDN URL. Size-suffix expansion is not applied — the exact URL found in the body is the key in `urlVariantMap`.
+
+---
+
+### Phase 8: Migration Hardening (completed in batch 5)
+- [x] 8.1 [RED] `scripts/migrate-wp/webp.test.ts` — 18 tests for `shouldConvertToWebp` and `buildCwebpCommand`
+- [x] 8.2 [RED] `scripts/migrate-wp/r2-uploader-retry.test.ts` — 6 tests for `uploadWithRetry`
+- [x] 8.3 `scripts/migrate-wp/webp.ts` — `shouldConvertToWebp`, `buildCwebpCommand`, `deriveWebpFileName`, `convertToWebp`
+- [x] 8.4 `scripts/migrate-wp/r2-uploader.ts` — `uploadWithRetry` + `SpawnFn`/`SleepFn` types; `uploadToR2` uses it
+- [x] 8.5 `scripts/migrate-wp/index.ts` — full media library via `fetchMedia()` + `buildMediaCategoryMap`
+- [x] 8.6 `scripts/migrate-wp/index.ts` — `convertToWebp` integrated in `processMediaItem`
+- [x] 8.7 `scripts/migrate-wp/index.ts` — incremental checkpoint: `writeManifest` after each attachment
+- [x] 8.8 `.agents/WP_MIGRATION.md` — "Resuming an interrupted migration" section added
+
+### Phase 8.2: Orphan-Collection Pass (completed in batch 6)
+- [x] 8.2.1 [RED] `scripts/migrate-wp/url-rewriter.test.ts` — 8 tests for `extractWpUrls`
+- [x] 8.2.2 [RED] `scripts/migrate-wp/url-rewriter.test.ts` — 8 tests for `buildOrphanKey`
+- [x] 8.2.3 [RED] `scripts/migrate-wp/url-rewriter.test.ts` — 5 tests for `collectOrphanUrls`
+- [x] 8.2.4 `scripts/migrate-wp/url-rewriter.ts` — exported WP_URL_PATTERN, added extractWpUrls, buildOrphanKey, collectOrphanUrls (21 tests green; suite total: 307)
+- [x] 8.2.5 `scripts/migrate-wp/types.ts` — `orphan?: boolean` added to MediaEntry
+- [x] 8.2.6 `scripts/migrate-wp/index.ts` — orphan-collection pass (step 5b)
+- [x] 8.2.7 `scripts/migrate-wp/index.ts` — dry-run orphan scan preview
+- [x] 8.2.8 `openspec/changes/wp-blog-migration/specs/wp-migration-script.md` — SC-MIG-18 added
+- [x] 8.2.9 `openspec/changes/wp-blog-migration/design.md` — ADR-018 / §12.6 added
+
+---
+
 ## Remaining Tasks
-- Task 5.1: Manual — R2 bucket `meg-blog-media` creation + custom domain `cdn.malagaeventgear.com` via Cloudflare dashboard. See `.agents/WP_MIGRATION.md` runbook.
-- **VERIFY REQUIRED**: Run `bun run test` to confirm 243 + 24 new = 267 tests green, then run `bun scripts/migrate-wp/index.ts --dry-run` to confirm dry-run output shows media library breakdown by mime type.
+- Task 5.1: Manual — R2 bucket creation + custom domain `cdn.malagaeventgear.com` via Cloudflare dashboard. See `.agents/WP_MIGRATION.md` runbook.
+- **VERIFY**: Run `bun run test` to confirm 307 tests green, then run `bun scripts/migrate-wp/index.ts --dry-run` to confirm orphan scan preview is shown.

@@ -276,3 +276,23 @@ These MUST be documented in `.agents/WP_MIGRATION.md` runbook.
 **When** the manifest entry for that attachment is inspected  
 **Then** the `category` field is `'blog'`  
 **And** the `r2Key` follows the `blog/<wpId>/<fileName>` format regardless of the category value
+
+---
+
+### SC-MIG-18: Orphan images referenced in post bodies are uploaded before rewriting
+
+**Given** a WP post body references an image URL (e.g. `https://malagaeventgear.com/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`) that returns HTTP 200 directly  
+**And** that URL is NOT present in the `/wp-json/wp/v2/media` REST endpoint (it is absent from `fetchMedia()`)  
+**When** the migration script runs the orphan-collection pass (after `fetchMedia()` upload, before post emission)  
+**Then** the script scans EVERY post body for WP upload URLs not in `urlVariantMap`  
+**And** downloads, converts (if jpeg/png → webp), and uploads each unique orphan URL to R2 under the key `blog/orphan/<year>/<month>/<filename>.webp`  
+**And** records each orphan as a `MediaEntry` with `wpId: 0` and `orphan: true` in the manifest  
+**And** merges orphan entries into `urlVariantMap` so `rewriteUrls()` resolves all body URLs  
+**And** writes the manifest checkpoint after EACH orphan upload (idempotent resume keyed by `originalUrl`)  
+**And** on a re-run, skips orphan URLs already present in `manifest.media` by `originalUrl`  
+**And** the script completes with exit code 0 (no unmapped-URL error thrown)
+
+**Pure helper contracts** (unit-tested in `url-rewriter.test.ts`):
+- `extractWpUrls(body)` — returns deduplicated array of all WP upload URLs in a body
+- `buildOrphanKey(wpUrl, converted)` — derives `blog/orphan/<path>` R2 key, swapping ext to `.webp` when `converted=true`
+- `collectOrphanUrls(bodies, urlVariantMap)` — returns Set of WP URLs present in bodies but absent from the map

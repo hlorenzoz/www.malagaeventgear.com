@@ -46,6 +46,13 @@ export interface MediaEntry {
 	originalUrl: string;
 	/** True if this image should be excluded from any future image sitemap */
 	excludeFromSitemap: boolean;
+	/**
+	 * True if this entry was added by the orphan-collection pass (not a WP media-library
+	 * attachment). Orphans are images referenced in post bodies but absent from
+	 * /wp-json/wp/v2/media. Their wpId is 0 (sentinel). Skip-check on re-run MUST use
+	 * originalUrl, not wpId, for orphan entries.
+	 */
+	orphan?: boolean;
 }
 
 /** One entry per migrated WP post. */

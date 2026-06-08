@@ -1016,6 +1016,27 @@ The crash-resume window is bounded: only the attachment currently in flight (bet
 
 Risks 4 and 6 from the original list were addressed during Phase 8: the full media library iteration (ADR-013) ensures all inline body image URLs are mapped before post conversion runs, eliminating the url-rewriter throw on unmapped URLs. Unicode category/author name handling (Risk 6) was validated via the dry-run audit mode built into `index.ts`.
 
+### §12.6 — Phase 8.2: Orphan-Collection Pass (ADR-018)
+
+**Problem**: The production migration crashed during post emission because `url-rewriter` threw on `https://malagaeventgear.com/wp-content/uploads/2024/09/Methacrylate-lectern.jpeg`. This image is reachable via HTTP (returns 200) but does NOT exist in `/wp-json/wp/v2/media` — it was uploaded directly to WP without being registered as a media attachment. Such images are invisible to `fetchMedia()`.
+
+**Decision**: Add an orphan-collection pass in `main()` between step 5 (media upload) and step 6 (post emission):
+
+1. After `buildUrlVariantMap()`, scan EVERY post's `content.rendered` body for WP upload URLs using the exported `WP_URL_PATTERN`.
+2. Collect the SET of URLs not present in `urlVariantMap` (the orphans), deduplicated across all posts.
+3. For each orphan: `downloadImage()` → `convertToWebp()` if jpeg/png → `uploadToR2(r2Key, ...)` → `mergeMediaEntry()` → `writeManifest()` (checkpoint).
+4. Orphan R2 key: `blog/orphan/<year>/<month>/<filename>[.webp]` — derived by `buildOrphanKey(wpUrl, converted)`.
+5. Orphan `MediaEntry` fields: `wpId: 0` (sentinel — no real WP ID), `orphan: true` (marker).
+6. Re-run idempotency: skip-check is `manifest.media[orphanUrl] !== undefined` (by `originalUrl`, NOT by `wpId`, since all orphans share `wpId: 0`).
+7. After orphan pass: rebuild `urlVariantMap` from all manifest entries (including orphans). `rewriteUrls()` now resolves every body URL.
+
+**Pure helpers** (exported from `url-rewriter.ts`, fully unit-tested):
+- `extractWpUrls(body)` — finds all WP upload URLs in a body; deduplicates; reuses `WP_URL_PATTERN`
+- `buildOrphanKey(wpUrl, converted)` — strips `/wp-content/uploads/`, prepends `blog/orphan/`, swaps ext if converted
+- `collectOrphanUrls(bodies, urlVariantMap)` — returns Set of orphan URLs across all bodies
+
+**ADR-018**: Orphan entry key in `manifest.media` is `originalUrl` (same convention as regular entries). Skip-check by `originalUrl` is already the manifest convention — orphan entries are just regular `MediaEntry` objects with `wpId=0` and `orphan=true` as markers.
+
 | # | Risk | Severity | Notes |
 |---|---|---|---|
 | 1 | `import.meta.glob` mock in Vitest requires `vi.mock` of Vite internals — may need `vitest-mock-svelte` or a custom resolver | Medium | Investigate before writing blog.ts tests |
