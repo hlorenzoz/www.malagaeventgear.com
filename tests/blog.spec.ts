@@ -227,6 +227,15 @@ test.describe('Post Sitemap (/post-sitemap.xml)', () => {
 		expect(body).toContain('<loc>https://malagaeventgear.com/blog/welcome-to-meg-blog/</loc>');
 	});
 
+	test('SC-SM-03/04: <lastmod> uses updated when present (overrides publishDate)', async ({ page }) => {
+		await page.goto('/post-sitemap.xml');
+		const body = await page.content();
+		// wedding-sound-guide fixture: publishDate 2025-03-10, updated 2025-05-01.
+		// lastmod MUST reflect `updated`, not `publishDate`.
+		expect(body).toContain('<lastmod>2025-05-01T00:00:00+00:00</lastmod>');
+		expect(body).not.toContain('2025-03-10');
+	});
+
 	test('SC-SM-05: draft posts are excluded', async ({ page }) => {
 		await page.goto('/post-sitemap.xml');
 		const body = await page.content();

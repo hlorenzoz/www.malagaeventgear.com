@@ -3,7 +3,33 @@
  * TDD Phase 8 — written RED before implementation.
  */
 import { describe, it, expect } from 'vitest';
-import { shouldConvertToWebp, buildCwebpCommand } from './webp';
+import { shouldConvertToWebp, buildCwebpCommand, deriveWebpFileName } from './webp';
+
+describe('deriveWebpFileName', () => {
+	it('replaces .jpg with .webp', () => {
+		expect(deriveWebpFileName('foo.jpg')).toBe('foo.webp');
+	});
+
+	it('replaces .png with .webp', () => {
+		expect(deriveWebpFileName('foo.png')).toBe('foo.webp');
+	});
+
+	it('replaces .jpeg with .webp', () => {
+		expect(deriveWebpFileName('image.jpeg')).toBe('image.webp');
+	});
+
+	it('preserves WP size-suffixed names, only swapping the extension', () => {
+		expect(deriveWebpFileName('venue-main-1024x768.jpg')).toBe('venue-main-1024x768.webp');
+	});
+
+	it('only swaps the final extension when the name contains dots', () => {
+		expect(deriveWebpFileName('my.photo.v2.png')).toBe('my.photo.v2.webp');
+	});
+
+	it('is idempotent for an already-.webp name', () => {
+		expect(deriveWebpFileName('foo.webp')).toBe('foo.webp');
+	});
+});
 
 // ---------------------------------------------------------------------------
 // shouldConvertToWebp

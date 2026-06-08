@@ -78,7 +78,7 @@ function fileNameFromUrl(url: string): string {
  *
  * This is best-effort metadata — category is not used in R2 keys (Phase 8).
  */
-function buildMediaCategoryMap(posts: WpPost[]): Map<number, string> {
+export function buildMediaCategoryMap(posts: WpPost[]): Map<number, string> {
 	const map = new Map<number, string>();
 
 	for (const post of posts) {
@@ -506,7 +506,11 @@ async function main(): Promise<void> {
 	console.log('=======================================\n');
 }
 
-main().catch((err) => {
-	console.error('[migrate-wp] Fatal error:', err);
-	process.exit(1);
-});
+// Guard: only run the migration when executed directly (`bun scripts/migrate-wp/index.ts`),
+// NOT when imported (e.g. by unit tests for exported pure helpers like buildMediaCategoryMap).
+if (import.meta.main) {
+	main().catch((err) => {
+		console.error('[migrate-wp] Fatal error:', err);
+		process.exit(1);
+	});
+}
