@@ -579,6 +579,20 @@ async function main(): Promise<void> {
 			process.exit(1);
 		}
 
+		// coverImage fallback chain: featured media (set above) → first body image.
+		// When a post has no featured media, the frontmatter default points at the
+		// site OG image; prefer the first real CDN image from the body instead so the
+		// cover is relevant and never a broken/missing asset.
+		if (!frontmatter.coverImage.startsWith('https://cdn.malagaeventgear.com/')) {
+			const firstBodyImg = markdownBody.match(
+				/https:\/\/cdn\.malagaeventgear\.com\/blog\/[^\s")]+\.(?:webp|jpe?g|png|svg|avif)/i
+			)?.[0];
+			if (firstBodyImg) {
+				frontmatter.coverImage = firstBodyImg;
+				console.log(`[migrate-wp] ${post.slug}: cover fallback → first body image`);
+			}
+		}
+
 		// Write .svx file
 		const svxPath = emitSvx(post.slug, frontmatter, markdownBody, isDryRun);
 

@@ -6,7 +6,7 @@ slug: managing-last-minute-wedding-rental-changes
 publishDate: 2026-02-21
 updated: 2026-02-16
 excerpt: "Last-minute changes in wedding plans can be a source of significant stress for couples, especially when it comes to organizing rentals. From unexpected guest list adjustments to unforeseen weather changes, the need to adapt quickly can challenge even the most prepared planners. Our guide to managing last-minute wedding rental changes provides essential tips and strategies […]"
-coverImage: https://malagaeventgear.com/og-image.jpg
+coverImage: https://cdn.malagaeventgear.com/blog/1633/wedding_dinner_table.webp
 categories: [Weddings]
 tags: []
 draft: false
