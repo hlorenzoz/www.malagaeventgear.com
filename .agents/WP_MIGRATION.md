@@ -56,13 +56,13 @@ Seguí el orden exactamente.
 
 ---
 
-## 1. Crear el bucket R2 `meg-blog-media`
+## 1. Crear el bucket R2 `images`
 
 El bucket vive en la cuenta `cc26ab18f887fb1c63c19e17a0bb313f`.
 
 ```bash
 CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f \
-  bunx wrangler r2 bucket create meg-blog-media
+  bunx wrangler r2 bucket create images
 ```
 
 Verificación:
@@ -70,7 +70,7 @@ Verificación:
 ```bash
 CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f \
   bunx wrangler r2 bucket list
-# Debe aparecer: meg-blog-media
+# Debe aparecer: images
 ```
 
 ---
@@ -80,7 +80,7 @@ CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f \
 Esto se hace desde el dashboard de Cloudflare (no hay CLI para esto):
 
 1. Ir a **Cloudflare Dashboard** → cuenta `cc26ab18f887fb1c63c19e17a0bb313f`
-2. R2 → bucket `meg-blog-media` → **Settings** → **Custom Domains**
+2. R2 → bucket `images` → **Settings** → **Custom Domains**
 3. Click **Connect Domain** → ingresar `cdn.malagaeventgear.com`
 4. Cloudflare crea automáticamente el registro CNAME en el DNS del dominio
 5. Esperar a que el dominio aparezca como **Active** (puede tomar hasta 5 minutos)
@@ -180,6 +180,51 @@ El script:
 
 **Idempotencia**: si el script falla a mitad, volvé a ejecutarlo — retoma desde donde quedó
 sin re-subir media ni re-emitir posts que ya están en el manifest.
+
+---
+
+## 6b. Resuming an interrupted migration
+
+If the migration script crashes mid-run (network timeout, wrangler auth error, disk full),
+you do NOT need to start over. The script writes the manifest to disk after **each media
+attachment** is fully processed. On the next run, it reads the manifest first and skips any
+attachment whose `wpId` is already present.
+
+**To resume, just re-run the same command:**
+
+```bash
+just migrate-wp-run
+# or directly:
+bun scripts/migrate-wp/index.ts
+```
+
+The script will log:
+
+```
+[migrate-wp] Manifest loaded: 47 media, 0 posts
+[migrate-wp] Resuming: 47 media already in manifest — will skip those.
+...
+[checkpoint] 48/173 media (wpId 1234) saved
+[checkpoint] 49/173 media (wpId 1235) saved
+...
+```
+
+**What is safe to re-run:**
+
+- Media uploads: wrangler `r2 object put` is idempotent — re-uploading an existing key
+  just overwrites with the same file. The manifest skip means we never re-upload anyway.
+- Post emission: `.svx` files are overwritten on re-run (idempotent by design).
+- `static/_redirects`: regenerated from post data on every run.
+
+**When to delete the manifest and start fresh:**
+
+Only if you want to re-upload ALL media (e.g. you changed the WebP quality or found a
+bug in the conversion). Delete `scripts/migrate-wp/manifest.json` first:
+
+```bash
+rm scripts/migrate-wp/manifest.json
+bun scripts/migrate-wp/index.ts
+```
 
 ---
 
@@ -351,11 +396,11 @@ Las imágenes en R2 son idempotentes (subir de nuevo sobreescribe). Para borrar 
 ```bash
 # Listar objetos en el bucket
 CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f \
-  bunx wrangler r2 object list meg-blog-media
+  bunx wrangler r2 object list images
 
 # Borrar un objeto específico
 CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f \
-  bunx wrangler r2 object delete meg-blog-media/<r2Key>
+  bunx wrangler r2 object delete images/<r2Key>
 ```
 
 El manifest (`scripts/migrate-wp/manifest.json`) también puede editarse manualmente o
@@ -371,6 +416,7 @@ borrarse para forzar una re-migración completa desde cero.
 | Tipos WP + Manifest | `scripts/migrate-wp/types.ts` |
 | WP REST API client | `scripts/migrate-wp/wp-client.ts` |
 | Downloader de imágenes | `scripts/migrate-wp/downloader.ts` |
+| WebP converter | `scripts/migrate-wp/webp.ts` |
 | Uploader a R2 | `scripts/migrate-wp/r2-uploader.ts` |
 | HTML → Markdown | `scripts/migrate-wp/turndown.ts` |
 | Reescritura de URLs | `scripts/migrate-wp/url-rewriter.ts` |

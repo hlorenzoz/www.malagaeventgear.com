@@ -69,7 +69,7 @@
 
 ## Phase 5: Infrastructure (parallel with Phase 4 after Phase 1)
 
-- [ ] 5.1 Create R2 bucket `meg-blog-media` via Cloudflare dashboard under account `cc26ab18f887fb1c63c19e17a0bb313f`; connect custom domain `cdn.malagaeventgear.com`. (spec SC-CDN-01) — **MANUAL STEP: see `.agents/WP_MIGRATION.md` runbook**
+- [ ] 5.1 Create R2 bucket `images` via Cloudflare dashboard under account `cc26ab18f887fb1c63c19e17a0bb313f`; connect custom domain `cdn.malagaeventgear.com`. (spec SC-CDN-01) — **MANUAL STEP: see `.agents/WP_MIGRATION.md` runbook**
 - [x] 5.2 Create `workers/blog-rebuild/wrangler.toml` — name `meg-blog-rebuild`; cron `0 6 * * *` (spec); no D1/R2/KV bindings; document `wrangler secret put DEPLOY_HOOK_URL`. (Design §6)
 - [x] 5.3 Create `workers/blog-rebuild/tsconfig.json` — mirrors `review-reminders/tsconfig.json` without `$lib/*` alias. (Design §6)
 - [x] 5.4 **[RED]** Write Vitest tests for `workers/blog-rebuild/src/index.ts`: 2xx response logs success and does not throw (SC-CRON-01); non-2xx throws Error with status code (SC-CRON-02).
@@ -88,6 +88,19 @@
 - [x] 7.7 **[W-03]** Add Vitest tests for `wp-client.ts` pagination: single-page (1 fetch), multi-page (3 fetches, all concatenated), correct URL params, missing header defaults to 1 page, non-2xx throws (7 tests).
 - [x] 7.8 **[W-02/SC-CRON-03]** Add Vitest tests to `workers/blog-rebuild/src/index.test.ts` for `DEPLOY_HOOK_URL` missing/undefined → handler throws, errors not swallowed (2 new tests; total 7).
 - [x] 7.9 **[S-03]** Refactor `src/routes/(public)/blog/[slug]/+page.ts` entries generator to use `getPostSlugs()` instead of `getAllPosts().map(...)`. Add 2 Vitest tests in `blog.test.ts` documenting slug consistency.
+
+---
+
+## Phase 8: Migration Hardening (2026-06-08)
+
+- [x] 8.1 **[RED]** Write Vitest tests for `shouldConvertToWebp` and `buildCwebpCommand` in `scripts/migrate-wp/webp.ts` (18 tests — pure logic).
+- [x] 8.2 **[RED]** Write Vitest tests for `uploadWithRetry` in `scripts/migrate-wp/r2-uploader.ts` (6 tests — injectable spawn/sleep).
+- [x] 8.3 Create `scripts/migrate-wp/webp.ts` — `shouldConvertToWebp`, `buildCwebpCommand`, `deriveWebpFileName`, `convertToWebp` (impure Bun.spawn wrapper). Make 8.1 green.
+- [x] 8.4 Add `uploadWithRetry` (3 attempts, exponential backoff 1s/2s/4s) to `scripts/migrate-wp/r2-uploader.ts`. Integrate into `uploadToR2`. Make 8.2 green.
+- [x] 8.5 Replace per-post `wp:featuredmedia` media loop in `scripts/migrate-wp/index.ts` with single pass over `fetchMedia()` (all 173 attachments). Build `mediaId → categorySlug` lookup from posts for best-effort category metadata.
+- [x] 8.6 Integrate WebP conversion into `processMediaItem` in `index.ts`: download → `convertToWebp` → upload (possibly converted file). `originalUrl` keeps WP URL; `fileName`/`mimeType`/`r2Url`/`cdnUrl` reflect `.webp` result when converted.
+- [x] 8.7 Add incremental manifest checkpoint in `index.ts`: call `writeManifest` after EACH media attachment is fully processed. Log `[checkpoint] <n>/<total> media (wpId <id>) saved`.
+- [x] 8.8 Update `.agents/WP_MIGRATION.md` runbook — add "Resuming an interrupted migration" subsection.
 
 ---
 

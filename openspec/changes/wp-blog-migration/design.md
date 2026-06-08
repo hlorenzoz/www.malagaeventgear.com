@@ -316,8 +316,8 @@ export type BlogPost = z.infer<typeof BlogPostSchema> & {
 export interface MediaEntry {
   wpId: number;
   originalUrl: string;           // https://malagaeventgear.com/wp-content/uploads/...
-  r2Key: string;                 // blog-media/2024/01/photo.webp
-  cdnUrl: string;                // https://cdn.malagaeventgear.com/blog-media/2024/01/photo.webp
+  r2Key: string;                 // blog/1234/foto-1024x768.webp
+  cdnUrl: string;                // https://cdn.malagaeventgear.com/blog/1234/foto-1024x768.webp
   mimeType: string;
   sizeBytes: number;
   uploadedAt: string;            // ISO 8601
@@ -335,7 +335,7 @@ export interface Manifest {
   version: 1;
   generatedAt: string;
   sourceUrl: string;             // https://malagaeventgear.com
-  r2Bucket: string;              // meg-blog-media
+  r2Bucket: string;              // images
   cdnBase: string;               // https://cdn.malagaeventgear.com
   urlVariantMap: Record<string, string>;  // old URL variant → cdnUrl (includes http/https, with/without www, size-suffixed variants)
   media: MediaEntry[];
@@ -404,7 +404,7 @@ bunx wrangler whoami
 
 # R2 upload command used by r2-uploader.ts:
 CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f \
-  bunx wrangler r2 object put meg-blog-media/<r2Key> \
+  bunx wrangler r2 object put images/<r2Key> \
   --file <tempFilePath> \
   --remote
 ```
@@ -818,10 +818,203 @@ For category/author 404 tests: since `prerender = true` with a fixed `entries` g
 | ADR-009 | `.svx` files under `src/content/`, dynamically imported by route | Accepted |
 | ADR-010 | `slugify()` extracted to `src/lib/utils/slugify.ts`, shared by data layer and migration script | Accepted |
 | ADR-011 | Author display name passed from load function as `authorMeta: Author`, not derived from slug | Accepted |
+| ADR-012 | R2 key format `blog/<wpId>/<fileName>`; shared `images` bucket with `blog/` prefix | Accepted |
+| ADR-013 | Iterate full WP media library (`fetchMedia`), not per-post featured-media | Accepted |
+| ADR-014 | Convert PNG/JPEG → WebP; SVG/AVIF/WebP uploaded as-is | Accepted |
+| ADR-015 | Use `cwebp` CLI (not `sharp`) for WebP conversion | Accepted |
+| ADR-016 | Injectable `spawnFn`/`sleepFn` in `uploadWithRetry` for testability | Accepted |
+| ADR-017 | Flush manifest after each attachment (per-checkpoint), not only at end of run | Accepted |
 
 ---
 
-## 12. Open Questions / Risks
+## 12. Phase 8 — Migration Hardening
+
+This section documents architectural decisions implemented during Phase 8 of the migration script. All decisions are reflected in the existing codebase (`scripts/migrate-wp/`). This section is descriptive, not prescriptive.
+
+### 12.1 R2 Configuration
+
+**Bucket**: `images` — the shared site bucket (not a dedicated blog bucket).
+
+**Key structure**: `blog/<wpId>/<fileName>`
+
+Example:
+```
+blog/42/venue-main.webp
+blog/42/venue-main-300x200.webp    ← size variant, same wpId
+blog/117/hero-banner.webp
+```
+
+**CDN base**: `https://cdn.malagaeventgear.com` (custom domain, active).
+
+**Why wpId-scoped keys instead of category-scoped keys**: Category is metadata about a post, not a property of an image. A single image can be referenced by posts in multiple categories. Using `blog/<wpId>/` ensures:
+1. Natural de-duplication: all size variants of the same attachment share a directory-like prefix.
+2. No key drift if a post's category is reassigned after migration.
+3. The key is stable and derivable purely from the WP attachment ID.
+
+Category is still derived (`mediaCategoryMap`) and stored in `MediaEntry.category` for audit purposes, but it does NOT appear in the R2 key.
+
+**Why shared `images` bucket with `blog/` prefix instead of a dedicated `meg-blog-media` bucket**: Cloudflare R2 buckets have a per-account limit. A folder/prefix costs nothing in R2 and provides the same logical separation. Reusing the site bucket avoids an additional bucket, CDN configuration, and wrangler binding. The `blog/` prefix makes all migration objects addressable and purgeable as a group without an extra bucket boundary.
+
+### ADR-012: R2 key format `blog/<wpId>/<fileName>`
+
+**Decision**: Use `blog/<wpId>/<fileName>` as the R2 object key. Store in the shared `images` bucket with CDN at `https://cdn.malagaeventgear.com`.
+
+**Rationale**: wpId is the stable, unique identifier for a WP attachment. Keying by wpId groups size variants under a natural prefix and makes idempotency checks cheap (scan by wpId prefix). Category-based keys would cause key churn on post re-categorization.
+
+**Rejected alternative**: `blog/<category>/<year>/<month>/<fileName>` — mirrors WP upload folder structure. Rejected because category is mutable metadata, year/month adds depth with no lookup benefit, and it does not cleanly group size variants of the same source image.
+
+**Rejected alternative**: A dedicated `meg-blog-media` bucket. Rejected because R2 per-account bucket limits are a finite resource, the shared `images` bucket with a `blog/` prefix is functionally equivalent, and it avoids additional CDN/wrangler configuration.
+
+---
+
+### 12.2 Full Media Library Iteration
+
+**Phase 8 change**: The media processing loop now iterates the full WP media library via `fetchMedia()` (`media_type=image`), which returned 165–173 attachments in testing. Previously, the loop iterated per-post `wp:featuredmedia` links, which covered only the featured image for each post.
+
+**Why the change was necessary**: The blog posts contain inline body images (images embedded in post content, not the featured image). These inline images exist as WP attachments with their own `wpId` and URLs. When `url-rewriter.ts` processes a post body, it scans for all `malagaeventgear.com/wp-content/uploads/` URLs and looks them up in `urlVariantMap`. If an inline image was never uploaded to R2, its URL has no entry in the variant map, and `rewriteUrls()` throws an error rather than emit a post with a broken WP origin URL.
+
+**Consequence**: The only correct fix is to upload the entire media library, not just featured images. `fetchMedia({ media_type: 'image' })` is the WP REST API call that returns all image attachments regardless of post association.
+
+**Category metadata for non-featured images**: Images not referenced as `featured_media` in any post have no deterministic category association. `buildMediaCategoryMap()` assigns the category of the first post that references an image as featured media; images with no such association fall back to the string `'blog'`. This is best-effort metadata stored in `MediaEntry.category` — it does not affect the R2 key.
+
+### ADR-013: Iterate full WP media library, not per-post featured-media
+
+**Decision**: Fetch all image attachments via `fetchMedia({ media_type: 'image' })` in a single pass before processing posts. Upload all of them to R2 before the post conversion loop starts.
+
+**Rationale**: `url-rewriter.ts` is strict — it throws on any WP image URL that has no entry in `urlVariantMap`. Per-post featured-media iteration misses inline body images, causing post conversion to abort. The full library fetch is the only approach that guarantees all image URLs present in post bodies have a corresponding CDN URL.
+
+**Rejected alternative**: Lazy upload — parse each post's HTML for image URLs, upload only those. Rejected because: (1) HTML parsing for URL extraction duplicates the turndown/url-rewriter pipeline, (2) size variants embedded in `srcset` attributes require separate handling, (3) the manifest checkpoint makes bulk-then-skip cheaper than per-post laziness.
+
+---
+
+### 12.3 WebP Conversion Policy
+
+**Policy** (implemented in `scripts/migrate-wp/webp.ts`):
+
+| Source MIME type | Action |
+|---|---|
+| `image/png` | Convert to WebP via `cwebp -q 82` |
+| `image/jpeg` | Convert to WebP via `cwebp -q 82` |
+| `image/webp` | Upload as-is |
+| `image/avif` | Upload as-is |
+| `image/svg+xml` | Upload as-is |
+| anything else | Upload as-is |
+
+**Dimensions**: `cwebp` preserves the input's pixel dimensions. WP already stores each size variant as a separate file; each variant is converted independently at its native resolution — no resizing is performed by the migration script.
+
+**Quality**: `q=82` — good balance for blog photos (used as default in `buildCwebpCommand`).
+
+**File name derivation**: Extension is replaced in place. `foo-300x200.jpg` → `foo-300x200.webp`. The WebP file name becomes the `fileName` stored in `MediaEntry` and the final segment of the R2 key.
+
+### ADR-014: Convert PNG/JPEG to WebP; leave SVG/AVIF/WebP untouched
+
+**Decision**: Apply WebP conversion only to `image/png` and `image/jpeg`. All other types are uploaded as-is.
+
+**Rationale for converting PNG/JPEG**: WebP offers meaningful file-size reduction (typically 25–35% vs. JPEG, larger vs. PNG) with no perceptible quality difference at `q=82`. These are the two dominant formats in the WP media library.
+
+**Rationale for skipping SVG**: SVG is a vector format. `cwebp` cannot process SVG. Converting SVG to WebP would rasterize it at a fixed resolution, destroying the scalability property of the vector source. SVGs must be served as-is.
+
+**Rationale for skipping AVIF**: AVIF → WebP is a quality and size downgrade. AVIF achieves better compression than WebP at equivalent visual quality. Converting would produce a larger or lower-quality file. AVIF is already a modern format and is served directly from CDN.
+
+**Rationale for skipping WebP**: Already the target format.
+
+**Tool choice — cwebp over sharp**: `sharp` is the common Node/Bun image processing library but requires native binaries compiled for the host platform (`@img/sharp-darwin-arm64` etc.). These native deps are not present in the project, adding installation complexity to a one-shot migration script. `cwebp` is a system binary installable via `brew install webp`, is already on PATH in the migration environment, and has no native binding overhead. For a one-shot script, `cwebp` is the pragmatic choice.
+
+### ADR-015: Use `cwebp` CLI (not `sharp`) for WebP conversion
+
+**Decision**: Invoke `cwebp` via `Bun.spawn` for PNG/JPEG → WebP conversion.
+
+**Rationale**: No native npm dependency; `cwebp` is a single system binary installable via `brew install webp`. For a one-shot migration script, eliminating native binding risk outweighs the ergonomic advantage of a JS library.
+
+**Rejected alternative**: `sharp` — requires platform-specific native binaries (`@img/sharp-darwin-arm64`, etc.) not present in the project. Installation adds CI/OS complexity for a script that runs exactly once.
+
+**Rejected alternative**: `@squoosh/lib` — deprecated and unmaintained.
+
+---
+
+### 12.4 Retry / Backoff Strategy
+
+**Implementation** (in `scripts/migrate-wp/r2-uploader.ts`):
+
+- **Max attempts**: 3
+- **Backoff**: exponential — `1000ms * 2^(attempt-1)` → 1s, 2s, 4s
+- **On final failure**: throws with the r2Key and stderr in the error message
+- **On success**: returns immediately without waiting for any remaining attempts
+
+**Separation of concerns**: `uploadWithRetry()` is a pure orchestration function that accepts `spawnFn: SpawnFn` and `sleepFn: SleepFn` as injectable dependencies. The production implementations (`realSpawn`, `realSleep`) are private to the module. This makes the retry logic unit-testable without real I/O: tests inject a mock spawn that returns `{ exitCode: 1 }` on the first N attempts and `{ exitCode: 0 }` on attempt N+1, and a no-op sleep.
+
+### ADR-016: Injectable spawn/sleep for testability in retry logic
+
+**Decision**: `uploadWithRetry` accepts `spawnFn` and `sleepFn` as function parameters rather than calling `Bun.spawn`/`Bun.sleep` directly.
+
+**Rationale**: Retry logic is non-trivial (3 attempts, exponential backoff, error capture). Testing it requires controlling the subprocess exit code and eliminating real delays. Injectable dependencies make this possible without monkey-patching globals. The pattern adds zero production cost.
+
+**Rejected alternative**: Test by running real wrangler against a mock R2 endpoint. Rejected because it adds environment setup complexity (mock server, auth bypass) for logic that is purely about retry counting and delay calculation.
+
+---
+
+### 12.5 Incremental Manifest Checkpoint
+
+**Mechanism**: After each WP attachment is fully processed (download → convert → upload → `mergeMediaEntry()`), `writeManifest(manifest)` is called immediately. The manifest is flushed to `scripts/migrate-wp/manifest.json` after every single attachment, not only at the end of the run.
+
+**Resume logic**: At the start of `main()`, `readManifest()` loads the existing manifest. The media loop checks `manifest.media` for an entry with `wpId === wpMedia.id` before calling `processMediaItem()`. If found, the attachment is skipped. The post loop does the same for `manifest.posts` by `wpId`.
+
+**Result**: A crash at any point during the media loop loses at most one attachment's work (the one currently in flight). On re-run, all previously completed attachments are skipped and the script resumes from the next unprocessed one.
+
+### ADR-017: Flush manifest after each attachment, not only at end of run
+
+**Decision**: Call `writeManifest()` inside the media loop after each attachment, not only after the full loop completes.
+
+**Rationale**: The migration processes ~165 attachments. Each download + cwebp + wrangler upload takes several seconds. A crash or network interruption midway through the run without checkpointing would force a full re-run from scratch, re-uploading all previously completed attachments. Since `wrangler r2 object put` is idempotent, re-uploads are safe but slow. Flushing per-attachment makes the practical crash-resume window one attachment.
+
+**Rejected alternative**: Checkpoint every N attachments (e.g. 10). Rejected because per-attachment flush has negligible overhead (JSON.stringify of ~165 entries + one file write ≈ <1ms) and reduces re-work to a minimum.
+
+**Rejected alternative**: Checkpoint only at end of run. Rejected because a crash after 100 attachments means 100 re-uploads on resume — unacceptable for a slow wrangler-based upload loop.
+
+### Sequence diagram — crash resume flow
+
+```
+ index.ts (main)         manifest.json         R2
+      │                       │                 │
+      │  readManifest()        │                 │
+      │──────────────────────►│                 │
+      │  { media: {...100 done entries...} }     │
+      │◄──────────────────────│                 │
+      │                       │                 │
+      │  for each allMedia[i]:                  │
+      │    isAlreadyDone?      │                 │
+      │──────────────────────►│                 │
+      │    YES (i < 100)       │                 │
+      │    ← skip              │                 │
+      │                       │                 │
+      │    NO (i = 100)        │                 │
+      │    download + convert  │                 │
+      │    uploadToR2(r2Key, …)│                 │
+      │────────────────────────────────────────►│
+      │    ← UploadResult      │                 │
+      │    mergeMediaEntry()   │                 │
+      │    writeManifest()     │                 │
+      │──────────────────────►│ (checkpoint)    │
+      │                       │                 │
+      │    ⚡ CRASH HERE        │                 │
+      │                       │                 │
+ [re-run]                     │                 │
+      │  readManifest()        │                 │
+      │──────────────────────►│                 │
+      │  { media: {...101 done entries...} }     │
+      │◄──────────────────────│                 │
+      │                       │                 │
+      │  allMedia[100] → isAlreadyDone? YES → skip
+      │  allMedia[101] → isAlreadyDone? NO  → process
+```
+
+The crash-resume window is bounded: only the attachment currently in flight (between upload completion and `writeManifest()` returning) can be re-processed. Since R2 `put` is idempotent, this is safe.
+
+---
+
+## 13. Open Questions / Risks
+
+Risks 4 and 6 from the original list were addressed during Phase 8: the full media library iteration (ADR-013) ensures all inline body image URLs are mapped before post conversion runs, eliminating the url-rewriter throw on unmapped URLs. Unicode category/author name handling (Risk 6) was validated via the dry-run audit mode built into `index.ts`.
 
 | # | Risk | Severity | Notes |
 |---|---|---|---|

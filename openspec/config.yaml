@@ -5,7 +5,7 @@ context: |
   Tech stack: SvelteKit 2 + Svelte 5 (runes), TypeScript, Tailwind v4, Zod, PWA.
   Hosting: Cloudflare via @sveltejs/adapter-cloudflare (Web APIs only, no Node built-ins).
   Architecture: prerendered static site; data in src/lib/data/*.ts (Zod-validated); i18n EN/ES.
-  Testing: Playwright E2E (tests/); Vitest to be added for server-lib unit tests.
+  Testing: Vitest unit (bun run test, 243 tests) + Playwright E2E (tests/).
   Style: <script lang="ts">, runes only, UI text via i18n, SeoHead for JSON-LD.
 
 strict_tdd: true
@@ -35,15 +35,15 @@ rules:
 
 testing:
   strict_tdd: true
-  detected: 2026-05-31
+  detected: 2026-06-08
   test_runner:
-    framework: Vitest (to be added) + Playwright (present)
-    command: "bun run test (to be added) / bunx playwright test"
+    framework: Vitest (present) + Playwright (present)
+    command: "bun run test / bunx playwright test"
   layers:
-    unit: { available: false, tool: "Vitest — to be added in this change" }
-    integration: { available: false, tool: "miniflare local D1 — to be added" }
+    unit: { available: true, tool: "Vitest" }
+    integration: { available: false, tool: "miniflare local D1 — not yet wired" }
     e2e: { available: true, tool: "Playwright" }
-  coverage: { available: false, command: "—" }
+  coverage: { available: true, command: "bunx vitest run --coverage (@vitest/coverage-v8)" }
   quality:
     linter: { available: false, command: "—" }
     type_checker: { available: true, command: "bun run check (svelte-check + tsc)" }

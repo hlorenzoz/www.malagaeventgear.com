@@ -30,19 +30,27 @@ A one-shot Bun script that fetches all WordPress content (posts, categories, tag
 
 ### 3. Image Downloading and R2 Upload
 
-- For each media attachment, the script MUST download the full-size image and all registered size variants (as returned by `_embedded['wp:featuredmedia'][0].media_details.sizes` or equivalent).
-- Images MUST be uploaded to the R2 bucket `meg-blog-media` using:
+- The script MUST upload the FULL media library fetched via `fetchMedia()` (all image attachments), NOT only the per-post featured media embedded in the posts response. This ensures inline body images are covered and the URL rewriter never encounters an unmapped URL.
+- For each media attachment, the script MUST download the full-size image and all registered size variants (as returned by `media_details.sizes`).
+- Images MUST be uploaded to the R2 bucket `images` using:
   ```
-  wrangler r2 object put meg-blog-media/<wpId>/<fileName> --file <localTempPath> --remote
+  wrangler r2 object put images/blog/<wpId>/<fileName> --file <localTempPath> --remote
   ```
   with `CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f` set in the environment.
 - The script MUST use `bun`'s `Bun.spawn` or `execa`-equivalent to invoke `wrangler` — no shell `exec` that would fail in CI environments without a TTY.
+- Each R2 upload MUST be retried up to 3 attempts with exponential backoff (delays of 1 s, 2 s, 4 s respectively) before the script treats the upload as a failure and exits with a non-zero status.
 - If an object key already exists in R2 (idempotency re-run), the upload MUST be skipped (or overwritten — implementation choice, but MUST NOT fail).
 - Local temporary image files MUST be cleaned up after upload (MUST NOT accumulate on disk).
 
+### 3a. Media Category Metadata
+
+- The `category` field on each manifest `MediaEntry` MUST be derived from the owning post's first category slug (best-effort). If no post references the media, or the post has no category, the value MUST default to `'blog'`.
+- The `category` value MUST NOT influence the R2 object key. The key is determined solely by `wpId` and `fileName`.
+
 ### 4. `manifest.json` Generation
 
-- The manifest MUST be written to `scripts/migrate-wp/manifest.json` after all uploads complete.
+- The manifest MUST be written to `scripts/migrate-wp/manifest.json` incrementally — it MUST be persisted to disk after EACH attachment is fully processed (downloaded, converted if applicable, uploaded). A final write after all attachments complete is also acceptable, but the incremental checkpoint write MUST happen.
+- On a re-run (resume after interruption), the script MUST read the existing manifest at startup and skip any attachment whose `wpId` already has entries present in the manifest. Skipped attachments MUST NOT be re-downloaded or re-uploaded.
 - The manifest schema is defined in `blog-media-cdn.md` spec. The migration script is the sole producer of this file.
 - On a re-run (idempotency), the script MUST merge new entries with the existing manifest — MUST NOT overwrite the entire file and lose previously-mapped entries that are still valid.
 
@@ -222,3 +230,49 @@ These MUST be documented in `.agents/WP_MIGRATION.md` runbook.
 **Given** a WP post body containing a shortcode (e.g. `[gallery ids="1,2,3"]`)  
 **When** the HTML is converted to Markdown  
 **Then** the output `.svx` body does NOT contain `[gallery` or any other `[...]` shortcode syntax
+
+---
+
+### SC-MIG-13: Full media library is uploaded (not just featured images)
+
+**Given** the WP media library contains attachments that are used only as inline body images (not as any post's featured media)  
+**When** the migration script completes  
+**Then** those attachments are present in `manifest.json`  
+**And** their R2 objects exist at `blog/<wpId>/<fileName>`
+
+---
+
+### SC-MIG-14: Upload retries on transient failure
+
+**Given** a wrangler upload command fails on the first two attempts (exit code non-zero)  
+**When** the third attempt succeeds (exit code 0)  
+**Then** the upload is considered successful and no error is thrown  
+**And** exactly 3 spawn calls were made
+
+---
+
+### SC-MIG-15: Upload fails after all 3 attempts exhausted
+
+**Given** a wrangler upload command fails on all 3 attempts  
+**When** `uploadWithRetry` is called  
+**Then** an error is thrown containing the R2 key in its message  
+**And** the script exits with a non-zero status code
+
+---
+
+### SC-MIG-16: Manifest is persisted after each attachment (checkpoint)
+
+**Given** the migration is processing 5 attachments and crashes after the 3rd  
+**When** the script is re-run  
+**Then** attachments 1–3 are skipped (already in manifest)  
+**And** only attachments 4–5 are downloaded and uploaded  
+**And** the final manifest contains all 5 attachments' entries
+
+---
+
+### SC-MIG-17: Category metadata is best-effort and does not affect R2 key
+
+**Given** a media attachment is not referenced by any post (orphaned attachment)  
+**When** the manifest entry for that attachment is inspected  
+**Then** the `category` field is `'blog'`  
+**And** the `r2Key` follows the `blog/<wpId>/<fileName>` format regardless of the category value

@@ -10,16 +10,34 @@ R2-backed image CDN for migrated WordPress media. Enriched `manifest.json` mappi
 
 ### 1. R2 Bucket and CDN Domain
 
-- A Cloudflare R2 bucket named `meg-blog-media` MUST exist under account `cc26ab18f887fb1c63c19e17a0bb313f`.
-- The custom domain `cdn.malagaeventgear.com` MUST be pointed at the `meg-blog-media` bucket.
+- A Cloudflare R2 bucket named `images` MUST exist under account `cc26ab18f887fb1c63c19e17a0bb313f`.
+- The custom domain `cdn.malagaeventgear.com` MUST be pointed at the `images` bucket.
 - All objects in the bucket MUST be publicly accessible via `https://cdn.malagaeventgear.com/<key>`.
 - The bucket MUST NOT be directly accessible via the `*.r2.cloudflarestorage.com` default URL in production (the CDN domain is the canonical URL).
 
 ### 2. Object Key Convention
 
-- Each uploaded image MUST use the key format: `<wpId>/<fileName>` (e.g. `42/venue-main-1200x800.jpg`).
+- Each uploaded image MUST use the key format: `blog/<wpId>/<fileName>` (e.g. `blog/42/venue-main-1200x800.webp`).
 - Size variants (WordPress thumbnail, medium, large, full) MUST each be stored as separate objects with their respective filenames as the key suffix.
 - The original full-size image MUST always be uploaded, even when intermediate sizes are also uploaded.
+- Each unique WP attachment (identified by `wpId`) MUST be stored once; objects are keyed by `wpId`, NOT by category or post reference, so the same attachment referenced by multiple posts MUST NOT produce duplicate R2 objects.
+
+### 2a. WebP Conversion Policy
+
+Before uploading, the migration script MUST apply a per-MIME-type conversion policy:
+
+| Source MIME type | Action |
+|-----------------|--------|
+| `image/png` | MUST convert to WebP via `cwebp` at existing dimensions |
+| `image/jpeg` | MUST convert to WebP via `cwebp` at existing dimensions |
+| `image/webp` | MUST upload as-is (already WebP) |
+| `image/avif` | MUST upload as-is (AVIF→WebP is a quality downgrade) |
+| `image/svg+xml` | MUST upload as-is (`cwebp` cannot process vector files) |
+| any other type | MUST upload as-is (safe default) |
+
+- `cwebp` MUST NOT resize the image; pixel dimensions of the output MUST equal those of the WP size variant.
+- For converted entries, `r2Url`, `cdnUrl`, `fileName`, and `mimeType` in the manifest MUST reflect the `.webp` output (e.g. `foo-300x200.webp`, `image/webp`).
+- `originalUrl` in the manifest MUST retain the original WP URL with its original extension (e.g. `.png`, `.jpg`), so the URL rewriter can map old→new correctly.
 
 ### 3. `manifest.json` Schema
 
@@ -73,8 +91,8 @@ Every WP image size variant (thumbnail, medium, medium_large, large, full, and a
 
 ### SC-CDN-01: R2 URL resolves publicly
 
-**Given** an image has been uploaded to `meg-blog-media` at key `42/venue-main.jpg`  
-**When** an HTTP GET request is made to `https://cdn.malagaeventgear.com/42/venue-main.jpg`  
+**Given** an image has been uploaded to `images` at key `blog/42/venue-main.jpg`  
+**When** an HTTP GET request is made to `https://cdn.malagaeventgear.com/blog/42/venue-main.jpg`  
 **Then** the response status is 200  
 **And** the `Content-Type` header is `image/jpeg`
 
@@ -147,3 +165,41 @@ Every WP image size variant (thumbnail, medium, medium_large, large, full, and a
 **Given** any entry in `manifest.json` at key `K`  
 **When** the entry's `originalUrl` field is read  
 **Then** `originalUrl === K`
+
+---
+
+### SC-CDN-10: R2 key uses `blog/<wpId>/<fileName>` format
+
+**Given** an attachment with WP ID `42` and file name `photo.jpg` has been processed  
+**When** the R2 key is inspected  
+**Then** the key equals `blog/42/photo.jpg` (prefix `blog/`, then wpId, then fileName)  
+**And** the `r2Url` equals `https://cdn.malagaeventgear.com/blog/42/photo.jpg`
+
+---
+
+### SC-CDN-11: PNG/JPEG attachments are stored as WebP
+
+**Given** a WP attachment with MIME type `image/jpeg` and file name `banner-1200x800.jpg`  
+**When** the migration script processes the attachment  
+**Then** the file uploaded to R2 is in WebP format  
+**And** the manifest entry `fileName` is `banner-1200x800.webp`  
+**And** the manifest entry `mimeType` is `image/webp`  
+**And** the manifest entry `originalUrl` still contains the original `.jpg` WP URL
+
+---
+
+### SC-CDN-12: SVG, AVIF, and existing WebP are uploaded without conversion
+
+**Given** a WP attachment with MIME type `image/svg+xml` (or `image/avif` or `image/webp`)  
+**When** the migration script processes the attachment  
+**Then** the file is uploaded to R2 with its original format unchanged  
+**And** the manifest `mimeType` reflects the original MIME type (not `image/webp`)
+
+---
+
+### SC-CDN-13: Same `wpId` produces only one R2 object per size variant
+
+**Given** a WP attachment with ID `42` is referenced by three different posts  
+**When** the migration script processes the full media library  
+**Then** R2 contains exactly one object per size variant of attachment `42`  
+**And** `manifest.json` contains exactly one entry per size variant URL of attachment `42`

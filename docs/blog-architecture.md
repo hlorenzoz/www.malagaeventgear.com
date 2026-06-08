@@ -254,7 +254,7 @@ permita alertas futuras.
 
 ### Estructura
 
-- **Bucket**: `meg-blog-media` (cuenta `cc26ab18f887fb1c63c19e17a0bb313f`)
+- **Bucket**: `images` (cuenta `cc26ab18f887fb1c63c19e17a0bb313f`)
 - **CDN base**: `https://cdn.malagaeventgear.com`
 - **Dominio custom**: conectado via Cloudflare R2 Custom Domains
 

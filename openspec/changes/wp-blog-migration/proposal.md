@@ -8,8 +8,8 @@ The current blog lives on WordPress and is entirely decoupled from the SvelteKit
 
 ### In Scope
 
-- **One-shot migration script** (`scripts/migrate-wp/`, Bun): fetches posts, categories, tags, authors, media from WordPress REST API (`/wp-json/wp/v2/*` with `_embed`); downloads and uploads images to R2 bucket `meg-blog-media` via `wrangler r2 object put --remote`; builds enriched `manifest.json`; converts HTML→Markdown via turndown; rewrites image URLs; emits `src/content/blog/<slug>.svx`.
-- **R2 infrastructure**: bucket `meg-blog-media` (account `cc26ab18f887fb1c63c19e17a0bb313f`) + custom domain `cdn.malagaeventgear.com`.
+- **One-shot migration script** (`scripts/migrate-wp/`, Bun): fetches posts, categories, tags, authors, media from WordPress REST API (`/wp-json/wp/v2/*` with `_embed`); downloads and uploads images to R2 bucket `images` via `wrangler r2 object put --remote`; builds enriched `manifest.json`; converts HTML→Markdown via turndown; rewrites image URLs; emits `src/content/blog/<slug>.svx`.
+- **R2 infrastructure**: bucket `images` (account `cc26ab18f887fb1c63c19e17a0bb313f`) + custom domain `cdn.malagaeventgear.com`.
 - **Native blog data layer**: `src/lib/data/blog.ts` — build-time `import.meta.glob`, Zod-validated, excludes `draft:true` and `publishDate > now`.
 - **Schema extension**: `BlogPostFrontmatterSchema` in `src/lib/types/seo.ts` gains `slug, categories[], tags[], publishDate, updated?, excerpt, coverImage, draft?`.
 - **mdsvex layout**: `src/lib/layouts/BlogPost.svelte`, reuses `buildArticleSchema()` from `src/lib/utils/schema.ts`.
@@ -96,7 +96,7 @@ The current blog lives on WordPress and is entirely decoupled from the SvelteKit
 
 ## Dependencies
 
-- Cloudflare R2 bucket `meg-blog-media` provisioned (account `cc26ab18f887fb1c63c19e17a0bb313f`).
+- Cloudflare R2 bucket `images` provisioned (account `cc26ab18f887fb1c63c19e17a0bb313f`).
 - Custom domain `cdn.malagaeventgear.com` pointed at R2 bucket.
 - `DEPLOY_HOOK_URL` Cloudflare Pages webhook secret available for blog-rebuild worker.
 - WordPress site (`malagaeventgear.com`) accessible during migration script run.
