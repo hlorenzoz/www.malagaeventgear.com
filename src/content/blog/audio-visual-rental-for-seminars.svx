@@ -63,9 +63,7 @@ Our tailored rental packages and professional support ensure seamless and engagi
 
 ---
 
-.stk-xm93rg9 ul li, .stk-xm93rg9 ol li, .stk-xm93rg9 ul li span, .stk-xm93rg9 ol li span{color:#0f0e17 !important;}.stk-xm93rg9 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-xm93rg9:before{background-color:#8dd2fc7d !important;}
 
--   .stk-r5vgbs0 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear offers top notch audiovisual rental services tailored for conventions and seminars in Malaga.
 

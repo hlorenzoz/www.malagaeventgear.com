@@ -58,9 +58,7 @@ Contact us today to transform your event into an unforgettable experience.
 
 ---
 
-.stk-wc5mtn1 ul li, .stk-wc5mtn1 ol li, .stk-wc5mtn1 ul li span, .stk-wc5mtn1 ol li span{color:#0f0e17 !important;}.stk-wc5mtn1 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-wc5mtn1:before{background-color:#8dd2fc7d !important;}
 
--   .stk-earism7 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear provides high quality audio visual solutions, perfect for enhancing training sessions and events.
 

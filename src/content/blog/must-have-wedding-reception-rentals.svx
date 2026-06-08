@@ -24,9 +24,7 @@ Navigating the complexities of wedding planning is simplified with Malaga Event 
 
 ---
 
-.stk-z3fhl5t ul li, .stk-z3fhl5t ol li, .stk-z3fhl5t ul li span, .stk-z3fhl5t ol li span{color:#0f0e17 !important;}.stk-z3fhl5t {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-z3fhl5t:before{background-color:#8dd2fc7d !important;}
 
--   .stk-stir02t .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear (MEG) offers premium audiovisual and lighting solutions for weddings in Malaga.
 

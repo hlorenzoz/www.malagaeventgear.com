@@ -24,9 +24,7 @@ Securing your wedding rentals and vendors in advance is essential for a smooth a
 
 ---
 
-.stk-y0dh3ie ul li, .stk-y0dh3ie ol li, .stk-y0dh3ie ul li span, .stk-y0dh3ie ol li span{color:#0f0e17 !important;}.stk-y0dh3ie {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-y0dh3ie:before{background-color:#8dd2fc7d !important;}
 
--   .stk-wyvenqs .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Early booking of wedding vendors secures top-quality services and alleviates high-demand stress.
 

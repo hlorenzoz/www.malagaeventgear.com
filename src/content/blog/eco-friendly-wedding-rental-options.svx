@@ -23,9 +23,7 @@ Couples increasingly opt for eco friendly weddings in Malaga, leveraging sustain
 
 ---
 
-.stk-0owzo54 ul li, .stk-0owzo54 ol li, .stk-0owzo54 ul li span, .stk-0owzo54 ol li span{color:#0f0e17 !important;}.stk-0owzo54 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-0owzo54:before{background-color:#8dd2fc7d !important;}
 
--   .stk-fdlnk4m .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Eco friendly weddings in Malaga are increasingly popular, emphasizing sustainable practices and local vendor support.
 

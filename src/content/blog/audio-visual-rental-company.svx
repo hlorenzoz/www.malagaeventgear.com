@@ -60,9 +60,7 @@ Their expert team provides seamless execution and personalized support, ensuring
 
 ---
 
-.stk-4xo57mp ul li, .stk-4xo57mp ol li, .stk-4xo57mp ul li span, .stk-4xo57mp ol li span{color:#0f0e17 !important;}.stk-4xo57mp {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-4xo57mp:before{background-color:#8dd2fc7d !important;}
 
--   .stk-6x834zr .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     **Malaga Event Gear (MEG)** provides top quality AV rentals for events in Malaga, Spain, tailored to enhance weddings, parties, and corporate gatherings.
 

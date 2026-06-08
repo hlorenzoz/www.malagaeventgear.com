@@ -4,9 +4,8 @@ import { test, expect } from '@playwright/test';
  * Blog E2E Tests — Phase 2 (Routes) + Phase 3 (Sitemaps)
  *
  * These tests run against the dev server (bun run dev) as configured in playwright.config.ts.
- * Fixture posts in src/content/blog/ provide test data:
- *   - welcome-to-meg-blog.svx        (published, category: Event Planning, author: hector-lorenzo)
- *   - wedding-sound-guide.svx        (published, categories: Weddings + Sound Acoustics)
+ * 75 real migrated posts in src/content/blog/ provide published content.
+ * Two fixture files remain for filtering tests only:
  *   - future-post-test-fixture.svx   (publishDate: 2099-12-31 — must be excluded)
  *   - draft-post-test-fixture.svx    (draft: true — must be excluded)
  */
@@ -94,21 +93,21 @@ test.describe('Blog Index (/blog/)', () => {
 	test('published posts are shown on /blog/', async ({ page }) => {
 		await page.goto('/blog/');
 		const content = await page.content();
-		expect(content).toContain('Welcome to the Malaga Event Gear Blog');
+		expect(content).toContain('Weather Considerations for Outdoor Rentals');
 	});
 });
 
 test.describe('Blog Post Route (/blog/[slug]/)', () => {
 	test('SC-BC-08: post route returns 200 with correct h1', async ({ page }) => {
-		const response = await page.goto('/blog/welcome-to-meg-blog/');
+		const response = await page.goto('/blog/weather-considerations-for-outdoor-rentals/');
 		expect(response?.status()).toBe(200);
 		// BlogPost.svelte renders the title as the first h1 in the post header
 		const h1 = page.locator('header h1').first();
-		await expect(h1).toContainText('Welcome to the Malaga Event Gear Blog');
+		await expect(h1).toContainText('Weather Considerations for Outdoor Rentals');
 	});
 
 	test('SC-BC-10: post page has BlogPosting JSON-LD schema', async ({ page }) => {
-		await page.goto('/blog/welcome-to-meg-blog/');
+		await page.goto('/blog/weather-considerations-for-outdoor-rentals/');
 		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
 		const hasArticle = scripts.some((s) => {
 			try {
@@ -127,7 +126,7 @@ test.describe('Blog Post Route (/blog/[slug]/)', () => {
 	});
 
 	test('SC-TAX-16: author name links to /blog/author/<slug>/', async ({ page }) => {
-		await page.goto('/blog/welcome-to-meg-blog/');
+		await page.goto('/blog/weather-considerations-for-outdoor-rentals/');
 		const authorLink = page.locator('a[href^="/blog/author/"]').first();
 		await expect(authorLink).toBeVisible();
 		const href = await authorLink.getAttribute('href');
@@ -135,7 +134,7 @@ test.describe('Blog Post Route (/blog/[slug]/)', () => {
 	});
 
 	test('SC-TAX-17: category tags link to /blog/category/<slug>/', async ({ page }) => {
-		await page.goto('/blog/welcome-to-meg-blog/');
+		await page.goto('/blog/weather-considerations-for-outdoor-rentals/');
 		const catLink = page.locator('a[href^="/blog/category/"]').first();
 		await expect(catLink).toBeVisible();
 		const href = await catLink.getAttribute('href');
@@ -179,20 +178,20 @@ test.describe('Category Landing (/blog/category/[category]/)', () => {
 
 test.describe('Author Landing (/blog/author/[author]/)', () => {
 	test('SC-TAX-11: author page returns 200 and shows posts', async ({ page }) => {
-		const response = await page.goto('/blog/author/hector-lorenzo/');
+		const response = await page.goto('/blog/author/hector-luis-lorenzo/');
 		expect(response?.status()).toBe(200);
 		const cards = page.locator('[data-testid="post-card"]');
 		await expect(cards.first()).toBeVisible();
 	});
 
 	test('SC-TAX-13: canonical URL has trailing slash', async ({ page }) => {
-		await page.goto('/blog/author/hector-lorenzo/');
+		await page.goto('/blog/author/hector-luis-lorenzo/');
 		const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
-		expect(canonical).toMatch(/\/blog\/author\/hector-lorenzo\/$/);
+		expect(canonical).toMatch(/\/blog\/author\/hector-luis-lorenzo\/$/);
 	});
 
 	test('SC-TAX-14: CollectionPage JSON-LD present', async ({ page }) => {
-		await page.goto('/blog/author/hector-lorenzo/');
+		await page.goto('/blog/author/hector-luis-lorenzo/');
 		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
 		const hasCollection = scripts.some((s) => {
 			try {
@@ -224,16 +223,21 @@ test.describe('Post Sitemap (/post-sitemap.xml)', () => {
 	test('SC-SM-02: post URL uses trailing slash', async ({ page }) => {
 		await page.goto('/post-sitemap.xml');
 		const body = await page.content();
-		expect(body).toContain('<loc>https://malagaeventgear.com/blog/welcome-to-meg-blog/</loc>');
+		expect(body).toContain('<loc>https://malagaeventgear.com/blog/weather-considerations-for-outdoor-rentals/</loc>');
 	});
 
 	test('SC-SM-03/04: <lastmod> uses updated when present (overrides publishDate)', async ({ page }) => {
 		await page.goto('/post-sitemap.xml');
 		const body = await page.content();
-		// wedding-sound-guide fixture: publishDate 2025-03-10, updated 2025-05-01.
-		// lastmod MUST reflect `updated`, not `publishDate`.
-		expect(body).toContain('<lastmod>2025-05-01T00:00:00+00:00</lastmod>');
-		expect(body).not.toContain('2025-03-10');
+		// weather-considerations-for-outdoor-rentals: publishDate 2026-03-02, updated 2026-02-17.
+		// The <url> block for this post MUST have lastmod derived from `updated`, not `publishDate`.
+		const urlBlockMatch = body.match(
+			/<url>[\s\S]*?<loc>[^<]*weather-considerations-for-outdoor-rentals[^<]*<\/loc>[\s\S]*?<\/url>/
+		);
+		expect(urlBlockMatch).not.toBeNull();
+		const urlBlock = urlBlockMatch![0];
+		expect(urlBlock).toContain('<lastmod>2026-02-17T00:00:00+00:00</lastmod>');
+		expect(urlBlock).not.toContain('2026-03-02');
 	});
 
 	test('SC-SM-05: draft posts are excluded', async ({ page }) => {

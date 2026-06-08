@@ -26,9 +26,7 @@ Planning a wedding in Malaga, Spain, is an exciting endeavor that hinges on choo
 
 ---
 
-.stk-dwrvuki ul li, .stk-dwrvuki ol li, .stk-dwrvuki ul li span, .stk-dwrvuki ol li span{color:#0f0e17 !important;}.stk-dwrvuki {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-dwrvuki:before{background-color:#8dd2fc7d !important;}
 
--   .stk-4ezby5i .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Wedding rentals offer essential items to enhance both indoor and outdoor settings, aligning with your wedding vision.
 

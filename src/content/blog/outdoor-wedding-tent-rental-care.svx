@@ -24,9 +24,7 @@ Planning an outdoor wedding requires careful consideration of various elements t
 
 ---
 
-.stk-7cmachp ul li, .stk-7cmachp ol li, .stk-7cmachp ul li span, .stk-7cmachp ol li span{color:#0f0e17 !important;}.stk-7cmachp {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-7cmachp:before{background-color:#8dd2fc7d !important;}
 
--   .stk-wyo7s9z .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Wedding tent rentals offer shelter and intimate settings for versatile event customization.
 

@@ -57,9 +57,7 @@ With over 25 years of expertise in delivering seamless events, these companies p
 
 ---
 
-.stk-fd4r4o7 ul li, .stk-fd4r4o7 ol li, .stk-fd4r4o7 ul li span, .stk-fd4r4o7 ol li span{color:#0f0e17 !important;}.stk-fd4r4o7 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-fd4r4o7:before{background-color:#8dd2fc7d !important;}
 
--   .stk-kh9cd3a .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Discover Málaga’s top audiovisual rental companies for weddings, parties, and corporate events.
 

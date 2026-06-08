@@ -24,13 +24,10 @@ Make your dream wedding come alive with exceptional audio visual rental services
 
 ---
 
-.stk-jyruh6v ul li, .stk-jyruh6v ol li, .stk-jyruh6v ul li span, .stk-jyruh6v ol li span{color:#0f0e17 !important;}.stk-jyruh6v {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-jyruh6v:before{background-color:#8dd2fc7d !important;}
 
--   .stk-p0luxth .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Elevate your wedding with magical audiovisual rentals in Malaga, featuring clear sound and dynamic lighting.
 
--   .stk-ad94293 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Choose **Malaga Event Gear (MEG)** for seamless AV setups and expert support tailored to any venue.
 

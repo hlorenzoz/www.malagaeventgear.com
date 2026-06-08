@@ -24,9 +24,7 @@ Planning successful outdoor events in Malaga involves understanding seasonal wea
 
 ---
 
-.stk-998d3ad ul li, .stk-998d3ad ol li, .stk-998d3ad ul li span, .stk-998d3ad ol li span{color:#0f0e17 !important;}.stk-998d3ad {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-998d3ad:before{background-color:#8dd2fc7d !important;}
 
--   .stk-de16a44 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Plan outdoor events in Malaga by understanding seasonal weather patterns and preparing for unexpected changes.
 

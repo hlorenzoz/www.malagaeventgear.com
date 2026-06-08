@@ -61,9 +61,7 @@ For questions or bookings, feel free to contact them directly.
 
 ---
 
-.stk-gks0csl ul li, .stk-gks0csl ol li, .stk-gks0csl ul li span, .stk-gks0csl ol li span{color:#0f0e17 !important;}.stk-gks0csl {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-gks0csl:before{background-color:#8dd2fc7d !important;}
 
--   .stk-3tqe0wt .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear offers state of the art audiovisual rental services for virtual conferences and online seminars.
 

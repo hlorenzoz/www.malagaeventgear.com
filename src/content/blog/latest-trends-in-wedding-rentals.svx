@@ -24,9 +24,7 @@ Organizing a luxury wedding in Spain on a budget is achievable through strategic
 
 ---
 
-.stk-lueurow ul li, .stk-lueurow ol li, .stk-lueurow ul li span, .stk-lueurow ol li span{color:#0f0e17 !important;}.stk-lueurow {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-lueurow:before{background-color:#8dd2fc7d !important;}
 
--   .stk-dipyo7x .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Exploring affordable wedding options in Malaga can blend luxury with budget efficiency through versatile rental solutions.
 

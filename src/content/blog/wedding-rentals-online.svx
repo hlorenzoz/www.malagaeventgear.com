@@ -26,9 +26,7 @@ From sparkling audiovisuals to breathtaking lighting setups, we offer tailored s
 
 ---
 
-.stk-xcwkajv ul li, .stk-xcwkajv ol li, .stk-xcwkajv ul li span, .stk-xcwkajv ol li span{color:#0f0e17 !important;}.stk-xcwkajv {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-xcwkajv:before{background-color:#8dd2fc7d !important;}
 
--   .stk-ehtly23 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     **Malaga Event Gear (MEG)** offers top tier wedding rentals with all inclusive audio visual solutions.
 

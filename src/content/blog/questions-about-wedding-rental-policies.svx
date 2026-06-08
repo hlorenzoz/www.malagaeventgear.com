@@ -24,9 +24,7 @@ Planning a wedding can be overwhelming, but asking the right questions to your w
 
 ---
 
-.stk-3vikju6 ul li, .stk-3vikju6 ol li, .stk-3vikju6 ul li span, .stk-3vikju6 ol li span{color:#0f0e17 !important;}.stk-3vikju6 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-3vikju6:before{background-color:#8dd2fc7d !important;}
 
--   .stk-f2hkns5 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Explore essential questions to streamline your wedding planning and avoid surprises.
 

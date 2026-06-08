@@ -24,9 +24,7 @@ Managing last-minute wedding rental changes can be stressful, but with the right
 
 ---
 
-.stk-f5j4c76 ul li, .stk-f5j4c76 ol li, .stk-f5j4c76 ul li span, .stk-f5j4c76 ol li span{color:#0f0e17 !important;}.stk-f5j4c76 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-f5j4c76:before{background-color:#8dd2fc7d !important;}
 
--   .stk-konw0zu .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Embrace flexibility to turn last-minute changes into growth opportunities, maintaining calm and control during wedding planning.
 

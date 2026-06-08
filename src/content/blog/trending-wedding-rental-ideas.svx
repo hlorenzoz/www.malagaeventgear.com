@@ -24,9 +24,7 @@ Discover the latest wedding rental trends for 2026 with **Malaga Event Gear (MEG
 
 ---
 
-.stk-7003f8m ul li, .stk-7003f8m ol li, .stk-7003f8m ul li span, .stk-7003f8m ol li span{color:#0f0e17 !important;}.stk-7003f8m {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-7003f8m:before{background-color:#8dd2fc7d !important;}
 
--   .stk-et7f8uy .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Discover top 2026 wedding rentals like elegant lighting and bespoke decor for unforgettable Malaga weddings.
 

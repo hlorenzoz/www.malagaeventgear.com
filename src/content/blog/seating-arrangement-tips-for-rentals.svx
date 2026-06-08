@@ -24,9 +24,7 @@ Creating the ideal seating arrangement for any event, whether it’s a wedding o
 
 ---
 
-.stk-grbqf72 ul li, .stk-grbqf72 ol li, .stk-grbqf72 ul li span, .stk-grbqf72 ol li span{color:#0f0e17 !important;}.stk-grbqf72 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-grbqf72:before{background-color:#8dd2fc7d !important;}
 
--   .stk-8jsn0fw .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Creating the perfect seating arrangement blends aesthetics with guest comfort and interaction.
 

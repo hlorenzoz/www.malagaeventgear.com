@@ -61,9 +61,7 @@ Our customizable rental packages cater to events of all sizes, providing flexibl
 
 ---
 
-.stk-8357biu ul li, .stk-8357biu ol li, .stk-8357biu ul li span, .stk-8357biu ol li span{color:#0f0e17 !important;}.stk-8357biu {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-8357biu:before{background-color:#8dd2fc7d !important;}
 
--   .stk-mranm6b .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear offers AV rentals for religious events in Malaga, providing exceptional audio clarity and stunning visuals.
 

@@ -24,9 +24,7 @@ Discover the charm of Malaga with our unique wedding ceremony rentals, offering 
 
 ---
 
-.stk-f5d04tz ul li, .stk-f5d04tz ol li, .stk-f5d04tz ul li span, .stk-f5d04tz ol li span{color:#0f0e17 !important;}.stk-f5d04tz {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-f5d04tz:before{background-color:#8dd2fc7d !important;}
 
--   .stk-5co4or5 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Explore unique weddings in Malaga with bespoke rentals, including elegant decor and state of the art audiovisuals.
 

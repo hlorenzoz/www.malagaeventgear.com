@@ -58,9 +58,7 @@ For inquiries or a custom quote, visit their contact page and elevate your next 
 
 ---
 
-.stk-c38rkov ul li, .stk-c38rkov ol li, .stk-c38rkov ul li span, .stk-c38rkov ol li span{color:#0f0e17 !important;}.stk-c38rkov {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-c38rkov:before{background-color:#8dd2fc7d !important;}
 
--   .stk-uaivkzj .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear enhances small events with top notch AV rentals, delivering stunning visuals and clear sound for memorable experiences.
 

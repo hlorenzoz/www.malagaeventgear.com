@@ -26,9 +26,7 @@ Planning a wedding in Malaga offers breathtaking scenery and a wealth of cost sa
 
 ---
 
-.stk-obyy1l1 ul li, .stk-obyy1l1 ol li, .stk-obyy1l1 ul li span, .stk-obyy1l1 ol li span{color:#0f0e17 !important;}.stk-obyy1l1 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-obyy1l1:before{background-color:#8dd2fc7d !important;}
 
--   .stk-pys2i8f .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga offers stunning venues with historic charm and beautiful beaches for unforgettable weddings.
 

@@ -61,9 +61,7 @@ Their comprehensive rental packages come with dedicated technical support to ens
 
 ---
 
-.stk-64lk7b4 ul li, .stk-64lk7b4 ol li, .stk-64lk7b4 ul li span, .stk-64lk7b4 ol li span{color:#0f0e17 !important;}.stk-64lk7b4 {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-64lk7b4:before{background-color:#8dd2fc7d !important;}
 
--   .stk-qk9vyod .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear offers top tier AV rental for professional corporate meetings in Malaga, enhancing presentations and audience engagement.
 

@@ -24,9 +24,7 @@ Malaga Event Gear (MEG) offers expert guidance on matching wedding rentals to th
 
 ---
 
-.stk-m4ani4w ul li, .stk-m4ani4w ol li, .stk-m4ani4w ul li span, .stk-m4ani4w ol li span{color:#0f0e17 !important;}.stk-m4ani4w {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-m4ani4w:before{background-color:#8dd2fc7d !important;}
 
--   .stk-9zfbsbe .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Define your wedding style by incorporating personal inspirations, hobbies, and colors to create a cohesive event.
 

@@ -23,9 +23,7 @@ Discover the charm of hosting your dream wedding in Malaga, Spain, with our All-
 
 ---
 
-.stk-8pxanbe ul li, .stk-8pxanbe ol li, .stk-8pxanbe ul li span, .stk-8pxanbe ol li span{color:#0f0e17 !important;}.stk-8pxanbe {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-8pxanbe:before{background-color:#8dd2fc7d !important;}
 
--   .stk-q6qwm6f .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     All-inclusive wedding packages in Spain offer seamless venue and audiovisual solutions, ensuring stress-free planning for couples.
 

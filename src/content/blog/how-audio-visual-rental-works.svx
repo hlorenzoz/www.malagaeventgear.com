@@ -58,9 +58,7 @@ For insights and services, visit our website and let us help you elevate your ev
 
 ---
 
-.stk-e7olq0n ul li, .stk-e7olq0n ol li, .stk-e7olq0n ul li span, .stk-e7olq0n ol li span{color:#0f0e17 !important;}.stk-e7olq0n {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-e7olq0n:before{background-color:#8dd2fc7d !important;}
 
--   .stk-ye6znml .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Audio visual rentals transform event organization offering flexible, cost effective solutions for diverse gatherings.
 

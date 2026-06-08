@@ -24,25 +24,19 @@ Transform your special day with our expert wedding rentals, designed to add eleg
 
 ---
 
-.stk-odzq5kn ul li, .stk-odzq5kn ol li, .stk-odzq5kn ul li span, .stk-odzq5kn ol li span{color:#0f0e17 !important;}.stk-odzq5kn {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-odzq5kn:before{background-color:#8dd2fc7d !important;}
 
--   .stk-svd660o .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Transform your wedding venue with **MEG’s** expert wedding rentals, ensuring elegance and sophistication.
 
--   .stk-41bd749 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     **MEG’s Wedding Pack** provides state of the art audio and visual solutions, creating magical experiences.
 
--   .stk-33e44bb .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Customizable lighting enhances ambiance, perfect for both intimate evenings and elaborate ceremonies.
 
--   .stk-39555b2 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Lounge furniture adds comfort and style, complementing the wedding’s theme with functional elegance.
 
--   .stk-4dce238 .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     **MEG** enhances receptions with personalized accessories, creating a unique atmosphere reflective of your story.
 

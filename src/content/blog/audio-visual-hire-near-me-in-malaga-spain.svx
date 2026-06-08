@@ -55,9 +55,7 @@ Contact us to discover how we can elevate your next occasion with our cutting ed
 
 ---
 
-.stk-en1bjxv ul li, .stk-en1bjxv ol li, .stk-en1bjxv ul li span, .stk-en1bjxv ol li span{color:#0f0e17 !important;}.stk-en1bjxv {background-color:#8dd2fc7d !important;border-top-left-radius:20px !important;border-top-right-radius:20px !important;border-bottom-right-radius:20px !important;border-bottom-left-radius:20px !important;overflow:hidden !important;box-shadow:0 5px 30px -10px #123f524d !important;border-style:solid !important;}.stk-en1bjxv:before{background-color:#8dd2fc7d !important;}
 
--   .stk-ybv9ifa .stk-block-icon-list-item\_\_text{color:#0f0e17 !important;}
 
     Malaga Event Gear offers top notch audio visual hire services in Malaga, ideal for weddings, parties, and corporate events.
 
