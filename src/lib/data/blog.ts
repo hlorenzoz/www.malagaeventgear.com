@@ -14,6 +14,9 @@ import {
 	getAuthorsFromPosts,
 	getPostsByAuthorFromPosts
 } from '$lib/data/blog-pipeline';
+import coverThumbsRaw from '$lib/data/cover-thumbs.json';
+
+const coverThumbs = coverThumbsRaw as Record<string, string>;
 
 // ─── Build-time data load ─────────────────────────────────────────────────────
 
@@ -38,6 +41,12 @@ const componentLoaders = import.meta.glob('../../content/blog/*.svx', {
 const _allPosts: BlogPost[] = buildPostsFromGlob(
 	Object.fromEntries(Object.entries(metaModules).map(([path, metadata]) => [path, { metadata }]))
 );
+
+// Attach the card-sized cover variant (~768px) from the generated lookup, so listing
+// grids serve a card-appropriate image instead of the full-size cover (CWV / LCP).
+for (const post of _allPosts) {
+	post.coverImageThumb = coverThumbs[post.coverImage] ?? post.coverImage;
+}
 
 // Taxonomy caches
 const _categories: Category[] = getCategoriesFromPosts(_allPosts);

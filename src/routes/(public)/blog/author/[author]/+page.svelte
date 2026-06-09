@@ -72,15 +72,18 @@
 
 	<!-- Posts Grid -->
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-		{#each posts as post}
+		{#each posts as post, i}
 			<article data-testid="post-card" class="relative bg-surface-container-low border border-border-glass rounded-[20px] overflow-hidden hover:border-electric-blue/40 transition-colors duration-300 flex flex-col">
 				{#if post.coverImage}
 					<a href="/blog/{post.slug}/" class="block aspect-video overflow-hidden">
 						<img
-							src={post.coverImage}
+							src={post.coverImageThumb ?? post.coverImage}
 							alt={post.title}
+							width="370"
+							height="208"
 							class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-							loading="lazy"
+							loading={i === 0 ? 'eager' : 'lazy'}
+							fetchpriority={i === 0 ? 'high' : undefined}
 						/>
 					</a>
 				{/if}
