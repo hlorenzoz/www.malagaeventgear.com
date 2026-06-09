@@ -33,9 +33,11 @@ export type BlogPostFrontmatter = z.infer<typeof BlogPostSchema>;
  */
 export type BlogPost = BlogPostFrontmatter & {
 	slug: string;
-	// Card-sized (~768px) cover variant for listing grids, attached from cover-thumbs.json
-	// (frontmatter coverImage stays the full-size image, used for the post hero + og:image).
+	// Responsive cover variants attached from cover-thumbs.json (frontmatter coverImage
+	// stays the full-size image, used for og:image). thumb = ~768px <img src> fallback;
+	// srcset = all R2 variants so the browser picks the right size per DPR/viewport.
 	coverImageThumb?: string;
+	coverImageSrcset?: string;
 };
 
 /**

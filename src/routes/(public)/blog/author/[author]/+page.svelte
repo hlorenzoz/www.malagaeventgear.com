@@ -78,6 +78,8 @@
 					<a href="/blog/{post.slug}/" class="block aspect-video overflow-hidden">
 						<img
 							src={post.coverImageThumb ?? post.coverImage}
+							srcset={post.coverImageSrcset}
+							sizes="(min-width: 1024px) 370px, (min-width: 768px) 45vw, 90vw"
 							alt={post.title}
 							width="370"
 							height="208"

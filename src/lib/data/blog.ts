@@ -16,7 +16,7 @@ import {
 } from '$lib/data/blog-pipeline';
 import coverThumbsRaw from '$lib/data/cover-thumbs.json';
 
-const coverThumbs = coverThumbsRaw as Record<string, string>;
+const coverThumbs = coverThumbsRaw as Record<string, { thumb: string; srcset?: string }>;
 
 // ─── Build-time data load ─────────────────────────────────────────────────────
 
@@ -45,7 +45,9 @@ const _allPosts: BlogPost[] = buildPostsFromGlob(
 // Attach the card-sized cover variant (~768px) from the generated lookup, so listing
 // grids serve a card-appropriate image instead of the full-size cover (CWV / LCP).
 for (const post of _allPosts) {
-	post.coverImageThumb = coverThumbs[post.coverImage] ?? post.coverImage;
+	const info = coverThumbs[post.coverImage];
+	post.coverImageThumb = info?.thumb ?? post.coverImage;
+	post.coverImageSrcset = info?.srcset;
 }
 
 // Taxonomy caches

@@ -54,7 +54,17 @@
 	<!-- Cover Image -->
 	{#if post.coverImage}
 		<div class="mb-8 rounded-2xl overflow-hidden aspect-video">
-			<img src={post.coverImage} alt={post.title} class="w-full h-full object-cover" loading="eager" />
+			<img
+				src={post.coverImageThumb ?? post.coverImage}
+				srcset={post.coverImageSrcset}
+				sizes="(min-width: 768px) 768px, 100vw"
+				alt={post.title}
+				width="768"
+				height="432"
+				class="w-full h-full object-cover"
+				loading="eager"
+				fetchpriority="high"
+			/>
 		</div>
 	{/if}
 
