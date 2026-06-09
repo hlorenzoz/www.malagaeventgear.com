@@ -48,7 +48,9 @@ import { dirname } from 'path';
 
 const __dirname_index = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT_INDEX = resolve(__dirname_index, '..', '..');
-const REDIRECTS_PATH = resolve(PROJECT_ROOT_INDEX, 'static', '_redirects');
+// adapter-cloudflare requires _redirects at the PROJECT ROOT (not static/). The
+// generator merges its managed block into any existing root _redirects (legacy rules).
+const REDIRECTS_PATH = resolve(PROJECT_ROOT_INDEX, '_redirects');
 
 const isDryRun = process.argv.includes('--dry-run');
 

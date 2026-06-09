@@ -1,5 +1,6 @@
 import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-cloudflare';
+import rehypeSlug from 'rehype-slug';
 
 /**
  * mdsvex 0.12.7 inyecta el frontmatter como `<script context="module">`, sintaxis
@@ -24,6 +25,13 @@ const config = {
 	},
 	kit: {
 		adapter: adapter(),
+		prerender: {
+			// Los posts migrados traen un "Table of Contents" de WP cuyo slugger no
+			// siempre coincide con rehype-slug (p. ej. "FAQs" → #fa-qs vs #faqs). Esas
+			// anclas no saltan, pero NO deben romper el build. handleHttpError queda por
+			// defecto (falla) para seguir detectando links 404 reales.
+			handleMissingId: 'warn'
+		},
 		// Inlina el CSS en el <head> eliminando el <link> render-blocking que retrasaba FCP/LCP.
 		// El umbral se compara contra el tamaño SIN comprimir: el CSS global (Tailwind) pesa ~83KB
 		// sin comprimir (~12KB gzip), así que el umbral debe superarlo. Crítico para las páginas de
@@ -32,7 +40,10 @@ const config = {
 	},
 	preprocess: [
 		mdsvex({
-			extensions: ['.svx']
+			extensions: ['.svx'],
+			// rehype-slug genera id en los headings (github-slugger) para que las anclas
+			// del "Table of Contents" de los posts migrados resuelvan (#brief-overview).
+			rehypePlugins: [rehypeSlug]
 			// No layout option — mdsvex layout injection uses $$props which is
 			// incompatible with runes mode. The [slug]/+page.svelte wraps post
 			// components explicitly via BlogPost.svelte instead (ADR-009 approach).

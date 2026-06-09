@@ -8,10 +8,12 @@ import { BlogPostSchema } from '$lib/types/blog';
 import type { BlogPost, Category, Author } from '$lib/types/blog';
 import { slugify } from '$lib/utils/slugify';
 
-// The shape of each module entry returned by import.meta.glob
+// The shape of each module entry passed to buildPostsFromGlob.
+// Only `metadata` (frontmatter) is required; the compiled component (`default`)
+// is loaded lazily elsewhere and is intentionally NOT used here.
 export interface GlobModule {
 	metadata: unknown;
-	default: unknown;
+	default?: unknown;
 }
 
 export type GlobResult = Record<string, GlobModule>;
@@ -44,8 +46,7 @@ export function buildPostsFromGlob(glob: GlobResult, buildDate: Date = new Date(
 
 		posts.push({
 			...frontmatter,
-			slug,
-			component: module.default
+			slug
 		});
 	}
 

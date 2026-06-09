@@ -4,9 +4,9 @@
 
 	let { data }: { data: PageData } = $props();
 
-	// The mdsvex component (data.post.component) contains only the rendered Markdown body.
+	// data.component is the lazily-loaded mdsvex component (only the rendered Markdown body).
 	// BlogPost.svelte wraps it with SEO, header, author links, category links, etc.
-	let PostBody = $derived(data.post.component);
+	let PostBody = $derived(data.component);
 </script>
 
 <BlogPost post={data.post}>

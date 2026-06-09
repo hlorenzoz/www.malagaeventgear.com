@@ -214,7 +214,7 @@ The script will log:
 - Media uploads: wrangler `r2 object put` is idempotent — re-uploading an existing key
   just overwrites with the same file. The manifest skip means we never re-upload anyway.
 - Post emission: `.svx` files are overwritten on re-run (idempotent by design).
-- `static/_redirects`: regenerated from post data on every run.
+- `_redirects (raíz del proyecto)`: regenerated from post data on every run.
 
 **When to delete the manifest and start fresh:**
 
@@ -228,11 +228,11 @@ bun scripts/migrate-wp/index.ts
 
 ---
 
-## 7. Redirects (`static/_redirects`)
+## 7. Redirects (`_redirects (raíz del proyecto)`)
 
 ### Cómo se generan
 
-La migración genera automáticamente el archivo `static/_redirects` durante el paso de
+La migración genera automáticamente el archivo `_redirects (raíz del proyecto)` durante el paso de
 la migración real (no en dry-run). El archivo mapea cada URL vieja de WordPress al
 nuevo path del blog de SvelteKit.
 
@@ -280,7 +280,7 @@ probá cada una:
 
 ```bash
 # Extraer todos los old paths del bloque gestionado
-awk '/BEGIN wp-blog-redirects/,/END wp-blog-redirects/' static/_redirects \
+awk '/BEGIN wp-blog-redirects/,/END wp-blog-redirects/' _redirects (raíz del proyecto) \
   | grep '^/' \
   | awk '{print $1}' \
   | while read path; do
@@ -292,7 +292,7 @@ awk '/BEGIN wp-blog-redirects/,/END wp-blog-redirects/' static/_redirects \
 
 ### Checklist post-deploy
 
-- [ ] `static/_redirects` fue commiteado y está en el deploy
+- [ ] `_redirects (raíz del proyecto)` fue commiteado y está en el deploy
 - [ ] `https://malagaeventgear.com/weather-considerations-for-outdoor-rentals/` devuelve 301
 - [ ] El Location header apunta a `/blog/...` (no un redirect doble)
 - [ ] Las páginas raíz (`/packages/`, `/about-us/`) siguen devolviendo 200 (NO redirigidas)
@@ -425,7 +425,7 @@ borrarse para forzar una re-migración completa desde cero.
 | Manifest I/O | `scripts/migrate-wp/manifest.ts` |
 | Redirect generator | `scripts/migrate-wp/redirects.ts` |
 | Manifest JSON | `scripts/migrate-wp/manifest.json` |
-| Redirects generados | `static/_redirects` |
+| Redirects generados | `_redirects (raíz del proyecto)` |
 | Posts emitidos | `src/content/blog/*.svx` |
 | Cron worker | `workers/blog-rebuild/` |
 | Runbook de lead capture | `docs/lead-capture-deployment.md` |

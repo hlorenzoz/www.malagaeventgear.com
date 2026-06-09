@@ -17,16 +17,27 @@ import {
 
 // ─── Build-time data load ─────────────────────────────────────────────────────
 
-// Glob is evaluated eagerly at module evaluation time (build time).
+// Frontmatter ONLY — evaluated eagerly at build time. `import: 'metadata'` pulls just
+// the exported frontmatter object from each .svx, NOT the compiled component. This keeps
+// listing pages (index/category/author/sitemaps) from bundling every post body (CWV).
 // Path is relative to THIS FILE (src/lib/data/blog.ts → ../content/blog/).
-const modules = import.meta.glob('../../content/blog/*.svx', { eager: true }) as Record<
-	string,
-	{ metadata: unknown; default: unknown }
->;
+const metaModules = import.meta.glob('../../content/blog/*.svx', {
+	eager: true,
+	import: 'metadata'
+}) as Record<string, unknown>;
+
+// Compiled components — LAZY loaders, code-split per post. Only the visited post's
+// body chunk is fetched (in [slug]/+page.ts via getPostComponentLoader).
+const componentLoaders = import.meta.glob('../../content/blog/*.svx', {
+	import: 'default'
+}) as Record<string, () => Promise<unknown>>;
 
 // Posts cache — computed once at module evaluation time (ADR-003, ADR-004).
 // The date filter uses the current date at build time (ADR-004).
-const _allPosts: BlogPost[] = buildPostsFromGlob(modules);
+// Wrap each metadata value into the GlobModule shape the pure pipeline expects.
+const _allPosts: BlogPost[] = buildPostsFromGlob(
+	Object.fromEntries(Object.entries(metaModules).map(([path, metadata]) => [path, { metadata }]))
+);
 
 // Taxonomy caches
 const _categories: Category[] = getCategoriesFromPosts(_allPosts);
@@ -97,4 +108,15 @@ export function getAuthors(): Author[] {
  */
 export function getPostsByAuthor(authorSlug: string): BlogPost[] {
 	return getPostsByAuthorFromPosts(_allPosts, authorSlug);
+}
+
+/**
+ * Returns the lazy loader for a post's compiled mdsvex component, or undefined.
+ * Used by /blog/[slug]/+page.ts to fetch ONLY the visited post's body chunk.
+ */
+export function getPostComponentLoader(slug: string): (() => Promise<unknown>) | undefined {
+	const entry = Object.entries(componentLoaders).find(
+		([path]) => path.split('/').pop()?.replace(/\.svx$/, '') === slug
+	);
+	return entry?.[1];
 }

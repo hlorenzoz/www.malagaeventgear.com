@@ -21,6 +21,11 @@
 		'meet-the-team': { en: 'Meet the Team', es: 'El Equipo' }
 	};
 
+	// Accumulated paths that are NOT real pages (no index route exists), so they
+	// must render as plain text, never as links — otherwise the prerender crawler
+	// follows them and fails the build with a 404 (e.g. /blog/author/, /blog/category/).
+	const NON_NAVIGABLE_PATHS = new Set(['/blog/author/', '/blog/category/']);
+
 	// Helper to translate route segments with dynamic capitalize fallback
 	function getSegmentName(segment: string, lang: 'en' | 'es'): string {
 		const translation = routeTranslations[segment.toLowerCase()];
@@ -49,16 +54,19 @@
 		const result = [
 			{
 				name: lang === 'en' ? 'Home' : 'Inicio',
-				href: '/'
+				href: '/',
+				navigable: true
 			}
 		];
 
 		let accumulatedPath = '';
 		segments.forEach((segment) => {
 			accumulatedPath += `/${segment}`;
+			const href = `${accumulatedPath}/`; // Strictly enforce trailing slash
 			result.push({
 				name: getSegmentName(segment, lang),
-				href: `${accumulatedPath}/` // Strictly enforce trailing slash
+				href,
+				navigable: !NON_NAVIGABLE_PATHS.has(href)
 			});
 		});
 
@@ -77,6 +85,9 @@
 					<span class="font-semibold text-on-surface truncate max-w-[150px] sm:max-w-none" aria-current="page">
 						{item.name}
 					</span>
+				{:else if item.navigable === false}
+					<!-- Section segment without an index page (e.g. /blog/author/) — plain text, not a link -->
+					<span class="select-none">{item.name}</span>
 				{:else}
 					<a
 						href={item.href}

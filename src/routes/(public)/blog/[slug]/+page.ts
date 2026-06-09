@@ -1,6 +1,7 @@
 import { error } from '@sveltejs/kit';
-import { getPostSlugs, getPostBySlug } from '$lib/data/blog';
+import { getPostSlugs, getPostBySlug, getPostComponentLoader } from '$lib/data/blog';
 import type { EntryGenerator, PageLoad } from './$types';
+import type { Component } from 'svelte';
 
 export const prerender = true;
 
@@ -9,10 +10,13 @@ export const prerender = true;
 export const entries: EntryGenerator = () =>
 	getPostSlugs().map((slug) => ({ slug }));
 
-export const load: PageLoad = ({ params }) => {
+export const load: PageLoad = async ({ params }) => {
 	const post = getPostBySlug(params.slug);
-	if (!post) {
+	const loader = getPostComponentLoader(params.slug);
+	if (!post || !loader) {
 		error(404, 'Post not found');
 	}
-	return { post };
+	// Lazily load ONLY this post's compiled body (code-split chunk).
+	const component = (await loader()) as Component;
+	return { post, component };
 };

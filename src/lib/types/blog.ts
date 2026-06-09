@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import type { SvelteComponent } from 'svelte';
 
 /**
  * Zod schema for blog post frontmatter.
@@ -28,14 +27,12 @@ export const BlogPostSchema = z.object({
 export type BlogPostFrontmatter = z.infer<typeof BlogPostSchema>;
 
 /**
- * BlogPost extends frontmatter with runtime-attached fields:
- * - slug: derived from the .svx filename
- * - component: the compiled Svelte component (mdsvex default export)
+ * BlogPost extends frontmatter with the slug derived from the .svx filename.
+ * The compiled component is NOT carried here — it is loaded lazily per-route via
+ * getPostComponentLoader(slug) so listing pages don't bundle every post body.
  */
 export type BlogPost = BlogPostFrontmatter & {
 	slug: string;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	component: any; // SvelteComponent constructor — typed as any to avoid generics noise
 };
 
 /**
