@@ -92,7 +92,14 @@
 	{:else}
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 			{#each posts as post, i}
-				<article data-testid="post-card" class="relative bg-surface-container-low border border-border-glass rounded-[20px] overflow-hidden hover:border-electric-blue/40 transition-colors duration-300 flex flex-col">
+				<!-- content-visibility:auto deja que el navegador SALTE render/layout/paint de las cards
+				     fuera de viewport (sin sacarlas del DOM → SEO intacto). La primera card queda exenta:
+				     está above-the-fold y es dueña de la imagen LCP (eager). contain-intrinsic-size con
+				     `auto` recuerda el alto real una vez renderizada → CLS se mantiene en 0. -->
+				<article
+					data-testid="post-card"
+					class="relative bg-surface-container-low border border-border-glass rounded-[20px] overflow-hidden hover:border-electric-blue/40 transition-colors duration-300 flex flex-col {i === 0 ? '' : '[content-visibility:auto] [contain-intrinsic-size:auto_420px]'}"
+				>
 					<!-- Cover Image -->
 					{#if post.coverImage}
 						<a href="/blog/{post.slug}/" class="block aspect-video overflow-hidden">
@@ -114,7 +121,7 @@
 						<!-- Categories + News badge -->
 						<div class="flex flex-wrap items-center gap-2 mb-3">
 							{#if post.isNews}
-								<span class="px-2 py-0.5 rounded-full text-xs font-label-sm bg-electric-blue text-white uppercase tracking-wider">
+								<span class="px-2 py-0.5 rounded-full text-xs font-label-sm bg-electric-blue-strong text-white uppercase tracking-wider">
 									{i18n.lang === 'en' ? 'News' : 'Noticias'}
 								</span>
 							{/if}

@@ -59,12 +59,16 @@
 	// Recompute on mount, on scroll, and whenever the track is resized.
 	$effect(() => {
 		if (!track) return;
-		updateScrollState();
 		const el = track;
+		// La primera medición lee geometría (scrollWidth/clientWidth) → diferirla a rAF la saca del
+		// critical path de hidratación y evita el forced reflow (mismo patrón que el reveal observer
+		// en (public)/+layout.svelte).
+		const raf = requestAnimationFrame(updateScrollState);
 		el.addEventListener('scroll', updateScrollState, { passive: true });
 		const ro = new ResizeObserver(updateScrollState);
 		ro.observe(el);
 		return () => {
+			cancelAnimationFrame(raf);
 			el.removeEventListener('scroll', updateScrollState);
 			ro.disconnect();
 		};
