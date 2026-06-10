@@ -2,6 +2,7 @@ import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-cloudflare';
 import rehypeSlug from 'rehype-slug';
 import { rehypeBlogImages } from './scripts/rehype-blog-images.mjs';
+import { rehypeFaqAccordion } from './scripts/rehype-faq-accordion.mjs';
 
 /**
  * mdsvex 0.12.7 inyecta el frontmatter como `<script context="module">`, sintaxis
@@ -44,7 +45,8 @@ const config = {
 			extensions: ['.svx'],
 			// rehype-slug genera id en los headings (github-slugger) para que las anclas
 			// del "Table of Contents" de los posts migrados resuelvan (#brief-overview).
-			rehypePlugins: [rehypeSlug, rehypeBlogImages]
+			// rehypeFaqAccordion MUST be last — it depends on ids already set by rehypeSlug
+			rehypePlugins: [rehypeSlug, rehypeBlogImages, rehypeFaqAccordion]
 			// No layout option — mdsvex layout injection uses $$props which is
 			// incompatible with runes mode. The [slug]/+page.svelte wraps post
 			// components explicitly via BlogPost.svelte instead (ADR-009 approach).

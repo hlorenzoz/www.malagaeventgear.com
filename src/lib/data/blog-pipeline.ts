@@ -44,9 +44,13 @@ export function buildPostsFromGlob(glob: GlobResult, buildDate: Date = new Date(
 		const pubDate = new Date(frontmatter.publishDate);
 		if (pubDate > buildDate) continue;
 
+		// Derive isNews: true when any category's slug equals 'news'
+		const isNews = frontmatter.categories.some((c) => slugify(c) === 'news');
+
 		posts.push({
 			...frontmatter,
-			slug
+			slug,
+			isNews
 		});
 	}
 
@@ -133,6 +137,22 @@ export function getAuthorsFromPosts(posts: BlogPost[]): Author[] {
  */
 export function getPostsByAuthorFromPosts(posts: BlogPost[], authorSlug: string): BlogPost[] {
 	return posts.filter((p) => slugify(p.author) === authorSlug);
+}
+
+/**
+ * Returns only news posts (isNews === true).
+ * A post is "news" when any of its categories slugifies to 'news'.
+ */
+export function getNewsPosts(posts: BlogPost[]): BlogPost[] {
+	return posts.filter((p) => p.isNews);
+}
+
+/**
+ * Returns only non-news posts (isNews === false).
+ * Complement of getNewsPosts — every published post is either news or an article.
+ */
+export function getArticlePosts(posts: BlogPost[]): BlogPost[] {
+	return posts.filter((p) => !p.isNews);
 }
 
 /**

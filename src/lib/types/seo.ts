@@ -39,6 +39,12 @@ export interface OpenGraphMeta {
 	}>;
 	locale?: string;
 	alternateLocales?: string[];
+	// Article-specific Open Graph fields (used when type === 'article')
+	publishedTime?: string;
+	modifiedTime?: string;
+	section?: string;
+	tags?: string[];
+	author?: string;
 }
 
 /**

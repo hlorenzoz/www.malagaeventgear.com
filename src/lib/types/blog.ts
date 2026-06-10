@@ -38,6 +38,12 @@ export type BlogPost = BlogPostFrontmatter & {
 	// srcset = all R2 variants so the browser picks the right size per DPR/viewport.
 	coverImageThumb?: string;
 	coverImageSrcset?: string;
+	// FAQ pairs extracted from the post body at build time (gen-post-faqs.ts).
+	// Populated from src/lib/data/post-faqs.json — absent for posts with no FAQ section.
+	faqs?: { question: string; answer: string }[];
+	// Derived from categories: true when any category slugifies to 'news'.
+	// Populated in blog-pipeline.ts alongside other derived fields.
+	isNews: boolean;
 };
 
 /**

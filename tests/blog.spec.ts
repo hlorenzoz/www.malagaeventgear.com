@@ -210,6 +210,63 @@ test.describe('Author Landing (/blog/author/[author]/)', () => {
 	});
 });
 
+test.describe('Blog SEO — Article schema enrichment', () => {
+	test('audio-visual-rental-company has BlogPosting JSON-LD with FAQPage JSON-LD', async ({ page }) => {
+		await page.goto('/blog/audio-visual-rental-company/');
+		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+		const schemas = scripts.map((s) => { try { return JSON.parse(s); } catch { return null; } }).filter(Boolean);
+
+		const article = schemas.find((s: any) => s['@type'] === 'BlogPosting');
+		expect(article).toBeTruthy();
+		// inLanguage must be 'en'
+		expect(article?.inLanguage).toBe('en');
+
+		const faqPage = schemas.find((s: any) => s['@type'] === 'FAQPage');
+		expect(faqPage).toBeTruthy();
+		expect(Array.isArray(faqPage?.mainEntity)).toBe(true);
+		expect(faqPage?.mainEntity.length).toBeGreaterThan(0);
+	});
+
+	test('audio-visual-rental-company has og:type=article meta tags', async ({ page }) => {
+		await page.goto('/blog/audio-visual-rental-company/');
+		const ogType = await page.locator('meta[property="og:type"]').getAttribute('content');
+		expect(ogType).toBe('article');
+
+		// article:published_time should be present
+		const publishedTime = await page.locator('meta[property="article:published_time"]').getAttribute('content');
+		expect(publishedTime).toBeTruthy();
+	});
+
+	test('audio-visual-rental-company has <details> FAQ accordion in body', async ({ page }) => {
+		await page.goto('/blog/audio-visual-rental-company/');
+		const details = page.locator('details.faq-item');
+		await expect(details.first()).toBeVisible();
+		const count = await details.count();
+		expect(count).toBeGreaterThan(0);
+	});
+
+	test('news post has NewsArticle JSON-LD', async ({ page }) => {
+		await page.goto('/blog/news-malaga-event-gear-delivers-flawless-audiovisual-production-at-progold-summit-2026-in-torremolinos/');
+		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+		const schemas = scripts.map((s: string) => { try { return JSON.parse(s); } catch { return null; } }).filter(Boolean);
+
+		const article = schemas.find((s: any) => s['@type'] === 'NewsArticle');
+		expect(article).toBeTruthy();
+		expect(article?.inLanguage).toBe('en');
+	});
+
+	test('non-news post has BlogPosting (not NewsArticle)', async ({ page }) => {
+		await page.goto('/blog/weather-considerations-for-outdoor-rentals/');
+		const scripts = await page.locator('script[type="application/ld+json"]').allTextContents();
+		const schemas = scripts.map((s: string) => { try { return JSON.parse(s); } catch { return null; } }).filter(Boolean);
+
+		const blogPosting = schemas.find((s: any) => s['@type'] === 'BlogPosting');
+		const newsArticle = schemas.find((s: any) => s['@type'] === 'NewsArticle');
+		expect(blogPosting).toBeTruthy();
+		expect(newsArticle).toBeFalsy();
+	});
+});
+
 test.describe('Post Sitemap (/post-sitemap.xml)', () => {
 	test('SC-SM-01: returns 200 with XML content-type and at least one <url>', async ({ page }) => {
 		const response = await page.goto('/post-sitemap.xml');

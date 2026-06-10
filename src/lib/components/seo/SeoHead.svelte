@@ -92,6 +92,27 @@
 		<meta property="og:image:type" content="image/webp" />
 	{/if}
 
+	<!-- Open Graph Article tags (only when og:type === 'article') -->
+	{#if openGraph?.type === 'article'}
+		{#if openGraph.publishedTime}
+			<meta property="article:published_time" content={openGraph.publishedTime} />
+		{/if}
+		{#if openGraph.modifiedTime}
+			<meta property="article:modified_time" content={openGraph.modifiedTime} />
+		{/if}
+		{#if openGraph.section}
+			<meta property="article:section" content={openGraph.section} />
+		{/if}
+		{#if openGraph.author}
+			<meta property="article:author" content={openGraph.author} />
+		{/if}
+		{#if openGraph.tags && openGraph.tags.length > 0}
+			{#each openGraph.tags as tag}
+				<meta property="article:tag" content={tag} />
+			{/each}
+		{/if}
+	{/if}
+
 	<!-- Twitter Cards -->
 	<meta name="twitter:card" content={twitter.card || 'summary_large_image'} />
 	<meta name="twitter:title" content={twitter.title || openGraph.title || title} />

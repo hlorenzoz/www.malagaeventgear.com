@@ -217,7 +217,15 @@ export function buildFAQPageSchema(
 }
 
 /**
- * Genera el esquema BlogPosting o Article para los posts del blog.
+ * Genera el esquema BlogPosting o NewsArticle para los posts del blog.
+ *
+ * Extended fields vs. the original:
+ * - type: 'BlogPosting' | 'NewsArticle' — defaults to 'BlogPosting'
+ * - articleSection: maps to schema.org articleSection
+ * - keywords: joined as comma-separated string per schema.org spec
+ * - inLanguage: always 'en' (site language)
+ * - image: emitted as ImageObject when imageUrl is provided (with optional dims);
+ *   falls back to siteConfig.logoUrl as a plain string only when imageUrl is absent
  */
 export function buildArticleSchema(post: {
 	title: string;
@@ -227,16 +235,32 @@ export function buildArticleSchema(post: {
 	authorName: string;
 	url: string;
 	imageUrl?: string;
+	imageWidth?: number;
+	imageHeight?: number;
+	type?: 'BlogPosting' | 'NewsArticle';
+	articleSection?: string;
+	keywords?: string[];
 }): Record<string, any> {
-	return {
+	// Build image node
+	let imageNode: Record<string, any> | string;
+	if (post.imageUrl) {
+		imageNode = { '@type': 'ImageObject', url: post.imageUrl };
+		if (post.imageWidth != null) imageNode.width = post.imageWidth;
+		if (post.imageHeight != null) imageNode.height = post.imageHeight;
+	} else {
+		imageNode = siteConfig.logoUrl;
+	}
+
+	const schema: Record<string, any> = {
 		'@context': 'https://schema.org',
-		'@type': 'BlogPosting',
+		'@type': post.type ?? 'BlogPosting',
 		'@id': `${siteConfig.url}${post.url}#article`,
 		'headline': post.title,
 		'description': post.description,
 		'datePublished': post.datePublished,
 		'dateModified': post.dateModified || post.datePublished,
-		'image': post.imageUrl || siteConfig.logoUrl,
+		'inLanguage': 'en',
+		'image': imageNode,
 		'author': {
 			'@type': 'Person',
 			'name': post.authorName
@@ -253,5 +277,36 @@ export function buildArticleSchema(post: {
 			'@type': 'WebPage',
 			'@id': `${siteConfig.url}${post.url}`
 		}
+	};
+
+	if (post.articleSection) {
+		schema['articleSection'] = post.articleSection;
+	}
+
+	if (post.keywords && post.keywords.length > 0) {
+		schema['keywords'] = post.keywords.join(', ');
+	}
+
+	return schema;
+}
+
+/**
+ * Genera el esquema FAQPage para colecciones de preguntas y respuestas en posts.
+ *
+ * @param faqs - Array of { question, answer } pairs (answer as plain text)
+ * @returns FAQPage JSON-LD schema object
+ */
+export function buildFAQSchema(faqs: { question: string; answer: string }[]): Record<string, any> {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'FAQPage',
+		'mainEntity': faqs.map((faq) => ({
+			'@type': 'Question',
+			'name': faq.question,
+			'acceptedAnswer': {
+				'@type': 'Answer',
+				'text': faq.answer
+			}
+		}))
 	};
 }

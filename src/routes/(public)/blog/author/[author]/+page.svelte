@@ -79,7 +79,7 @@
 						<img
 							src={post.coverImageThumb ?? post.coverImage}
 							srcset={post.coverImageSrcset}
-							sizes="(min-width: 1024px) 370px, (min-width: 768px) 45vw, 90vw"
+							sizes="(min-width: 1024px) 370px, (min-width: 768px) 45vw, calc(100vw - 2rem)"
 							alt={post.title}
 							width="370"
 							height="208"
@@ -91,18 +91,21 @@
 				{/if}
 
 				<div class="p-6 flex flex-col flex-1">
-					{#if post.categories.length > 0}
-						<div class="flex flex-wrap gap-2 mb-3">
-							{#each post.categories as cat}
-								<a
-									href="/blog/category/{slugify(cat)}/"
-									class="text-xs font-label-sm text-electric-blue uppercase tracking-wider hover:underline"
-								>
-									{cat}
-								</a>
-							{/each}
-						</div>
-					{/if}
+					<div class="flex flex-wrap items-center gap-2 mb-3">
+						{#if post.isNews}
+							<span class="px-2 py-0.5 rounded-full text-xs font-label-sm bg-electric-blue text-white uppercase tracking-wider">
+								{i18n.lang === 'en' ? 'News' : 'Noticias'}
+							</span>
+						{/if}
+						{#each post.categories as cat}
+							<a
+								href="/blog/category/{slugify(cat)}/"
+								class="text-xs font-label-sm text-electric-blue uppercase tracking-wider hover:underline"
+							>
+								{cat}
+							</a>
+						{/each}
+					</div>
 
 					<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 leading-tight">
 						<a href="/blog/{post.slug}/" class="hover:text-electric-blue transition-colors">

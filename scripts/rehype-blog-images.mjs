@@ -37,7 +37,7 @@ const stripHtml = (s) => (s || '').replace(/<[^>]+>/g, '').trim();
 const baseOf = (url) => url.replace(/(-\d+x\d+)?\.[a-z0-9]+$/i, '');
 
 // Prose column is max-w-3xl (768px); below that the image is full-bleed (~100vw).
-const SIZES = '(min-width: 768px) 768px, 100vw';
+const SIZES = '(min-width: 768px) 768px, calc(100vw - 2rem)';
 const FALLBACK_TARGET = 1024;
 
 let cache = null;
