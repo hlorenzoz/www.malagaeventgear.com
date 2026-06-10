@@ -33,12 +33,16 @@ const manifest = JSON.parse(readFileSync(MANIFEST, 'utf8')) as {
 };
 
 // Group variants by base (URL without the -WxH suffix and extension).
+// The manifest can hold two entries for the same variant (WP-keyed + r2Key-keyed after a
+// FORCE re-encode), so dedupe by width per base — a srcset must not repeat a width.
 const byBase = new Map<string, { url: string; width: number }[]>();
 for (const e of Object.values(manifest.media)) {
 	if (!e.r2Url) continue;
 	const base = e.r2Url.replace(/(-\d+x\d+)?\.[a-z0-9]+$/i, '');
 	if (!byBase.has(base)) byBase.set(base, []);
-	byBase.get(base)!.push({ url: e.r2Url, width: e.width ?? 0 });
+	const list = byBase.get(base)!;
+	const width = e.width ?? 0;
+	if (!list.some((v) => v.width === width)) list.push({ url: e.r2Url, width });
 }
 for (const list of byBase.values()) list.sort((a, b) => a.width - b.width);
 

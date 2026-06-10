@@ -15,6 +15,13 @@
  * Run: `bun scripts/gen-cover-variants.ts`  (needs cwebp + wrangler logged into account cc26ab18,
  *       `export CLOUDFLARE_ACCOUNT_ID=cc26ab18f887fb1c63c19e17a0bb313f`)
  * After it finishes, regenerate the map: `bun scripts/gen-cover-thumbs.ts`
+ *
+ * Env knobs:
+ *   VARIANT_WIDTH=700  target rung width (default 600)
+ *   QUALITY=70         cwebp -q (default 82)
+ *   FORCE=1            re-encode + re-upload rungs that already exist (same R2 key, overwrites).
+ *                      R2 objects are served with max-age=31536000 — purge the printed CDN URLs
+ *                      in the Cloudflare dashboard (Caching → Purge by URL) after a forced run.
  */
 import { readFileSync, writeFileSync, readdirSync } from 'fs';
 import { downloadImage } from './migrate-wp/downloader';
@@ -30,6 +37,8 @@ const BLOG_DIR = resolve(ROOT, 'src/content/blog');
 // ideal source is 370×DPR: 600 covers DPR≤1.5, 700 covers DPR~1.75 (Lighthouse mobile) and beats the
 // 768 rung. Run once per width (e.g. VARIANT_WIDTH=600 then VARIANT_WIDTH=700).
 const TARGET = Number(process.env.VARIANT_WIDTH ?? 600);
+const QUALITY = Number(process.env.QUALITY ?? 82);
+const FORCE = process.env.FORCE === '1';
 const CDN_PREFIX = 'https://cdn.malagaeventgear.com/';
 const baseOf = (s: string) => s.replace(/(-\d+x\d+)?\.[a-z0-9]+$/i, '');
 
@@ -65,7 +74,8 @@ function writeManifest() {
 }
 
 async function cwebpResize(input: string, output: string): Promise<void> {
-	const proc = Bun.spawn(['cwebp', '-quiet', '-resize', String(TARGET), '0', '-q', '82', input, '-o', output]);
+	// -m 6: slowest/best compression method — offline one-off, encode time is irrelevant.
+	const proc = Bun.spawn(['cwebp', '-quiet', '-resize', String(TARGET), '0', '-q', String(QUALITY), '-m', '6', input, '-o', output]);
 	const code = await proc.exited;
 	if (code !== 0) throw new Error(`cwebp failed (${code}) for ${input}`);
 }
@@ -73,26 +83,32 @@ async function cwebpResize(input: string, output: string): Promise<void> {
 let made = 0;
 let skipped = 0;
 let i = 0;
+const purgeUrls: string[] = [];
 for (const base of coverBases) {
 	i++;
 	const list = groups.get(base);
 	if (!list || list.length === 0) { skipped++; continue; }
-	if (list.some((e) => e.width === TARGET)) { skipped++; continue; }
-	const full = list.reduce((a, b) => (b.width > a.width ? b : a));
+	const existing = list.find((e) => e.width === TARGET);
+	if (existing && !FORCE) { skipped++; continue; }
+	// Always re-encode from the largest source, never from a previous TARGET encode.
+	const sources = list.filter((e) => e.width !== TARGET);
+	if (sources.length === 0) { skipped++; continue; }
+	const full = sources.reduce((a, b) => (b.width > a.width ? b : a));
 	if (!full.width || full.width <= TARGET) { skipped++; continue; }
 	if (/svg|avif/i.test(full.mimeType ?? '')) { skipped++; continue; }
 
 	const h = Math.round(TARGET * (full.height / full.width));
-	const key = `${baseOf(full.r2Key)}-${TARGET}x${h}.webp`;
+	const key = existing?.r2Key ?? `${baseOf(full.r2Key)}-${TARGET}x${h}.webp`;
 	const url = buildCdnUrl(key);
 	const fileName = key.split('/').pop()!;
 
 	try {
 		const { tempPath, cleanup } = await downloadImage(full.r2Url);
-		const out = `${tempPath}.600.webp`;
+		const out = `${tempPath}.${TARGET}.webp`;
 		await cwebpResize(tempPath, out);
 		await uploadToR2(key, out, false);
 		cleanup();
+		if (existing) purgeUrls.push(url);
 
 		manifest.media[key] = {
 			...full,
@@ -109,12 +125,16 @@ for (const base of coverBases) {
 		made++;
 		if (made % 10 === 0) {
 			writeManifest();
-			console.log(`[600] ${i}/${coverBases.size} — ${made} made, ${skipped} skipped (checkpoint)`);
+			console.log(`[${TARGET}] ${i}/${coverBases.size} — ${made} made, ${skipped} skipped (checkpoint)`);
 		}
 	} catch (err) {
-		console.error(`[600] FAILED ${base}:`, err instanceof Error ? err.message : err);
+		console.error(`[${TARGET}] FAILED ${base}:`, err instanceof Error ? err.message : err);
 	}
 }
 
 writeManifest();
-console.log(`[600] DONE — ${made} variants generated, ${skipped} skipped, ${coverBases.size} cover bases total.`);
+console.log(`[${TARGET}] DONE — ${made} variants generated (q${QUALITY}), ${skipped} skipped, ${coverBases.size} cover bases total.`);
+if (purgeUrls.length > 0) {
+	console.log(`[${TARGET}] ${purgeUrls.length} existing rungs overwritten — purge these CDN URLs (Caching → Purge by URL):`);
+	for (const u of purgeUrls) console.log(u);
+}
