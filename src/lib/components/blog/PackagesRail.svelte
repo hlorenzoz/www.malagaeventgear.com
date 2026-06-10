@@ -23,8 +23,9 @@
 				<a href={pkg.route} class="packages-rail-card" data-testid="package-card">
 					{#if pkg.image}
 						<div class="packages-rail-img-wrap">
+							<!-- Thumbnail dedicado (160x160 ≈5–8 KiB) en vez del <slug>.webp completo (800x800) -->
 							<img
-								src={pkg.image}
+								src={pkg.image.replace('.webp', '-thumb.webp')}
 								alt={pkg.name}
 								width="64"
 								height="64"
