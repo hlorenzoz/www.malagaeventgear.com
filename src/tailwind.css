@@ -27,6 +27,13 @@
   src: url('/fonts/plus-jakarta-sans-latin-wght-normal.woff2') format('woff2-variations');
 }
 
+/* Los anclas internos (#id del ToC, FAQ) saltan al borde superior del viewport, pero el navbar
+   sticky (73px) taparía el título de destino. scroll-padding-top desplaza ese punto de anclaje
+   por debajo del navbar — funciona tanto para anclas nativos como para scrollIntoView. */
+html {
+  scroll-padding-top: 6rem;
+}
+
 :root {
   color-scheme: dark;
   --background: #121414;

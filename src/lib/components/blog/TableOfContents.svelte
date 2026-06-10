@@ -10,6 +10,16 @@
 	// Track the active heading id via IntersectionObserver
 	let activeId = $state<string>('');
 
+	// Al hacer clic en un enlace marcamos su sección como activa AL INSTANTE (feedback inmediato) y
+	// bloqueamos el observer mientras dura el scroll suave, para que no parpadee a headings intermedios
+	// que cruzan el viewport en el camino. El bloqueo se libera tras ~700ms (cuando el scroll asienta).
+	let lockUntil = 0;
+
+	function handleClick(id: string) {
+		activeId = id;
+		lockUntil = Date.now() + 700;
+	}
+
 	$effect(() => {
 		if (!toc || toc.length === 0) return;
 
@@ -18,6 +28,7 @@
 
 		const observer = new IntersectionObserver(
 			(entries) => {
+				if (Date.now() < lockUntil) return;
 				// Find the topmost visible heading
 				const visible = entries
 					.filter((e) => e.isIntersecting)
@@ -54,6 +65,7 @@
 				<li class={entry.level === 3 ? 'toc-desktop-item toc-desktop-item--h3' : 'toc-desktop-item'}>
 					<a
 						href="#{entry.id}"
+						onclick={() => handleClick(entry.id)}
 						class={[
 							'toc-desktop-link',
 							activeId === entry.id ? 'toc-desktop-link--active' : ''
