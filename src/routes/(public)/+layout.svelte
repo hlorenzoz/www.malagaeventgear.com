@@ -76,7 +76,7 @@
 	<TopNavBar />
 
 	<!-- Contenido principal canvas -->
-	<main class="flex-grow pt-[73px] md:pt-[73px] overflow-hidden">
+	<main class="flex-grow pt-[73px] md:pt-[73px] overflow-x-clip">
 		<Breadcrumbs />
 		{@render children()}
 	</main>
