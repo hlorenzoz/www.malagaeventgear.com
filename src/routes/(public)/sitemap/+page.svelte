@@ -279,7 +279,9 @@
 			<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
 				<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
 					<Icon name="label" size="22" />
-					{i18n.lang === 'en' ? 'Categories' : 'Categorías'}
+					<a href="/blog/categories/" class="hover:underline">
+						{i18n.lang === 'en' ? 'Categories' : 'Categorías'}
+					</a>
 				</h3>
 				<nav class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
 					<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/blog/">

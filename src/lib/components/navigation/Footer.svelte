@@ -3,6 +3,10 @@
 	import { packages } from '$lib/data/packages';
 	import { siteConfig } from '$lib/data/site';
 	import Icon from '$lib/components/navigation/Icon.svelte';
+	import type { Category } from '$lib/types/blog';
+
+	// Categorías del blog serializadas por (public)/+layout.server.ts — NO importar $lib/data/blog aquí.
+	let { categories = [] }: { categories?: Category[] } = $props();
 </script>
 
 <!-- Footer Shared Component -->
@@ -39,6 +43,9 @@
 					</a>
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/blog/category/news/">
 						{i18n.lang === 'en' ? 'News' : 'Noticias'}
+					</a>
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/blog/categories/">
+						{i18n.lang === 'en' ? 'Categories' : 'Categorías'}
 					</a>
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/about-us/">
 						{i18n.lang === 'en' ? 'About Us' : 'Sobre Nosotros'}
@@ -79,6 +86,16 @@
 					{#each packages as pkg (pkg.id)}
 						<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href={pkg.route}>
 							{pkg.name}
+						</a>
+					{/each}
+				</nav>
+				<a href="/blog/categories/" class="font-label-lg text-on-surface uppercase tracking-wider mb-2 mt-4 hover:text-electric-blue transition-colors duration-200">
+					{i18n.lang === 'en' ? 'Categories' : 'Categorías'}
+				</a>
+				<nav class="flex flex-col gap-2">
+					{#each categories as cat (cat.slug)}
+						<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/blog/category/{cat.slug}/">
+							{cat.name}
 						</a>
 					{/each}
 				</nav>

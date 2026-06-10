@@ -15,7 +15,8 @@ export const GET: RequestHandler = async () => {
 		'sitemap',
 		'equipment',
 		'packages',
-		'blog'
+		'blog',
+		'blog/categories'
 	];
 
 	// Base URL of the website

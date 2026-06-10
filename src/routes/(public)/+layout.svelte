@@ -9,7 +9,7 @@
 	import { page } from '$app/stores';
 	import { buildLocalBusinessSchema, buildBreadcrumbsSchema, buildWebSiteSchema } from '$lib/utils/schema';
 
-	let { children } = $props();
+	let { data, children } = $props();
 
 	// Esquemas de datos estructurados globales
 	const localBusinessSchema = buildLocalBusinessSchema();
@@ -82,7 +82,7 @@
 	</main>
 
 	<!-- Pie de página unificado -->
-	<Footer />
+	<Footer categories={data.categories} />
 
 	<!-- WhatsApp Floating Action Widget -->
 	<WhatsAppWidget />
