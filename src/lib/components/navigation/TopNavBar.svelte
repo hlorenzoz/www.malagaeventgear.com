@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 	import { i18n } from '$lib/i18n.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
 
@@ -8,7 +9,44 @@
 	let mobileMenuOpen = $state(false);
 	let currentTheme = $state('dark');
 
+	// Auto-hide on scroll — SOLO en páginas de post individuales (/blog/<slug>/), no en el índice
+	// (/blog/), categorías (/blog/category/…), autores (/blog/author/…), ni el resto del sitio.
+	let isBlogPost = $derived(/^\/blog\/(?!category\/|author\/)[^/]+\/?$/.test($page.url.pathname));
+	let hidden = $state(false);
+
+	// Al navegar (SPA), el navbar siempre vuelve a verse. afterNavigate es el punto idiomático
+	// para este reset (evita asignar estado dentro de un $effect).
+	afterNavigate(() => {
+		hidden = false;
+	});
+
 	onMount(() => {
+		let lastY = window.scrollY;
+		let ticking = false;
+
+		const onScroll = () => {
+			if (ticking) return;
+			ticking = true;
+			requestAnimationFrame(() => {
+				ticking = false;
+				const y = window.scrollY;
+				// Fuera de un post, o con el menú móvil abierto: mantener visible.
+				if (!isBlogPost || mobileMenuOpen) {
+					hidden = false;
+					lastY = y;
+					return;
+				}
+				if (y > 80 && y > lastY) {
+					hidden = true; // bajando
+				} else if (y < lastY) {
+					hidden = false; // subiendo
+				}
+				lastY = y;
+			});
+		};
+
+		window.addEventListener('scroll', onScroll, { passive: true });
+
 		const updateTheme = () => {
 			let saved = null;
 			try {
@@ -34,7 +72,10 @@
 		};
 
 		mediaQuery.addEventListener('change', handler);
-		return () => mediaQuery.removeEventListener('change', handler);
+		return () => {
+			mediaQuery.removeEventListener('change', handler);
+			window.removeEventListener('scroll', onScroll);
+		};
 	});
 
 	function toggleTheme() {
@@ -68,7 +109,10 @@
 </script>
 
 <!-- TopNavBar Shared Component -->
-<header class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 transition-colors duration-300">
+<header
+	class="fixed top-0 w-full z-50 bg-surface-glass backdrop-blur-xl border-b border-border-glass shadow-md shadow-primary/10 transition duration-300 will-change-transform"
+	style:transform={hidden ? 'translateY(-100%)' : 'translateY(0)'}
+>
 	<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
 		<!-- Brand Logo (theme-aware: light logo on dark theme, dark logo on light theme) -->
 		<a class="transition-transform active:scale-95 duration-200" href="/" onclick={closeMobileMenu} aria-label={i18n.t.nav.brand}>

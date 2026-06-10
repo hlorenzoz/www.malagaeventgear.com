@@ -3,7 +3,7 @@
  * Strict TDD — tests written first.
  */
 import { describe, it, expect } from 'vitest';
-import { resolvePackageForPost } from './packages';
+import { resolvePackageForPost, getPackagesForPost, packages } from './packages';
 
 // Minimal BlogPost stub for testing
 function makePost(overrides: {
@@ -100,5 +100,65 @@ describe('resolvePackageForPost', () => {
 		const post = makePost({ categories: ['weddings'] });
 		const pkg = resolvePackageForPost(post);
 		expect(pkg.slug).toBe('wedding');
+	});
+});
+
+describe('getPackagesForPost', () => {
+	it('returns every package exactly once (no dupes, no omissions)', () => {
+		const post = makePost({ categories: ['Weddings'] });
+		const result = getPackagesForPost(post);
+		expect(result).toHaveLength(packages.length);
+		const slugs = result.map((p) => p.slug).sort();
+		const expected = packages.map((p) => p.slug).sort();
+		expect(slugs).toEqual(expected);
+	});
+
+	it('places the resolved package first (matches resolvePackageForPost)', () => {
+		const weddingPost = makePost({ categories: ['Weddings'] });
+		expect(getPackagesForPost(weddingPost)[0].slug).toBe(
+			resolvePackageForPost(weddingPost).slug
+		);
+
+		const corporatePost = makePost({ categories: ['Corporate Events'] });
+		expect(getPackagesForPost(corporatePost)[0].slug).toBe(
+			resolvePackageForPost(corporatePost).slug
+		);
+
+		const generic = makePost({ title: 'General audio visual tips' });
+		expect(getPackagesForPost(generic)[0].slug).toBe('eco');
+	});
+
+	it('orders the remaining packages by relevance to the post', () => {
+		// A corporate/MICE post: after the resolved package, the OTHER corporate packages
+		// (mice / basic-mice / product-presentation) should rank above unrelated social ones.
+		const post = makePost({
+			categories: ['Corporate Events'],
+			title: 'Corporate conference AV in Malaga',
+			tags: ['conference', 'meeting']
+		});
+		const order = getPackagesForPost(post).map((p) => p.slug);
+		const corporateSlugs = ['mice', 'basic-mice', 'product-presentation'];
+		const weddingIdx = order.indexOf('wedding');
+		// Every corporate package must appear before the wedding package
+		for (const slug of corporateSlugs) {
+			expect(order.indexOf(slug)).toBeLessThan(weddingIdx);
+		}
+	});
+
+	it('ranks the wedding package highly for a wedding post', () => {
+		const post = makePost({
+			categories: ['Weddings'],
+			title: 'Trending wedding rental ideas',
+			tags: ['wedding', 'reception']
+		});
+		const order = getPackagesForPost(post).map((p) => p.slug);
+		expect(order[0]).toBe('wedding');
+	});
+
+	it('is deterministic for the same input', () => {
+		const post = makePost({ categories: ['MICE'] });
+		expect(getPackagesForPost(post).map((p) => p.slug)).toEqual(
+			getPackagesForPost(post).map((p) => p.slug)
+		);
 	});
 });

@@ -8,7 +8,7 @@
 	import PackagesRail from '$lib/components/blog/PackagesRail.svelte';
 	import PostCTA from '$lib/components/blog/PostCTA.svelte';
 	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
-	import { resolvePackageForPost } from '$lib/data/packages';
+	import { resolvePackageForPost, getPackagesForPost } from '$lib/data/packages';
 
 	let {
 		post,
@@ -54,6 +54,9 @@
 	// Resolve the most relevant package for this post's context
 	let resolvedPackage = $derived(resolvePackageForPost(post));
 
+	// Packages ordered by relevance to this post (resolved first → matches the CTA)
+	let railPackages = $derived(getPackagesForPost(post));
+
 	function formatDate(dateStr: string): string {
 		try {
 			return new Date(dateStr).toLocaleDateString(i18n.lang === 'es' ? 'es-ES' : 'en-GB', {
@@ -93,7 +96,7 @@
 			class="hidden lg:block lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto"
 			aria-label="Event packages sidebar"
 		>
-			<PackagesRail />
+			<PackagesRail packages={railPackages} />
 		</aside>
 
 		<!-- ── Col 2: Main content ── -->
@@ -131,7 +134,7 @@
 					</div>
 				{/if}
 
-				<h1 class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface leading-tight mb-6 text-center">
+				<h1 class="font-display-lg text-[2.25rem] sm:text-[2.75rem] md:text-[3.5rem] lg:text-[4rem] leading-[1.12] tracking-tight text-on-surface text-center mt-3 mb-8">
 					{post.title}
 				</h1>
 
@@ -157,7 +160,7 @@
 
 			<!-- Mobile Packages strip (horizontal scroll-snap, hidden on lg+) -->
 			<div class="packages-rail-mobile lg:hidden mb-8" data-testid="packages-rail-mobile">
-				<PackagesRail />
+				<PackagesRail packages={railPackages} />
 			</div>
 
 			<!-- Post Body (mdsvex content rendered via children snippet) -->

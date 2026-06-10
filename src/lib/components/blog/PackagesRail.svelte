@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { packages } from '$lib/data/packages';
+	import { packages as allPackages, type EventPackage } from '$lib/data/packages';
+
+	// Accept an ordered package list (e.g. relevance-sorted for a post). Defaults to the
+	// full catalog so other usages keep working without passing a prop.
+	let { packages = allPackages }: { packages?: EventPackage[] } = $props();
 </script>
 
 <!--

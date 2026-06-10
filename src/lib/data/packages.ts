@@ -549,3 +549,78 @@ export function resolvePackageForPost(post: {
 	// Default fallback: eco pack
 	return packages.find((p) => p.slug === 'eco')!;
 }
+
+/**
+ * Per-package relevance signals (mirror PACKAGE_RULES, but one entry per package so each
+ * can be scored independently). Used by getPackagesForPost to rank the rail by relevance.
+ */
+const PACKAGE_SIGNALS: Record<string, { category: RegExp[]; keyword: RegExp[] }> = {
+	wedding: {
+		category: [/\bwedding/i],
+		keyword: [/\bwedding\b/i, /\bbride/i, /\bceremony\b/i, /\breception\b/i]
+	},
+	'basic-mice': {
+		category: [/\bcorporate\b/i, /\bmice\b/i, /\bevent/i, /\bconference/i, /\bmeeting/i],
+		keyword: [/\bcorporate\b/i, /\bconference/i, /\bmeeting/i, /\bseminar/i, /\bmice\b/i]
+	},
+	mice: {
+		category: [/\bcorporate\b/i, /\bmice\b/i, /\bevent/i, /\bconference/i, /\bmeeting/i],
+		keyword: [/\bcorporate\b/i, /\bconference/i, /\bmeeting/i, /\bseminar/i, /\bmice\b/i]
+	},
+	'product-presentation': {
+		category: [/\bcorporate\b/i, /\bpresentation\b/i, /\blaunch\b/i],
+		keyword: [/\bpresentation\b/i, /\bproduct\s+launch\b/i, /\blaunch\b/i, /\bshowcase\b/i, /\bdealership\b/i, /\bproduct\b/i]
+	},
+	eco: {
+		category: [/\bparty\b/i, /\bprivate\b/i, /\bcelebration\b/i],
+		keyword: [/\bparty\b/i, /\bbirthday\b/i, /\bcelebration\b/i, /\bbudget\b/i, /\bprivate\b/i]
+	}
+};
+
+/**
+ * Relevance score of a package for a post.
+ * Weights: category match = 3, title keyword = 2, each tag keyword = 1.
+ */
+function scorePackage(
+	slug: string,
+	post: { categories: string[]; tags: string[]; title: string }
+): number {
+	const sig = PACKAGE_SIGNALS[slug];
+	if (!sig) return 0;
+	let score = 0;
+	for (const cat of post.categories) {
+		if (sig.category.some((re) => re.test(cat))) score += 3;
+	}
+	if (sig.keyword.some((re) => re.test(post.title))) score += 2;
+	for (const tag of post.tags) {
+		if (sig.keyword.some((re) => re.test(tag))) score += 1;
+	}
+	return score;
+}
+
+/**
+ * Returns ALL packages ordered by relevance to the post:
+ * the resolved (most relevant) package first — matching resolvePackageForPost so the rail
+ * stays consistent with the PostCTA — then the rest sorted by relevance score (desc),
+ * with catalog order as a stable tiebreaker.
+ *
+ * @param post - A BlogPost (or minimal subset with categories, tags, title)
+ * @returns Every EventPackage exactly once, most relevant first.
+ */
+export function getPackagesForPost(post: {
+	categories: string[];
+	tags: string[];
+	title: string;
+	isNews?: boolean;
+}): EventPackage[] {
+	const resolved = resolvePackageForPost(post);
+	const catalogIndex = new Map(packages.map((p, i) => [p.slug, i]));
+	const others = packages
+		.filter((p) => p.slug !== resolved.slug)
+		.sort((a, b) => {
+			const diff = scorePackage(b.slug, post) - scorePackage(a.slug, post);
+			if (diff !== 0) return diff;
+			return catalogIndex.get(a.slug)! - catalogIndex.get(b.slug)!;
+		});
+	return [resolved, ...others];
+}

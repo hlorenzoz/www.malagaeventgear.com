@@ -3,12 +3,22 @@
 
 
 
+-- ❌ ✅ Comments
+
+✅ Navbar oculta
+
+✅ Our Packages dinámico
+
+Sección de galería de todas las imágenes en forma de carrusel
+
+Click to Share/Tweet: Añadir botón de compartir para redes sociales (WhatsApp, Facebook, Twitter)
+
+Sección de comentarios
+
+
 -- ❌ ✅
 
-
-
--- ❌ ✅
-
+API REST para la creación de contenido (INTEGRACIÓN) mediante SEO Toolkit
 
 
 -- ❌ ✅ Tracking Google Analytics & Cloudflare Zaraz
@@ -16,8 +26,7 @@
 
 
 
-
--- ❌ ✅ Package (redesign)
+-- ✅ Package (redesign)
 
 En la página específica de cada uno de los paquetes hace falta
 
