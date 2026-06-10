@@ -34,9 +34,11 @@ export function parseToc(body) {
 		const h2Match = line.match(/^##\s+(.+)$/);
 		if (h2Match) {
 			const text = h2Match[1].trim();
-			// Skip the old inline "Table of Contents" section
-			if (/^table of contents$/i.test(text)) continue;
+			// Slug every heading to keep the slugger state aligned with rehype-slug (dedup parity).
 			const id = slugger.slug(text);
+			// Skip the old inline "Table of Contents" and the empty "Testimonials" marker —
+			// both are removed from the body by rehype-post-toc, so they must not appear in the ToC.
+			if (/^table of contents$/i.test(text) || /^testimonials$/i.test(text)) continue;
 			entries.push({ id, text, level: 2 });
 			continue;
 		}

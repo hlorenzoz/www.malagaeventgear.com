@@ -86,13 +86,14 @@
 
 <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24">
 	<!-- 3-col grid: [packages | content | toc] on desktop; single col on mobile -->
-	<div class="lg:grid lg:grid-cols-[minmax(0,210px)_minmax(0,1fr)_minmax(0,240px)] lg:gap-10">
+	<div class="lg:grid lg:grid-cols-[minmax(0,210px)_minmax(0,1fr)_minmax(0,240px)] lg:gap-10 lg:items-start">
 
 		<!-- ── Col 1: Packages Rail (desktop only, sticky) ── -->
-		<aside class="hidden lg:block" aria-label="Event packages sidebar">
-			<div class="lg:sticky lg:top-24">
-				<PackagesRail />
-			</div>
+		<aside
+			class="hidden lg:block lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto"
+			aria-label="Event packages sidebar"
+		>
+			<PackagesRail />
 		</aside>
 
 		<!-- ── Col 2: Main content ── -->
@@ -185,10 +186,11 @@
 		</article>
 
 		<!-- ── Col 3: Table of Contents (desktop only, sticky) ── -->
-		<aside class="hidden lg:block" aria-label="Table of contents sidebar">
-			<div class="lg:sticky lg:top-24">
-				<TableOfContents toc={post.toc} />
-			</div>
+		<aside
+			class="hidden lg:block lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto"
+			aria-label="Table of contents sidebar"
+		>
+			<TableOfContents toc={post.toc} />
 		</aside>
 
 	</div>
@@ -381,17 +383,26 @@
 	:global(.img-gallery > p) {
 		flex: 0 0 auto;
 		scroll-snap-align: start;
-		width: min(85%, 480px);
-		border-radius: 8px;
-		overflow: hidden;
+		width: min(82%, 440px);
 		margin: 0;
 	}
 
 	:global(.img-gallery img) {
 		width: 100%;
+		aspect-ratio: 4 / 3;
 		height: auto;
 		display: block;
 		object-fit: cover;
+		border-radius: 14px;
+		box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.5);
+	}
+
+	:global(.img-gallery figcaption) {
+		margin-top: 0.6rem;
+		font-size: 0.8125rem;
+		line-height: 1.5;
+		font-style: italic;
+		color: var(--color-on-surface-variant, #94a3b8);
 	}
 
 	/* ── Prose typography improvements (Medium-inspired) ───────────────────── */

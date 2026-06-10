@@ -15,18 +15,38 @@
  */
 import { visit } from 'unist-util-visit';
 
+/** Recursively extract the trimmed text content of a hast node. */
+function toText(node) {
+	if (!node) return '';
+	if (node.type === 'text') return node.value ?? '';
+	return (node.children ?? []).map(toText).join('');
+}
+
 /**
  * Returns true if the node is a `<p>` containing exactly one `<img>`.
  * @param {import('hast').Node} node
  * @returns {boolean}
  */
+function hasImgChild(node) {
+	return (node.children ?? []).some((c) => c.type === 'element' && c.tagName === 'img');
+}
+
 function isStandaloneImage(node) {
-	if (node.type !== 'element' || node.tagName !== 'p') return false;
-	// Filter out whitespace text nodes
-	const meaningful = (node.children ?? []).filter(
-		(c) => !(c.type === 'text' && !c.value?.trim())
-	);
-	return meaningful.length === 1 && meaningful[0].type === 'element' && meaningful[0].tagName === 'img';
+	if (node.type !== 'element') return false;
+	// <figure> produced by rehype-blog-images for captioned images (img + figcaption)
+	if (node.tagName === 'figure') return hasImgChild(node);
+	// <p> containing exactly one <img> (uncaptioned standalone image)
+	if (node.tagName === 'p') {
+		const meaningful = (node.children ?? []).filter(
+			(c) => !(c.type === 'text' && !c.value?.trim())
+		);
+		return (
+			meaningful.length === 1 &&
+			meaningful[0].type === 'element' &&
+			meaningful[0].tagName === 'img'
+		);
+	}
+	return false;
 }
 
 export function rehypeImageGallery() {
@@ -34,54 +54,67 @@ export function rehypeImageGallery() {
 		const children = tree.children;
 		if (!children || !Array.isArray(children)) return;
 
-		let i = 0;
-		while (i < children.length) {
-			// Find start of a run of standalone images
-			if (!isStandaloneImage(children[i])) {
-				i++;
-				continue;
-			}
+		// Collect ALL standalone body images (top-level), even when scattered between
+		// paragraphs/sections — guide posts place one image per section. We consolidate
+		// them into a single swipeable carousel so the post reads as text + one gallery.
+		const indices = [];
+		for (let k = 0; k < children.length; k++) {
+			if (isStandaloneImage(children[k])) indices.push(k);
+		}
 
-			// Count the run
-			let j = i;
-			while (j < children.length && isStandaloneImage(children[j])) {
-				j++;
-			}
-			const runLength = j - i;
+		// Need at least 2 images to make a gallery; a lone image stays inline.
+		if (indices.length < 2) return;
 
-			// Only wrap groups of 2+
-			if (runLength < 2) {
-				i++;
-				continue;
-			}
-
-			// Extract the img nodes from each <p><img></p>
-			const imgNodes = children.slice(i, j).map((pNode) => {
-				// Unwrap: take the <img> from inside <p>
-				const img = (pNode.children ?? []).find(
-					(c) => c.type === 'element' && c.tagName === 'img'
-				);
-				// Wrap in <figure> for semantics (figcaption may be added by rehype-blog-images later)
-				return {
-					type: 'element',
-					tagName: 'figure',
-					properties: { className: ['img-gallery-item'] },
-					children: img ? [img] : []
-				};
-			});
-
-			// Build the gallery wrapper
-			const galleryNode = {
+		// Build one slide per image block. Captioned images are already
+		// <figure><img><figcaption> — keep their children. Bare <p><img></p> unwrap to the <img>.
+		const slides = indices.map((idx) => {
+			const node = children[idx];
+			const slideChildren =
+				node.tagName === 'figure'
+					? node.children ?? []
+					: (node.children ?? []).filter((c) => c.type === 'element' && c.tagName === 'img');
+			return {
 				type: 'element',
 				tagName: 'figure',
-				properties: { className: ['img-gallery'] },
-				children: imgNodes
+				properties: { className: ['img-gallery-item'] },
+				children: slideChildren
 			};
+		});
 
-			// Replace the run with the gallery
-			children.splice(i, runLength, galleryNode);
-			// Advance past the inserted gallery node
-			i++;
+		const galleryNode = {
+			type: 'element',
+			tagName: 'figure',
+			properties: { className: ['img-gallery'] },
+			children: slides
+		};
+
+		// Caption texts now shown inside the carousel (figcaption). The migrated WP body
+		// often ALSO repeats each caption as a plain paragraph — collect those to dedupe.
+		const captionTexts = new Set();
+		for (const slide of slides) {
+			for (const c of slide.children) {
+				if (c.type === 'element' && c.tagName === 'figcaption') {
+					captionTexts.add(toText(c).trim());
+				}
+			}
+		}
+
+		// Remove the original image blocks (reverse order to keep indices valid),
+		// then insert the consolidated gallery at the position of the first image.
+		const firstIdx = indices[0];
+		for (let k = indices.length - 1; k >= 0; k--) {
+			children.splice(indices[k], 1);
+		}
+		children.splice(firstIdx, 0, galleryNode);
+
+		// Drop any remaining top-level <p> that merely duplicates a carousel caption.
+		if (captionTexts.size > 0) {
+			for (let k = children.length - 1; k >= 0; k--) {
+				const c = children[k];
+				if (c.type === 'element' && c.tagName === 'p' && captionTexts.has(toText(c).trim())) {
+					children.splice(k, 1);
+				}
+			}
 		}
 	};
 }
