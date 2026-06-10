@@ -8,6 +8,8 @@
  *   - alt: WP attachment alt_text (fallback: decoded title) — fixes a11y warnings + SEO.
  *   - width/height: intrinsic dimensions → reserves space (CLS).
  *   - loading="lazy" + decoding="async": defer offscreen body images.
+ *   - caption: when the manifest entry has a non-empty `caption`, wraps the <img>
+ *     (inside its parent <p>) in a <figure> + <figcaption>.
  *
  * The manifest (scripts/migrate-wp/manifest.json) is read ONCE at build time in Node
  * and is NOT bundled into the client. Cover images on listing cards/hero are handled
@@ -20,7 +22,7 @@ import { visit } from 'unist-util-visit';
 const NAMED = {
 	amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", '#039': "'",
 	hellip: '…', ndash: '–', mdash: '—', rsquo: '’', lsquo: '‘',
-	ldquo: '“', rdquo: '”', nbsp: ' '
+	ldquo: '“', rdquo: '”', nbsp: ' '
 };
 
 function decodeEntities(s) {
@@ -53,6 +55,7 @@ function loadIndex() {
 			if (!e.r2Url) continue;
 			byUrl[e.r2Url] = {
 				alt: decodeEntities(e.alt) || decodeEntities(stripHtml(e.title)),
+				caption: decodeEntities(stripHtml(e.caption || '')),
 				width: e.width,
 				height: e.height
 			};
@@ -71,7 +74,11 @@ function loadIndex() {
 export function rehypeBlogImages() {
 	const { byUrl, byBase } = loadIndex();
 	return (tree) => {
-		visit(tree, 'element', (node) => {
+		// First pass: enrich <img> attributes and mark which need caption wrapping.
+		// We use a custom walk to also handle the parent so we can replace <p><img></p>
+		// with <figure><img><figcaption></figure>.
+
+		visit(tree, 'element', (node, index, parent) => {
 			if (node.tagName !== 'img' || !node.properties) return;
 			const src = node.properties.src;
 			if (typeof src !== 'string') return;
@@ -96,6 +103,45 @@ export function rehypeBlogImages() {
 				if (meta.width != null && node.properties.width == null) node.properties.width = meta.width;
 				if (meta.height != null && node.properties.height == null)
 					node.properties.height = meta.height;
+			}
+
+			// Caption wrapping: when the manifest has a non-empty caption and the parent
+			// is a <p> element, replace the <p><img></p> with <figure><img><figcaption></figure>.
+			const caption = meta?.caption;
+			if (caption && parent && parent.type === 'element' && parent.tagName === 'p' && index != null) {
+				// Build <figure> wrapping the enriched <img> + <figcaption>
+				const figureNode = {
+					type: 'element',
+					tagName: 'figure',
+					properties: {},
+					children: [
+						node,
+						{
+							type: 'element',
+							tagName: 'figcaption',
+							properties: {},
+							children: [{ type: 'text', value: caption }]
+						}
+					]
+				};
+
+				// Replace the parent <p> in its grandparent's children array.
+				// We need to find the grandparent — but visit gives us parent of the <img>
+				// (which is the <p>). We can mutate the <p> itself to become a <figure>.
+				// The safest approach: turn the <p> into a <figure> by mutating in place.
+				parent.tagName = 'figure';
+				parent.properties = {};
+				parent.children = [
+					node,
+					{
+						type: 'element',
+						tagName: 'figcaption',
+						properties: {},
+						children: [{ type: 'text', value: caption }]
+					}
+				];
+				// Return early — we've already modified the parent node in-place
+				return;
 			}
 		});
 	};

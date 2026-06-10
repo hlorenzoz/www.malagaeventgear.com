@@ -15,13 +15,16 @@
 		meta = getReviewsMeta(),
 		variant = 'carousel',
 		limit,
-		heading = true
+		heading = true,
+		compact = false
 	}: {
 		testimonials?: Testimonial[];
 		meta?: ReviewsMeta;
 		variant?: 'carousel' | 'grid';
 		limit?: number;
 		heading?: boolean;
+		/** Compact mode: reduces vertical padding (py-32 → py-12) for use inside article layouts. */
+		compact?: boolean;
 	} = $props();
 
 	let items = $derived(typeof limit === 'number' ? testimonials.slice(0, limit) : testimonials);
@@ -71,7 +74,7 @@
 <section
 	id="testimonials"
 	data-testid="testimonials"
-	class="py-32 px-margin-mobile md:px-margin-desktop bg-surface-container-low border-y border-border-glass transition-colors duration-300"
+	class="{compact ? 'py-12' : 'py-32'} px-margin-mobile md:px-margin-desktop bg-surface-container-low border-y border-border-glass transition-colors duration-300"
 >
 	<div class="max-w-container-max mx-auto">
 		{#if heading}
@@ -124,7 +127,7 @@
 				<div
 					bind:this={track}
 					data-testid="carousel-track"
-					class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
+					class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-2 px-2 scrollbar-none [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
 				>
 					{#each items as testimonial (testimonial.id)}
 						<TestimonialCard {testimonial} />

@@ -3,6 +3,8 @@
 	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 
+	let { data } = $props();
+
 	let sitemapSchema = $derived({
 		'@context': 'https://schema.org',
 		'@type': 'WebPage',
@@ -264,4 +266,82 @@
 		</section>
 
 	</div>
+
+	<!-- ── Blog Section ──────────────────────────────────────────────────────── -->
+	<section class="mb-24">
+		<div class="flex items-center gap-3 border-b border-border-glass pb-4 mb-8">
+			<Icon name="article" size="32" className="text-electric-blue" />
+			<h2 class="font-headline-md text-headline-md text-on-surface">Blog</h2>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			<!-- Categories -->
+			<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
+				<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
+					<Icon name="label" size="22" />
+					{i18n.lang === 'en' ? 'Categories' : 'Categorías'}
+				</h3>
+				<nav class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
+					<a class="hover:text-electric-blue transition-colors flex items-center gap-2" href="/blog/">
+						<Icon name="rss_feed" size="18" />
+						{i18n.lang === 'en' ? 'All Posts' : 'Todos los Posts'}
+					</a>
+					{#each data.categories as cat (cat.slug)}
+						<a
+							class="hover:text-electric-blue transition-colors flex items-center gap-2"
+							href="/blog/category/{cat.slug}/"
+						>
+							<Icon name="folder" size="18" />
+							{cat.name}
+							<span class="text-xs opacity-60">({cat.count})</span>
+						</a>
+					{/each}
+				</nav>
+			</div>
+
+			<!-- Authors -->
+			<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
+				<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
+					<Icon name="person" size="22" />
+					{i18n.lang === 'en' ? 'Authors' : 'Autores'}
+				</h3>
+				<nav class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
+					{#each data.authors as author (author.slug)}
+						<a
+							class="hover:text-electric-blue transition-colors flex items-center gap-2"
+							href="/blog/author/{author.slug}/"
+						>
+							<Icon name="account_circle" size="18" />
+							{author.name}
+							<span class="text-xs opacity-60">({author.count})</span>
+						</a>
+					{/each}
+				</nav>
+			</div>
+
+			<!-- Recent Posts -->
+			<div class="glass-panel rounded-xl p-6 flex flex-col gap-4">
+				<h3 class="font-headline-sm text-headline-sm text-electric-blue flex items-center gap-2">
+					<Icon name="history" size="22" />
+					{i18n.lang === 'en' ? 'Recent Posts' : 'Posts Recientes'}
+				</h3>
+				<nav class="flex flex-col gap-2 font-body-md text-body-md text-on-surface-variant">
+					{#each data.posts as post (post.slug)}
+						<a
+							class="hover:text-electric-blue transition-colors text-sm leading-snug"
+							href="/blog/{post.slug}/"
+						>
+							{post.title}
+						</a>
+					{/each}
+					<a
+						class="hover:text-electric-blue transition-colors flex items-center gap-1 text-sm font-semibold mt-2"
+						href="/blog/"
+					>
+						{i18n.lang === 'en' ? 'View all posts →' : 'Ver todos →'}
+					</a>
+				</nav>
+			</div>
+		</div>
+	</section>
 </div>

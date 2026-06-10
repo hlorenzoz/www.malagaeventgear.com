@@ -42,11 +42,11 @@ export default defineConfig({
 			},
 			workbox: {
 				globPatterns: ['**/*.{js,css,png,svg,ico,webmanifest}'],
-				// El chunk principal de la app ronda los ~2.1 MB (≈535 KB gzip) y supera el
+				// El chunk principal de la app ronda los ~3.2 MB (≈535 KB gzip) y supera el
 				// default de workbox (2 MiB), lo que rompía el build del SW. Subimos el límite
 				// para precachearlo como antes. NOTA: ese bundle grande es un tema de CWV
 				// pre-existente (no del blog) que conviene revisar/code-split por separado.
-				maximumFileSizeToCacheInBytes: 3 * 1024 * 1024
+				maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
 			}
 		})
 	]

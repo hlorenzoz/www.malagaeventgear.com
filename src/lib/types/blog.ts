@@ -41,6 +41,9 @@ export type BlogPost = BlogPostFrontmatter & {
 	// FAQ pairs extracted from the post body at build time (gen-post-faqs.ts).
 	// Populated from src/lib/data/post-faqs.json — absent for posts with no FAQ section.
 	faqs?: { question: string; answer: string }[];
+	// Table of Contents entries extracted from the post body at build time (gen-post-toc.ts).
+	// Populated from src/lib/data/post-toc.json — absent for posts with no headings.
+	toc?: { id: string; text: string; level: 2 | 3 }[];
 	// Derived from categories: true when any category slugifies to 'news'.
 	// Populated in blog-pipeline.ts alongside other derived fields.
 	isNews: boolean;

@@ -470,3 +470,82 @@ export const packages: EventPackage[] = packagesData.map((pkg) => {
 export const getPackageBySlug = (slug: string): EventPackage | undefined => {
 	return packages.find((pkg) => pkg.slug === slug);
 };
+
+/**
+ * Category/keyword → package slug mapping table.
+ * Rules are checked in order; first match wins.
+ * Each rule has category keywords (matched against post.categories) and
+ * title/tag keywords (matched against post.title and post.tags).
+ */
+const PACKAGE_RULES: {
+	/** Patterns to match against category names (case-insensitive substring) */
+	categoryPatterns?: RegExp[];
+	/** Patterns to match against title and tags (case-insensitive substring) */
+	keywordPatterns?: RegExp[];
+	/** Package slug to resolve when this rule matches */
+	slug: string;
+}[] = [
+	// Weddings
+	{
+		categoryPatterns: [/\bwedding/i],
+		keywordPatterns: [/\bwedding\b/i],
+		slug: 'wedding'
+	},
+	// Corporate / MICE / Events / Conferences / Meetings
+	{
+		categoryPatterns: [/\bcorporate\b/i, /\bmice\b/i, /\bevent/i, /\bconference/i, /\bmeeting/i],
+		slug: 'basic-mice'
+	},
+	// Product presentations / launches / conferences in title/tags
+	{
+		keywordPatterns: [/\bpresentation\b/i, /\bproduct\s+launch\b/i, /\blaunch\b/i],
+		slug: 'product-presentation'
+	}
+	// Default: eco (handled separately below)
+];
+
+/**
+ * Resolves the most relevant EventPackage for a given blog post.
+ *
+ * Matching strategy (in order):
+ * 1. Check post.categories against categoryPatterns for each rule
+ * 2. Check post.tags and post.title against keywordPatterns for each rule
+ * 3. Fallback: 'eco' package
+ *
+ * @param post - A BlogPost (or minimal subset with categories, tags, title)
+ * @returns The most relevant EventPackage
+ */
+export function resolvePackageForPost(post: {
+	categories: string[];
+	tags: string[];
+	title: string;
+	isNews?: boolean;
+}): EventPackage {
+	for (const rule of PACKAGE_RULES) {
+		// Check categories
+		if (rule.categoryPatterns) {
+			const matched = post.categories.some((cat) =>
+				rule.categoryPatterns!.some((pattern) => pattern.test(cat))
+			);
+			if (matched) {
+				const pkg = packages.find((p) => p.slug === rule.slug);
+				if (pkg) return pkg;
+			}
+		}
+
+		// Check title and tags for keyword patterns
+		if (rule.keywordPatterns) {
+			const searchStrings = [post.title, ...post.tags];
+			const matched = searchStrings.some((str) =>
+				rule.keywordPatterns!.some((pattern) => pattern.test(str))
+			);
+			if (matched) {
+				const pkg = packages.find((p) => p.slug === rule.slug);
+				if (pkg) return pkg;
+			}
+		}
+	}
+
+	// Default fallback: eco pack
+	return packages.find((p) => p.slug === 'eco')!;
+}

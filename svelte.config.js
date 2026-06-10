@@ -3,6 +3,10 @@ import adapter from '@sveltejs/adapter-cloudflare';
 import rehypeSlug from 'rehype-slug';
 import { rehypeBlogImages } from './scripts/rehype-blog-images.mjs';
 import { rehypeFaqAccordion } from './scripts/rehype-faq-accordion.mjs';
+import { rehypePostToc } from './scripts/rehype-post-toc.mjs';
+import { rehypeSectionCards } from './scripts/rehype-section-cards.mjs';
+import { rehypeImageGallery } from './scripts/rehype-image-gallery.mjs';
+import { rehypeInternalLinks } from './scripts/rehype-internal-links.mjs';
 
 /**
  * mdsvex 0.12.7 inyecta el frontmatter como `<script context="module">`, sintaxis
@@ -43,10 +47,18 @@ const config = {
 	preprocess: [
 		mdsvex({
 			extensions: ['.svx'],
-			// rehype-slug genera id en los headings (github-slugger) para que las anclas
-			// del "Table of Contents" de los posts migrados resuelvan (#brief-overview).
-			// rehypeFaqAccordion MUST be last — it depends on ids already set by rehypeSlug
-			rehypePlugins: [rehypeSlug, rehypeBlogImages, rehypeFaqAccordion]
+			// Plugin execution order matters:
+			// 1. rehypeSlug    — assigns ids to all headings (must be first)
+			// 2. rehypeBlogImages — enriches <img> with srcset/alt/dimensions
+			// 3. rehypeImageGallery — groups consecutive images into scroll-snap galleries
+			//    (must run after rehypeBlogImages so srcset is already set)
+			// 4. rehypePostToc — removes old inline ToC, removes empty Testimonials h2,
+			//    injects mobile ToC after Key Highlights (needs ids from rehypeSlug;
+			//    must run before rehypeFaqAccordion which restructures h3 nodes)
+			// 5. rehypeSectionCards — wraps Brief Overview / Key Highlights in styled cards
+			//    (must run after rehypePostToc removes the old ToC)
+			// 6. rehypeFaqAccordion — MUST be last (restructures h3 nodes into <details>)
+			rehypePlugins: [rehypeSlug, rehypeInternalLinks, rehypeBlogImages, rehypeImageGallery, rehypePostToc, rehypeSectionCards, rehypeFaqAccordion]
 			// No layout option — mdsvex layout injection uses $$props which is
 			// incompatible with runes mode. The [slug]/+page.svelte wraps post
 			// components explicitly via BlogPost.svelte instead (ADR-009 approach).
