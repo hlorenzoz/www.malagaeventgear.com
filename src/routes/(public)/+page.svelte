@@ -4,7 +4,14 @@
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
 	import { getHomepageFaqs, buildFaqSchema } from '$lib/data/faq';
+	import { getArticlePosts, getNewsPosts } from '$lib/data/blog';
+	import LatestPostsRow from '$lib/components/home/LatestPostsRow.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
+
+	// Latest editorial content for the home rows (already sorted by publishDate desc).
+	// Latest Posts excludes news to avoid overlapping with the Latest News row.
+	const latestPosts = getArticlePosts().slice(0, 5);
+	const latestNews = getNewsPosts().slice(0, 5);
 
 	// Cheapest package price for the "What does it cost?" answer (kept in sync with packages data)
 	let minPrice = $derived(Math.min(...packages.map((p) => p.price)));
@@ -554,3 +561,19 @@
 		</div>
 	</div>
 </section>
+
+<!-- Latest Posts (non-news articles) -->
+<LatestPostsRow
+	title={i18n.lang === 'en' ? 'Latest Posts' : 'Últimos Artículos'}
+	posts={latestPosts}
+	viewAllHref="/blog/"
+	viewAllLabel={i18n.lang === 'en' ? 'View all posts' : 'Ver todos los artículos'}
+/>
+
+<!-- Latest News -->
+<LatestPostsRow
+	title={i18n.lang === 'en' ? 'Latest News' : 'Últimas Noticias'}
+	posts={latestNews}
+	viewAllHref="/blog/category/news/"
+	viewAllLabel={i18n.lang === 'en' ? 'View all news' : 'Ver todas las noticias'}
+/>

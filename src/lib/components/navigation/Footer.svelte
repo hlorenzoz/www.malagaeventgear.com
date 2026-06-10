@@ -37,6 +37,9 @@
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/blog/">
 						{i18n.lang === 'en' ? 'Blog' : 'Blog'}
 					</a>
+					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/blog/category/news/">
+						{i18n.lang === 'en' ? 'News' : 'Noticias'}
+					</a>
 					<a class="font-body-md text-body-md text-on-surface-variant hover:text-electric-blue hover:translate-x-1 transition-all duration-200" href="/about-us/">
 						{i18n.lang === 'en' ? 'About Us' : 'Sobre Nosotros'}
 					</a>
