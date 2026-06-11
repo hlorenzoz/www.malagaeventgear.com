@@ -599,41 +599,51 @@ export function resolvePackageForPost(post: {
 /**
  * Per-package relevance signals (mirror PACKAGE_RULES, but one entry per package so each
  * can be scored independently). Used by getPackagesForPost to rank the rail by relevance.
+ * `slug` mirrors PACKAGE_RULES.slugPatterns — the cleanest single-topic signal, so it
+ * carries the highest weight in scorePackage and keeps the rail consistent with the CTA.
  */
-const PACKAGE_SIGNALS: Record<string, { category: RegExp[]; keyword: RegExp[] }> = {
+const PACKAGE_SIGNALS: Record<string, { slug: RegExp[]; category: RegExp[]; keyword: RegExp[] }> = {
 	wedding: {
+		slug: [/wedding/],
 		category: [/\bwedding/i],
 		keyword: [/\bwedding\b/i, /\bbride/i, /\bceremony\b/i, /\breception\b/i]
 	},
 	'basic-mice': {
+		// No slug rule in PACKAGE_RULES — basic-mice is the broad category catch-all.
+		slug: [],
 		category: [/\bcorporate\b/i, /\bmice\b/i, /\bevent/i, /\bconference/i, /\bmeeting/i],
 		keyword: [/\bcorporate\b/i, /\bconference/i, /\bmeeting/i, /\bseminar/i, /\bmice\b/i]
 	},
 	mice: {
+		slug: [/gala/, /sports/, /corporate-event/],
 		category: [/\bcorporate\b/i, /\bmice\b/i, /\bevent/i, /\bconference/i, /\bmeeting/i],
-		keyword: [/\bcorporate\b/i, /\bconference/i, /\bmeeting/i, /\bseminar/i, /\bmice\b/i]
+		keyword: [/\bgala\b/i, /\bsports?\b/i, /\bcorporate\b/i, /\bconference/i, /\bmice\b/i]
 	},
 	'product-presentation': {
+		slug: [/seminar/, /training/, /virtual/, /remote/, /presentation/, /launch/, /webinar/, /press-conference/],
 		category: [/\bcorporate\b/i, /\bpresentation\b/i, /\blaunch\b/i],
-		keyword: [/\bpresentation\b/i, /\bproduct\s+launch\b/i, /\blaunch\b/i, /\bshowcase\b/i, /\bdealership\b/i, /\bproduct\b/i]
+		keyword: [/\bpresentation\b/i, /\bproduct\s+launch\b/i, /\blaunch\b/i, /\bseminar/i, /\bwebinar/i, /\btraining\b/i, /\bvirtual\b/i, /\bshowcase\b/i, /\bdealership\b/i, /\bproduct\b/i]
 	},
 	eco: {
+		slug: [/music/, /performance/, /concert/],
 		category: [/\bparty\b/i, /\bprivate\b/i, /\bcelebration\b/i],
-		keyword: [/\bparty\b/i, /\bbirthday\b/i, /\bcelebration\b/i, /\bbudget\b/i, /\bprivate\b/i]
+		keyword: [/\bparty\b/i, /\bbirthday\b/i, /\bcelebration\b/i, /\bbudget\b/i, /\bprivate\b/i, /\bmusic\b/i, /\bconcert\b/i]
 	}
 };
 
 /**
  * Relevance score of a package for a post.
- * Weights: category match = 3, title keyword = 2, each tag keyword = 1.
+ * Weights: slug match = 4 (strongest, mirrors the resolver), category match = 3,
+ * title keyword = 2, each tag keyword = 1.
  */
 function scorePackage(
 	slug: string,
-	post: { categories: string[]; tags: string[]; title: string }
+	post: { categories: string[]; tags: string[]; title: string; slug?: string }
 ): number {
 	const sig = PACKAGE_SIGNALS[slug];
 	if (!sig) return 0;
 	let score = 0;
+	if (post.slug && sig.slug.some((re) => re.test(post.slug!))) score += 4;
 	for (const cat of post.categories) {
 		if (sig.category.some((re) => re.test(cat))) score += 3;
 	}
@@ -657,6 +667,7 @@ export function getPackagesForPost(post: {
 	categories: string[];
 	tags: string[];
 	title: string;
+	slug?: string;
 	isNews?: boolean;
 }): EventPackage[] {
 	const resolved = resolvePackageForPost(post);

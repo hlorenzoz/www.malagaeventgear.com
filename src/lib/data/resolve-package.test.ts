@@ -227,4 +227,29 @@ describe('getPackagesForPost', () => {
 			getPackagesForPost(post).map((p) => p.slug)
 		);
 	});
+
+	it('rail head mirrors the slug-driven CTA package', () => {
+		const cases: [string, string][] = [
+			['audio-visual-rental-for-seminars', 'product-presentation'],
+			['audio-visual-rental-for-gala-dinners', 'mice'],
+			['audio-visual-rental-for-music-performances', 'eco']
+		];
+		for (const [slug, expected] of cases) {
+			const post = makePost({ slug, categories: ['Audio Visual Rental', 'Events'] });
+			expect(getPackagesForPost(post)[0].slug).toBe(expected);
+		}
+	});
+
+	it('scores slug signals so a slug-matched package outranks higher-category ones', () => {
+		// Slug señala launch (→ product-presentation, resolved) Y music (→ eco). 'eco' NO es
+		// el resuelto, no tiene señal de categoría para "Events", así que sin puntaje por slug
+		// quedaría último; con el slug debe superar a basic-mice (que solo puntúa por categoría).
+		const post = makePost({
+			slug: 'av-for-music-and-product-launch',
+			categories: ['Audio Visual Rental', 'Events']
+		});
+		const order = getPackagesForPost(post).map((p) => p.slug);
+		expect(order[0]).toBe('product-presentation'); // resuelto primero
+		expect(order.indexOf('eco')).toBeLessThan(order.indexOf('basic-mice'));
+	});
 });
