@@ -3,6 +3,7 @@
 	import { buildArticleSchema, buildFAQSchema } from '$lib/utils/schema';
 	import { i18n } from '$lib/i18n.svelte';
 	import { slugify } from '$lib/utils/slugify';
+	import { siteConfig } from '$lib/data/site';
 	import type { BlogPost } from '$lib/types/blog';
 	import TableOfContents from '$lib/components/blog/TableOfContents.svelte';
 	import PackagesRail from '$lib/components/blog/PackagesRail.svelte';
@@ -21,10 +22,13 @@
 		children?: import('svelte').Snippet;
 	} = $props();
 
-	let canonicalUrl = $derived(`https://malagaeventgear.com/blog/${post.slug}/`);
+	let canonicalUrl = $derived(`${siteConfig.url}/blog/${post.slug}/`);
 
 	// First category for articleSection (if any)
 	let firstCategory = $derived(post.categories[0] ?? undefined);
+
+	let authorSlug = $derived(slugify(post.author));
+	let authorUrl = $derived(`${siteConfig.url}/blog/author/${authorSlug}/`);
 
 	let articleSchema = $derived(
 		buildArticleSchema({
@@ -33,6 +37,7 @@
 			datePublished: post.publishDate,
 			dateModified: post.updated,
 			authorName: post.author,
+			authorUrl: authorUrl,
 			url: `/blog/${post.slug}/`,
 			imageUrl: post.coverImage,
 			// Use NewsArticle @type when the post belongs to the "News" category
@@ -51,8 +56,6 @@
 	let jsonLdSchemas = $derived(
 		faqSchema ? [articleSchema, faqSchema] : [articleSchema]
 	);
-
-	let authorSlug = $derived(slugify(post.author));
 
 	// Resolve the most relevant package for this post's context
 	let resolvedPackage = $derived(resolvePackageForPost(post));
@@ -105,7 +108,7 @@
 		modifiedTime: post.updated ?? post.publishDate,
 		section: firstCategory,
 		tags: post.tags && post.tags.length > 0 ? post.tags : undefined,
-		author: post.author,
+		author: authorUrl,
 		images: [{ url: post.coverImage, alt: post.title }]
 	}}
 />

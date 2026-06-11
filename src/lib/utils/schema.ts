@@ -233,6 +233,7 @@ export function buildArticleSchema(post: {
 	datePublished: string;
 	dateModified?: string;
 	authorName: string;
+	authorUrl?: string;
 	url: string;
 	imageUrl?: string;
 	imageWidth?: number;
@@ -263,7 +264,8 @@ export function buildArticleSchema(post: {
 		'image': imageNode,
 		'author': {
 			'@type': 'Person',
-			'name': post.authorName
+			'name': post.authorName,
+			...(post.authorUrl ? { 'url': post.authorUrl } : {})
 		},
 		'publisher': {
 			'@type': 'Organization',
@@ -271,7 +273,8 @@ export function buildArticleSchema(post: {
 			'logo': {
 				'@type': 'ImageObject',
 				'url': siteConfig.logoUrl
-			}
+			},
+			'url': siteConfig.url
 		},
 		'mainEntityOfPage': {
 			'@type': 'WebPage',

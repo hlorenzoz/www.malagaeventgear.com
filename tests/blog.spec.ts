@@ -220,6 +220,9 @@ test.describe('Blog SEO — Article schema enrichment', () => {
 		expect(article).toBeTruthy();
 		// inLanguage must be 'en'
 		expect(article?.inLanguage).toBe('en');
+		// author.url and publisher.url should be present
+		expect(article?.author?.url).toBe('https://malagaeventgear.com/blog/author/hector-luis-lorenzo/');
+		expect(article?.publisher?.url).toBe('https://malagaeventgear.com');
 
 		const faqPage = schemas.find((s: any) => s['@type'] === 'FAQPage');
 		expect(faqPage).toBeTruthy();
@@ -235,6 +238,10 @@ test.describe('Blog SEO — Article schema enrichment', () => {
 		// article:published_time should be present
 		const publishedTime = await page.locator('meta[property="article:published_time"]').getAttribute('content');
 		expect(publishedTime).toBeTruthy();
+
+		// article:author should point to the author bio URL
+		const authorMeta = await page.locator('meta[property="article:author"]').getAttribute('content');
+		expect(authorMeta).toBe('https://malagaeventgear.com/blog/author/hector-luis-lorenzo/');
 	});
 
 	test('audio-visual-rental-company has <details> FAQ accordion in body', async ({ page }) => {
@@ -253,6 +260,8 @@ test.describe('Blog SEO — Article schema enrichment', () => {
 		const article = schemas.find((s: any) => s['@type'] === 'NewsArticle');
 		expect(article).toBeTruthy();
 		expect(article?.inLanguage).toBe('en');
+		expect(article?.author?.url).toBe('https://malagaeventgear.com/blog/author/hector-luis-lorenzo/');
+		expect(article?.publisher?.url).toBe('https://malagaeventgear.com');
 	});
 
 	test('non-news post has BlogPosting (not NewsArticle)', async ({ page }) => {
