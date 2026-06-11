@@ -11,14 +11,16 @@
 
 ✅ Fix tables, <ul>, ...
 
+---
 
-
-Múltiple secciones de lista contínua de imágenes animadas (desplasándose continuamente como una tira contínua)
+Crear múltiples componentes reutilizables de lista continua de imágenes animadas (desplazándose continuamente como una tira continua)
 
 - Lista con todas las imágenes (Home page - 1 vez)
 - Lista de imágenes relevantes para cada paquete (página de cada paquete - 1 vez)
 
+Use Plan mode y SDD
 
+---
 
 Click to Share/Tweet: Añadir botón de compartir para redes sociales (WhatsApp, Facebook, Twitter)
 

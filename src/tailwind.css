@@ -172,13 +172,45 @@ html {
 
   /* Typography */
   --font-display-lg: 'Playfair Display', 'Playfair Fallback', serif;
-  --font-body-md: 'Plus Jakarta Sans', sans-serif;
-  --font-headline-lg-mobile: 'Playfair Display', 'Playfair Fallback', serif;
-  --font-body-lg: 'Plus Jakarta Sans', sans-serif;
   --font-headline-lg: 'Playfair Display', 'Playfair Fallback', serif;
+  --font-headline-lg-mobile: 'Playfair Display', 'Playfair Fallback', serif;
+  --font-headline-md: 'Playfair Display', 'Playfair Fallback', serif;
+  --font-headline-sm: 'Playfair Display', 'Playfair Fallback', serif;
+  --font-body-lg: 'Plus Jakarta Sans', sans-serif;
+  --font-body-md: 'Plus Jakarta Sans', sans-serif;
+  --font-body-sm: 'Plus Jakarta Sans', sans-serif;
   --font-label-lg: 'Plus Jakarta Sans', sans-serif;
   --font-label-sm: 'Plus Jakarta Sans', sans-serif;
-  --font-headline-md: 'Playfair Display', 'Playfair Fallback', serif;
+
+  --text-display-lg: 4rem; /* 64px */
+  --text-display-lg--line-height: 4.5rem; /* 72px */
+  
+  --text-headline-lg: 3rem; /* 48px */
+  --text-headline-lg--line-height: 3.5rem; /* 56px */
+  
+  --text-headline-lg-mobile: 2rem; /* 32px */
+  --text-headline-lg-mobile--line-height: 2.5rem; /* 40px */
+  
+  --text-headline-md: 2rem; /* 32px */
+  --text-headline-md--line-height: 2.5rem; /* 40px */
+  
+  --text-headline-sm: 1.5rem; /* 24px */
+  --text-headline-sm--line-height: 2rem; /* 32px */
+  
+  --text-body-lg: 1.125rem; /* 18px */
+  --text-body-lg--line-height: 1.75rem; /* 28px */
+  
+  --text-body-md: 1rem; /* 16px */
+  --text-body-md--line-height: 1.5rem; /* 24px */
+  
+  --text-body-sm: 0.875rem; /* 14px */
+  --text-body-sm--line-height: 1.25rem; /* 20px */
+  
+  --text-label-lg: 0.875rem; /* 14px */
+  --text-label-lg--line-height: 1.25rem; /* 20px */
+  
+  --text-label-sm: 0.75rem; /* 12px */
+  --text-label-sm--line-height: 1rem; /* 16px */
 
   /* Border Radius Override and Extended */
   --radius-sm: 0.25rem;

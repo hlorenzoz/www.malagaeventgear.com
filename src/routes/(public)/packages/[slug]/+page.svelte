@@ -9,9 +9,13 @@
 	import type { PageData } from './$types';
 	import { buildServiceSchema } from '$lib/utils/schema';
 
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+
 	let { data }: { data: PageData } = $props();
 	let pkg = $derived(data.pkg);
 	let landing = $derived(pkg.landing);
+	let packageImages = $derived(getImagesForPackage(pkg.id));
 
 	let seoSchema = $derived(
 		buildServiceSchema(
@@ -247,6 +251,18 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Gallery Marquee Section (Relevant to this package) -->
+	{#if packageImages.length > 0}
+		<section class="py-16 overflow-hidden relative w-full">
+			<div class="px-margin-mobile md:px-margin-desktop text-center mb-10">
+				<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+					{i18n.t.gallery.titlePackage.replace('{pack}', pkg.name)}
+				</span>
+			</div>
+			<ImageMarquee images={packageImages} speed="normal" direction="left" />
+		</section>
+	{/if}
 
 	<!-- ─── Testimonials ─────────────────────────────────────────────────── -->
 	<div class="w-full mb-16">

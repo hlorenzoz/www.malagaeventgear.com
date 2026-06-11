@@ -7,6 +7,8 @@
 	import { getArticlePosts, getNewsPosts } from '$lib/data/blog';
 	import LatestPostsRow from '$lib/components/home/LatestPostsRow.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { galleryImages } from '$lib/data/gallery';
 
 	// Latest editorial content for the home rows (already sorted by publishDate desc).
 	// Latest Posts excludes news to avoid overlapping with the Latest News row.
@@ -250,6 +252,20 @@
 
 <!-- Testimonials Section (Google Reviews) -->
 <Testimonials />
+
+<!-- Gallery Marquee Section -->
+<section class="py-24 overflow-hidden relative">
+	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
+		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+			{i18n.t.gallery.titleHome}
+		</span>
+	</div>
+
+	<div class="space-y-4">
+		<ImageMarquee images={galleryImages.slice(0, 15)} speed="normal" direction="left" />
+		<ImageMarquee images={galleryImages.slice(15)} speed="normal" direction="right" />
+	</div>
+</section>
 
 <!-- Services Section (Bento Grid) -->
 <section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">

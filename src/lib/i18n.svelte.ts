@@ -252,6 +252,11 @@ export const translations = {
 			backToPackages: 'Browse all packages',
 			whatsappCta: 'Or reach us now on WhatsApp',
 			leadLabel: 'Reference'
+		},
+		// Gallery
+		gallery: {
+			titleHome: 'Our Events in Action',
+			titlePackage: 'Past {pack} Events'
 		}
 	},
 	es: {
@@ -502,6 +507,11 @@ export const translations = {
 			backToPackages: 'Ver todos los paquetes',
 			whatsappCta: 'O contactanos ahora por WhatsApp',
 			leadLabel: 'Referencia'
+		},
+		// Gallery
+		gallery: {
+			titleHome: 'Nuestros Eventos en Acción',
+			titlePackage: 'Eventos Anteriores de {pack}'
 		}
 	}
 } as const;
