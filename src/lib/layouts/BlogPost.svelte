@@ -127,7 +127,7 @@
 		</aside>
 
 		<!-- ── Col 2: Main content ── -->
-		<article>
+		<article class="min-w-0">
 			<!-- Cover Image -->
 			{#if post.coverImage}
 				<div class="mb-8 rounded-2xl overflow-hidden aspect-video">
@@ -552,6 +552,8 @@
 	/* Tables — wrapped by rehypeTableWrap for horizontal scroll on narrow viewports */
 	:global(.prose .table-wrap) {
 		overflow-x: auto;
+		width: 100%;
+		max-width: 100%;
 		margin: 1.5rem 0;
 		-webkit-overflow-scrolling: touch;
 		border-radius: 0.5rem;

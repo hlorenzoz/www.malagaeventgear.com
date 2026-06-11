@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Fixed (blog-table-overlap)
+- **Table Overlap & Responsive Scroll**: Added the `min-w-0` class to the `<article>` element (the center grid item in the blog layout) in `src/lib/layouts/BlogPost.svelte` to prevent CSS Grid column expansion beyond the viewport container. Standardized `.table-wrap` styling with `width: 100%` and `max-width: 100%` to ensure that wide tables trigger the responsive horizontal scroll instead of overlapping the Table of Contents (ToC) sidebar.
+
 ### Added (blog-image-marquees)
 - **Content-Relevant Blog Image Marquees**: Built an automated TypeScript script (`scripts/inject-blog-marquees.ts`) that parses and classifies all 75+ Svelte mdsvex blog posts (`.svx`) into `wedding`, `mice` (corporate), or `eco` (general) packages based on frontmatter categories and slugs, injecting Svelte imports and `<ImageMarquee>` components at a target H2 heading around 60% of the content depth.
 - **E2E Playwright Tests** (`tests/blog-marquees.spec.ts`): Built test suite validating that wedding, corporate, and general blog posts render image marquees with appropriate categorized image sets.
