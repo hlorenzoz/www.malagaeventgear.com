@@ -7,6 +7,17 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (share-this-component)
+- **ShareThis Component** (`src/lib/components/blog/ShareThis.svelte`): Svelte 5 component supporting three flexible modes: `inline` (horizontal share bar), `sidebar` (vertical sticky share bar), and `drawer` (mobile floating FAB that opens a sliding bottom-sheet with a glassmorphic backdrop filter).
+- **Mobile Overlap Prevention**: Standardized bottom coordinate for Share FAB (`bottom: calc(7.25rem + env(safe-area-inset-bottom, 0px))`) and modified the WhatsApp widget (`WhatsAppWidget.svelte` with `style="bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px))"`) to stack cleanly above WhatsApp in mobile screen orientations and dynamically handle iOS safe-area home indicators.
+- **Icon Standardization**: Cleaned up the mobile Share FAB custom SVG with explicit SVG stroke/fill properties on child nodes to ensure rendering consistency on mobile browsers and matching the share-plus styling.
+- **Package Details Integration** (`packages/[slug]/+page.svelte`): Deployed the ShareThis component (both inline and mobile FAB drawer) to the service package landing pages with Intersection Observer scroll tracking.
+- **Share Links Utility** (`src/lib/utils/share.ts`): Decoupled pure functions to generate correctly encoded sharing URLs for WhatsApp, Facebook, Twitter, Pinterest, LinkedIn, and Email, as well as clipboard copying helpers.
+- **Scroll-driven Visibility Toggle**: Integrated Intersection Observer inside `BlogPost.svelte` and `+page.svelte` layouts to track top inline share widget visibility, dynamically fading in the left sticky sidebar share widget on desktop and the mobile FAB on mobile when the top widget scroll pasts.
+- **E2E and Unit Tests**: Added Vitest unit tests (`src/lib/utils/share.test.ts`) for share URL generation, and Playwright integration tests (`tests/share.spec.ts`) validating desktop scroll visibility toggling, mobile FAB/drawer click transitions, copy-link permissions and tooltips, and package landing page sharing.
+
+
+
 ### Added (wp-blog-migration)
 - **Native mdsvex Blog System**: Implemented a full native blog replacing the WordPress placeholder page. Posts live in `src/content/blog/*.svx` (mdsvex format), validated by `BlogPostSchema` (Zod), read at build time via `import.meta.glob`.
 - **4 Blog Routes (prerendered)**: `/blog/` (index), `/blog/[slug]/` (post detail), `/blog/category/[category]/` (taxonomy), `/blog/author/[author]/` (author landing). All use `prerender = true` + `entries()` generator.

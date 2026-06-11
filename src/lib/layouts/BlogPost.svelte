@@ -9,7 +9,8 @@
 	import PostCTA from '$lib/components/blog/PostCTA.svelte';
 	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { resolvePackageForPost, getPackagesForPost } from '$lib/data/packages';
-	import { setContext } from 'svelte';
+	import { setContext, onMount } from 'svelte';
+	import ShareThis from '$lib/components/blog/ShareThis.svelte';
 
 	let {
 		post,
@@ -74,6 +75,21 @@
 			return dateStr;
 		}
 	}
+
+	let topShareEl = $state<HTMLElement | null>(null);
+	let isTopVisible = $state(true);
+
+	onMount(() => {
+		if (!topShareEl) return;
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				isTopVisible = entry.isIntersecting;
+			},
+			{ threshold: 0 }
+		);
+		observer.observe(topShareEl);
+		return () => observer.disconnect();
+	});
 </script>
 
 <SeoHead
@@ -103,6 +119,7 @@
 			aria-label="Event packages sidebar"
 		>
 			<PackagesRail packages={railPackages} />
+			<ShareThis mode="sidebar" visible={isTopVisible} url={canonicalUrl} title={post.title} coverImage={post.coverImage} />
 		</aside>
 
 		<!-- ── Col 2: Main content ── -->
@@ -169,6 +186,11 @@
 				<PackagesRail packages={railPackages} />
 			</div>
 
+			<!-- Share Widget (Top, inline) -->
+			<div bind:this={topShareEl}>
+				<ShareThis mode="inline" url={canonicalUrl} title={post.title} coverImage={post.coverImage} />
+			</div>
+
 			<!-- Post Body (mdsvex content rendered via children snippet) -->
 			<div class="prose prose-invert prose-lg max-w-none">
 				{@render children?.()}
@@ -203,6 +225,11 @@
 		</aside>
 
 	</div>
+</div>
+
+<!-- Mobile FAB and Drawer Share (hidden on lg+) -->
+<div class="lg:hidden">
+	<ShareThis mode="drawer" visible={isTopVisible} url={canonicalUrl} title={post.title} coverImage={post.coverImage} />
 </div>
 
 <style>

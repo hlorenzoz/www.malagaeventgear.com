@@ -8,6 +8,7 @@
 	import { siteConfig } from '$lib/data/site';
 	import type { PageData } from './$types';
 	import { buildServiceSchema } from '$lib/utils/schema';
+	import ShareThis from '$lib/components/blog/ShareThis.svelte';
 
 	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
 	import { getImagesForPackage } from '$lib/data/gallery';
@@ -16,6 +17,7 @@
 	let pkg = $derived(data.pkg);
 	let landing = $derived(pkg.landing);
 	let packageImages = $derived(getImagesForPackage(pkg.id));
+	let canonicalUrl = $derived(`${siteConfig.url}${pkg.route}`);
 
 	let seoSchema = $derived(
 		buildServiceSchema(
@@ -34,6 +36,9 @@
 	let stickyVisible = $state(false);
 	let formInView = $state(false);
 
+	let topShareEl = $state<HTMLElement | null>(null);
+	let isTopVisible = $state(true);
+
 	function scrollToForm() {
 		const el = document.getElementById('lead-form');
 		if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -48,6 +53,8 @@
 		};
 
 		let observer: IntersectionObserver | null = null;
+		let topShareObserver: IntersectionObserver | null = null;
+
 		// Diferir el observe() al siguiente frame para no forzar layout durante la hidratación.
 		const raf = requestAnimationFrame(() => {
 			if (formEl) {
@@ -59,6 +66,16 @@
 				);
 				observer.observe(formEl);
 			}
+
+			if (topShareEl) {
+				topShareObserver = new IntersectionObserver(
+					([entry]) => {
+						isTopVisible = entry.isIntersecting;
+					},
+					{ threshold: 0 }
+				);
+				topShareObserver.observe(topShareEl);
+			}
 		});
 
 		window.addEventListener('scroll', scrollHandler, { passive: true });
@@ -68,6 +85,7 @@
 			cancelAnimationFrame(raf);
 			window.removeEventListener('scroll', scrollHandler);
 			observer?.disconnect();
+			topShareObserver?.disconnect();
 		};
 	});
 </script>
@@ -75,7 +93,7 @@
 <SeoHead
 	title={pkg.seo.title[i18n.lang]}
 	description={pkg.desc[i18n.lang]}
-	canonicalUrl={`${siteConfig.url}${pkg.route}`}
+	canonicalUrl={canonicalUrl}
 	image={pkg.image}
 	jsonLdSchema={seoSchema}
 />
@@ -157,6 +175,11 @@
 					<span class="font-label-sm text-on-surface">5.0 Google</span>
 				</div>
 			</div>
+		</div>
+
+		<!-- Share Widget (Top, inline) -->
+		<div bind:this={topShareEl} class="mt-6">
+			<ShareThis mode="inline" url={canonicalUrl} title={pkg.name} coverImage={pkg.image} />
 		</div>
 	</section>
 
@@ -267,5 +290,10 @@
 	<!-- ─── Testimonials ─────────────────────────────────────────────────── -->
 	<div class="w-full mb-16">
 		<Testimonials variant="carousel" heading={true} />
+	</div>
+
+	<!-- Mobile FAB and Drawer Share (hidden on lg+) -->
+	<div class="lg:hidden">
+		<ShareThis mode="drawer" visible={isTopVisible} url={canonicalUrl} title={pkg.name} coverImage={pkg.image} />
 	</div>
 </div>

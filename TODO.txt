@@ -13,7 +13,7 @@
 
 ---
 
-Crear múltiples componentes reutilizables de lista continua de imágenes animadas (desplazándose continuamente como una tira continua)
+✅ Crear múltiples componentes reutilizables de lista continua de imágenes animadas (desplazándose continuamente como una tira continua)
 
 - Lista con todas las imágenes (Home page - 1 vez)
 - Lista de imágenes relevantes para cada paquete (página de cada paquete - 1 vez)
@@ -22,7 +22,21 @@ Use Plan mode y SDD
 
 ---
 
-Click to Share/Tweet: Añadir botón de compartir para redes sociales (WhatsApp, Facebook, Twitter)
+Crea el componente Share This (algo como el plugin de Mediavine: Grow)
+
+https://www.grow.me/publishers/quick-start-guide/
+
+Para compartir en:
+WhatsApp
+Facebook
+Twitter
+Pinterest
+LinkedIn
+Email
+
+---
+
+Click to Tweet (select texto a twittear)
 
 Sección de comentarios
 

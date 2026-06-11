@@ -12,7 +12,8 @@
 	href="https://wa.me/34600428750"
 	target="_blank"
 	rel="noopener noreferrer"
-	class="group fixed bottom-6 right-6 z-40 flex items-center gap-3 p-1 rounded-full bg-linear-to-r from-[#25D366] to-[#128C7E] text-white shadow-xl shadow-green-500/20 hover:shadow-2xl hover:shadow-green-500/35 hover:-translate-y-1 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+	class="group fixed right-6 z-40 flex items-center gap-3 p-1 rounded-full bg-linear-to-r from-[#25D366] to-[#128C7E] text-white shadow-xl shadow-green-500/20 hover:shadow-2xl hover:shadow-green-500/35 hover:-translate-y-1 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25D366]"
+	style="bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px))"
 	aria-label={tooltipText}
 >
 	<!-- Floating visual pulse -->
