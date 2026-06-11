@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga’s premier destination for audio visual rental services. Whether you’re planning a wedding, corporate event, or private party, our top notch rental solutions are designed to make your occasion truly unforgettable.
 
 With over two decades of expertise and a wide selection of cutting edge equipment, [**Malaga Event Gear (MEG)**](/) promises seamless integration and impeccable quality. We’re dedicated to providing dynamic lighting and crystal clear sound that elevate any event’s atmosphere.
@@ -72,11 +76,7 @@ Our rental services are tailored to meet the needs of diverse events, ensuring t
 
 Trust our experienced team to provide seamless service that sets your event apart in Malaga. With extensive experience, we deliver comprehensive conference equipment and innovative solutions, ensuring your occasion is both memorable and impactful.
 
-**MULTIPLE PACKAGES FOR ALL TYPES OF EVENTS**
-
-Discover Audiovisual Rental options for your **stress free event**
-
-[See Packages Options](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

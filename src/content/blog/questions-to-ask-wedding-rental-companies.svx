@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding in Malaga can be a joyous yet challenging endeavor, especially when selecting the right rental company to furnish your special day. To ensure your celebration is flawless, it’s crucial to know what questions to ask wedding rental companies. This guide will provide you with essential insights into what makes a great rental provider, focusing on necessary wedding gear and expert service.
 
 From enchanting lighting to state of the art audio systems, discover how to choose the best options for your magical day in beautiful Malaga. Let us help make your wedding planning journey as smooth and stress free as possible.
@@ -116,11 +120,7 @@ Seamless integration and flexibility
 
 _This table emphasizes the critical components and benefits of wedding rentals in Malaga through the expertise of Malaga Event Gear (MEG)._
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

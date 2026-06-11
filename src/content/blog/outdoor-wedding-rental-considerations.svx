@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning an outdoor wedding in picturesque Malaga, Spain, means embracing the charm and beauty of nature while ensuring every detail is meticulously executed. To create an unforgettable celebration, essential wedding rentals such as stages, lighting, and audio visual equipment become pivotal. **Malaga Event Gear (MEG)** offers tailored solutions, providing top notch gear to enhance your ceremony’s aesthetic and acoustics.
 
 From romantic beach settings to countryside festivities, understanding the key considerations in wedding rentals will help you fashion a flawless event. Dive into the essentials that will make your special day shine with professionalism and elegance.
@@ -118,11 +122,7 @@ In Malaga, the significance of having reliable wedding equipment rentals cannot 
 
 By choosing us, you’re assured of a rental company that prioritizes your needs, ensuring seamless setup and flawless execution. Tap into our extensive knowledge and elevate your wedding beyond expectations. Experience why countless couples have trusted us with their most important day, making our equipment rentals a pivotal part of their unforgettable Malaga wedding.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

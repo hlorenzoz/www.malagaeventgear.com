@@ -9,6 +9,7 @@
 	import PostCTA from '$lib/components/blog/PostCTA.svelte';
 	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { resolvePackageForPost, getPackagesForPost } from '$lib/data/packages';
+	import { setContext } from 'svelte';
 
 	let {
 		post,
@@ -53,6 +54,11 @@
 
 	// Resolve the most relevant package for this post's context
 	let resolvedPackage = $derived(resolvePackageForPost(post));
+
+	// Expose the resolved package to descendant components (e.g. <InlineCTA /> in the
+	// mdsvex body) as a getter, so inline CTAs render the SAME package as the end-of-post
+	// PostCTA below. A getter (not the raw value) keeps it reactive through the closure.
+	setContext('post-package', () => resolvedPackage);
 
 	// Packages ordered by relevance to this post (resolved first → matches the CTA)
 	let railPackages = $derived(getPackagesForPost(post));

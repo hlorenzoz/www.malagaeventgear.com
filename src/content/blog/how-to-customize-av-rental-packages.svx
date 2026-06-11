@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to your comprehensive guide on how to customize AV rental packages in Malaga, Spain. Whether you’re planning a wedding, corporate event, or private party, our expertly tailored solutions ensure your occasion stands out with top quality audiovisual equipment.
 
 In this guide, you’ll discover essential tips and insights for selecting the perfect gear that meets your specific needs and budget. With over two decades of industry experience, Malaga Event Gear is here to help you create unforgettable experiences that captivate your audience.
@@ -50,11 +54,7 @@ Delve into the dynamic world of **audio visual hire** in Malaga, where event o
 
 With **customizable rental packages**, companies like Malaga Event Gear offer not just **equipment rentals**, but a promise of unforgettable experiences through quality **audiovisual rental**. As you embark on this journey of choosing the ultimate gear, explore how AV rentals can redefine the success of your event and boost pull through innovative event production.
 
-****Customize Your AV Rental Package****
-
-Why settle for standard? Our expert team in Malaga makes customization easy, guiding you through every option to create a bespoke, cost effective AV solution perfectly matched to your event’s unique needs on the Costa del Sol.
-
-[Start Customizing with an AV Expert](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

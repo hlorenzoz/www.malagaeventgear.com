@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Discover the charm of hosting your dream wedding in Malaga, Spain, with our All-In-One [Wedding Rental Packages](https://malagaeventgear.com/wedding-pack/). Designed to provide a seamless experience, our rental packages cater to your every need, offering everything from professional audio-visual setups to breathtaking lighting arrangements. Whether planning an intimate beach ceremony or a grand countryside celebration, our weekend hire venues and dedicated services ensure your special day is both magical and stress-free. Let us handle the details while you create unforgettable memories in the exquisite setting of sunny Malaga. Reach out today to begin planning your perfect wedding adventure.
 
 ## Brief Overview
@@ -117,11 +121,7 @@ Distinctive & Easy
 
 _The table above highlights the core components of all-inclusive wedding packages available across various regions in Spain. It underscores the organized planning services provided, the wide array of customization options for personalizing the special day, and the overarching benefits of a stress-free and distinctive experience. This structured overview demonstrates how comprehensive packages are tailored to deliver exceptional weddings in Spain._
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

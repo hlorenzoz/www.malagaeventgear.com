@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be an exciting yet daunting task, especially when it comes to ensuring you have the right equipment and ambiance for your special day. [Wedding rentals](https://malagaeventgear.com/wedding-rentals/) play a crucial role in bringing your vision to life, offering a wide range of essential items to create an unforgettable experience.
 
 From sound systems and lighting to projectors and more, understanding what to rent is key. This guide will walk you through the must have rental items and provide valuable tips to ensure your wedding day is seamless and spectacular, making it a memorable celebration in every way.
@@ -113,11 +117,7 @@ _This table highlights essential considerations for maximizing the effectiveness
 
 ### Here Are Some Wedding Rental Industry Tips for a Successful Event
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

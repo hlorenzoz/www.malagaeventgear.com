@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding is a joyous yet intricate task that involves careful consideration of various elements. A key aspect to ensure a seamless celebration is the timing of your wedding rental bookings and securing your wedding vendors well in advance. From reserving the ideal venue and selecting top-notch audiovisual equipment, to choosing caterers and photographers, having a well-structured timeline can alleviate stress and ensure every detail is flawlessly executed. In this guide, we’ll explore essential tips to help you orchestrate your wedding plans efficiently, ensuring a magical day filled with cherished memories.
 
 ## Brief Overview
@@ -73,11 +77,7 @@ From the moment you book your wedding vendors, you gain the ability to focus on 
 
 Engaging with vendors in advance also provides the liberty to establish a strong vendor-client relationship, which is invaluable. This rapport facilitates easier communication and coordination, leading to an event that reflects both your vision and professional expertise. As an advocate for seamless wedding planning, explore options like **Malaga Event Gear (MEG)** for a hassle-free experience. **Explore our wedding rentals** by visiting [MEG’s Wedding Rentals page](https://malagaeventgear.com/wedding-rentals/) to secure your place in our calendar and enhance your event with state-of-the-art technology and expert support, ensuring every moment is nothing short of magical.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

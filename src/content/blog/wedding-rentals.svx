@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Transform your special day with our expert wedding rentals, designed to add elegance and sophistication to any celebration. Whether it’s an intimate beach ceremony or a grand countryside gala, [our tailored packages](https://malagaeventgear.com/pricing/) offer everything you need to create unforgettable memories. From professional sound systems ensuring clarity during vows to exquisite lighting that sets the perfect romantic mood, we provide all in one solutions that promise a seamless wedding experience. Our dedicated team is committed to making your event extraordinary, guiding you through every step to ensure a flawless and stress free celebration.
 
 ## Brief Overview
@@ -137,11 +141,7 @@ Provides lasting memories
 
 _This table illustrates how the Wedding Pack by Malaga Event Gear elevates the wedding experience with tailored solutions._
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

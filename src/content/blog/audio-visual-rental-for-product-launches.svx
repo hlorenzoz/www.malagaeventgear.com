@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your trusted partner in bringing spectacular product launches to life with top notch audio visual rental for product launches in Malaga, Spain. With over 25 years of industry experience, we specialize in providing state of the art AV equipment and bespoke solutions tailored to elevate your event.
 
 Whether you’re organizing an intimate product reveal or a large scale corporate launch, our complete range of services, including cutting edge sound systems, dynamic lighting, and high quality projectors, ensures your event leaves a lasting impression.
@@ -92,11 +96,7 @@ Each package includes state of the art sound systems, delivering crystal clear a
 
 Choose our expertly curated packages to enjoy stress free event preparation and focus on making an unforgettable impression at your next product launch.
 
-****Launch with Impact: AV Rental for Product Launches****
-
-Secure a 5000 lumen projector, high quality screen, crystal clear sound, and a wireless mic for your next successful product launch, presentation, or demonstration in Malaga, Spain!
-
-[Book Now Your Product Presentation Pack](https://malagaeventgear.com/product-presentation-pack/)
+<InlineCTA />
 
 ## Testimonials
 

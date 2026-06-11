@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Explore the latest wedding rental trends for 2026 that transform your big day into an unforgettable celebration. With enchanting décor, state-of-the-art audio visuals, and bespoke setups, couples can create a magical atmosphere that aligns with their unique vision. Discover sophisticated lighting, luxurious linens, and innovative entertainment options, all designed to enhance your wedding experience. Whether you’re planning a beachside ceremony or a grand indoor event, these top wedding rental ideas will ensure a memorable occasion that dazzles guests and leaves a lasting impression. Stay ahead of the trends and elevate your wedding with exceptional style and elegance.
 
 ## Brief Overview
@@ -77,11 +81,7 @@ A living **champagne wall** can truly elevate your wedding experience, transfo
 
 At **Malaga Event Gear (MEG)**, we recognize the importance of making weddings special through creative elements like a champagne wall, which pairs well with romantic lighting and sound systems for a full sensory experience. For those planning weddings in Malaga, this rental option is a stylish solution to create lasting memories while ensuring the event remains exceptional. To explore how these rentals can fit your needs, don’t hesitate to reach out for a consultation and see how a living champagne wall can be the perfect **luxury upgrade** for your big day.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

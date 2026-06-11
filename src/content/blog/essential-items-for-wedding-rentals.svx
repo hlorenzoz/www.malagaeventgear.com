@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be a daunting task, especially when it comes to ensuring all the essential details are covered. From audio visual equipment to lighting, having the right rentals can transform your celebration into a magical event. This ultimate checklist highlights the must-have items for wedding rentals, ensuring every moment is perfectly captured and enjoyed. Whether you’re hosting a grand celebration or an intimate gathering, our guide will help you navigate the essentials to ensure your special day is both flawless and memorable. Get ready to explore what makes the perfect setup for your unforgettable wedding day.
 
 ## Brief Overview
@@ -78,11 +82,7 @@ From chic chairs to stylish tables, rental selections can elevate the decor of y
 
 To explore a range of wedding furniture options, visit our [wedding rentals](https://malagaeventgear.com/wedding-rentals/) page for inspiration and solutions tailored to your needs.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

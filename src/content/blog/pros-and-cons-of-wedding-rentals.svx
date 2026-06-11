@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding in Malaga, Spain, offers the enchanting allure of sun kissed beaches and historic venues. Couples often find themselves considering wedding rentals to simplify logistics and enhance their event’s aesthetic appeal. From audio visual excellence to exquisite furnishings, the right rentals spark magic into every moment. However, balancing convenience with potential cost and availability challenges is crucial before making decisions. This comprehensive guide explores the pros and cons of wedding rentals, helping you create unforgettable memories while optimizing your budget and vision for your special day in Malaga.
 
 ## Brief Overview
@@ -50,11 +54,7 @@ Whether it’s chair rentals, audiovisual equipment, or stunning lighting soluti
 
 Each rental company in Malaga is committed to ensuring every detail is shaped according to your wishes, blending practicality with the elegance of **local** charm. Learn more about Malaga’s [wedding rentals](https://malagaeventgear.com/wedding-rentals) here.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

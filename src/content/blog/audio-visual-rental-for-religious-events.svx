@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your trusted partner for exceptional audio visual rental for religious events and houses of worship solutions in Malaga, Spain. With over two decades of experience, we bring reliability and expertise to your events, ensuring impeccable audio clarity and stunning visual presentations.
 
 Whether you’re hosting a church service, seminar, or conference, our state of the art equipment and professional support enhance every moment, allowing your message to resonate powerfully. Explore our diverse range of high quality rental options to elevate your religious gatherings, and turn your vision into a captivating reality.
@@ -81,11 +85,7 @@ Our expert team understands the unique needs of religious conferences and servic
 
 Whether you’re hosting a small service or a grand conference, our comprehensive hire options will elevate your spiritual events and leave a lasting impression on attendees.
 
-****Project Your Message with AV Rental for Religious Events****
-
-Secure a clear sound system, a high definition screen or projector, and a wireless microphone to ensure every word is heard at your next successful religious ceremony or event in Malaga, Spain!
-
-[Request Your Custom Quote Today](https://malagaeventgear.com/basic-mice-pack/)
+<InlineCTA />
 
 ## Testimonials
 

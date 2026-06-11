@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier partner for top notch audio visual rental for remote presentations services in Malaga, Spain, specifically tailored for remote presentations, online seminars, and virtual conferences. Since 1996, we’ve dedicated ourselves to ensuring impeccable sound and visual clarity for your events.
 
 Our specialized packages and state of the art equipment cater to all your digital event needs, providing seamless experiences from start to finish. Whether you’re hosting a company meeting or a product launch, trust us to deliver exceptional audiovisual solutions.
@@ -81,11 +85,7 @@ Our extensive range of audiovisual rental options allows you to tailor every asp
 
 Discover more about our [audiovisual rental services](https://malagaeventgear.com/audio-visual-rental/) and elevate your next digital event to new heights.
 
-****Connect Clearly with AV Rental for Remote Presentations****
-
-Secure a Video Wall or high resolution screen, a professional sound system, and video conferencing equipment for your next successful hybrid or remote presentation in Malaga, Spain!
-
-[Request Your Quote Today](https://malagaeventgear.com/product-presentation-pack/)
+<InlineCTA />
 
 ## Testimonials
 

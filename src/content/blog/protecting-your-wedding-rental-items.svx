@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding involves meticulous attention to every detail, and ensuring your rented items remain in pristine condition is crucial. Whether it’s the elegant lighting that sets the mood or the sophisticated audio systems that amplify every heartfelt promise, protecting these essentials ensures your day runs smoothly. Our essential rentals checklist provides everything you need to know about caring for your wedding rentals, guaranteeing they remain in top shape throughout your event. Malaga Event Gear (MEG) is dedicated to providing superior equipment, making your wedding day as seamless and memorable as possible. Read on to learn more about safeguarding your rentals.
 
 ## Brief Overview
@@ -87,11 +91,7 @@ The benefits of wedding rentals in Malaga can significantly contribute to crafti
 
 This list aims to guide you in creating an unforgettable wedding experience in Malaga.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

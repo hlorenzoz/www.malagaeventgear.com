@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding involves countless decisions, and one of the most exhilarating aspects is matching your venue with the ideal decor and rentals. With a myriad of styles to choose from, finding the perfect combination can feel overwhelming. Whether you’re dreaming of a vintage, bohemian, or classic theme, making sure that every element aligns will create a seamless and unforgettable experience. From elegant lighting to exquisite sound systems, understanding how to balance aesthetics with functionality is key. In this guide, we’ll explore creative ideas and practical tips to ensure your wedding rentals flawlessly complement your chosen theme.
 
 ## Brief Overview
@@ -73,11 +77,7 @@ Defining your wedding style and vision begins with understanding what inspires y
 
 Your wedding theme should effortlessly capture the essence of your relationship. Browse through design inspiration boards or consult with professional planners to refine your **aesthetic**. Collaborating with experts like Malaga Event Gear (MEG) can provide insights into how audiovisual enhancements can elevate your celebration. Our top-of-the-line equipment ensures that your chosen aesthetics translate into a vivid reality, encapsulating the day with the perfect ambiance. To learn more about how to match wedding rentals with your theme and create a seamless event, visit our [wedding rentals page](https://malagaeventgear.com/wedding-rentals/). With strategic planning and attention to detail, achieving a cohesive and memorable wedding is within reach.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

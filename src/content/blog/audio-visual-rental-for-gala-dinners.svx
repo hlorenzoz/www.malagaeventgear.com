@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier destination for **audio visual rental** for gala dinners solutions designed to elevate your event in the vibrant city of Malaga, Spain. With over two decades of experience, we specialize in delivering state of the art _audio visual equipment_ and seamless execution for unforgettable events.
 
 Whether you are hosting a corporate gala or a sophisticated banquet, our team ensures an immersive experience with top notch sound, lighting, and visual effects. Browse our tailored packages and affordable rental options to discover how we can enhance your next event.
@@ -127,11 +131,7 @@ Transform your gala dinner into an unforgettable night with our high quality **
 
 With our wide variety of screens and specialized services, we guarantee an event to remember. Choose us for your next event in Malaga and experience the difference professional visual equipment can make in enhancing your gala’s atmosphere!
 
-****Host an Exquisite Event with AV Rental for Gala Dinners****
-
-Secure **elegant ambient lighting**, a **crystal clear sound system**, and **high definition screens** to ensure a flawless and memorable **gala dinner, award ceremony, or upscale event** in Malaga, Spain!
-
-[Request Your Quote Today](https://malagaeventgear.com/mice-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Transform your wedding venue with elegant table linens and stylish chair rentals that elevate the ambiance of your special day. Our wedding linen rental services offer an extensive selection of premium fabrics and designs, catering to your wedding theme and personal taste. From classic white tablecloths to vibrant table runners, each piece is meticulously maintained to ensure a flawless appearance. Achieving a cohesive and sophisticated look has never been easier with our reliable linen solutions. Whether an intimate gathering or a grand celebration, our offerings ensure your event leaves a lasting impression.
 
 ## Brief Overview
@@ -80,11 +84,7 @@ Your wedding decor should reflect your personality and flair, and linen rentals 
 
 Embracing these elements will complement your broader vision, elevating the atmosphere to match the magic and romance of your special day. Each choice, from fabric type to color scheme, is a thread in the tapestry of your memorable celebration.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

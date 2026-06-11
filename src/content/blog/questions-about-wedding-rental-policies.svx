@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding involves countless details and decisions, often making it a daunting task for couples. One key aspect that can set the stage for a successful celebration is choosing the right wedding rental company and venue. To ensure you have a memorable and stress-free event, it’s crucial to ask the right questions during this selection process. Knowing what to inquire about regarding packages, policies, and service offerings will help you make informed decisions and create the wedding of your dreams. Dive into this guide for essential questions to streamline your wedding planning journey.
 
 ## Brief Overview
@@ -77,11 +81,7 @@ When selecting a wedding rental package in Malaga, understanding the key inclusi
 
 Confirm the availability of romantic lighting, sound systems, and wireless microphones to elevate the atmosphere with the latest technology. Check whether the rental vendor offers seamless integration with your chosen wedding venues, maximizing your overall experience. Aligning these details ensures your rentals complement the venue perfectly, making your wedding day a beautifully orchestrated occasion. Don’t hesitate to engage directly with vendors to tailor your rental experience for a truly unforgettable event.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

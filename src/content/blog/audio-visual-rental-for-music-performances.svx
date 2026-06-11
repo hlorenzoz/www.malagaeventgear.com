@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier choice for audio visual rental for music performances and concerts in Malaga, Spain. Whether you’re a musician looking for high quality sound equipment or organizing a small event or private celebration, we offer dynamic lighting and crystal clear audio solutions to meet your needs.
 
 With a commitment to providing state of the art technology and excellent customer service, our rental packages are designed to elevate any occasion. Let us help you create an unforgettable experience with our budget friendly and reliable solutions.
@@ -91,11 +95,7 @@ From flawlessly executed music performances to engaging concerts, our cutting ed
 
 Trust us to provide **exceptional** equipment that brings your vision to life and creates **unforgettable** moments.
 
-****Electrify Your Gig with AV Rental for Music Performances****
-
-Secure a **professional sound system**, **mixing console**, **stage lighting**, and all the necessary **audio visual gear** for your next successful **concert, music festival, or live performance** in Malaga, Spain!
-
-[Request Your Quote Now](https://malagaeventgear.com/eco-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be a daunting task, but the right rentals can transform your reception into an unforgettable event. Whether you’re envisioning a rustic outdoor ceremony or a sophisticated banquet, choosing the right equipment is crucial. From elegant seating arrangements to state-of-the-art sound systems, must-have rentals ensure your celebration is seamless and memorable. Discover the essential items that will elevate your special day, making every moment picturesque and effortlessly enjoyable. Dive into our comprehensive guide to wedding reception rentals, designed to help you create the perfect ambiance for your once-in-a-lifetime celebration.
 
 ## Brief Overview
@@ -50,11 +54,7 @@ As experienced specialists in professional audio-visual and event equipment, we 
 
 Choosing the right rentals for your ceremony isn’t just about aesthetics; it’s about functionality and enhancing guest experience. From comfortable seating to state-of-the-art sound systems, every piece should work harmoniously to reflect your style and meet your event’s needs. Ready to transform your wedding ceremony into a breathtaking affair? Visit our website to explore more about how our wedding rentals can elevate your special day further: [Wedding Rentals at MEG](https://malagaeventgear.com/wedding-rentals/).
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier provider of complete audio visual rental for training sessions solutions in Malaga, tailored for any occasion in Malaga, Spain. Excelling in delivering crystal clear audio and stunning visuals, we specialize in enhancing training sessions, corporate events, meetings, and more.
 
 With cutting edge technology and over two decades of experience, our team ensures your event’s success with seamless setup, high quality sound systems, and wireless microphones for ultimate freedom.
@@ -84,11 +88,7 @@ When it comes to ensuring outstanding events, Malaga Event Gear stands as the to
 
 Whether it’s training sessions, meetings, or larger events, our comprehensive rental services ensure seamless execution. Experience the best in audiovisual technology and support, making your events unforgettable and perfectly in tune with your expectations.
 
-****Secure Audiovisual Rental for Training Sessions****
-
-Secure a 5000 lumen projector, crystal clear sound, and a wireless mic for your next successful training session or workshop in Malaga, Spain!
-
-[Book Now Your Product Presentation Pack](https://malagaeventgear.com/product-presentation-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Make your dream wedding come alive with exceptional audio visual rental services in Malaga, Spain. Our expert team at **Malaga Event Gear (MEG)** specializes in delivering crystal clear sound and breathtaking lighting that perfectly suit any venue, from picturesque beach weddings to enchanting countryside celebrations. We offer a range of top tier AV equipment, including sound systems, projectors, and dynamic lighting, ensuring every speech, vow, and dance is captured beautifully. Trust us to transform your special day into an unforgettable experience with seamless setups and unparalleled support, tailor made to make your wedding shine.
 
 ## Brief Overview
@@ -116,11 +120,7 @@ Efficient budget management
 
 _This table highlights how using audiovisual rentals can elevate wedding events through professional service and well maintained equipment._
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 
@@ -203,12 +203,6 @@ Visual elements like LED walls can enhance the beachfront atmosphere by displayi
 At **Malaga Event Gear (MEG)**, we provide AV rental options designed to meet the unique demands of both beachfront and indoor celebrations, offering equipment that seamlessly integrates into your setting for a flawless event.
 
 ![Two wedding rings are placed inside a book, forming a heart shape, wedding rings.](https://cdn.malagaeventgear.com/blog/1638/wedding_rings_heart_book-768x512.webp)
-
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[Reserve Your Wedding Pack Now](https://malagaeventgear.com/wedding-pack/)
 
 ## Creating the Perfect Ambiance with Dynamic Lighting
 

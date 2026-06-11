@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier choice for exceptional audio visual rental for sports events in Malaga, Spain. Elevate your sporting experiences with our state of the art sound systems and vibrant visual equipment, designed to engage and energize every audience.
 
 Whether you’re organizing a small local game or a large scale tournament, our expertly tailored solutions ensure flawless execution and immersive experiences. With a commitment to quality and dedicated customer service, Malaga Event Gear transforms your sports event into a remarkable spectacle.
@@ -81,11 +85,7 @@ An essential for any sporting venue, LED screens bring every moment to life, tra
 
 Discover how our LED solutions can enhance your next sports event today.
 
-****Score Big with Audiovisual Rental for Sports Events****
-
-Secure a high quality screen, crystal clear sound, and all the necessary AV gear for your next successful sports event or viewing party in Malaga, Spain!
-
-[Request Your Quote Today](https://malagaeventgear.com/mice-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning an indoor wedding in Malaga, Spain, involves meticulous attention to detail to ensure a magical celebration. This comprehensive guide on indoor wedding rental essentials and lighting can transform any venue into an enchanting setting.
 
 From elegant lighting solutions that create the perfect atmosphere to top notch audiovisual equipment for crystal clear speeches and music, discover how these key elements contribute to the success of your special day. Let **Malaga Event Gear’s (MEG)** expertise and quality products help you craft an unforgettable wedding experience.
@@ -75,11 +79,7 @@ When it comes to crafting a memorable wedding, rental items play a pivotal role 
 
 As you delve deeper into this comprehensive guide, you’ll discover how event rental services can take your upcoming wedding to new heights. Understanding these essentials not only streamlines your planning but also saves time and offers peace of mind. This is a cornerstone aspect for couples envisioning their perfect day.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

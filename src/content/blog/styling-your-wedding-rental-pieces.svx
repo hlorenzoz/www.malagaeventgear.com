@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Transform your wedding into a breathtaking spectacle with expertly styled rental pieces that capture your unique vision. Dive into our curated tips and décor ideas to elevate your special day, whether it’s an intimate beach ceremony or a grand countryside celebration. **Malaga Event Gear (MEG)** provides elegant solutions tailored for every occasion, ensuring seamless audio and visual setups. From romantic lighting to impeccable sound systems, discover how to create an unforgettable ambiance. Let our guidance inspire you to craft a celebration as memorable as your love story. Contact us for personalized assistance and begin planning your dream wedding today!
 
 ## Brief Overview
@@ -46,11 +50,7 @@ The Wedding Pack by **Malaga Event Gear (MEG)** stands out as the go-to choice f
 
 It’s not just about renting items. You’re curating an experience that resonates with you and your guests. The pack’s romantic lighting solutions and crystal-clear audio systems create an immersive ambiance, elevating your special day into an unforgettable event. Moreover, our team’s expertise transforms spaces, making the most of the rental decor while ensuring every detail aligns with your wedding style. Visit our [wedding rentals page](https://malagaeventgear.com/wedding-rentals/) for more inspiration on how our **Wedding Pack** can bring your vision to life.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

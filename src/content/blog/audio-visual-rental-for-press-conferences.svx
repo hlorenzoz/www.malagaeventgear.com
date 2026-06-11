@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your trusted partner for state of the art audio visual rental for press conferences and corporate events solutions in Malaga, Spain. Our expert team provides seamless setups with advanced sound systems, projectors, and lighting to ensure your event is a resounding success.
 
 With over two decades of experience, we specialize in creating unforgettable experiences with crystal clear audio and high definition visuals that captivate your audience. Discover our versatile rental packages and elevate your event to new heights.
@@ -81,11 +85,7 @@ From modern LED screens to state of the art video cameras, we ensure every detai
 
 Whether it’s boosting engagement or improving overall experience, our audiovisual equipment rental services in Malaga transform every event into an unforgettable occasion. Trust us for unmatched quality and dedication.
 
-****Control the Narrative with AV Rental for Press Conferences****
-
-Secure a professional sound system, microphones (wired and wireless), a high definition screen, and stage lighting to ensure a successful press conference or media event in Malaga, Spain!
-
-[Request Your Quote Today](https://malagaeventgear.com/product-presentation-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be a daunting task, especially when it comes to selecting the perfect spot and comparing rental quotes. With so many options available, making the right choice requires careful consideration of factors like venue ambiance, audio visual needs, and budget constraints. This guide offers insightful tips to help you navigate through the process, ensuring you choose a spot that not only fits your style but also your budget. Whether you’re planning an intimate beach wedding or a grand indoor ceremony, our advice will help streamline your decision-making process and ensure a memorable celebration.
 
 ## Brief Overview
@@ -118,11 +122,7 @@ Planning efficiently ensures your wedding not only stays within budget but remai
 
 Effective communication can greatly enhance the overall experience. By meticulously comparing these crucial elements, you’ll be well on your way to making informed decisions that maximize value and satisfaction. Remember, thoughtful planning is the key to creating a seamless and unforgettable wedding day.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

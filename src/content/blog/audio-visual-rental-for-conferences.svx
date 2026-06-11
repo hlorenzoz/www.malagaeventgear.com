@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Unlock the full potential with our top notch audio visual rental for conferences and events services in Malaga. Malaga Event Gear specializes in providing high quality audio and visual equipment tailored to your unique needs, ensuring every presentation and gathering is a resounding success.
 
 With our extensive range of cutting edge technology, from pristine sound systems to dynamic lighting solutions, your guests will be captivated by a flawless experience. Our expert team, boasting decades of industry expertise, is dedicated to delivering exceptional service, guaranteeing your event is unforgettable.
@@ -84,11 +88,7 @@ Enjoy peace of mind with our seamless setup and expert support. Our diverse arra
 
 Check out our [audio visual equipment rental services](https://malagaeventgear.com/audio-visual-rental/) for more details on customizing your event.
 
-****Professional AV Rental for Conferences in** Malaga, Spain**
-
-Ensure your event runs flawlessly. We specialize in providing comprehensive, high definition audiovisual solutions and expert on site technical support for conferences, conventions, and business meetings on the Costa del Sol and all Malaga, Spain.
-
-[Request Your Custom Conference AV Quote](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

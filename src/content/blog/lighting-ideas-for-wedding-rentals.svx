@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Illuminating your wedding day with the perfect lighting is key to creating an unforgettable atmosphere. Whether you’re envisioning a romantic garden ceremony or a grand ballroom celebration, the right lighting ideas for wedding rentals can transform your venue into a magical wonderland.
 
 **Malaga Event Gear (MEG)** offers expert guidance and an array of lighting solutions to elevate your event. Dive into our comprehensive list of 47 lighting ideas to inspire awe and add a touch of enchantment to your special day. From twinkling fairy lights to dynamic color effects, discover how to light up your wedding with style and sophistication.
@@ -81,11 +85,7 @@ Event lighting plays a critical role in transforming wedding venues into enchant
 
 At **Malaga Event Gear (MEG)**, we specialize in providing exceptional lighting rentals that turn your event visions into reality. With thoughtful lighting ideas and expert assistance, your wedding becomes more than a ceremony. It becomes an unforgettable experience.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

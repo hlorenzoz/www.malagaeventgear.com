@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Embrace sustainability in your wedding planning with our eco friendly wedding rental options, designed to enhance your special day while minimizing your environmental impact. Discover a variety of stylish and sustainable tents that offer the perfect backdrop for a green celebration. Whether you envision a rustic outdoor gathering or a chic garden fête, our eco conscious solutions combine elegance and functionality, ensuring your wedding aligns with your values. Create unforgettable memories while showcasing your commitment to the planet, all set against the stunning natural beauty of Malaga, Spain.
 
 ## Brief Overview
@@ -117,11 +121,7 @@ Recyclable materials
 
 _The table summarizes the key aspects and benefits of the shift towards eco-friendly weddings in Malaga, emphasizing how these practices not only lessen the environmental impact but also enhance local engagement and sustainability. Examples illustrate practical applications of these green initiatives._
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

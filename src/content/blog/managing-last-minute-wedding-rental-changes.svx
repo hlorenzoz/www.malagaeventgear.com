@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Last-minute changes in wedding plans can be a source of significant stress for couples, especially when it comes to organizing rentals. From unexpected guest list adjustments to unforeseen weather changes, the need to adapt quickly can challenge even the most prepared planners. Our guide to managing last-minute wedding rental changes provides essential tips and strategies to help you remain calm and focused. Learn how to effectively navigate these changes with ease, ensuring your special day in Malaga remains as beautiful and seamless as planned. Read on to discover how you can turn potential stress into smooth sailing.
 
 ## Brief Overview
@@ -87,11 +91,7 @@ Consider these strategies for integrating flexibility into your wedding planning
 
 These tips ensure a seamless, stress-free wedding celebration, even when surprises arise.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

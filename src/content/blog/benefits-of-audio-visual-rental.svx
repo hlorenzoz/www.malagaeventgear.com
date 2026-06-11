@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Unlock the potential of your event in Malaga, Spain, and the benefits of audio visual rental with our premier audio visual rental services.
 
 Whether you’re hosting an intimate gathering or a corporate gala, high quality AV equipment can transform your venue into a captivating experience. At **Malaga Event Gear (MEG)**, we offer a vast selection of sound systems, projectors, and lighting solutions tailored to your unique needs.
@@ -84,11 +88,7 @@ From eliminating the need for regular maintenance to offering scalable solutions
 
 Let’s delve into the details of how AV rental can significantly streamline your event planning.
 
-******Ready to Make Your Event Unforgettable?******
-
-Get all the benefits of high end audio visual rental without the hassle.
-
-[**Request Your Free Quote Now**](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

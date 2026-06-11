@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier destination for professional audiovisual hire in Malaga, Spain. Whether you’re planning a wedding, party, corporate meeting, or conference, our comprehensive range of high quality equipment and superior service ensures your event is a resounding success.
 
 From advanced lighting solutions to crystal clear sound systems and video conferencing tools, our expert team is dedicated to tailor made setups to fit your unique requirements. Discover how our decades of experience can elevate your events by exploring our versatile packages.
@@ -79,11 +83,7 @@ Dive into a world of superior technology as you explore the best _hire_ audio 
 
 Your search for top notch AV hire services in Malaga ends here , let’s make your event truly outstanding.
 
-****Your Local Experts: Audio Visual Hire In Málaga, Spain****
-
-Based in the heart of Malaga, Spain, we deliver and set up professional AV equipment across the Costa del Sol and surrounding areas, ensuring hassle free events right where you need us.
-
-[Check Our Availability Near You](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

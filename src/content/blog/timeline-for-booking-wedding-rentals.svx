@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning your wedding involves orchestrating countless details, and timely booking of wedding rentals is crucial for a seamless celebration. This guide highlights the optimal timeline for reserving essential rentals such as our renowned [Wedding Pack](https://malagaeventgear.com/wedding-pack/) by **Malaga Event Gear (MEG)**. Whether it’s securing crystal clear audio for vows or enchanting lighting for that dreamlike ambiance, our step-by-step roadmap ensures every aspect is meticulously coordinated. Navigate the journey from initial planning to flawless execution with confidence. Engage with our insights, crafted to make your wedding an unforgettable success. Start planning today and let us bring your vision to life effortlessly.
 
 ## Brief Overview
@@ -78,11 +82,7 @@ Booking your wedding rentals 12-18 months in advance can significantly enhance y
 
 Understanding vendor timelines and planning ahead allows for a seamless integration of audiovisual elements, such as dynamic lighting tailored to your theme. Such preparations go a long way in shaping a memorable day. Partnering with quality vendors like **Malaga Event Gear (MEG)** ensures you’re backed by professionals dedicated to your vision. Start the conversation **today**, and book early to avoid being half-prepared; reach out and take charge of your wedding timeline confidently. **Plan ahead and make your day as magical as anticipated, leaving nothing to chance.**
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

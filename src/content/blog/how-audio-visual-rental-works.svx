@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to the ultimate guide on how audio visual rental works in Malaga, Spain. Whether you’re planning a wedding, corporate event, or a party, understanding the nuances of audio visual sound and equipment rentals can vastly enhance your occasion.
 
 Discover the benefits of renting cutting edge technology such as sound systems, projectors, and lighting solutions for a seamless experience. Our comprehensive insights will equip you with the knowledge to ensure your event shines with professional grade equipment, tailored just for you.
@@ -86,11 +90,7 @@ When considering audio visual rentals, it’s important to know what you’re ge
 
 Renting audio and visual equipment means you don’t have to invest in buying expensive gear you’ll rarely use, making it a cost effective choice.
 
-******Master How Audio Visual Rental Works for Your Next Event******
-
-Discover our seamless 4 step process. From selecting your custom package to professional on site setup, designed to make your Malaga event shine without the stress.
-
-[Get Your Free Rental Quote](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

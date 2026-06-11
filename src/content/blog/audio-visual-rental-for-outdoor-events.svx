@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier choice for audio visual rental for outdoor events in Malaga, Spain. With unmatched expertise and high quality equipment, we ensure your occasion leaves a lasting impression.
 
 Whether hosting a dynamic press conference, an engaging seminar, or a captivating product launch, our state of the art sound and visual systems provide clarity and excellence. Elevate your event with our comprehensive packages designed for the ultimate outdoor experience.
@@ -114,11 +118,7 @@ Daily, Long term
 
 _This table succinctly summarizes the diverse rental offerings available, providing an easy reference for clients looking to enhance various events with state of the art audiovisual solutions._
 
-****Shine Bright with AV Rental for Outdoor Events****
-
-Secure a powerful sound system, weather resistant screens, and dynamic lighting designed for an impactful outdoor festival, market, or celebration in Malaga, Spain!
-
-[Request Your Quote Today](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Hosting an outdoor event can be a captivating experience, further elevated with the right audio visual equipment. However, setting up rental AV equipment involves meticulous planning and execution to ensure flawless operation.
 
 Whether you’re organizing a wedding, party, or corporate event in Malaga, choosing the correct equipment set, from sound systems to lighting, is essential. Our comprehensive guide offers practical insights and expert tips to help you set up rented AV equipment seamlessly, guaranteeing a memorable and successful event.
@@ -91,11 +95,7 @@ By strategically placing **audio equipment** like powerful speakers and microp
 
 Choosing high quality **sound equipment** and experienced technicians makes all the difference in ensuring sound precision and clarity. Equally vital is the visual component of your event.
 
-****Get a Flawless Outdoor AV Setup in Malaga****
-
-Don’t let the elements ruin your event. From beach weddings to garden parties, we provide pro grade equipment with seamless delivery and expert installation.
-
-[Book Our Hassle Free Outdoor Setup](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

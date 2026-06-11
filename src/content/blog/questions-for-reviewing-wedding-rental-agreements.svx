@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be both exciting and stressful, especially when it comes to ensuring all your rental agreements are in order. Asking the right questions before signing a wedding rental contract is crucial to avoid any potential pitfalls. From understanding the fine print to clarifying delivery details, knowing what to look for in your rental agreement can save you from future headaches. In this guide, we’ll walk you through essential questions and tips to review your wedding rental contracts thoroughly, so you can focus on creating unforgettable memories at your event.
 
 ## Brief Overview
@@ -81,11 +85,7 @@ When you’re examining a rental agreement, it’s essential to focus on several
 
 A well-drafted contract from a trusted rental provider, like **MEG**, often offers flexibility, enabling you to make necessary adjustments if things don’t go according to plan. By comprehensively reviewing these elements, not only do you secure peace of mind, but you also ensure all details align with your vision. For more insights into crafting the perfect rental plan, explore informative resources that guide you through this essential **aspect** of wedding planning. For more specific contract tips or to explore rental options, visit our [wedding rentals page](https://malagaeventgear.com/wedding-rentals/).
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

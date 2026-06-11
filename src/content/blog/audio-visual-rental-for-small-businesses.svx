@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to “The Ultimate Guide to Audio Visual Rental for Small Businesses in Malaga, Spain”, where Malaga Event Gear brings the spotlight to how clear visuals and crisp sound can transform your event experience. Tailored especially for small businesses, our guide provides expert insights into AV equipment rental, ensuring you make impactful presentations and events.
 
 Learn about essential setups, including high quality projectors, brilliant screens, and state of the art sound systems. With over 25 years of industry expertise, we offer you strategies to enhance your event with top notch audio visual solutions.
@@ -82,11 +86,7 @@ From projectors to screens, each piece of equipment plays a vital role in delive
 
 With careful planning and the right audiovisual choices, your small event can become a memorable success. So, align your goals with expert solutions and watch your event shine brightly.
 
-****Boost Your Business Image with Audiovisual Rental****
-
-Secure a high definition screen, clear sound system, and a wireless mic for your next successful small business meeting, presentation, or product demo in Malaga, Spain!
-
-[**Book Now Your Presentation Pack**](https://malagaeventgear.com/basic-mice-pack/)
+<InlineCTA />
 
 ## Testimonials
 

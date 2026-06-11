@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Searching for top notch wedding rentals near you in Malaga, Spain? Discover the perfect blend of elegance and convenience with our exceptional wedding and event rental services. At **Malaga Event Gear (MEG)**, we specialize in offering high quality audio, visual, and lighting equipment tailored to create unforgettable moments. Whether you’re planning an intimate beach ceremony or a lavish indoor banquet, our comprehensive rental solutions have got you covered. With over a decade of experience, we ensure seamless execution and remarkable memories for you and your guests. Explore our offerings today to make your special day truly extraordinary.
 
 ## Brief Overview
@@ -112,11 +116,7 @@ Choosing the right audio visual rentals for your wedding is a pivotal step towar
 
 Our premium audio systems are designed for versatility, easily accommodating various venue sizes while maintaining impeccable sound quality. This ensures that, whether you’re in a cozy outdoor setting or a large indoor hall, every guest experiences the event as intended. In addition to our superior sound solutions, our lighting packages create an ambiance that complements the overall theme of your wedding.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding in the enchanting city of Malaga requires meticulous attention to detail, especially when it comes to selecting the right audio visual rental service.
 
 This guide offers essential insights into how to choose an audio visual rental service for weddings tailored to your special day. With ****Malaga Event Gear (MEG)****, you can ensure that every moment is expertly captured and heard with crystal clear precision.
@@ -93,11 +97,7 @@ Prioritizing equipment quality during the hire process often means the differenc
 
 For those uncertain about key choices, consider reaching out to professional rental services to understand service options better. This can bring peace of mind, knowing that your event’s technical aspects are in capable hands. Explore more about [AV rental solutions](https://malagaeventgear.com/audio-visual-rental/) to design the celebration of a lifetime.
 
-****Stop Stressing Over Your Wedding AV. Let the Experts Handle It.****
-
-From crystal clear vows to a packed dance floor, our all inclusive **Wedding Pack** provides professional sound, romantic lighting, and on site technical support so you can focus on your special day.
-
-[Get Your Free Wedding AV Quote](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

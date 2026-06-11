@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your go to source for top tier audio visual rental for corporate meetings services in Malaga, Spain. Elevate your business gatherings with our state of the art technology, ensuring seamless presentations and impactful experiences.
 
 Whether hosting a [small group](https://malagaeventgear.com/audio-visual-rental-for-small-businesses/) or a [large conference](https://malagaeventgear.com/audio-visual-rental-for-conferences/), our comprehensive range of sound systems, projectors, and lighting solutions promise to meet every need with professionalism and reliability. Discover how we can transform your next corporate event into a success story with our dedicated team and cutting edge equipment.
@@ -89,11 +93,7 @@ With personalized solutions for lighting and AV equipment, we cater to events of
 
 Trust in MEG’s expertise for innovative audiovisual services that enhance the audience’s experience and exceed expectations. Unlock the full potential of your corporate event with our specialized AV rental services.
 
-**Elevate Your Next Corporate Meeting with Flawless AV**
-
-Impress your clients and team with high impact technology. From crisp 60 inch screens to professional audio and dedicated on site technicians, our **Basic MICE Pack**, **MICE Pack**, or **Product Presentation Pack** ensures your presentation runs smoothly from start to finish.
-
-[Get My Custom Meeting Quote](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

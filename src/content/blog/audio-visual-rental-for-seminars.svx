@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your trusted partner for premier audio visual rental for seminars, conventions, and impactful events services tailored in Malaga, Spain. With over two decades of expertise, we are committed to delivering crystal clear audio and stunning visuals that elevate your event’s ambiance and professionalism.
 
 Whether it’s a corporate seminar or a grand convention, our state of the art equipment and personalized service ensure a seamless experience. Discover how our bespoke packages and cutting edge technology can transform your event into a remarkable occasion.
@@ -89,11 +93,7 @@ Unlock the potential of your conventions and conferences in Malaga with our cutt
 
 Our state of the art setups are tailored specifically for conventions, delivering seamless integration and operation for every occasion. Whether you’re hosting a small seminar or a large scale conference, our reliable audiovisual rentals provide the technological backbone required to engage and captivate your audience, ensuring your event’s success.
 
-****Make Your Seminars Stand Out with AV Rental****
-
-Secure a high quality projector, professional sound system, and a wireless microphone for your next successful seminar, lecture, or educational event in Malaga, Spain!
-
-[**Enquire Now Your Product Presentation Pack**](https://malagaeventgear.com/product-presentation-pack/)
+<InlineCTA />
 
 ## Testimonials
 

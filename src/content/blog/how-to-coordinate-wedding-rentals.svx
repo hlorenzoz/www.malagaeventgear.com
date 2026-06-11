@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding involves countless details, but coordinating rentals can be one of the most crucial tasks to ensure your special day goes off without a hitch. Prioritizing your rental order to complement your venue’s unique aesthetics not only enhances the event’s ambiance but also simplifies the decision-making process. Whether you’re hosting an intimate gathering or a grand celebration, understanding how to align your rentals with your venue’s style will create a seamless, elegant experience. Discover the essential steps to make your wedding unforgettable, from selecting the perfect sound system to creating magical lighting effects.
 
 ## Brief Overview
@@ -85,11 +89,7 @@ Auditory and visual aspects shouldn’t be overlooked during this process. High-
 
 As you embark on planning your special day, consider how integrating rentals into your venue’s aesthetics can help achieve a seamless, **personalized** event. This approach not only accentuates the beauty of the location but also ensures that the day reflects your story magnificently. **Explore more wedding rental options** by visiting our [wedding rentals page](https://malagaeventgear.com/wedding-rentals/) to craft an event that truly resonates with you and your guests.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

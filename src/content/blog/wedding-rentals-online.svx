@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Discover the perfect blend of elegance and convenience with our events and wedding rentals online in Malaga, Spain. Whether you’re planning a grand celebration or an intimate gathering, our comprehensive range of online wedding rental services ensures your special day is nothing short of spectacular.
 
 From sparkling audiovisuals to breathtaking lighting setups, we offer tailored solutions that transform any venue into a magical setting. With our expert guidance and impeccable service, creating an unforgettable experience for you and your guests has never been easier. Explore our offerings today and let us turn your vision into a reality.
@@ -74,11 +78,7 @@ Planning an unforgettable wedding requires attention to detail, and finding the 
 
 With years of experience in providing exceptional service in Malaga, Spain, we’re committed to making your special day seamless and stress free. Let us transform your venue with crystal clear sound and stunning visual displays, setting the perfect mood for your nuptials.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

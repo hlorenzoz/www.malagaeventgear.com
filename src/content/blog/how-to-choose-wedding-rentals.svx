@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be both exciting and overwhelming, especially when it comes to selecting the right rentals to create your dream day. With so many options available, it’s important to know how to choose wedding rentals wisely to ensure your event runs smoothly and looks stunning. From elegant seating arrangements to state of the art audiovisual equipment, each piece plays a crucial role in the overall ambiance. This guide will walk you through the must have rentals and provide essential tips to simplify your decision making process, ensuring a seamless, memorable celebration for you and your guests in Malaga, Spain.
 
 ## Brief Overview
@@ -122,11 +126,7 @@ Personalized Service, Cost Efficiency
 
 _This table underscores the importance of choosing the right rental service and how assessing your event and venue needs leads to a memorable wedding experience._
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

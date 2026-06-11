@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a successful event is an art that requires meticulous attention to detail, especially when it comes to audio visual needs. Whether you’re hosting a corporate conference or an intimate wedding, understanding common AV rental mistakes can save you from last minute headaches.
 
 In this guide, we’ll explore the top 15 errors that can derail your plans and provide practical tips to ensure your event is flawless. By familiarizing yourself with these pitfalls, you can navigate the world of AV rentals with confidence, ensuring clear sound, stunning visuals, and a memorable experience for your guests.
@@ -92,11 +96,7 @@ Next, assess your audience’s size to determine the appropriate equipment neede
 
 Having a clear understanding of the audience size aids in selecting the necessary rental equipment and avoids over or underestimating AV needs. Communicate effectively with the AV team to confirm availability and the specifics of the gear you plan to rent.
 
-****Experience a Hassle Free Event Without the Technical Errors****
-
-Skip the stress of common AV rental mistakes and let our experts handle the setup for you.
-
-[Request Your Quote Today](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

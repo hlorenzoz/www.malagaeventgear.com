@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Discover the unmatched convenience and quality of audio video rental in Malaga, Spain, with our specialized AV equipment solutions. Catering to the unique demands of TV, film, and cinema projects, our offerings ensure you can capture every moment with precision.
 
 Whether you’re an independent filmmaker or a large production crew, our top of the line cameras and gear equip you for success. Leveraging years of expertise, Malaga Event Gear provides dedicated service, ensuring your events and productions hit the mark.
@@ -91,11 +95,7 @@ By leveraging local expertise and quality equipment, events can achieve professi
 
 For tailored solutions, see our [equipment rental options](https://malagaeventgear.com/pricing/).
 
-****Local & Reliable: Audio Video Rental Near Me in Málaga****
-
-**Skip the stress. We provide professional audio and video rental packages, delivering and setting up your equipment seamlessly across Malaga and the beautiful Costa del Sol.**
-
-[See Rental Packages & Service Area](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

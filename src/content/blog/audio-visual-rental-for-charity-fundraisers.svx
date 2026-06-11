@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier partner for professional [audio visual rental](https://malagaeventgear.com/audio-visual-rental/) for charity fundraisers services, perfect for charity fundraisers in Malaga, Spain.
 
 Our commitment to elevating your event shines through with our top tier equipment tailored for fundraising galas, auctions, and community initiatives. With our diverse range of services, including stunning sound systems, vibrant lighting, and high definition projectors, we ensure that your cause receives the attention and impact it deserves.
@@ -79,11 +83,7 @@ Hosting a successful charity fundraiser in Malaga, Spain? Choose Malaga Event Ge
 
 Our expertise in _event production_ ensures your charity events make a lasting impact. We offer comprehensive AV services for seamless installations, providing top tier visual systems tailored to your event.
 
-****Amplify Your Mission: Professional AV Rental for Charity Fundraisers****
-
-Ensure your message and music are heard loud and clear. Rent our professional sound and lighting systems to make your fundraiser an unforgettable success.
-
-[Get Your Charity AV Quote](https://malagaeventgear.com/basic-mice-pack/)
+<InlineCTA />
 
 ## Testimonials
 

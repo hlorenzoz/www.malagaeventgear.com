@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to **Malaga Event Gear (MEG)**, the premier audio visual rental company in Malaga, Spain. With a focus on delivering cutting edge equipment and unparalleled service, we specialize in bringing your events to life, from intimate weddings to grand corporate gatherings.
 
 Our comprehensive range of top tier AV solutions ensures that your occasion is not only memorable but perfectly executed. Trust our expertise, honed over decades, to provide the reliable support you need.
@@ -132,11 +136,7 @@ By choosing us, you’re not just hiring equipment. You’re partnering with a t
 
 Visit our [audio visual rental page](https://malagaeventgear.com/audio-visual-rental/) for more insights.
 
-****Looking for a Reliable Audio Visual Rental Company in Malaga, Spain?****
-
-From corporate conferences to dream weddings, we provide state of the art sound, lighting, and projectors with professional setup and support. Get a seamless experience backed by over 25 years of industry expertise.
-
-[Request Your Free Quote](https://malagaeventgear.com/pricing/)
+<InlineCTA />
 
 ## Testimonials
 

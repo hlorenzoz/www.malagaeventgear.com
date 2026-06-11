@@ -12,6 +12,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Planning a wedding can be as daunting as it is exciting, often leading to budget woes. Fortunately, [wedding rentals](https://malagaeventgear.com/wedding-rentals/) offer an economical solution that enhances your celebration without blowing your budget. From elegant tablescapes to stylish audio visual equipment, rentals give couples the freedom to achieve their dream wedding look for less.
 
 Explore our top tips for utilizing wedding rentals to create memorable, cost effective ceremonies and receptions. Whether it’s an intimate gathering or a lavish affair, finding smart rental solutions can effortlessly enhance your event’s ambiance while keeping costs in check.
@@ -87,11 +91,7 @@ Whether you envision a romantic beachside ceremony or an opulent indoor receptio
 
 With their professional support, you can confidently focus on enjoying your wedding, knowing that everything from the sound system to lighting effects is in capable hands. Explore more about their [wedding rental offerings](https://malagaeventgear.com/wedding-pack/) and discover how **MEG** can transform your event into an unforgettable experience.
 
-**Book Your Stress Free Wedding AV Package Today**
-
-Secure professional sound, stunning lighting, and dedicated technical assistance for your magical celebration in Malaga, Spain!
-
-[**Reserve Your Wedding Pack Now**](https://malagaeventgear.com/wedding-pack/)
+<InlineCTA />
 
 ## Testimonials
 

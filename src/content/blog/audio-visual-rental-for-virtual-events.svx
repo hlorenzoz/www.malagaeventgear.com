@@ -11,6 +11,10 @@ tags: []
 draft: false
 ---
 
+<script>
+	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
+</script>
+
 Welcome to Malaga Event Gear, your premier destination for audio visual rental services, specially tailored for virtual events in Malaga, Spain. With over two decades of experience, we provide state of the art audiovisual and sound equipment rentals to enhance your presentations, workshops, and seminars.
 
 Our cutting edge technology ensures seamless, crystal clear audio and stunning visual excellence, making your virtual occasions truly unforgettable. From corporate meetings to educational events, choose Malaga Event Gear to elevate your event experience.
@@ -86,11 +90,7 @@ Our sound and visual equipment, available for hire, captures every moment with c
 
 So why compromise? **Hire** our premium audiovisual solutions today to make your events stand out effortlessly.
 
-****Ensure a High Impact Product Presentation****
-
-Secure a 5000 lumen projector, crystal clear sound, and a wireless mic for your next successful launch event in Malaga, Spain!
-
-[Book Now Your Presentation Pack](https://malagaeventgear.com/product-presentation-pack/)
+<InlineCTA />
 
 ## Testimonials
 
