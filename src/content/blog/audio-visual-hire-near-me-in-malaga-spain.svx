@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -240,6 +242,11 @@ Choose from a wide selection of audio visual equipment, lighting, and more to cr
 By customizing your event with us, you’ll receive personalized service and expert assistance, guaranteeing that every detail is meticulously managed. Explore our tailored rental options today and see why we are the preferred choice for event planners in Malaga.
 
 Don’t settle for anything less than perfection. Let’s make your event unforgettable!
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Experience State of the Art Sound Systems
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -149,6 +151,11 @@ In the realm of wedding planning, choosing innovative rental solutions can signi
 Event rentals serve as the backbone of your wedding aesthetic, transforming ordinary settings into extraordinary experiences. Consider options like sleek lounge furniture for a modern edge or ornate candelabras for a vintage feel. Effective use of light and sound solutions can also elevate the mood, with soft, romantic lighting enhancing the intimacy of the vows and dynamic lights energizing the reception. MEG specializes in creating unforgettable ambience through crystal clear sound systems and tailor-made lighting designs, making every moment of your wedding feel exceptional.
 
 Furthermore, integrating floral elements into your rental selections can add depth and coherence to your theme. Whether you choose textured linens with floral patterns or statement floral centerpieces, these elements can tie your décor together harmoniously. It is essential to collaborate with professionals who understand how to bring your vision to life while ensuring the setup is seamless and stress-free. MEG provides comprehensive rental solutions that accommodate both indoor and outdoor weddings, promising a memorable celebration that is as effortless as it is beautiful.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## The Role of Rental Colors in Creating a Cohesive Theme
 

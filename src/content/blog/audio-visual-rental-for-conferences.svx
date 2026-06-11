@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -196,6 +198,11 @@ Executing a seamless event in Malaga starts with choosing the right audiovisual 
 Our team not only offers top notch sound equipment and lighting solutions but also ensures a smooth setup process. This comprehensive package minimizes technical hiccups, allowing you to focus on delivering an engaging experience.
 
 From initial equipment setup to on the day support, our experts are there to handle every detail, making sure your event execution is both seamless and memorable. For inquiries or bookings, feel free to reach out via [our contact page](https://malagaeventgear.com/contact-us/).
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Enhancing Events with State of the Art Audio Visual Technology
 

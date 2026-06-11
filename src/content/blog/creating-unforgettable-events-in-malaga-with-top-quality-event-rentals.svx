@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 ## Table of Contents
 
 -   [The Importance of Professional Event Gear](#the-importance-of-professional-event-gear)
@@ -52,6 +57,11 @@ Choosing a reputable rental company, such as **[Malaga Event Gear](https://malag
 Their expertise in event equipment guarantees that clients receive not only superior gear but also professional support, enhancing the overall event experience.
 
 Investing in professional event gear solidifies the foundation for crafting unforgettable experiences that leave a lasting impression on all attendees.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Tailored Event Solutions for the Costa del Sol
 

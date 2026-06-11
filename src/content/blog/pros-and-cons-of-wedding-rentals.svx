@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -170,6 +172,11 @@ A beautiful tropical beach wedding ceremony unfolds on pristine white sands, ado
 ![Elegant wedding reception table setting with white floral centerpieces, wedding.](https://cdn.malagaeventgear.com/blog/1632/wedding_reception_decor.webp)
 
 An elegantly decorated wedding reception table featuring a grand white floral centerpiece, perfectly set for a sophisticated celebration.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Cons of Wedding Rentals: What to Consider
 

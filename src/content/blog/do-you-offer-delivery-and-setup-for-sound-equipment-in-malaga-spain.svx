@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -268,6 +270,11 @@ Continuing from the multitude of advantages that Malaga Event Gear brings to you
 -   Proven track record of successful projects across various industries, showcasing our versatility and commitment to excellence.
 
 By choosing Malaga Event Gear, you ensure that every auditory and visual aspect of your event is executed with precision, professionalism, and style.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Versatile Rental Equipment for a Variety of Occasions
 

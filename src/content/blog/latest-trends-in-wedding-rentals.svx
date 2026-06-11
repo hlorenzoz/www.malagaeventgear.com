@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -142,6 +144,11 @@ Actionable Steps to Streamline Wedding Planning:
 -   Opt for a buffet-style meal to provide variety and control costs.
 
 These suggestions can help you create a memorable wedding experience without overextending your budget.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## The Role of Professional Event Equipment in Weddings
 

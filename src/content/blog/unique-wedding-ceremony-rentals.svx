@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 Discover the charm of Malaga with our unique wedding ceremony rentals, offering creative ideas that bring your dream day to life. Whether you’re seeking an intimate beach ceremony or a grand countryside celebration, our curated venue options reflect the picturesque beauty of southern Spain. From elegant decor to state of the art audiovisual technology, we ensure every detail of your wedding is perfect. Let Malaga’s cultural richness and breathtaking landscapes serve as the backdrop for your unforgettable day. Explore tailored solutions that match your vision, and make your wedding a memorable affair for you and your guests.
 
 ## Brief Overview
@@ -174,6 +179,11 @@ If these ideas have sparked your interest in a unique celebration, we invite you
 | Ceremony | Lazo Tradition | Bohemian Luxe | Forest Whisper |
 
 _By embedding local customs like Andalusian ceramics and lazo traditions into your wedding, you create a celebration that is both unique and personal. Choosing a stunning environment, whether it be a vineyard, beach, or garden, enhances the experience for you and your guests. With the aid of experts, you can seamlessly integrate these personalized touches, ensuring a memorable and stress free event._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Transform Your Wedding Ceremony with Elegant Lighting
 

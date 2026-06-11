@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -200,6 +202,11 @@ At Malaga Event Gear, we know how vital dynamic lighting is in setting the perfe
 From intimate worship services to large scale events, our team ensures your production shines through. Whether you’re hosting events, presentations, or community gatherings, our dynamic lighting options cater to all, providing a visually stunning backdrop that uplifts the spiritual experience.
 
 Make your event unforgettable with lighting that complements every aspect of your production. Elevate your event’s atmosphere and captivate your audience with lighting that leaves a lasting impression.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Catering to Unique Events with Customizable Rental Options
 

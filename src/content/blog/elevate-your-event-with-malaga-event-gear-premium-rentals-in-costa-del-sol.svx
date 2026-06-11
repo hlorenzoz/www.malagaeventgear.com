@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 ## Table of Contents
 
 -   [Comprehensive Event Rentals Tailored for Every Occasion](#comprehensive-event-rentals-tailored-for-every-occasion)
@@ -52,6 +57,11 @@ The integration of such equipment is vital in elevating the presentation quality
 In summary, Malaga Event Gear’s extensive array of equipment is tailored to meet the specific requirements of different occasions.
 
 By providing high quality sound systems, innovative lighting solutions, smoke machines, and large screen projectors, they ensure that every event is not just seen but truly experienced, creating lasting impressions.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## The Malaga Event Gear Experience: Professional Service and Unmatched Quality
 

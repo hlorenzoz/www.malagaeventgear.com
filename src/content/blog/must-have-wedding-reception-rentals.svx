@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -126,6 +128,11 @@ Our range of chic linens and decor items can turn any table setting into a maste
 | Serve as focal pointsFacilitate interactionsPromote visual harmony | Opt for varied texturesUtilize seasonal floralsMatch candles & lighting | Feature monogrammed itemsDisplay meaningful quotesIntegrate signature colors |
 
 _This table highlights how strategic selections in table settings contribute to creating a cohesive and elegant wedding reception._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Dazzle Your Guests with Outdoor Wedding Furniture
 

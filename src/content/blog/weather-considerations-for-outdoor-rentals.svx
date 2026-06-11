@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -119,6 +121,11 @@ A beautifully decorated wedding table adorned with pastel flower arrangements si
 Making sure your event tents can endure various weather changes is paramount in hosting a successful outdoor gathering. Stability is a key factor, especially when unpredictable wind and rain come into play. When you position tents properly, it enhances their durability, allowing them to stand firm against surprising weather. Using weather-resistant materials is also crucial; they not only provide excellent protection from the elements but also extend the lifespan of the rental equipment. Our tent rentals include comprehensive solutions to enhance tent stability, ensuring your marquee remains intact, be it a gentle breeze or a stronger gust of wind.
 
 Additionally, selecting the right anchoring techniques further boosts tent stability. Techniques like stakes for softer ground or weights for harder surfaces provide steadfast support, vital for unpredictable weather conditions like sudden Malaga showers. Durable equipment from **Malaga Event Gear (MEG)**, renowned for withstanding harsh weather, ensures your event’s setup isn’t disrupted, so guests can enjoy the occasion uninterrupted. Investing time in understanding and implementing these adjustments when hiring tent rentals will significantly minimize potential setbacks. For detailed guidance on adaptable setups and securing coastal venues, explore our [Wedding Pack](https://malagaeventgear.com/wedding-pack/) offerings, crafted to suit any event size and budget.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Developing a Contingency Plan for Weather Challenges
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -136,6 +138,11 @@ They can also be nestled amidst indoor or outdoor decorations, lending an added 
 By working with an audio visual specialist, you can ensure that the color schemes of the neon match the overall wedding theme, making it not just a highlight but an integral part of the decor. Choosing the right hire company is crucial, as it allows you to explore a variety of options and find the perfect fit for your wedding style and ideas.
 
 Creative options such as neon-illuminated quotes or monograms can significantly enhance the visual aesthetic and the emotional appeal, making these rental ideas not just trendy, but timeless. As a couple, you can experiment with endless custom neon ideas that align with your vision, bringing a personal and unforgettable touch to your wedding event.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Enhancing the Experience with Experiential Rentals
 

@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 Anyone who has ever organized an event knows the feeling.
 
 That low grade hum of anxiety that comes from juggling a dozen logistical threads, praying none of them unravel.
@@ -137,6 +142,11 @@ It’s about anticipating the client’s exact requirements.
 -   **Projector Power:** The **[Basic MICE Pack](https://malagaeventgear.com/basic-mice-pack/)**, designed for small meetings, includes a “3000 lumen projector.” The **[Product Presentation Pack](https://malagaeventgear.com/product-presentation-pack/)**, however, upgrades this to a more powerful “5000 lumen projector,” recognizing that product launches often happen in more brightly lit environments where a stronger beam is needed to keep visuals sharp.
 -   **Microphone Flexibility:** The **[Basic MICE pack](https://malagaeventgear.com/basic-mice-pack/)** provides “1 gooseneck microphone,” which is perfect for a speaker standing at a podium. The full **[MICE pack](https://malagaeventgear.com/mice-pack/)** includes both a gooseneck microphone _and_ “1 wireless microphone,” adding crucial flexibility for Q&A sessions or presenters who like to move around the stage.
 -   **Anticipatory Add Ons:** The optional extras show we’re always thinking one step ahead. For just 20€, you can add a “Smoke machine” to the party focused **[Eco Pack](https://malagaeventgear.com/eco-pack/)**. For a corporate event, a sleek “Methacrylate lectern” is available as an add on to the **[MICE pack](https://malagaeventgear.com/mice-pack/)** for 50€. These aren’t random upsells. We are logical enhancements for each specific event type.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## A Niche Focus Can Be a Superpower.
 

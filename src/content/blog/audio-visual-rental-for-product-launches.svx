@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -219,6 +221,11 @@ Live streaming not only amplifies engagement but also enhances interaction with 
 | Feedback Loops | Improved Content Quality | Surveys, Comment Sections | Act on Constructive Criticism |
 
 _This table concisely illustrates the key methods to enhance audience engagement through live streaming and visual hire, focusing on the benefits, necessary tools, and practical tips for effective implementation._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Factors to Consider When Choosing AV Equipment Hire
 

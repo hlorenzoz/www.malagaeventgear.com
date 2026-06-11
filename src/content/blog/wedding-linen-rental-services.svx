@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -136,6 +138,11 @@ At **Malaga Event Gear (MEG)**, we offer a comprehensive [Wedding Pack](https://
 ### How Our Rental Collection Elevates Your Wedding Celebration
 
 Our rental collection is meticulously crafted to offer versatility and elegance, helping to elevate your wedding celebration. From chic table linens to luxurious chair covers, our product range caters to various themes and styles. Each element within our service is chosen to enhance the overall ambiance, creating a captivating atmosphere that resonates with your guests. By integrating high-quality rentals, MEG ensures your event is a harmonious blend of style and comfort, leaving cherished memories for you and your attendees.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Planning Your Event: Booking Linen and Audiovisual Services
 

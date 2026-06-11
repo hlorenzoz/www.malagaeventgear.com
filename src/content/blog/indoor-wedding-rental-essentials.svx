@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -240,6 +242,11 @@ This not only captivates the guests but also supplements the overall décor with
 Engaging with a knowledgeable rental service, like **Malaga Event Gear (MEG)**, can make all the difference. Their experience assists in aligning your wedding rentals with both your vision and the functionality the occasion demands, blending cutting edge technology with detailed execution.
 
 For an indoor wedding, remember that each décor element, from furniture to lighting, contributes significantly to the day’s overall success. Choose wisely to ensure that both aesthetics and practical needs are met, making your wedding an extraordinary affair.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Optimizing Seating Arrangements for Guest Comfort
 

@@ -11,6 +11,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 The **Costa del Sol** continues to solidify its reputation as a premier destination for international corporate gatherings. Between May 20 and May 23, 2026, the prestigious **PROGOLD SUMMIT 2026** took place at the **Hotel Meliá Costa del Sol Centro de Convenciones** in Torremolinos, Málaga, Spain.
 
 This high-profile corporate event brought together industry professionals for days of intensive networking, presentations, and strategic meetings. To ensure the ambitious presentation schedule met world-class standards, **Malaga Event Gear (MEG)** was brought on board to manage the technical production, delivering a seamless audiovisual environment for all attendees.
@@ -44,6 +49,11 @@ Key to this operation was providing flexible audio options, utilizing high-perfo
 Executing a corporate summit of this scale requires strict attention to detail and top-tier equipment. **MEG’s** engineering team managed the complete installation, integration, and continuous monitoring of the system throughout the four-day event. The team utilized high-resolution display screens and bright projection systems to present **Progold’s** complex data and multimedia content clearly under the venue’s corporate lighting conditions.
 
 The onsite **Progold** coordination team, led by **Francesco** and **Isabella**, proved to be incredibly supportive and collaborative partners. They graciously made all their resources available to the technical crew, paving the way for an efficient, smooth installation. This synergy allowed our native English-speaking technical team to maintain open, efficient channels of communication, eliminating potential delays and ensuring that all transitions between speakers occurred without a hitch.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Seamless Execution Drives Success
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -120,6 +122,11 @@ A beautifully arranged indoor hall set for a wedding ceremony, featuring elegant
 ![Elegant wedding table setup with floral centerpieces by the beach.](https://cdn.malagaeventgear.com/blog/1625/beach_wedding_table_decor.webp)
 
 A beautifully decorated wedding table adorned with pastel flower arrangements sits under a floral canopy by the ocean, ready for a seaside celebration.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Securing Your Wedding Venue Early in Malaga
 

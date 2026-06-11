@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (blog-image-marquees)
+- **Content-Relevant Blog Image Marquees**: Built an automated TypeScript script (`scripts/inject-blog-marquees.ts`) that parses and classifies all 75+ Svelte mdsvex blog posts (`.svx`) into `wedding`, `mice` (corporate), or `eco` (general) packages based on frontmatter categories and slugs, injecting Svelte imports and `<ImageMarquee>` components at a target H2 heading around 60% of the content depth.
+- **E2E Playwright Tests** (`tests/blog-marquees.spec.ts`): Built test suite validating that wedding, corporate, and general blog posts render image marquees with appropriate categorized image sets.
+
 ### Added (click-to-tweet)
 - **Click to Tweet Text Selection** (`src/lib/components/blog/ClickToTweet.svelte`): A premium Svelte 5 component that monitors selection events within the blog post body (`.prose` container), displaying a glassmorphic floating tooltip above the text range allowing users to tweet selections (`“Selected text” — URL`) via X's Web Intent.
 - **BlogPost Layout Integration** (`src/lib/layouts/BlogPost.svelte`): Mounted the `<ClickToTweet>` component dynamically inside the blog layout, passing the post's canonical URL and title.

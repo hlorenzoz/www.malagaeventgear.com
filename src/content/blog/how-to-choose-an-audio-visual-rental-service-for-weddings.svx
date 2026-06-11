@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -202,6 +204,11 @@ Advanced AV equipment, such as LED walls, adds layers of visual intrigue and eng
 As you explore rental services, assess their ability to offer innovative solutions that adapt to both indoor and outdoor settings. Partnering with a knowledgeable provider like Malaga Event Gear ensures your visuals are captivating, seamless, and technologically sound.
 
 Considering these aspects will guarantee that your Malaga wedding is remembered for its breathtaking beauty and flawless execution. Feel free to [contact us](https://malagaeventgear.com/wedding-pack/) for personalized advice or quotes on how to best incorporate cutting edge visual technologies into your event.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## The Rental Process: Booking and Event Day Execution
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -231,6 +233,11 @@ These unique benefits and features of our AV equipment offer unparalleled advant
 -   Competitive pricing packages accommodate various budgets
 
 These attributes collectively ensure an unmatched event experience, leaving a profound impact on your audience.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('mice')} speed="normal" direction="left" />
+</div>
 
 ## Elevate Your Events with High Quality Audio Equipment
 

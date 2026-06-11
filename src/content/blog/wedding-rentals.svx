@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -177,6 +179,11 @@ An idyllic beach wedding ceremony setup awaits under a clear blue sky, promising
 ![A vibrant tropical beach wedding ceremony with pink rose petals and ocean views.](https://cdn.malagaeventgear.com/blog/1630/tropical_beach_wedding.webp)
 
 A beautiful tropical beach wedding ceremony unfolds on pristine white sands, adorned with a vibrant pink rose petal aisle and elegant floral arrangements, set against the backdrop of a clear blue ocean.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Unique Reception Accents to Elevate Your Wedding
 

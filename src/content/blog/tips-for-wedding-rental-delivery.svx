@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -167,6 +169,11 @@ A vibrant red carpet aisle leads to a floral arch, set on a stunning white sand 
 ![Clear methacrylate lectern on a stage surrounded by tables set for an outdoor event](https://cdn.malagaeventgear.com/blog/orphan/2024/09/Methacrylate-lectern.webp)
 
 A stunning methacrylate lectern illuminated by soft lighting, ready for a special outdoor gathering
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Working with a Reputable Rental Company
 

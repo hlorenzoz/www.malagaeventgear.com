@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -249,6 +251,11 @@ At Malaga Event Gear, we’re dedicated to ensuring perfect acoustics for everyt
 Whether you’re hosting an intimate gathering or a large scale conference, our state of the art audio equipment ensures every word is heard clearly. With premium sound systems designed specifically for your event, we prioritize acoustics to enhance your audience’s experience.
 
 Rely on us to deliver seamless audio solutions that make your conferences truly impactful and unforgettable.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Lighting Rental: Creating Unforgettable Atmospheric Effects
 

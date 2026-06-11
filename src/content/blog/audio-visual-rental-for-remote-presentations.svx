@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -186,6 +188,11 @@ Start by choosing high quality sound systems to maintain crystal clear audio. Id
 At Malaga Event Gear, we provide expert tips to optimize audiovisual setups for your online events, ensuring your virtual meeting resonates with your audience.
 
 Elevate your next event with seamless sound and lighting solutions.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Personalized Audio Visual Equipment Hire for Conferences and Launches
 

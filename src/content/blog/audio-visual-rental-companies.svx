@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -172,6 +174,11 @@ A sleek and modern event setup is ready for a Volvo Mice event in Malaga, featur
 ![Mice event setup at a Volvo dealership in Malaga, Volvo.](https://cdn.malagaeventgear.com/blog/1267/volvo_mice_event_setup_1-1024x765.webp)
 
 A sleek and modern event setup is ready for a Volvo Mice event in Malaga, featuring a reception desk, display screens, and a stage area.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## The Benefits of Visual Rental for Various Occasions
 

@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 ## Table of Contents
 
 -   [Top Quality Event Rentals in Malaga](#top-quality-event-rentals-in-malaga)
@@ -56,6 +61,11 @@ Ultimately, the importance of choosing the right gear cannot be overstated.
 Quality rentals from Malaga Event Gear ensure that events, whether casual or formal, are equipped with reliable equipment that enhances the overall experience.
 
 This attention to detail solidifies their reputation as a leading provider of event rentals in the region.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Creating Memorable Events on the Costa del Sol
 

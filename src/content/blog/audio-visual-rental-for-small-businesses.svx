@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -157,6 +159,11 @@ Does the rental service include technicians to ensure everything runs smoothly?
 Finally, the service’s cost effectiveness is significant. Compare quotes to ensure you’re getting value for your investment while still receiving top notch equipment.
 
 Choose an equipment rental provider that not only meets but exceeds your expectations, ensuring your event’s success with high quality sound and visuals. By keeping these considerations in mind, your choice in equipment rental becomes a strategic advantage.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Types of Rental Equipment for Small Events
 

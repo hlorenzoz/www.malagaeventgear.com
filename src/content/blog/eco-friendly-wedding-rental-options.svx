@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -137,6 +139,11 @@ When it comes to integrating sustainable solutions into your wedding, **Malaga E
 Integrating **MEG’s** eco-friendly solutions doesn’t only mean reducing environmental impact; it also signifies a commitment to supporting businesses that prioritize sustainability. **MEG’s** team brings an unparalleled quality of service, setting up and dismantling equipment with minimal fuss, allowing you to focus on enjoying your day. Their dedication to environmentally friendly practices makes them a valuable partner in crafting a wedding that reflects your values and commitment to the environment. As you plan your special day, consider how incorporating sustainable practices with **MEG** can elevate not only the event’s charm but also its environmental conscience.
 
 For more insightful tips on merging sustainability with stylish wedding planning, discover our next section on essential tent ideas for outdoor weddings, or explore our range of wedding services tailored to celebrate love and sustainability.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Essential Tent Ideas for Outdoor Weddings
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -150,6 +152,11 @@ When planning your wedding in Malaga, understanding the policy around modificati
 Understanding a venue’s refund policy is a critical factor in wedding planning, especially when life’s unpredictable nature comes into play. The refund policy often dictates how much financial flexibility you have in case changes are inevitable. Make it a point to ask your wedding venue about the refund policy in detail, how much notice is required for cancellations or modifications to avoid penalties? Clarifying this policy helps you make informed decisions about deposits and final payments, giving you peace of mind as you continue to strategize your event. Additionally, consider how this aligns with other vendors’ policies you employ, ensuring a unified approach across the board.
 
 Engage in an open discussion with your vendors on potential modifications or adjustments to your event dynamics. Knowing the impact of such changes ensures your wedding plans remain robust, with clear insights into what costs might be refundable under different circumstances. Collaborating closely with vendors like **MEG**, who offer flexible arrangements, can safeguard your investments and expectations. By focusing on these essential questions, you can more effectively manage both your budget and timeline, maintaining the celebratory spirit even when confronted with a need for adjustments.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Ask Your Wedding Venue About Technical Support Availability
 

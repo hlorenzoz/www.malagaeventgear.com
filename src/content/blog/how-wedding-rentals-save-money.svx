@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -210,6 +212,11 @@ A beautiful tropical beach wedding ceremony unfolds on pristine white sands, ado
 ![Two wedding rings are placed inside a book, forming a heart shape, wedding rings.](https://cdn.malagaeventgear.com/blog/1638/wedding_rings_heart_book.webp)
 
 Two elegant wedding rings are tenderly nestled within the pages of a book, cleverly folded to form a symbolic heart shape, representing enduring love and commitment.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Customizing Rentals for Unique Wedding Themes
 

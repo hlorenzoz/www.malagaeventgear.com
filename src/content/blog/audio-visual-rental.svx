@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -215,6 +217,11 @@ The [MICE Pack](https://malagaeventgear.com/mice-pack/) is designed to elevate c
 Each MICE Pack comes with a 60 inch screen, high quality sound system, and versatile microphone options to suit different event styles. Moreover, our dedicated technician will be on hand for up to six hours, ensuring all equipment operates smoothly.
 
 Choose this package to guarantee a successful, professional, and engaging experience for all attendees.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('mice')} speed="normal" direction="left" />
+</div>
 
 ## Creating Memorable Celebrations with Wedding and Party Packs
 

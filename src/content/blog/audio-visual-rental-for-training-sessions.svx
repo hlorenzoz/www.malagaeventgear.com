@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -206,6 +208,11 @@ To ensure ultimate event success, consider these additional benefits of choosing
 -   Dedicated client liaison available to address and prioritize your evolving needs promptly.
 
 These features collectively ensure an unforgettable event experience tailored to your specific needs.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## High Performance Audio Solutions for Crystal Clear Sound
 

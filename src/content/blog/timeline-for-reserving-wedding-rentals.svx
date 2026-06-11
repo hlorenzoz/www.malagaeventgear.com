@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -152,6 +154,11 @@ Setting the stage for your wedding is more than just arranging equipment; it’s
 -   Coordinate with your DJ or live band to create a playlist that reflects your personal style and resonates with your guests.
 
 These tips will further enhance your wedding ambiance, ensuring it not only captivates and delights but also leaves a lasting impression on all who attend.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Choosing the Perfect Venue for Your Wedding in Malaga
 

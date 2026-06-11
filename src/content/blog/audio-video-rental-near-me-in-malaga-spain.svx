@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -255,6 +257,11 @@ By leveraging our rental service in Malaga, you gain not just top tier equipment
 | Comprehensive Packages | All Inclusive Service Offering | Provides Convenience and Peace of Mind |
 
 _This table illustrates the essential components of our AV rental service that ensure a flawless event experience._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## The Importance of Quality Lighting Equipment for Events
 

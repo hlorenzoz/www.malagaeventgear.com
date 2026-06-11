@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 ## Table of Contents
 
 -   [Comprehensive Event Solutions in Malaga: Sound Systems, Lighting, and More](#comprehensive-event-solutions-in-malaga-sound-systems-lighting-and-more)
@@ -73,6 +78,11 @@ Testimonials reflect how the right event gear not only enhances guest experience
 ![Lighting, big-display, projector, and sound system rental for events in Malaga.](https://cdn.malagaeventgear.com/blog/1293/malaga_event_lighting_big_display_projector_sound_rental-1024x765.webp)
 
 A captivating event space in Malaga with vibrant pink lighting, a large display screen, and a projector, showcasing the impact of professional event rental services.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Why Choose Malaga Event Gear (MEG) for Your Next Event
 

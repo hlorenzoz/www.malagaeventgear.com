@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -166,6 +168,11 @@ When planning an [unforgettable event](https://malagaeventgear.com/audio-visual-
 -   Explore interactive lighting design to engage your audience and enhance their overall experience.
 
 By considering these options, you can create an event that is both visually stunning and professionally executed, leaving a lasting impression on your attendees.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Planning an Audio Visual Setup for Corporate Events in Malaga
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -233,6 +235,11 @@ This ensures that whether you need clear visuals for a product launch or immersi
 With Malaga Event Gear, you’re not just renting equipment; you’re leveraging comprehensive solutions that elevate your events to a new level of excellence. We invite you to explore our flexible rental options and experience the benefits firsthand.
 
 For further details and to discuss your specific event needs, visit our [Audio Visual Rental](https://malagaeventgear.com/audio-visual-rental/) page or leave a comment below. Let us support your next event with unparalleled equipment and service.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Expert Support for Seamless Event Production
 

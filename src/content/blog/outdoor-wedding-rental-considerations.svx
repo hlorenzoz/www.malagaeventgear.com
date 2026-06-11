@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -239,6 +241,11 @@ Partnering with a seasoned rental company like **Malaga Event Gear (MEG)** assur
 Furthermore, every detail, from table placement to visual aesthetics, plays a role in shaping the guest experience. Rentals designed to complement your theme contribute to a cohesive look and feel.
 
 **Malaga Event Gear**‘s **(MEG)** attention to such meticulous details makes every meal a standout event, ensuring memories that last a lifetime. To explore how our offerings can elevate your wedding, visit our [Wedding Pack](https://malagaeventgear.com/wedding-pack/) page.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Understanding Equipment Rentals for Outdoor Weddings
 

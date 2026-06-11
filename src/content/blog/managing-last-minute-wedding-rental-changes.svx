@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -134,6 +136,11 @@ Creating a backup plan is essential when facing last-minute wedding rental chang
 ### Ensuring Equipment Availability for Your Event’s Needs
 
 Ensuring the availability of high-quality equipment is crucial for any wedding, especially when last-minute changes occur. **Malaga Event Gear (MEG)** excels at providing state-of-the-art audiovisual solutions tailored to your event’s requirements. Our extensive vendor network and strategic planning guarantee that essential equipment is on-hand, minimizing the risk of disruptions. Having a reliable backup plan and a responsive support team ensures the venue’s setup will be flawless, affording you peace of mind. Rely on **MEG** to accommodate swiftly, so your creativity in planning is reflected perfectly in every detail.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Selecting the Right Coordinator for Efficient Event Management
 

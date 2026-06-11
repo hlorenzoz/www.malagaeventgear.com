@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -297,6 +299,11 @@ Don’t overlook the importance of a soundcheck. This preparatory step reveals p
 During the soundcheck, ensure your AV team tests each input and adjusts levels to prevent audio disruptions. Proper configuration during this phase can significantly boost the sound quality, ensuring clear audio for presentations and entertainment.
 
 Trust in the expertise of professionals like **Malaga Event Gear (MEG)**, who tailor their services to meet your unique requirements and ensure every aspect of the audio is perfect. Reach out to us for insights into our [AV equipment hire services](https://malagaeventgear.com/pricing/) and ensure your event stands out for its flawless sound.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Choosing the Right AV Hire Service
 

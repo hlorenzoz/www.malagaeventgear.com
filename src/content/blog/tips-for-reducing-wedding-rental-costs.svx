@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -239,6 +241,11 @@ Don’t hesitate to ask vendors for their best offers, competing against other l
 Their profound understanding of local nuances and needs makes them a reliable partner in ensuring your special day not only shines but also aligns with budgetary expectations. For those looking to maximize wedding rental savings in Malaga, structured and savvy rental strategies are key to crafting an unforgettable yet budget friendly occasion.
 
 Reach out through our contact page if you have questions or need further details on how to enhance your wedding with budget friendly solutions!
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Identifying and Managing Hidden Costs
 

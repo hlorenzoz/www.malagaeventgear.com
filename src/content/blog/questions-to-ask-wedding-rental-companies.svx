@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -226,6 +228,11 @@ Coordinating audio and visual elements enhances the wedding’s mood and ensures
 | Visual Displays | Engaging Visuals | Integrated Solutions | Guest Engagement |
 
 _This table illustrates the pivotal role of carefully selected audio visual elements and other rentals in crafting an unforgettable wedding celebration in Malaga._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Creating the Perfect Event Rental Package
 

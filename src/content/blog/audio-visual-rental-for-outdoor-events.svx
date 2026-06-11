@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -251,6 +253,11 @@ Elevate your conference and convention experience with our crystal clear audio s
 Our state of the art sound systems ensure every keynote speaker and panel discussion is delivered with pristine clarity. Specializing in outdoor setups, our audio solutions perfectly suit Malaga’s vibrant event scene.
 
 Whether you’re organizing a conference or a large scale convention, our expert technicians provide the professional support you need for seamless execution. Trust us for crystal clear audio that commands attention and leaves a lasting impression on your audience.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Streamlined Rental Service Process for a Hassle Free Experience
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -150,6 +152,11 @@ Our state of the art audio visual solutions are designed to meet diverse needs, 
 Clear sound is a cornerstone of effective communication in any corporate meeting. It ensures that all participants, whether in the room or joining remotely, receive your message without distortion. At **Malaga Event Gear (MEG)**, we prioritize superior sound equipment in our audiovisual solutions to ensure every attendee is engaged and informed.
 
 Our technical support guarantees that audio quality is maintained throughout the event, reducing the risk of miscommunication and maximizing audience interaction. Trust in our expertise to elevate your meeting’s impact with flawless sound production.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('mice')} speed="normal" direction="left" />
+</div>
 
 ## Seamless Setup: Stage and Laptop Rental Solutions
 

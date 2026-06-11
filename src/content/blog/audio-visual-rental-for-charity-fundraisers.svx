@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -157,6 +159,11 @@ At Malaga Event Gear, we offer inclusive audio visual services designed to eleva
 Our screen hire includes live streaming options, while our speaker hire guarantees clear sound delivery. Choose from tailored audio visual packages, making it easier to cater to your specific charity needs.
 
 Elevate your events with the best in audio visual hire, ensuring unforgettable experiences for your audience.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Flexible Audio Visual Hire Packages for Charity Events
 

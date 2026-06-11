@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -147,6 +149,11 @@ Moreover, considering the functional setup inside the tent is essential. Arrangi
 | Avoid overcrowding | Ground reinforcement | Timing of setup | Check structural integrity | Opt for quality fabrics |
 
 _This table provides a clear overview of essential practices for securing and maintaining wedding tent rentals, ensuring a flawless and enjoyable event experience._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Audio and Visual Rentals: Enhancing Wedding Atmosphere
 

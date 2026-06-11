@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -165,6 +167,11 @@ At Malaga Event Gear, we specialize in providing tailored rentals that match the
 Whether you need high quality audiovisual gear for conferences or specialized sound equipment for effective presentations, we’ve got you covered. Our clients experience exceptional clarity and crisp visuals with our top notch equipment hire services, supporting every aspect of their virtual events.
 
 From screens and projectors to complete audio setups, our rental options are designed to enhance your event’s impact. Trust in our expertise to elevate your audience’s experience with professional grade audiovisual solutions, engineered to meet your event’s unique demands.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## How to Hire the Best Audiovisual Equipment in Malaga
 

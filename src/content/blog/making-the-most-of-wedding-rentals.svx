@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -255,6 +257,11 @@ Additional Ideas for Enhancing Venue Setup
 -   Integrate subtle background music to maintain an ambient mood.
 
 Implementing these strategies can significantly elevate the overall experience for your guests, ensuring your event is both stylish and memorable.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Elevating Your Wedding Décor with Unique Elements
 

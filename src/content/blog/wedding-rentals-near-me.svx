@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -187,6 +189,11 @@ For example, fairy lights draped elegantly over outdoor spaces can create a whim
 Our range includes LED uplighting to enhance architectural features, while colored gels can be employed to wash the setting in hues that match your theme. By incorporating customizable lighting patterns, we ensure that every area from the aisle to the dance floor is perfectly illuminated. Not only do these lighting advancements improve visibility and enhance décor, but they also contribute significantly to the overall mood that your guests will experience.
 
 Choosing **MEG** for your wedding rentals means deciding on quality and expertise that turn ordinary settings into spectacular showcases. Let us help you add reception accents that captivate every guest, making your wedding in Malaga, Spain a night to remember.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Hire Party Audio Visual Rentals Available for All Wedding Needs
 

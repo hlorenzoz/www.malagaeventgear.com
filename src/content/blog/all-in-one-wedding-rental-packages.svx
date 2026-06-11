@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -183,6 +185,11 @@ Planning a wedding can be overwhelming, but with our all-inclusive wedding pack,
 Our all-inclusive wedding pack ensures that you receive expert guidance and support every step of the way. Coordinating with **MEG** means having a dedicated team at your side, handling everything from the audio system setup for crystal clear speeches to the dynamic lighting that enhances your reception’s atmosphere. By integrating these essential services, we simplify the planning process so you can focus on celebrating with your guests and making unforgettable memories. Aligning with your style and preferences, our team manages each element, relieving you from logistical complexities associated with traditional wedding planning.
 
 The benefits of choosing our all-inclusive package are multifaceted. Beyond seamless coordination, you gain peace of mind knowing everything is professionally managed, ensuring a hassle-free experience for both you and your guests. Offering tailored solutions, our services adapt to your unique needs, whether you’re dreaming of a romantic beach wedding or an elegant countryside celebration. **Malaga Event Gear’s** expertise and state-of-the-art equipment bring your vision to life, allowing you to savor every moment without worry. For those interested in a deeper dive into our offerings, visit our [wedding pack page](https://malagaeventgear.com/wedding-pack/) to explore how we can transform your wedding day into an unforgettable celebration.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Creating Magical Moments with State of the Art Technology
 

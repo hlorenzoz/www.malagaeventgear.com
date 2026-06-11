@@ -11,6 +11,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 The Costa del Sol continues to solidify its reputation as a premier global hub for high-end corporate gatherings, demanding nothing short of technical perfection. From May 19 to May 20, 2026, Marbella became the staging ground for a sophisticated corporate event that brought together industry leaders.
 
 Behind the scenes, ensuring that every presentation was delivered with absolute clarity, **Malaga Event Gear (MEG)** stepped in to provide essential technical support for **[Bmotion](https://www.bmotionav.com/)**, one of the region’s premier audiovisual agencies. This collaboration highlighted the seamless synergy that occurs when top-tier event production meets reliable, deeply experienced local expertise.
@@ -54,3 +59,8 @@ For international agencies planning events across the region, having a partner t
 Operating in the sector since 1996 and backing every project with a portfolio of over 1,000 satisfied clients, **MEG** remains the premier choice for event production on the Costa del Sol. Whether your upcoming project requires discrete corporate setups or expansive lighting and sound services in Spain, our team brings the high-quality equipment and professional dedication needed to make it a triumph.
 
 [Contact](https://malagaeventgear.com/pricing/) **Malaga Event Gear** today to discover how our tailored technical support can elevate your next event.
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
+

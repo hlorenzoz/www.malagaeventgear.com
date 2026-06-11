@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -169,6 +171,11 @@ Whether you’re planning a live music performance or a corporate gathering, our
 Transform your special occasions with dynamic lighting solutions from Malaga Event Gear. Our expert team specializes in creating captivating atmospheres for weddings, lighting up parties, and all kinds of events.
 
 Whether you’re hosting an intimate gathering or a grand celebration, our lighting will set the perfect mood, ensuring your event shines. Trust us to illuminate your party or event with state of the art lighting equipment that turns ordinary moments into extraordinary memories.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Specialized Event Gear for Unforgettable Concerts
 

@@ -11,6 +11,16 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
+
 ## **Malaga Event Gear Marks Seven Year Milestone Providing Essential Audio Infrastructure for Malaga’s Community Dialogue**
 
 **Málaga, Spain – December 14, 2025**

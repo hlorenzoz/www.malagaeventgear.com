@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -166,6 +168,11 @@ To further enhance audience engagement through AV rental, consider these additio
 -   Integrate social media capabilities to extend engagement beyond the physical event space.
 
 By implementing these strategies, you can significantly enhance audience engagement and elevate the overall event experience.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Outdoor LED Solutions: Perfect for Any Sporting Venue
 

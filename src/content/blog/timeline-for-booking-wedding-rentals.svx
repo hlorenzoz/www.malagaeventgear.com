@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -141,6 +143,11 @@ Planning your wedding rentals well in advance is key to a smooth and successful 
 To avoid the pitfalls of last-minute wedding rental planning, start by laying out a clear timeline that aligns with your wedding date. Ideally, book your rentals eight months ahead to secure your preferred services and guarantee availability. Engaging vendors early in the process allows you to lock in essential elements like lighting and sound systems, ensuring they’ve got ample time to coordinate logistical needs and deliveries. Regular communication with your vendors helps maintain transparency and ensures that any changes in your planning, such as adjusting party sizes or venue setups, are addressed well in advance.
 
 Working with experienced vendors like **Malaga Event Gear (MEG)** can significantly simplify the process. Our team prioritizes seamless service and timely deliveries, coordinating with other vendors to ensure everything fits your ideal vision. By managing these elements well in advance, the weeks leading up to the wedding will be less stressful, allowing you to focus on other crucial aspects of wedding planning. With strategic early booking, you’re not only avoiding the headache of last-minute arrangements but also setting the stage for an unforgettable celebration. Let **MEG** be your trusted partner, ensuring your rental needs are met promptly for complete peace of mind.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Enhancing Your Wedding Day with Audio Visual Excellence
 

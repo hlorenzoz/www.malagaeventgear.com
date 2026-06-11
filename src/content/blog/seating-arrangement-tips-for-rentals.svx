@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -167,6 +169,11 @@ A serene bride in a detailed lace veil stands with her hands clasped in prayer, 
 ![A beautiful beach wedding ceremony setup with a red carpet aisle and floral arch.](https://cdn.malagaeventgear.com/blog/1636/tropical_beach_wedding_aisle.webp)
 
 A vibrant red carpet aisle leads to a floral arch, set on a stunning white sand beach for a romantic tropical wedding ceremony under a clear blue sky.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Maximizing Space with Efficient Seating Arrangements
 

@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 ## Table of Contents
 
 -   [Comprehensive Event Rentals Tailored for Your Needs](#comprehensive-event-rentals-tailored-for-your-needs)
@@ -56,6 +61,11 @@ Numerous satisfied clients have shared their positive experiences after utilizin
 Their testimonials underscore the profound impact that professional equipment can have on an event’s atmosphere and overall success.
 
 By investing in top quality gear, organizers can ensure a memorable experience for all attendees.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Creating Unforgettable Experiences on the Costa del Sol
 

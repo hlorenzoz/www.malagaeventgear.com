@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -139,6 +141,11 @@ The Wedding Pack includes a professional sound system capable of supporting up t
 Apart from audio solutions, the pack provides premium lighting options to craft both romantic and dynamic atmospheres. With the elegance of strategically placed lighting, your wedding venue transforms, enhancing the ambiance and highlighting key areas such as the dance floor or dining spaces. Under the soft glow of these lights, every aspect of your wedding becomes photo-ready, allowing photographers to capture the nuance and beauty of the celebration. A noteworthy mention goes to **MEG’s** commitment to hassle-free service, including seamless setup and takedown of all rental equipment.
 
 This service ensures that couples can focus on their big day without the distraction of technical complexities. The company’s highly efficient and professional team provides dedicated support throughout the process, making sure every aspect runs smoothly. For those interested in exploring more about **Malaga Event Gear’s Wedding Pack**, visiting their comprehensive detailed page is highly recommended: [Wedding Pack](https://malagaeventgear.com/wedding-pack/). This perfect blend of sound, lighting, and service truly encapsulates what high-quality rental solutions should embody, turning wedding visions into reality with ease and finesse.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Creating a Detailed Rental Checklist for Your Event
 

@@ -12,6 +12,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -225,6 +227,11 @@ For corporate events or product presentations, the emphasis is often on clarity 
 Additionally, technical support is critical in these scenarios to handle complex setups and troubleshoot any potential issues efficiently. By assessing your event’s unique requirements, you can determine the best type of equipment to deliver an impactful message and maintain audience attention.
 
 Partnering with a rental company like **Malaga Event Gear (MEG)** guarantees access to both expertise and equipment, ensuring your event is professionally executed from start to finish.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Selecting the Right AV Rental Company
 

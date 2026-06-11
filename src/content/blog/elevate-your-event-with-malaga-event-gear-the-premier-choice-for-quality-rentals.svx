@@ -12,6 +12,11 @@ tags: []
 draft: false
 ---
 
+<script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
+</script>
+
 ## Table of Contents
 
 -   [Comprehensive Event Equipment Offerings](#comprehensive-event-equipment-offerings)
@@ -58,6 +63,11 @@ The combination of high quality projection and sound creates an immersive experi
 Selecting the right equipment is crucial for making any event memorable.
 
 By choosing Malaga Event Gear, clients can rest assured that they are benefiting from expert advice and quality rentals tailored to their specific needs.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Creating Memorable Events on the Costa del Sol
 

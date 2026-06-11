@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -235,6 +237,11 @@ To further complement our comprehensive AV setup services, here are additional m
 -   Ensure regular communication with clients for updates and feedback
 
 These strategies underscore our commitment to excellence, ensuring your event stands out for all the right reasons.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Practical Tips for Booking Your AV Hire Service
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -114,6 +116,11 @@ Weather plays a crucial role in outdoor weddings and events, making it essential
 Preparing for weather changes is a fundamental aspect of planning outdoor weddings and other events with tent rentals. Given the unpredictability of weather, investing in climate control solutions such as tent heaters becomes invaluable. These heaters not only ensure warmth during chilly evenings but also maintain a cozy atmosphere, essential for guest comfort. Additionally, consider renting tents with sides that can be easily adjusted or closed during sudden showers, safeguarding guests from rain. Making weather-proofing a top priority minimizes risks and ensures your event proceeds without a hitch.
 
 Understanding the climate in Malaga is key when planning your event. While generally sunny, the area can experience occasional rain or windy conditions, making it essential to consider these factors in your rental plan. Collaborating with a reputable service like **Malaga Event Gear (MEG)** provides access to guidance and equipment tailored to local weather patterns. Whether it’s arranging for extra stakes to secure tents or designing a layout that maximizes wind resistance, choosing the right equipment and setup is crucial. Moreover, having a contingency plan and communicating with vendors about weather possibilities ensures you’re prepared for any changes, allowing your wedding or event to captivate guests regardless of the weather forecast. By integrating these strategies, you’ll create a memorable and flawless experience protected from unpredictable elements.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Budgeting for Your Wedding Tent Rentals
 

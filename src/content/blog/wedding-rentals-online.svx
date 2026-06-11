@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -189,6 +191,11 @@ Transform your ceremony into a beautifully orchestrated event where every word r
 | Mixing Consoles | User Friendly Controls | Precision in Sound Mixing | Wedding DJ, Live Performances |
 
 _This table highlights how professional sound systems enhance the overall experience of wedding ceremonies._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Explore Party Rental Options for Your Wedding Celebration
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -204,6 +206,11 @@ Our customizable lighting solutions offer a transformative experience with numer
 -   **Personalization:** Infuse your event with unique personality and style by choosing color schemes and lighting effects that align with your vision.
 
 With our innovative lighting solutions, you can ensure a memorable experience that captivates and delights your guests.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Enjoy Hassle Free Setup and Support for Your Special
 

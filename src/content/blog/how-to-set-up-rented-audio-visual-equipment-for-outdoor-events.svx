@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -301,6 +303,11 @@ Their hands on assistance from setup to live execution assures that all technica
 Drawing from our long standing tradition in the industry, over 1000 satisfied customers affirm our deep understanding of creating powerful auditory experiences. For further insights into optimizing your AV system for outdoor events, you may explore more about our services and get assistance from our experienced technicians through [Malaga Event Gear’s AV Rental for Corporate Events](https://malagaeventgear.com/audio-visual-rental-for-corporate-events/).
 
 If questions linger about your specific audio needs or the best practices for incorporating visuals into your setup, feel free to leave a comment or contact us for a personalized consultation.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Incorporating Lighting Equipment for Ambiance
 

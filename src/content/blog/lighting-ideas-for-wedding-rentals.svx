@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -260,6 +262,11 @@ Expertly crafted lighting designs also ensure that functional needs, such as lig
 With **MEG’s** expertise, these lighting ideas can be customized to fit the unique vibe of your wedding, blending harmoniously with your wedding planning while adding a distinctive glow that enhances the magic of every captured moment.
 
 To ensure your special day shines as planned, let our team assist you with personalized advice and lighting rental solutions tailored to your taste. To learn more, or to request a quote, visit our [wedding pack](https://malagaeventgear.com/wedding-pack/). We’re here to help make your dream wedding a reality.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Transformative Effects of Event Lighting on Countryside Weddings
 

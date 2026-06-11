@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -166,6 +168,11 @@ Successfully coordinating your wedding rentals begins with a detailed understand
 It’s crucial to conceptualize how various rentals like tables, audiovisual equipment, and lighting will fit within the venue’s characteristics. Understanding space constraints and flow is vital to ensure seamless placement without obstructing key walkways or sightlines. Deliberate setup choices elevate the event’s elegance; for instance, strategically placed lighting can highlight architectural features, while well-arranged sound systems ensure optimal audio delivery. The goal is to enhance the venue’s aesthetic by finding harmony between its natural attributes and rented additions.
 
 Moreover, consider the delivery logistics carefully. Coordinating with rental companies to understand the timing, access points, and any restrictions involved in the delivery setup ensures a smooth process. Proactive communication about delivery schedules prevents unforeseen delays and allows ample time for proper placement and adjustments. It’s also wise to perform a test setup with your audiovisual elements to fine-tune lighting and sound systems, guaranteeing their positive impact on the wedding atmosphere. By embracing a structured delivery setup to placement approach, every rental element falls seamlessly into place, enriching the venue’s inherent beauty and crafting delightful memories for both you and your guests.
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('wedding')} speed="normal" direction="left" />
+</div>
 
 ## Maximizing the Impact of Lighting in Wedding Decor
 

@@ -13,6 +13,8 @@ draft: false
 ---
 
 <script>
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import { getImagesForPackage } from '$lib/data/gallery';
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
@@ -195,6 +197,11 @@ Reach out today to discover how we can elevate your event’s experience.
 | Energy Efficient | Cost Savings | Remote Parties | Eco friendly LEDs |
 
 _This table succinctly encapsulates how advanced LED screens from Malaga Event Gear transform events with superior clarity and adaptable solutions._
+
+
+<div class="my-12 overflow-hidden w-full">
+	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />
+</div>
 
 ## Lighting Equipment Solutions to Enhance Event Ambiance
 
