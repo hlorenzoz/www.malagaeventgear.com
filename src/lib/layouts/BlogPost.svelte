@@ -466,8 +466,29 @@
 		padding-left: 1.5rem;
 	}
 
+	/* Tailwind v4 preflight resets list-style to none on ul/ol; re-apply markers */
+	:global(.prose ul) {
+		list-style: disc;
+	}
+
+	:global(.prose ol) {
+		list-style: decimal;
+	}
+
+	:global(.prose ul ul) {
+		list-style: circle;
+	}
+
+	:global(.prose ul ul ul) {
+		list-style: square;
+	}
+
 	:global(.prose li) {
 		margin-bottom: 0.5rem;
+	}
+
+	:global(.prose li::marker) {
+		color: var(--color-electric-blue, #3b82f6);
 	}
 
 	:global(.prose blockquote) {
@@ -493,6 +514,47 @@
 		text-align: center;
 		margin-top: 0.5rem;
 		font-style: italic;
+	}
+
+	/* Tables — wrapped by rehypeTableWrap for horizontal scroll on narrow viewports */
+	:global(.prose .table-wrap) {
+		overflow-x: auto;
+		margin: 1.5rem 0;
+		-webkit-overflow-scrolling: touch;
+		border-radius: 0.5rem;
+		border: 1px solid var(--color-border-glass, rgba(255, 255, 255, 0.1));
+	}
+
+	:global(.prose table) {
+		width: 100%;
+		border-collapse: collapse;
+		min-width: 32rem;
+		font-size: 0.95em;
+	}
+
+	:global(.prose th),
+	:global(.prose td) {
+		border: 1px solid var(--color-border-glass, rgba(255, 255, 255, 0.1));
+		padding: 0.6rem 0.85rem;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	:global(.prose thead th) {
+		background: rgba(255, 255, 255, 0.05);
+		font-weight: 600;
+	}
+
+	:global(.prose tbody tr:nth-child(even)) {
+		background: rgba(255, 255, 255, 0.02);
+	}
+
+	@media (max-width: 640px) {
+		:global(.prose th),
+		:global(.prose td) {
+			padding: 0.5rem 0.6rem;
+			font-size: 0.875em;
+		}
 	}
 
 	/* Respect reduced-motion preference */

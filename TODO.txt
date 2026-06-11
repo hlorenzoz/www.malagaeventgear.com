@@ -9,7 +9,16 @@
 
 ✅ Our Packages dinámico
 
-Sección de galería de todas las imágenes en forma de carrusel
+✅ Fix tables, <ul>, ...
+
+
+
+Múltiple secciones de lista contínua de imágenes animadas (desplasándose continuamente como una tira contínua)
+
+- Lista con todas las imágenes (Home page - 1 vez)
+- Lista de imágenes relevantes para cada paquete (página de cada paquete - 1 vez)
+
+
 
 Click to Share/Tweet: Añadir botón de compartir para redes sociales (WhatsApp, Facebook, Twitter)
 
@@ -18,11 +27,10 @@ Sección de comentarios
 
 -- ❌ ✅
 
-API REST para la creación de contenido (INTEGRACIÓN) mediante SEO Toolkit
+API REST para la creación de contenido (INTEGRACIÓN) con SEO Toolkit
 
 
 -- ❌ ✅ Tracking Google Analytics & Cloudflare Zaraz
-
 
 
 

@@ -189,45 +189,12 @@ High quality sound equipment ensures your message is delivered clearly, while dy
 
 Experience the true power of tailored event solutions with our state of the art audiovisual equipment, designed to elevate your event to new heights.
 
-Event Type
-
-Sound System Features
-
-Lighting Features
-
-Benefits of Optimization
-
-Concerts
-
-High fidelity acoustics, Surround sound
-
-Dynamic color changes, Stage spotlights
-
-Enhanced audience engagement, Elevated performances
-
-Conferences
-
-Clear vocal amplification, Feedback suppression
-
-Adjustable brightness, Focused beam
-
-Improved communication, Professional ambiance
-
-Weddings
-
-Customized playlists, Balanced audio levels
-
-Romantic ambience lighting, Soft gradients
-
-Personalized experience, Unforgettable moments
-
-Corporate Events
-
-Wireless microphones, Background music integration
-
-Elegant design, Brand color schemes
-
-Brand representation, Polished execution
+| Event Type | Sound System Features | Lighting Features | Benefits of Optimization |
+| --- | --- | --- | --- |
+| Concerts | High fidelity acoustics, Surround sound | Dynamic color changes, Stage spotlights | Enhanced audience engagement, Elevated performances |
+| Conferences | Clear vocal amplification, Feedback suppression | Adjustable brightness, Focused beam | Improved communication, Professional ambiance |
+| Weddings | Customized playlists, Balanced audio levels | Romantic ambience lighting, Soft gradients | Personalized experience, Unforgettable moments |
+| Corporate Events | Wireless microphones, Background music integration | Elegant design, Brand color schemes | Brand representation, Polished execution |
 
 _This table highlights the critical elements of effective sound and lighting solutions for creating memorable events._
 

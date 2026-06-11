@@ -97,41 +97,13 @@ As you embark on planning your special day, consider how integrating rentals int
 
 Creating a cohesive wedding aesthetic involves crafting an event that effortlessly incorporates all design elements to form a unified and harmonious appearance. This process calls for a keen understanding of the venue’s existing features and a well-thought-out approach in choosing elements like colors, decor, and audio-visual systems. By marrying these components seamlessly, you not only enhance the venue’s natural charm but also reflect your unique style and vision. Prioritizing these aspects in your planning ensures a memorable occasion filled with joy and elegance, leaving an indelible mark on your special day.
 
-Design Element
-
-Role in Aesthetic
-
-Tips for Integration
-
-Color Palette
-
-Sets the tone and mood
-
-Choose 2-3 primary colors and complement with accents
-
-Floral Arrangements
-
-Adds texture and elegance
-
-Coordinate with venue decor and personal attire
-
-Lighting
-
-Enhances ambiance
-
-Use soft lights and consider natural light opportunities
-
-Venue Decor
-
-Reflects theme and style
-
-Incorporate theme elements subtly in the decor
-
-Stationery
-
-Communicates theme and details
-
-Ensure fonts and colors align with overall aesthetic
+| Design Element | Role in Aesthetic | Tips for Integration |
+| --- | --- | --- |
+| Color Palette | Sets the tone and mood | Choose 2-3 primary colors and complement with accents |
+| Floral Arrangements | Adds texture and elegance | Coordinate with venue decor and personal attire |
+| Lighting | Enhances ambiance | Use soft lights and consider natural light opportunities |
+| Venue Decor | Reflects theme and style | Incorporate theme elements subtly in the decor |
+| Stationery | Communicates theme and details | Ensure fonts and colors align with overall aesthetic |
 
 _This table underscores the importance of strategic design choices in creating a unified wedding aesthetic._
 

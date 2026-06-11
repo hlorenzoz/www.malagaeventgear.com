@@ -178,41 +178,13 @@ Support doesn’t stop at the equipment. Our technicians provide continuous help
 
 Hire us for a hassle free event experience!
 
-Equipment Type
-
-Key Features
-
-Benefits
-
-Cameras
-
-High Resolution, Adjustable Angles
-
-Enhanced Visual Connectivity
-
-Microphones
-
-Noise Reduction, Wireless
-
-Clearer Sound Quality
-
-Projectors
-
-4K Display, Compact Size
-
-Vivid Image Projection
-
-Lighting
-
-Adjustable Intensity, LED
-
-Improved Visual Settings
-
-Speakers
-
-Surround Sound, Bluetooth
-
-Immersive Audio Experience
+| Equipment Type | Key Features | Benefits |
+| --- | --- | --- |
+| Cameras | High Resolution, Adjustable Angles | Enhanced Visual Connectivity |
+| Microphones | Noise Reduction, Wireless | Clearer Sound Quality |
+| Projectors | 4K Display, Compact Size | Vivid Image Projection |
+| Lighting | Adjustable Intensity, LED | Improved Visual Settings |
+| Speakers | Surround Sound, Bluetooth | Immersive Audio Experience |
 
 _Opting for top tier audiovisual gear ensures seamless virtual communication and elevates participant engagement, solidifying successful event execution._
 

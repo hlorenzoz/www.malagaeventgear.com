@@ -162,45 +162,12 @@ At Malaga Event Gear, our **screen rental** options provide a versatile soluti
 
 Our rental services offer high quality equipment that adapts to your specific needs, enhancing every presentation. Whether you require top notch audiovisual gear or comprehensive rental packages, our equipment will elevate the visual experience and leave an unforgettable impression.
 
-Service Type
-
-Equipment Options
-
-Technical Support
-
-User Benefits
-
-Audio Visual Rentals
-
-Monitors, Projectors, Sound Systems
-
-On site Installation and Troubleshooting
-
-Enhanced Audience Engagement
-
-Event Furniture Rentals
-
-Chairs, Tables, Stages
-
-Logistics Coordination
-
-Comfort and Style
-
-Lighting Services
-
-LED Lights, Spotlights, Mood Lighting
-
-Custom Lighting Design
-
-Dynamic Atmosphere
-
-Networking Solutions
-
-Routers, Switches, Wi-Fi Systems
-
-24/7 Technical Assistance
-
-Seamless Connectivity
+| Service Type | Equipment Options | Technical Support | User Benefits |
+| --- | --- | --- | --- |
+| Audio Visual Rentals | Monitors, Projectors, Sound Systems | On site Installation and Troubleshooting | Enhanced Audience Engagement |
+| Event Furniture Rentals | Chairs, Tables, Stages | Logistics Coordination | Comfort and Style |
+| Lighting Services | LED Lights, Spotlights, Mood Lighting | Custom Lighting Design | Dynamic Atmosphere |
+| Networking Solutions | Routers, Switches, Wi-Fi Systems | 24/7 Technical Assistance | Seamless Connectivity |
 
 _This table encapsulates how our customizable rental services and diverse screen rental options can elevate any event experience with cutting edge technology._
 

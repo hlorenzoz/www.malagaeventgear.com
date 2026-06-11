@@ -1,5 +1,6 @@
 import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-cloudflare';
+import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import { rehypeBlogImages } from './scripts/rehype-blog-images.mjs';
 import { rehypeFaqAccordion } from './scripts/rehype-faq-accordion.mjs';
@@ -7,6 +8,7 @@ import { rehypePostToc } from './scripts/rehype-post-toc.mjs';
 import { rehypeSectionCards } from './scripts/rehype-section-cards.mjs';
 import { rehypeImageGallery } from './scripts/rehype-image-gallery.mjs';
 import { rehypeInternalLinks } from './scripts/rehype-internal-links.mjs';
+import { rehypeTableWrap } from './scripts/rehype-table-wrap.mjs';
 
 /**
  * mdsvex 0.12.7 inyecta el frontmatter como `<script context="module">`, sintaxis
@@ -47,6 +49,9 @@ const config = {
 	preprocess: [
 		mdsvex({
 			extensions: ['.svx'],
+			// remarkGfm enables GFM pipe-tables (the migrated posts reconstruct their
+			// tables as markdown tables), plus strikethrough/autolinks/task-lists.
+			remarkPlugins: [remarkGfm],
 			// Plugin execution order matters:
 			// 1. rehypeSlug    — assigns ids to all headings (must be first)
 			// 2. rehypeBlogImages — enriches <img> with srcset/alt/dimensions
@@ -57,8 +62,9 @@ const config = {
 			//    must run before rehypeFaqAccordion which restructures h3 nodes)
 			// 5. rehypeSectionCards — wraps Brief Overview / Key Highlights in styled cards
 			//    (must run after rehypePostToc removes the old ToC)
-			// 6. rehypeFaqAccordion — MUST be last (restructures h3 nodes into <details>)
-			rehypePlugins: [rehypeSlug, rehypeInternalLinks, rehypeBlogImages, rehypeImageGallery, rehypePostToc, rehypeSectionCards, rehypeFaqAccordion]
+			// 6. rehypeTableWrap — wraps <table> in .table-wrap for responsive scroll
+			// 7. rehypeFaqAccordion — MUST be last (restructures h3 nodes into <details>)
+			rehypePlugins: [rehypeSlug, rehypeInternalLinks, rehypeBlogImages, rehypeImageGallery, rehypePostToc, rehypeSectionCards, rehypeTableWrap, rehypeFaqAccordion]
 			// No layout option — mdsvex layout injection uses $$props which is
 			// incompatible with runes mode. The [slug]/+page.svelte wraps post
 			// components explicitly via BlogPost.svelte instead (ADR-009 approach).

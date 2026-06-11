@@ -186,55 +186,12 @@ Our packages are designed with personalized AV hire solutions to make corporate 
 
 Explore our array of rental services and discover how we can elevate your corporate events with tailored solutions that fit every need.
 
-Package Name
-
-Event Scale
-
-Equipment Type
-
-Key Features
-
-Support Services
-
-Basic Essentials
-
-Small Gatherings
-
-Audio & Visual
-
-Cost Effective, Easy Setup
-
-Dedicated On Site Technician
-
-Advanced Package
-
-Medium Sized Events
-
-Lighting, Sound Systems
-
-Customizable, High Quality
-
-24/7 Customer Support
-
-Premium Experience
-
-Large Conferences
-
-Full AV Suite
-
-State of the Art Technology
-
-Comprehensive Event Management
-
-Corporate Signature
-
-Exclusive Events
-
-Interactive Displays
-
-Personalized Branding
-
-Full Service Consultation
+| Package Name | Event Scale | Equipment Type | Key Features | Support Services |
+| --- | --- | --- | --- | --- |
+| Basic Essentials | Small Gatherings | Audio & Visual | Cost Effective, Easy Setup | Dedicated On Site Technician |
+| Advanced Package | Medium Sized Events | Lighting, Sound Systems | Customizable, High Quality | 24/7 Customer Support |
+| Premium Experience | Large Conferences | Full AV Suite | State of the Art Technology | Comprehensive Event Management |
+| Corporate Signature | Exclusive Events | Interactive Displays | Personalized Branding | Full Service Consultation |
 
 _This table encapsulates how Malaga Event Gear’s customized rental packages and personalized AV hire transform corporate events in Malaga._
 

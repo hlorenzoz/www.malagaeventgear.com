@@ -84,37 +84,11 @@ When it comes to creating unforgettable outdoor events in Malaga, Spain, **choo
 
 Our expertly curated [equipment rental](https://malagaeventgear.com/audio-visual-rental/) options cater to all your _unique_ audiovisual needs, providing the latest AV equipment for exceptional clarity and impact. As a trusted rental service provider, we pride ourselves on delivering reliable solutions tailored to your requirements, giving you the flexibility and confidence to host remarkable events with cutting edge technology and seamless execution.
 
-Service Type
-
-Features
-
-Target Events
-
-Duration Options
-
-Audio Equipment Rental
-
-High fidelity speakers, microphones
-
-Concerts, conferences
-
-Daily, Weekly
-
-Visual Systems Hire
-
-Projectors, LED screens
-
-Workshops, celebrations
-
-Hourly, Daily
-
-Lighting Solutions
-
-Stage lights, ambient lighting
-
-Parties, corporate events
-
-Daily, Long term
+| Service Type | Features | Target Events | Duration Options |
+| --- | --- | --- | --- |
+| Audio Equipment Rental | High fidelity speakers, microphones | Concerts, conferences | Daily, Weekly |
+| Visual Systems Hire | Projectors, LED screens | Workshops, celebrations | Hourly, Daily |
+| Lighting Solutions | Stage lights, ambient lighting | Parties, corporate events | Daily, Long term |
 
 _This table succinctly summarizes the diverse rental offerings available, providing an easy reference for clients looking to enhance various events with state of the art audiovisual solutions._
 

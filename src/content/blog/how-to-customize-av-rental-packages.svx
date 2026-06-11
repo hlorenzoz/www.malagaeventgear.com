@@ -290,37 +290,11 @@ Our offerings encompass an extensive range of services like audio, video walls, 
 
 Explore our rental packages to craft a unique experience.
 
-Service
-
-Key Features
-
-Benefits
-
-Client Impact
-
-State of the Art AV Technology
-
-Advanced sound and visual systems
-
-Immersive experiences
-
-Creates unforgettable events
-
-Transparent Pricing and High Quality Equipment
-
-Clear cost structures and premium tools
-
-Ensures planning clarity and durability
-
-Builds client trust and satisfaction
-
-Personalized Support from Technicians
-
-Dedicated technical assistance
-
-Smooth execution and troubleshooting
-
-Enhances event success and reliability
+| Service | Key Features | Benefits | Client Impact |
+| --- | --- | --- | --- |
+| State of the Art AV Technology | Advanced sound and visual systems | Immersive experiences | Creates unforgettable events |
+| Transparent Pricing and High Quality Equipment | Clear cost structures and premium tools | Ensures planning clarity and durability | Builds client trust and satisfaction |
+| Personalized Support from Technicians | Dedicated technical assistance | Smooth execution and troubleshooting | Enhances event success and reliability |
 
 This table encapsulates how innovative AV solutions and transparent practices ensure remarkable event experiences, maximizing client satisfaction and trust.
 

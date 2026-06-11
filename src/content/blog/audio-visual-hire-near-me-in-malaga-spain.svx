@@ -223,37 +223,11 @@ Whether you’re planning an intimate wedding celebration or a large corporate e
 
 Let us [elevate your events](https://malagaeventgear.com/pricing/) and create memories that last a lifetime. Contact us for a customized quote tailored to your specific event needs.
 
-Package Type
-
-Key Features
-
-Event Types
-
-Customization Options
-
-Basic
-
-Sound System, Basic Lighting
-
-Small Gatherings
-
-Customizable Lighting
-
-Standard
-
-Sound & Lighting, Projector
-
-Corporate Events, Weddings
-
-Thematic Lighting, Additional Speakers
-
-Premium
-
-Full AV Setup, HD Screen, Enhanced Audio
-
-Large Conferences, Concerts
-
-Custom Visuals, Advanced Lighting
+| Package Type | Key Features | Event Types | Customization Options |
+| --- | --- | --- | --- |
+| Basic | Sound System, Basic Lighting | Small Gatherings | Customizable Lighting |
+| Standard | Sound & Lighting, Projector | Corporate Events, Weddings | Thematic Lighting, Additional Speakers |
+| Premium | Full AV Setup, HD Screen, Enhanced Audio | Large Conferences, Concerts | Custom Visuals, Advanced Lighting |
 
 _This table showcases the versatility and customization options available with Malaga Event Gear’s AV packages for various events._
 
