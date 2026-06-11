@@ -103,6 +103,72 @@ describe('resolvePackageForPost', () => {
 	});
 });
 
+describe('resolvePackageForPost — slug-driven relevance (per-post text)', () => {
+	// Estos posts tienen categoría "Events" (que de otro modo resolvería a basic-mice),
+	// pero el slug indica el paquete realmente relevante. El slug debe ganarle a la
+	// regla amplia de categoría. Ground truth = el pack que linkeaba el CTA del sitio viejo.
+
+	const productPresentationSlugs = [
+		'audio-visual-rental-for-seminars',
+		'audio-visual-rental-for-training-sessions',
+		'audio-visual-rental-for-virtual-events',
+		'audio-visual-rental-for-remote-presentations',
+		'audio-visual-rental-for-press-conferences',
+		'audio-visual-rental-for-product-launches'
+	];
+	for (const slug of productPresentationSlugs) {
+		it(`resolves ${slug} → product-presentation despite Events category`, () => {
+			const post = makePost({ slug, categories: ['Audio Visual Rental', 'Events'] });
+			expect(resolvePackageForPost(post).slug).toBe('product-presentation');
+		});
+	}
+
+	const miceSlugs = [
+		'audio-visual-rental-for-gala-dinners',
+		'audio-visual-rental-for-sports-events',
+		'audio-visual-rental-for-corporate-events'
+	];
+	for (const slug of miceSlugs) {
+		it(`resolves ${slug} → mice despite Events category`, () => {
+			const post = makePost({ slug, categories: ['Audio Visual Rental', 'Events'] });
+			expect(resolvePackageForPost(post).slug).toBe('mice');
+		});
+	}
+
+	it('resolves music-performances → eco despite Events category', () => {
+		const post = makePost({
+			slug: 'audio-visual-rental-for-music-performances',
+			categories: ['Audio Visual Rental', 'Events']
+		});
+		expect(resolvePackageForPost(post).slug).toBe('eco');
+	});
+
+	// Genéricos: el viejo CTA linkeaba /pricing/ → basic-mice sigue siendo el default sensato.
+	const basicMiceSlugs = [
+		'audio-visual-rental-for-charity-fundraisers',
+		'audio-visual-rental-for-religious-events',
+		'audio-visual-rental-for-small-businesses',
+		'audio-visual-rental-for-corporate-meetings',
+		'audio-visual-rental-for-conferences',
+		'audio-visual-rental-for-outdoor-events',
+		'audio-visual-rental-companies'
+	];
+	for (const slug of basicMiceSlugs) {
+		it(`resolves ${slug} → basic-mice (generic events default)`, () => {
+			const post = makePost({ slug, categories: ['Audio Visual Rental', 'Events'] });
+			expect(resolvePackageForPost(post).slug).toBe('basic-mice');
+		});
+	}
+
+	it('wedding posts are unaffected by slug rules', () => {
+		const post = makePost({
+			slug: 'audio-visual-rental-for-weddings',
+			categories: ['Audio Visual Rental', 'Events', 'Weddings']
+		});
+		expect(resolvePackageForPost(post).slug).toBe('wedding');
+	});
+});
+
 describe('getPackagesForPost', () => {
 	it('returns every package exactly once (no dupes, no omissions)', () => {
 		const post = makePost({ categories: ['Weddings'] });

@@ -482,6 +482,8 @@ const PACKAGE_RULES: {
 	categoryPatterns?: RegExp[];
 	/** Patterns to match against title and tags (case-insensitive substring) */
 	keywordPatterns?: RegExp[];
+	/** Patterns to match against the post slug (clean, single-topic signal) */
+	slugPatterns?: RegExp[];
 	/** Package slug to resolve when this rule matches */
 	slug: string;
 }[] = [
@@ -491,15 +493,48 @@ const PACKAGE_RULES: {
 		keywordPatterns: [/\bwedding\b/i],
 		slug: 'wedding'
 	},
-	// Corporate / MICE / Events / Conferences / Meetings
+	// Product presentations / launches / seminars / training / virtual / remote.
+	// El slug es la señal limpia (los títulos mezclan temas, p. ej. "Press Conferences
+	// AND Corporate Events"), por eso va PRIMERO entre las reglas de eventos.
+	{
+		slugPatterns: [
+			/seminar/,
+			/training/,
+			/virtual/,
+			/remote/,
+			/presentation/,
+			/launch/,
+			/webinar/,
+			/press-conference/
+		],
+		keywordPatterns: [
+			/\bpresentation\b/i,
+			/\bproduct\s+launch\b/i,
+			/\blaunch\b/i,
+			/\bseminar/i,
+			/\bwebinar/i,
+			/\btraining\b/i,
+			/\bvirtual\b/i
+		],
+		slug: 'product-presentation'
+	},
+	// MICE de mayor porte: galas, eventos deportivos, eventos corporativos.
+	{
+		slugPatterns: [/gala/, /sports/, /corporate-event/],
+		keywordPatterns: [/\bgala\b/i, /\bsports?\b/i],
+		slug: 'mice'
+	},
+	// Música / conciertos / performances → eco (social, centrado en sonido).
+	{
+		slugPatterns: [/music/, /performance/, /concert/],
+		keywordPatterns: [/\bconcert\b/i],
+		slug: 'eco'
+	},
+	// Corporate / MICE / Events / Conferences / Meetings — catch-all amplio para el
+	// resto de eventos genéricos (el sitio viejo los mandaba a /pricing/).
 	{
 		categoryPatterns: [/\bcorporate\b/i, /\bmice\b/i, /\bevent/i, /\bconference/i, /\bmeeting/i],
 		slug: 'basic-mice'
-	},
-	// Product presentations / launches / conferences in title/tags
-	{
-		keywordPatterns: [/\bpresentation\b/i, /\bproduct\s+launch\b/i, /\blaunch\b/i],
-		slug: 'product-presentation'
 	}
 	// Default: eco (handled separately below)
 ];
@@ -519,9 +554,20 @@ export function resolvePackageForPost(post: {
 	categories: string[];
 	tags: string[];
 	title: string;
+	slug?: string;
 	isNews?: boolean;
 }): EventPackage {
 	for (const rule of PACKAGE_RULES) {
+		// Check slug first — it's the cleanest single-topic signal, so a specific
+		// slug (e.g. ".../seminars") wins over the broad category catch-all below.
+		if (rule.slugPatterns && post.slug) {
+			const matched = rule.slugPatterns.some((pattern) => pattern.test(post.slug!));
+			if (matched) {
+				const pkg = packages.find((p) => p.slug === rule.slug);
+				if (pkg) return pkg;
+			}
+		}
+
 		// Check categories
 		if (rule.categoryPatterns) {
 			const matched = post.categories.some((cat) =>
