@@ -551,9 +551,10 @@
 
 	/* Tables — wrapped by rehypeTableWrap for horizontal scroll on narrow viewports */
 	:global(.prose .table-wrap) {
-		overflow-x: auto;
+		display: block;
 		width: 100%;
 		max-width: 100%;
+		overflow-x: auto;
 		margin: 1.5rem 0;
 		-webkit-overflow-scrolling: touch;
 		border-radius: 0.5rem;
