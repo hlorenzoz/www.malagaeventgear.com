@@ -22,7 +22,7 @@ Use Plan mode y SDD
 
 ---
 
-Crea el componente Share This (algo como el plugin de Mediavine: Grow)
+✅ Crea el componente Share This (algo como el plugin de Mediavine: Grow)
 
 https://www.grow.me/publishers/quick-start-guide/
 
@@ -37,6 +37,7 @@ Email
 ---
 
 Click to Tweet (select texto a twittear)
+
 
 Sección de comentarios
 

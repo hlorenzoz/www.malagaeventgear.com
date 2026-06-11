@@ -11,6 +11,7 @@
 	import { resolvePackageForPost, getPackagesForPost } from '$lib/data/packages';
 	import { setContext, onMount } from 'svelte';
 	import ShareThis from '$lib/components/blog/ShareThis.svelte';
+	import ClickToTweet from '$lib/components/blog/ClickToTweet.svelte';
 
 	let {
 		post,
@@ -231,6 +232,8 @@
 <div class="lg:hidden">
 	<ShareThis mode="drawer" visible={isTopVisible} url={canonicalUrl} title={post.title} coverImage={post.coverImage} />
 </div>
+
+<ClickToTweet url={canonicalUrl} title={post.title} />
 
 <style>
 	/* FAQ Accordion — global styles targeting the rehype-faq-accordion plugin output.

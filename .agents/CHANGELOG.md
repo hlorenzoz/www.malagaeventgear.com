@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (click-to-tweet)
+- **Click to Tweet Text Selection** (`src/lib/components/blog/ClickToTweet.svelte`): A premium Svelte 5 component that monitors selection events within the blog post body (`.prose` container), displaying a glassmorphic floating tooltip above the text range allowing users to tweet selections (`“Selected text” — URL`) via X's Web Intent.
+- **BlogPost Layout Integration** (`src/lib/layouts/BlogPost.svelte`): Mounted the `<ClickToTweet>` component dynamically inside the blog layout, passing the post's canonical URL and title.
+- **E2E Playwright Tests** (`tests/click-to-tweet.spec.ts`): Built test suite validating tooltip visibility, range limits (3-200 chars), page boundary checks (no tooltips outside `.prose`), and successful popup redirect interception.
+
 ### Added (share-this-component)
 - **ShareThis Component** (`src/lib/components/blog/ShareThis.svelte`): Svelte 5 component supporting three flexible modes: `inline` (horizontal share bar), `sidebar` (vertical sticky share bar), and `drawer` (mobile floating FAB that opens a sliding bottom-sheet with a glassmorphic backdrop filter).
 - **Mobile Overlap Prevention**: Standardized bottom coordinate for Share FAB (`bottom: calc(7.25rem + env(safe-area-inset-bottom, 0px))`) and modified the WhatsApp widget (`WhatsAppWidget.svelte` with `style="bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px))"`) to stack cleanly above WhatsApp in mobile screen orientations and dynamically handle iOS safe-area home indicators.
