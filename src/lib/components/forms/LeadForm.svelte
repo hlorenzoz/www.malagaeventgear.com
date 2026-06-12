@@ -346,7 +346,7 @@
 		<!-- Micro-copy de confianza -->
 		<div class="mt-4 flex flex-col items-center justify-center gap-1 text-center text-xs text-on-surface-variant/75">
 			<p>🛡️ {i18n.lang === 'en' ? 'No credit card required to check availability' : 'No se requiere tarjeta de crédito para consultar'}</p>
-			<p>⚡ {i18n.lang === 'en' ? 'Response in under 3 hours guaranteed' : 'Respuesta garantizada en menos de 3 horas'}</p>
+			<p>⚡ {i18n.lang === 'en' ? 'Response as soon as possible' : 'Respuesta lo antes posible'}</p>
 		</div>
 	</form>
 </section>

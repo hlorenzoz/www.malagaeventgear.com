@@ -253,9 +253,6 @@
 	</div>
 </section>
 
-<!-- Testimonials Section (Google Reviews) -->
-<Testimonials />
-
 <!-- Gallery Marquee Section -->
 <section class="py-24 overflow-hidden relative">
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
@@ -518,6 +515,9 @@
 		</div>
 	</div>
 </section>
+
+<!-- Testimonials Section (Google Reviews) -->
+<Testimonials />
 
 <!-- FAQ Section -->
 <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-300">
