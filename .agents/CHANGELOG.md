@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 - **Profile Image & Scrolling Gallery / Google Reviews on Team Page**: Replaced Hector Luis Lorenzo's placeholder profile icon with an optimized, CDN-hosted WebP image (`https://cdn.malagaeventgear.com/team/hector-luis-lorenzo.webp`). Integrated the high-performance scrolling `ImageMarquee` component and verified client `Testimonials` (Google My Business reviews) below the profile cards on the `/meet-the-team/` page to drive brand validation and trust. Standardized the canonical URL with trailing slash conventions.
 
 ### Changed
-- **Real Event Images on Homepage Bento Grid**: Replaced generic placeholder Unsplash images for the Sound, Lighting, and Visuals categories under `static/images/services/` with real Malaga Event Gear event images. Re-generated and optimized WebP crop variants (`-desktop.webp` and `-mobile.webp`) for high-speed loading and zero CLS.
+- **Real Event Images in Service Bento Grids via CDN Mapping**: Replaced generic placeholder images in the homepage and `/equipment/` bento grids with real event photos. Integrated `cover-thumbs.json` lookup mapping to serve responsive crop sizes (`srcset`) and thumbnails (`src`) directly from Malaga Event Gear's Cloudflare R2 CDN, maximizing mobile and desktop performance without large local binaries.
 
 ### Added (packages-page-enhancements)
 - **Image Marquee and Carousel Reviews on Packages Page**: Integrated the general `ImageMarquee` component on `/packages/` (rendering 2 rows of scrolling photos above testimonials) and replaced the grid-variant reviews block with the horizontal carousel-variant reviews block (`variant="carousel"`).

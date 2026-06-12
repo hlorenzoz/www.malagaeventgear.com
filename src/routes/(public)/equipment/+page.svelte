@@ -6,6 +6,9 @@
 	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
 	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
 	import { galleryImages } from '$lib/data/gallery';
+	import coverThumbsRaw from '$lib/data/cover-thumbs.json';
+
+	const coverThumbs = coverThumbsRaw as Record<string, { thumb: string; srcset?: string }>;
 
 	// Esquema de catálogo de servicios (SEO Generativo)
 	let servicesSchema = $derived(
@@ -146,19 +149,17 @@
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[400px]">
 		<!-- Audio -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal active is-revealed">
-			<picture class="absolute inset-0 w-full h-full opacity-70 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/sound-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/sound-desktop.webp" type="image/webp" />
-				<img 
-					alt="Professional sound rental equipment" 
-					class="w-full h-full object-cover" 
-					src="/images/services/sound-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="Professional sound rental equipment" 
+				class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1276/malaga_congress_sound_system_rental-scaled.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1276/malaga_congress_sound_system_rental-scaled.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1276/malaga_congress_sound_system_rental-scaled.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
 			<div class="absolute inset-0 bg-surface-glass backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end h-full z-10 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
@@ -177,19 +178,17 @@
 
 		<!-- Lighting -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal active is-revealed" style="transition-delay: 100ms;">
-			<picture class="absolute inset-0 w-full h-full opacity-70 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/lighting-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/lighting-desktop.webp" type="image/webp" />
-				<img 
-					alt="Spectacular event lighting rental equipment" 
-					class="w-full h-full object-cover" 
-					src="/images/services/lighting-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="Spectacular event lighting rental equipment" 
+				class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1297/malaga_event_lighting_sound_system_rental_2-scaled.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1297/malaga_event_lighting_sound_system_rental_2-scaled.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1297/malaga_event_lighting_sound_system_rental_2-scaled.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
@@ -207,19 +206,17 @@
 
 		<!-- Visuals -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low row-span-1 reveal active is-revealed" style="transition-delay: 200ms;">
-			<picture class="absolute inset-0 w-full h-full opacity-70 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/projectors-screens-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/projectors-screens-desktop.webp" type="image/webp" />
-				<img 
-					alt="HD projectors and screen rental equipment" 
-					class="w-full h-full object-cover" 
-					src="/images/services/projectors-screens-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="HD projectors and screen rental equipment" 
+				class="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity duration-500 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1301/lighting-sound-big-screen-projector-rental-malaga_1.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1301/lighting-sound-big-screen-projector-rental-malaga_1.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1301/lighting-sound-big-screen-projector-rental-malaga_1.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent"></div>
 			<div class="absolute bottom-0 left-0 w-full p-8 z-10">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">
@@ -237,19 +234,17 @@
 
 		<!-- Special Effects -->
 		<div class="group relative rounded-[20px] overflow-hidden border border-border-glass bg-surface-container-low lg:col-span-2 row-span-1 reveal active is-revealed" style="transition-delay: 300ms;">
-			<picture class="absolute inset-0 w-full h-full opacity-45 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/fx-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/fx-desktop.webp" type="image/webp" />
-				<img 
-					alt="Special effects low-lying fog and confetti rental machines" 
-					class="w-full h-full object-cover" 
-					src="/images/services/fx-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="Special effects low-lying fog and confetti rental machines" 
+				class="absolute inset-0 w-full h-full object-cover opacity-45 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1191/billie-jean-king-cup-2024-celebration-lights-sound.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1191/billie-jean-king-cup-2024-celebration-lights-sound.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1191/billie-jean-king-cup-2024-celebration-lights-sound.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute inset-0 bg-gradient-to-r from-background via-background/20 to-transparent"></div>
 			<div class="absolute top-0 left-0 w-full h-full p-8 flex flex-col justify-center z-10 max-w-lg">
 				<div class="w-12 h-12 rounded-full bg-primary-container/50 border border-primary/30 flex items-center justify-center mb-4 backdrop-blur-md">

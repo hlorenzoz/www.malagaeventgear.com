@@ -9,6 +9,9 @@
 	import Icon from '$lib/components/navigation/Icon.svelte';
 	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
 	import { galleryImages } from '$lib/data/gallery';
+	import coverThumbsRaw from '$lib/data/cover-thumbs.json';
+
+	const coverThumbs = coverThumbsRaw as Record<string, { thumb: string; srcset?: string }>;
 
 	// Latest editorial content for the home rows (already sorted by publishDate desc).
 	// Latest Posts excludes news to avoid overlapping with the Latest News row.
@@ -280,19 +283,17 @@
 		<!-- Sound System (Large) -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group md:col-span-2 md:row-span-2 reveal active is-revealed">
 			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent z-10"></div>
-			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/sound-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/sound-desktop.webp" type="image/webp" />
-				<img 
-					alt="Professional sound system rental" 
-					class="w-full h-full object-cover" 
-					src="/images/services/sound-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="Professional sound system rental" 
+				class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1276/malaga_congress_sound_system_rental-scaled.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1276/malaga_congress_sound_system_rental-scaled.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1276/malaga_congress_sound_system_rental-scaled.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute bottom-0 left-0 p-8 z-20 w-full">
 				<div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center mb-4 backdrop-blur-md text-on-surface">
 					<Icon name="speaker" />
@@ -307,19 +308,17 @@
 		<!-- Lighting -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
 			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent z-10"></div>
-			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/lighting-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/lighting-desktop.webp" type="image/webp" />
-				<img 
-					alt="Spectacular event lighting rental" 
-					class="w-full h-full object-cover" 
-					src="/images/services/lighting-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="Spectacular event lighting rental" 
+				class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1297/malaga_event_lighting_sound_system_rental_2-scaled.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1297/malaga_event_lighting_sound_system_rental_2-scaled.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1297/malaga_event_lighting_sound_system_rental_2-scaled.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute bottom-0 left-0 p-6 z-20 w-full">
 				<div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center mb-3 backdrop-blur-md text-on-surface">
 					<Icon name="lightbulb" />
@@ -332,19 +331,17 @@
 		<!-- Visuals/Projectors -->
 		<div class="glass-panel rounded-2xl overflow-hidden relative group reveal active is-revealed">
 			<div class="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-background via-background/70 to-transparent z-10"></div>
-			<picture class="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 pointer-events-none">
-				<source media="(max-width: 767px)" srcset="/images/services/visuals-mobile.webp" type="image/webp" />
-				<source media="(min-width: 768px)" srcset="/images/services/visuals-desktop.webp" type="image/webp" />
-				<img 
-					alt="HD event visuals and projectors rental" 
-					class="w-full h-full object-cover" 
-					src="/images/services/visuals-desktop.webp"
-					loading="lazy"
-					decoding="async"
-					width="600"
-					height="400"
-				/>
-			</picture>
+			<img 
+				alt="HD event visuals and projectors rental" 
+				class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none" 
+				src={coverThumbs['https://cdn.malagaeventgear.com/blog/1292/malaga_event_lighting_display_projector_sound_rental_3-scaled.webp']?.thumb ?? 'https://cdn.malagaeventgear.com/blog/1292/malaga_event_lighting_display_projector_sound_rental_3-scaled.webp'}
+				srcset={coverThumbs['https://cdn.malagaeventgear.com/blog/1292/malaga_event_lighting_display_projector_sound_rental_3-scaled.webp']?.srcset}
+				sizes="(max-width: 767px) 400px, 600px"
+				loading="lazy"
+				decoding="async"
+				width="600"
+				height="400"
+			/>
 			<div class="absolute bottom-0 left-0 p-6 z-20 w-full">
 				<div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center mb-3 backdrop-blur-md text-on-surface">
 					<Icon name="videocam" />
