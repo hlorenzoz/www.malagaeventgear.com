@@ -120,7 +120,7 @@
 	title="Premium Audiovisual Equipment Rental in Malaga | MEG"
 	description="Malaga Event Gear (MEG) offers premium sound system, spectacular lighting, projector, and screen rentals for weddings, corporate events, and parties in Malaga."
 	canonicalUrl="https://malagaeventgear.com/"
-	jsonLdSchema={[buildFaqSchema(getHomepageFaqs())]}
+	jsonLdSchema={[buildFaqSchema(getHomepageFaqs(), i18n.lang)]}
 />
 
 <!-- Hero Section -->

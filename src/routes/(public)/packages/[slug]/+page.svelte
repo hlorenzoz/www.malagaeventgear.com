@@ -7,7 +7,7 @@
 	import { i18n } from '$lib/i18n.svelte';
 	import { siteConfig } from '$lib/data/site';
 	import type { PageData } from './$types';
-	import { buildServiceSchema } from '$lib/utils/schema';
+	import { buildServiceSchema, buildFAQSchema } from '$lib/utils/schema';
 	import ShareThis from '$lib/components/blog/ShareThis.svelte';
 
 	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
@@ -76,6 +76,10 @@
 		)
 	);
 
+	let faqSchema = $derived(
+		buildFAQSchema(packageFaqs.map(faq => ({ question: faq.q, answer: faq.a })))
+	);
+
 	// Sticky CTA: hide when lead-form is in viewport
 	let stickyVisible = $state(false);
 	let formInView = $state(false);
@@ -139,7 +143,7 @@
 	description={pkg.desc[i18n.lang]}
 	canonicalUrl={canonicalUrl}
 	image={pkg.image}
-	jsonLdSchema={seoSchema}
+	jsonLdSchema={[seoSchema, faqSchema]}
 />
 
 <!-- ─── Sticky CTA bar ─────────────────────────────────────────────────── -->
