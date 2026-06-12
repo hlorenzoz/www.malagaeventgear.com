@@ -343,9 +343,10 @@
 			{isLoading ? i18n.t.leadForm.submitting : i18n.t.leadForm.submitBtn}
 		</button>
 
-		<!-- Response-time trust signal -->
-		<p class="mt-4 text-center text-sm text-on-surface-variant">
-			⚡ {i18n.t.leadForm.responseTime}
-		</p>
+		<!-- Micro-copy de confianza -->
+		<div class="mt-4 flex flex-col items-center justify-center gap-1 text-center text-xs text-on-surface-variant/75">
+			<p>🛡️ {i18n.lang === 'en' ? 'No credit card required to check availability' : 'No se requiere tarjeta de crédito para consultar'}</p>
+			<p>⚡ {i18n.lang === 'en' ? 'Response in under 3 hours guaranteed' : 'Respuesta garantizada en menos de 3 horas'}</p>
+		</div>
 	</form>
 </section>

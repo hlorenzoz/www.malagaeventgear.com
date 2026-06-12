@@ -79,7 +79,28 @@ test.describe('Package detail page — CRO layout (Phase 1)', () => {
 		const submitBtn = page.locator('#lead-form form button[type="submit"]');
 		await expect(submitBtn).toBeVisible();
 		const btnText = await submitBtn.textContent();
-		// Spanish: "Solicitar Presupuesto"
-		expect(btnText?.toLowerCase()).toContain('solicitar');
+		// Spanish: "Verificar Disponibilidad"
+		expect(btnText?.toLowerCase()).toContain('verificar');
+	});
+
+	test('should display visual CRO features (Hero benefits, Process Timeline, FAQs)', async ({ page }) => {
+		await page.goto(PACKAGE_URL);
+		await page.waitForLoadState('networkidle');
+
+		// 1. Hero benefits
+		const firstBenefit = page.locator('span:has-text("setup & delivery"), span:has-text("montaje gratis")');
+		await expect(firstBenefit).toBeVisible();
+
+		// 2. Process Timeline
+		const processSection = page.locator('section').filter({ hasText: /Simple Steps|Pasos Simples/i });
+		await expect(processSection).toBeVisible();
+		const steps = processSection.locator('.grid .glass-panel');
+		await expect(steps).toHaveCount(4);
+
+		// 3. Collapsible FAQs
+		const faqSection = page.locator('section').filter({ hasText: /Frequently Asked Questions|Preguntas Frecuentes/i });
+		await expect(faqSection).toBeVisible();
+		const details = faqSection.locator('details');
+		await expect(details.first()).toBeVisible();
 	});
 });

@@ -19,6 +19,50 @@
 	let packageImages = $derived(getImagesForPackage(pkg.id));
 	let canonicalUrl = $derived(`${siteConfig.url}${pkg.route}`);
 
+	// Localized hero benefits
+	const heroBenefits = $derived([
+		{
+			icon: 'package_2',
+			text: i18n.lang === 'en' ? 'Free setup & delivery (Malaga & Costa del Sol)' : 'Transporte y montaje gratis (Málaga y Costa del Sol)'
+		},
+		{
+			icon: 'check_circle',
+			text: i18n.lang === 'en' ? 'Premium brands (Shure, Pioneer, Yamaha)' : 'Equipos de marca premium (Shure, Pioneer, Yamaha)'
+		},
+		{
+			icon: 'support_agent',
+			text: i18n.lang === 'en' ? 'On-site technical support available' : 'Soporte técnico in situ disponible'
+		}
+	]);
+
+	// Localized package-specific FAQs (objection handling)
+	const packageFaqs = $derived([
+		{
+			q: i18n.lang === 'en' ? 'Is delivery and setup included in the package price?' : '¿El transporte y montaje están incluidos en el precio?',
+			a: i18n.lang === 'en' 
+				? 'Yes, for premium packages (like the Wedding Pack and MICE Pack), full professional delivery, cabling setup, and teardown in Malaga and its direct suburbs are included. For standard packages, a small logistical fee may apply depending on your event\'s exact location.'
+				: 'Sí, para paquetes premium (como el Wedding Pack y el MICE Pack), el transporte, montaje profesional del cableado y desmontaje en Málaga y cercanías está incluido. Para packs estándar, se puede aplicar un pequeño cargo logístico según la ubicación exacta.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'What areas do you cover in Andalusia?' : '¿Qué zonas de Andalucía cubren?',
+			a: i18n.lang === 'en'
+				? 'We serve Malaga capital, Marbella, and the entire Costa del Sol daily. We also service Seville and Granada (for orders over 400€). We currently do not offer pickup options since we operate on a delivery-only model.'
+				: 'Damos servicio diario a Málaga capital, Marbella y toda la Costa del Sol. También cubrimos Sevilla y Granada (para pedidos mayores de 400€). No ofrecemos opción de recogida local ya que operamos bajo un modelo exclusivo de entrega a domicilio.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'What happens if it rains for an outdoor event?' : '¿Qué pasa si llueve en un evento al aire libre?',
+			a: i18n.lang === 'en'
+				? 'If your event is outdoors, we require a covered area (tents, pergolas) to protect the electrical equipment. In case of rain without cover, we will work with you to relocate the gear indoors. Safety of guests and protection of high-voltage gear is our top priority.'
+				: 'Si tu evento es al aire libre, requerimos una zona techada (carpas, pérgolas) para proteger los equipos eléctricos. En caso de lluvia sin techo, coordinaremos con vos para trasladar el montaje bajo techo. La seguridad y protección de los equipos eléctricos es nuestra prioridad.'
+		},
+		{
+			q: i18n.lang === 'en' ? 'What happens if I need a technician during my event?' : '¿Qué pasa si necesito un técnico durante el evento?',
+			a: i18n.lang === 'en'
+				? 'Our premium packages (like the Wedding Pack and MICE Pack) already include on-site technical monitoring. For other packages, you can request a dedicated sound/light engineer to stay at your venue for a stress-free experience.'
+				: 'Nuestros paquetes premium (como el Wedding Pack y el MICE Pack) ya incluyen asistencia y monitoreo técnico en directo. Para otros paquetes, podés solicitar que un ingeniero de sonido/iluminación se quede en el recinto para garantizar tranquilidad absoluta.'
+		}
+	]);
+
 	let seoSchema = $derived(
 		buildServiceSchema(
 			{
@@ -124,9 +168,20 @@
 		<h1 class="font-headline-lg-mobile md:font-headline-lg text-[40px] md:text-display-lg leading-tight mb-6 text-on-background">
 			{pkg.name}
 		</h1>
-		<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto leading-relaxed mb-10">
+		<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl mx-auto leading-relaxed mb-6">
 			{pkg.desc[i18n.lang]}
 		</p>
+
+		<!-- Hero benefits bullets -->
+		<div class="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-3 max-w-3xl mx-auto mb-10 font-label-sm text-on-surface-variant">
+			{#each heroBenefits as benefit}
+				<div class="flex items-center gap-2">
+					<Icon name={benefit.icon} size="18" className="text-electric-blue shrink-0" />
+					<span>{benefit.text}</span>
+				</div>
+			{/each}
+		</div>
+
 		<!-- Primary CTA: scroll to form -->
 		<button
 			onclick={scrollToForm}
@@ -275,6 +330,53 @@
 		</div>
 	</div>
 
+	<!-- ─── Process Timeline Section ──────────────────────────────────────── -->
+	<section class="py-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto border-t border-border-glass">
+		<div class="text-center mb-16">
+			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+				{i18n.t.process.badge}
+			</span>
+			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background">
+				{i18n.t.process.title}
+			</h2>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+			<!-- Step 1 -->
+			<div class="glass-panel rounded-2xl p-6 relative flex flex-col h-full">
+				<div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-electric-blue-strong text-white font-bold flex items-center justify-center shadow-lg">
+					1
+				</div>
+				<h3 class="font-headline-sm text-lg text-on-surface mb-2 mt-2">{i18n.t.process.s1Title}</h3>
+				<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">{i18n.t.process.s1Desc}</p>
+			</div>
+			<!-- Step 2 -->
+			<div class="glass-panel rounded-2xl p-6 relative flex flex-col h-full">
+				<div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-electric-blue-strong text-white font-bold flex items-center justify-center shadow-lg">
+					2
+				</div>
+				<h3 class="font-headline-sm text-lg text-on-surface mb-2 mt-2">{i18n.t.process.s2Title}</h3>
+				<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">{i18n.t.process.s2Desc}</p>
+			</div>
+			<!-- Step 3 -->
+			<div class="glass-panel rounded-2xl p-6 relative flex flex-col h-full">
+				<div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-electric-blue-strong text-white font-bold flex items-center justify-center shadow-lg">
+					3
+				</div>
+				<h3 class="font-headline-sm text-lg text-on-surface mb-2 mt-2">{i18n.t.process.s3Title}</h3>
+				<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">{i18n.t.process.s3Desc}</p>
+			</div>
+			<!-- Step 4 -->
+			<div class="glass-panel rounded-2xl p-6 relative flex flex-col h-full">
+				<div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-electric-blue-strong text-white font-bold flex items-center justify-center shadow-lg">
+					4
+				</div>
+				<h3 class="font-headline-sm text-lg text-on-surface mb-2 mt-2">{i18n.t.process.s4Title}</h3>
+				<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">{i18n.t.process.s4Desc}</p>
+			</div>
+		</div>
+	</section>
+
 	<!-- Gallery Marquee Section (Relevant to this package) -->
 	{#if packageImages.length > 0}
 		<section class="py-16 overflow-hidden relative w-full">
@@ -291,6 +393,36 @@
 	<div class="w-full mb-16">
 		<Testimonials variant="carousel" heading={true} />
 	</div>
+
+	<!-- ─── Package FAQs Section ──────────────────────────────────────────── -->
+	<section class="py-20 px-margin-mobile md:px-margin-desktop max-w-4xl mx-auto border-t border-border-glass">
+		<div class="text-center mb-12">
+			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+				{i18n.t.contact.faqTitle}
+			</span>
+			<h2 class="font-headline-lg text-[32px] md:text-headline-lg text-on-background">
+				{i18n.lang === 'en' ? 'Frequently Asked Questions' : 'Preguntas Frecuentes'}
+			</h2>
+		</div>
+
+		<div class="space-y-4">
+			{#each packageFaqs as faq}
+				<div class="glass-panel rounded-2xl overflow-hidden transition-all duration-300">
+					<details class="group">
+						<summary class="flex items-center justify-between p-6 font-headline-sm text-base md:text-lg text-on-surface cursor-pointer list-none focus:outline-none">
+							<span>{faq.q}</span>
+							<span class="text-electric-blue transition-transform duration-300 group-open:rotate-180">
+								<Icon name="expand_more" size="24" />
+							</span>
+						</summary>
+						<div class="px-6 pb-6 pt-2 border-t border-border-glass/50 font-body-md text-sm md:text-base text-on-surface-variant leading-relaxed">
+							{faq.a}
+						</div>
+					</details>
+				</div>
+			{/each}
+		</div>
+	</section>
 
 	<!-- Mobile FAB and Drawer Share (hidden on lg+) -->
 	<div class="lg:hidden">

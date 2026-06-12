@@ -222,7 +222,7 @@ export const translations = {
 		},
 		// Lead capture form
 		leadForm: {
-			title: 'Request a Free Quote',
+			title: 'Secure Your Event Date',
 			subtitle: "Fill in the form and we'll get back to you as soon as possible.",
 			nameLabelInput: 'Full Name *',
 			emailLabelInput: 'Email Address *',
@@ -230,7 +230,7 @@ export const translations = {
 			eventDateLabel: 'Event Date *',
 			commentsLabel: 'Questions or Comments',
 			commentsPlaceholder: 'Tell us about your event — venue, number of guests, special requirements...',
-			submitBtn: 'Get My Quote',
+			submitBtn: 'Check Date Availability',
 			submitting: 'Sending...',
 			errorRequired: 'This field is required.',
 			errorEmail: 'Please enter a valid email address.',
@@ -477,7 +477,7 @@ export const translations = {
 		},
 		// Lead capture form
 		leadForm: {
-			title: 'Solicitá tu Presupuesto Gratis',
+			title: 'Asegurá la Fecha de tu Evento',
 			subtitle: 'Completá el formulario y te respondemos lo antes posible.',
 			nameLabelInput: 'Nombre Completo *',
 			emailLabelInput: 'Correo Electrónico *',
@@ -485,7 +485,7 @@ export const translations = {
 			eventDateLabel: 'Fecha del Evento *',
 			commentsLabel: 'Preguntas o Comentarios',
 			commentsPlaceholder: 'Contanos sobre tu evento — espacio, cantidad de invitados, requerimientos especiales...',
-			submitBtn: 'Solicitar Presupuesto',
+			submitBtn: 'Verificar Disponibilidad',
 			submitting: 'Enviando...',
 			errorRequired: 'Este campo es obligatorio.',
 			errorEmail: 'Por favor ingresá un correo electrónico válido.',
