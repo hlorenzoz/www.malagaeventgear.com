@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (meet-the-team-enhancements)
+- **Profile Image & Scrolling Gallery / Google Reviews on Team Page**: Replaced Hector Luis Lorenzo's placeholder profile icon with an optimized, CDN-hosted WebP image (`https://cdn.malagaeventgear.com/team/hector-luis-lorenzo.webp`). Integrated the high-performance scrolling `ImageMarquee` component and verified client `Testimonials` (Google My Business reviews) below the profile cards on the `/meet-the-team/` page to drive brand validation and trust. Standardized the canonical URL with trailing slash conventions.
+
 ### Added (packages-page-enhancements)
 - **Image Marquee and Carousel Reviews on Packages Page**: Integrated the general `ImageMarquee` component on `/packages/` (rendering 2 rows of scrolling photos above testimonials) and replaced the grid-variant reviews block with the horizontal carousel-variant reviews block (`variant="carousel"`).
 - **Fixed Outdated E2E Test**: Refactored the package landing page CTA link verification in `tests/packages.spec.ts` to expect the inline lead capture form (`#lead-form`) instead of the outdated `/contact/?pack=...` link.
