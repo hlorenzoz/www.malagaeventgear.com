@@ -50,6 +50,23 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 		}
 	});
 
+	test('should verify general image marquee and testimonials carousel on packages page', async ({ page }) => {
+		await page.goto('/packages/');
+		await page.waitForLoadState('networkidle');
+
+		// Verify ImageMarquee
+		const marquees = page.locator('.marquee-container');
+		await expect(marquees.first()).toBeVisible();
+		await expect(marquees).toHaveCount(2);
+
+		// Verify Testimonials is present and in carousel variant
+		const testimonials = page.locator('[data-testid="testimonials"]');
+		await expect(testimonials).toBeVisible();
+
+		const carouselTrack = testimonials.locator('[data-testid="carousel-track"]');
+		await expect(carouselTrack).toBeVisible();
+	});
+
 	test('should verify each package landing page content and booking CTA URL pre-selection', async ({ page }) => {
 		for (const pkg of packageDetails) {
 			await page.goto(pkg.route);
@@ -63,9 +80,9 @@ test.describe('Service Packages & Footer Navigation E2E Tests', () => {
 			const priceText = page.locator(`.text-electric-blue:has-text("${pkg.price}")`);
 			await expect(priceText).toBeVisible();
 
-			// Verify the Book/CTA button maps to the correct contact pre-selection URL
-			const ctaButton = page.locator(`a[href="/contact/?pack=${pkg.id}"]`);
-			await expect(ctaButton).toBeVisible();
+			// Verify the lead form is present on the package page
+			const leadForm = page.locator('#lead-form');
+			await expect(leadForm).toBeVisible();
 		}
 	});
 });

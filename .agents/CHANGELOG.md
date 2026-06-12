@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (packages-page-enhancements)
+- **Image Marquee and Carousel Reviews on Packages Page**: Integrated the general `ImageMarquee` component on `/packages/` (rendering 2 rows of scrolling photos above testimonials) and replaced the grid-variant reviews block with the horizontal carousel-variant reviews block (`variant="carousel"`).
+- **Fixed Outdated E2E Test**: Refactored the package landing page CTA link verification in `tests/packages.spec.ts` to expect the inline lead capture form (`#lead-form`) instead of the outdated `/contact/?pack=...` link.
+
 ### Added (equipment-page-enhancements)
 - **Image Marquee and Testimonials on Equipment Page**: Integrated the high-performance continuous scrolling `ImageMarquee` component and verified client `Testimonials` (Google My Business reviews) on `/equipment/` to increase customer trust and conversions.
 - **Packages Redirection Link**: Updated the arrow action button on the "Special Effects & Fog Machines" banner at `/equipment/` to link to `/packages/` (enforcing trailing slash conventions).
