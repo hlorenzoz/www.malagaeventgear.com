@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Added (equipment-page-enhancements)
+- **Image Marquee and Testimonials on Equipment Page**: Integrated the high-performance continuous scrolling `ImageMarquee` component and verified client `Testimonials` (Google My Business reviews) on `/equipment/` to increase customer trust and conversions.
+- **Packages Redirection Link**: Updated the arrow action button on the "Special Effects & Fog Machines" banner at `/equipment/` to link to `/packages/` (enforcing trailing slash conventions).
+- **E2E Playwright Tests** (`tests/equipment.spec.ts`): Built test suite validating that the image marquee, Google reviews testimonials, and packages redirection link are fully functional and present on the `/equipment/` page.
+
 ### Fixed (blog-table-overlap)
 - **Table Overlap & Responsive Scroll**: Added the `min-w-0` class to the `<article>` element (the center grid item in the blog layout) in `src/lib/layouts/BlogPost.svelte` to prevent CSS Grid column expansion beyond the viewport container. Standardized `.table-wrap` styling with `width: 100%` and `max-width: 100%` to ensure that wide tables trigger the responsive horizontal scroll instead of overlapping the Table of Contents (ToC) sidebar.
 

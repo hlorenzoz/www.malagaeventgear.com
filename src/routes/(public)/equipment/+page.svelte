@@ -2,8 +2,10 @@
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
-
 	import { buildItemListSchema } from '$lib/utils/schema';
+	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
+	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
+	import { galleryImages } from '$lib/data/gallery';
 
 	// Esquema de catálogo de servicios (SEO Generativo)
 	let servicesSchema = $derived(
@@ -271,6 +273,23 @@
 	</div>
 </section>
 
+<!-- Gallery Marquee Section -->
+<section class="py-24 overflow-hidden relative">
+	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
+		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
+			{i18n.t.gallery.titleHome}
+		</span>
+	</div>
+
+	<div class="space-y-4">
+		<ImageMarquee images={galleryImages.slice(0, 15)} speed="normal" direction="left" />
+		<ImageMarquee images={galleryImages.slice(15)} speed="normal" direction="right" />
+	</div>
+</section>
+
+<!-- Testimonials Section (Google Reviews) -->
+<Testimonials />
+
 <!-- Special Effects banner -->
 <section class="py-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 	<div class="glass-panel rounded-2xl overflow-hidden relative group h-[200px] flex items-center px-8 reveal active is-revealed">
@@ -283,7 +302,7 @@
 				</p>
 			</div>
 			<a 
-				href="/equipment/"
+				href="/packages/"
 				class="hidden md:flex w-16 h-16 rounded-full border border-border-glass items-center justify-center hover:bg-on-surface/5 active:scale-90 transition-all duration-300 text-on-surface"
 			>
 				<Icon name="arrow_forward" size="32" className="group-hover:translate-x-1 transition-transform" />
