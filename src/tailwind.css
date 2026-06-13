@@ -258,6 +258,21 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
+/* Hero decorative backdrop — CSS background (not an <img>) so it never competes
+   for the LCP "largest paint" slot. Mobile-first source, desktop source ≥768px. */
+.hero-bg {
+  background-image: url('/premium_event_stage_mobile.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .hero-bg {
+    background-image: url('/premium_event_stage.webp');
+  }
+}
+
 /* Scroll Reveal Animations */
 .reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured {
   opacity: 0;

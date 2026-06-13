@@ -123,22 +123,27 @@
 	jsonLdSchema={[buildFaqSchema(getHomepageFaqs(), i18n.lang)]}
 />
 
+<!-- Preload the decorative hero backdrop so the CSS background paints early -->
+<svelte:head>
+	<link rel="preload" as="image" href="/premium_event_stage_mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+	<link rel="preload" as="image" href="/premium_event_stage.webp" media="(min-width: 768px)" fetchpriority="high" />
+</svelte:head>
+
 <!-- Hero Section -->
 <section class="relative min-h-[90vh] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-24 overflow-hidden">
 	<div class="absolute inset-0 z-0">
-		<picture>
-			<source media="(max-width: 767px)" srcset="/premium_event_stage_mobile.webp" type="image/webp" />
-			<source media="(min-width: 768px)" srcset="/premium_event_stage.webp" type="image/webp" />
-			<img
-				alt="Stage Background with Professional Event Lights"
-				class="w-full h-full object-cover opacity-60 dark:opacity-70 transition-opacity duration-300"
-				src="/premium_event_stage.webp"
-				loading="eager"
-				fetchpriority="high"
-				width="1024"
-				height="1024"
-			/>
-		</picture>
+		<!--
+			Decorative hero backdrop rendered as a CSS background-image (not an <img>).
+			A full-viewport <img> is excluded from LCP candidacy by Chrome (treated as a
+			background) yet still occupies the "largest paint" slot, which suppressed the
+			real LCP element (the <h1>) and produced NO_LCP in Lighthouse. As a CSS
+			background it stays visible but no longer competes, so the <h1> is the stable LCP.
+		-->
+		<div
+			class="hero-bg absolute inset-0 opacity-60 dark:opacity-70 transition-opacity duration-300"
+			role="img"
+			aria-label="Stage background with professional event lights"
+		></div>
 		<div class="absolute inset-0 bg-gradient-to-b from-background/55 via-background/15 to-background transition-colors duration-300"></div>
 	</div>
 	
@@ -149,7 +154,11 @@
 			</span>
 			<h1 class="font-display-lg text-[40px] md:text-display-lg text-on-background leading-tight">
 				{i18n.t.hero.titlePart1} <br />
-				<span class="text-gradient font-bold">{i18n.t.hero.titleGradient}</span> {i18n.t.hero.titlePart2}
+				<!-- Solid brand color (not text-gradient) on purpose: background-clip:text with a
+				     transparent fill is treated as non-contentful by Chrome and disqualifies the
+				     whole <h1> as an LCP candidate, which caused NO_LCP. The gradient ran between
+				     two near-identical blues, so the solid color is visually equivalent. -->
+				<span class="text-electric-blue font-bold">{i18n.t.hero.titleGradient}</span> {i18n.t.hero.titlePart2}
 			</h1>
 			<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
 				{i18n.t.hero.subtitle}
