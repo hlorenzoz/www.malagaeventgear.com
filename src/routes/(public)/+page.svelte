@@ -86,12 +86,22 @@
 	let atStart = $state(true);
 	let atEnd = $state(false);
 
-	function updateScrollState() {
+	// Cached max scroll distance. scrollWidth/clientWidth only change on resize, so we
+	// read them in `measure()` (ResizeObserver) and avoid touching layout on every scroll.
+	let maxScroll = 0;
+
+	function measure() {
 		if (!track) return;
-		const max = track.scrollWidth - track.clientWidth;
-		scrollable = max > 1;
+		maxScroll = track.scrollWidth - track.clientWidth;
+		scrollable = maxScroll > 1;
+		updateEdges();
+	}
+
+	// Scroll-time work: read only scrollLeft (cheap) and compare against the cached max.
+	function updateEdges() {
+		if (!track) return;
 		atStart = track.scrollLeft <= 1;
-		atEnd = track.scrollLeft >= max - 1;
+		atEnd = track.scrollLeft >= maxScroll - 1;
 	}
 
 	function scrollByCard(direction: 1 | -1) {
@@ -103,14 +113,23 @@
 
 	$effect(() => {
 		if (!track) return;
-		updateScrollState();
+		measure();
 		const el = track;
-		el.addEventListener('scroll', updateScrollState, { passive: true });
-		const ro = new ResizeObserver(updateScrollState);
+		let raf = 0;
+		const onScroll = () => {
+			if (raf) return;
+			raf = requestAnimationFrame(() => {
+				raf = 0;
+				updateEdges();
+			});
+		};
+		el.addEventListener('scroll', onScroll, { passive: true });
+		const ro = new ResizeObserver(measure);
 		ro.observe(el);
 		return () => {
-			el.removeEventListener('scroll', updateScrollState);
+			el.removeEventListener('scroll', onScroll);
 			ro.disconnect();
+			if (raf) cancelAnimationFrame(raf);
 		};
 	});
 </script>
@@ -209,7 +228,7 @@
 </section>
 
 <!-- At a Glance Section (answer-engine optimization: questions as h2) -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<section class="cv-auto py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 	<div class="text-center mb-16">
 		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
 			{i18n.t.overview.badge}
@@ -237,7 +256,7 @@
 </section>
 
 <!-- Impact in Numbers Section -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop relative border-y border-border-glass bg-surface-container-low transition-colors duration-300">
+<section class="cv-auto py-24 px-margin-mobile md:px-margin-desktop relative border-y border-border-glass bg-surface-container-low transition-colors duration-300">
 	<div class="max-w-container-max mx-auto text-center">
 		<h2 class="font-headline-lg text-[32px] md:text-headline-lg mb-16 text-on-background">{i18n.t.impact.title}</h2>
 		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -263,7 +282,7 @@
 </section>
 
 <!-- Gallery Marquee Section -->
-<section class="py-24 overflow-hidden relative">
+<section class="cv-auto py-24 overflow-hidden relative">
 	<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-12">
 		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
 			{i18n.t.gallery.titleHome}
@@ -277,7 +296,7 @@
 </section>
 
 <!-- Services Section (Bento Grid) -->
-<section class="py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<section class="cv-auto py-32 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
 	<div class="text-center mb-20">
 		<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
 			{i18n.t.categories.badge}
@@ -379,7 +398,7 @@
 </section>
 
 <!-- How It Works Section -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop relative border-y border-border-glass bg-surface-container-low transition-colors duration-300">
+<section class="cv-auto py-24 px-margin-mobile md:px-margin-desktop relative border-y border-border-glass bg-surface-container-low transition-colors duration-300">
 	<div class="max-w-container-max mx-auto">
 		<div class="text-center mb-16">
 			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-primary uppercase tracking-widest mb-4">
@@ -405,7 +424,7 @@
 </section>
 
 <!-- Pricing Preview Section -->
-<section class="py-32 px-margin-mobile md:px-margin-desktop relative border-b border-border-glass bg-surface-container-low transition-colors duration-300">
+<section class="cv-auto py-32 px-margin-mobile md:px-margin-desktop relative border-b border-border-glass bg-surface-container-low transition-colors duration-300">
 	<div class="max-w-container-max mx-auto">
 		<div class="text-center mb-16">
 			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-electric-blue uppercase tracking-widest mb-4">
@@ -529,7 +548,7 @@
 <Testimonials />
 
 <!-- FAQ Section -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-300">
+<section class="cv-auto py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-300">
 	<div class="max-w-4xl mx-auto">
 		<div class="text-center mb-16">
 			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-primary uppercase tracking-widest mb-4">

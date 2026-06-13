@@ -273,13 +273,22 @@ html {
   }
 }
 
-/* Scroll Reveal Animations */
+/* Skip layout/paint for below-the-fold sections until they scroll into view.
+   The browser caches each element's real size after first render; the 600px
+   placeholder is only the pre-render estimate (kept conservative to avoid CLS). */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Scroll Reveal Animations.
+   No `will-change` on the base rule on purpose: it forced a permanent compositor
+   layer per reveal element (17 on the homepage). The transition is one-shot, so the
+   layer cost outweighs the benefit. */
 .reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-  backface-visibility: hidden;
 }
 
 .reveal.active, .reveal.is-revealed, 
