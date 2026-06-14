@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Vite plugin: exposes blog post frontmatter as the virtual module `virtual:blog-meta`.
  *

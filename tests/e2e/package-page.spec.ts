@@ -6,7 +6,7 @@ test.describe('Package detail page — CRO layout (Phase 1)', () => {
 	test('hero is visible above fold, price anchor and trust signal present', async ({ page }) => {
 		await page.setViewportSize({ width: 1440, height: 900 });
 		await page.goto(PACKAGE_URL);
-		await page.waitForLoadState('networkidle');
+		await page.waitForLoadState('load');
 
 		// h1 hero visible above fold
 		const h1 = page.locator('h1');
@@ -23,7 +23,7 @@ test.describe('Package detail page — CRO layout (Phase 1)', () => {
 
 	test('LeadForm is embedded on the page', async ({ page }) => {
 		await page.goto(PACKAGE_URL);
-		await page.waitForLoadState('networkidle');
+		await page.waitForLoadState('load');
 
 		const form = page.locator('#lead-form');
 		await expect(form).toBeVisible();
@@ -34,7 +34,7 @@ test.describe('Package detail page — CRO layout (Phase 1)', () => {
 		// right column, so the bar is intentionally hidden there. Test where it matters.
 		await page.setViewportSize({ width: 390, height: 844 });
 		await page.goto(PACKAGE_URL);
-		await page.waitForLoadState('networkidle');
+		await page.waitForLoadState('load');
 
 		// Scroll past the 200px threshold but not far enough to reach the stacked form
 		await page.evaluate(() => window.scrollTo(0, 400));
@@ -46,7 +46,7 @@ test.describe('Package detail page — CRO layout (Phase 1)', () => {
 
 	test('Testimonials carousel is visible before footer', async ({ page }) => {
 		await page.goto(PACKAGE_URL);
-		await page.waitForLoadState('networkidle');
+		await page.waitForLoadState('load');
 
 		// Scroll to bottom to make sure Testimonials are rendered
 		await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
@@ -73,19 +73,16 @@ test.describe('Package detail page — CRO layout (Phase 1)', () => {
 		await page.goto(PACKAGE_URL);
 		await page.evaluate(() => localStorage.setItem('lang', 'es'));
 		await page.reload();
-		await page.waitForLoadState('networkidle');
+		await page.waitForLoadState('load');
 
 		// The submit button should show Spanish copy
 		const submitBtn = page.locator('#lead-form form button[type="submit"]');
-		await expect(submitBtn).toBeVisible();
-		const btnText = await submitBtn.textContent();
-		// Spanish: "Verificar Disponibilidad"
-		expect(btnText?.toLowerCase()).toContain('verificar');
+		await expect(submitBtn).toHaveText(/verificar/i);
 	});
 
 	test('should display visual CRO features (Hero benefits, Process Timeline, FAQs)', async ({ page }) => {
 		await page.goto(PACKAGE_URL);
-		await page.waitForLoadState('networkidle');
+		await page.waitForLoadState('load');
 
 		// 1. Hero benefits
 		const firstBenefit = page.locator('span:has-text("setup & delivery"), span:has-text("montaje gratis")');

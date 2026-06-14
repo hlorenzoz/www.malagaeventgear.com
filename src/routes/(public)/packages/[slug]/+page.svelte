@@ -85,7 +85,9 @@
 	let formInView = $state(false);
 
 	let topShareEl = $state<HTMLElement | null>(null);
-	let isTopVisible = $state(true);
+	let isTopShareIntersecting = $state(true);
+	let isNearTop = $state(true);
+	let isTopVisible = $derived(isTopShareIntersecting || isNearTop);
 
 	function scrollToForm() {
 		const el = document.getElementById('lead-form');
@@ -98,6 +100,7 @@
 
 		const scrollHandler = () => {
 			stickyVisible = window.scrollY > 200;
+			isNearTop = window.scrollY < 100;
 		};
 
 		let observer: IntersectionObserver | null = null;
@@ -118,7 +121,7 @@
 			if (topShareEl) {
 				topShareObserver = new IntersectionObserver(
 					([entry]) => {
-						isTopVisible = entry.isIntersecting;
+						isTopShareIntersecting = entry.isIntersecting;
 					},
 					{ threshold: 0 }
 				);

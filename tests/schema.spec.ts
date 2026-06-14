@@ -133,7 +133,7 @@ test.describe('Structured Data (Schema.org) E2E Validation Tests', () => {
 		// 1. ContactPage schema (page-level)
 		const contactPage = schemas.find(s => s['@type'] === 'ContactPage');
 		expect(contactPage).toBeDefined();
-		expect(contactPage.url).toBe('https://www.malagaeventgear.com/contact');
+		expect(contactPage.url).toBe('https://malagaeventgear.com/contact');
 
 		// 2. FAQPage schema, sourced from the centralized FAQ store (inquiry-oriented set)
 		const faqPage = schemas.find(s => s['@type'] === 'FAQPage');

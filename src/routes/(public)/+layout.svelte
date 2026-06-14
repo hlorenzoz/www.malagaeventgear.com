@@ -3,7 +3,7 @@
 	import Footer from '$lib/components/navigation/Footer.svelte';
 	import Breadcrumbs from '$lib/components/navigation/Breadcrumbs.svelte';
 	import WhatsAppWidget from '$lib/components/navigation/WhatsAppWidget.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import { afterNavigate } from '$app/navigation';
 	import { i18n } from '$lib/i18n.svelte';
 	import { page } from '$app/stores';
@@ -26,6 +26,14 @@
 		if (!revealObserver) return;
 		document.querySelectorAll(REVEAL_SELECTOR).forEach((el) => revealObserver!.observe(el));
 	}
+
+	setContext('reveal', {
+		scan: () => {
+			if (revealObserver) {
+				requestAnimationFrame(scanRevealElements);
+			}
+		}
+	});
 
 	onMount(() => {
 		// Inicializar i18n de forma segura en el cliente (evita desajustes de hidratación)

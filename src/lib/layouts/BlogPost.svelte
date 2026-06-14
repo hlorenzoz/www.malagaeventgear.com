@@ -81,18 +81,30 @@
 	}
 
 	let topShareEl = $state<HTMLElement | null>(null);
-	let isTopVisible = $state(true);
+	let isTopShareIntersecting = $state(true);
+	let isNearTop = $state(true);
+	let isTopVisible = $derived(isTopShareIntersecting || isNearTop);
 
 	onMount(() => {
 		if (!topShareEl) return;
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				isTopVisible = entry.isIntersecting;
+				isTopShareIntersecting = entry.isIntersecting;
 			},
 			{ threshold: 0 }
 		);
 		observer.observe(topShareEl);
-		return () => observer.disconnect();
+
+		const handleScroll = () => {
+			isNearTop = window.scrollY < 100;
+		};
+		window.addEventListener('scroll', handleScroll, { passive: true });
+		handleScroll();
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener('scroll', handleScroll);
+		};
 	});
 </script>
 

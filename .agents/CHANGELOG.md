@@ -7,6 +7,19 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 
 ## [Unreleased]
 
+### Fixed
+- **Svelte-Check Type-Checking wrangler types**: Created a helper script (`scripts/fix-types.ts`) integrated into `package.json` (`build`, `check`, `gen`) to patch the auto-generated `worker-configuration.d.ts` file, replacing `typeof import("./.svelte-kit/cloudflare/_worker")` with `any`. This prevents TypeScript and `svelte-check` from type-checking the minified Edge worker JS bundle, fixing 1098 compiler errors.
+- **Playwright Copy Link Tooltip Click Gesture**: Updated the "Copy Link" desktop E2E test in `tests/share.spec.ts` to trigger a native Playwright `.click()` instead of a synthetic `dispatchEvent('click')`. This ensures a true user gesture is simulated, allowing the secure Clipboard API to resolve and set the tooltip visible under parallel test runners.
+- **FAQ Page Reveal Animation on Filter Switch**: Resolved a bug where switching categories on the FAQ page left items with 0 opacity by exposing the layout's scroll reveal `scan` method via Svelte Context and calling it within an `$effect` block on filter state changes.
+- **Scroll Toggles for Share FAB and Sticky Sidebar**: Fixed a race condition where the left sidebar share block and mobile FAB displayed on page load or near the top of the scroll viewport, using reactive derivation (`isTopVisible = $derived(isTopShareIntersecting || isNearTop)`).
+- **CSS Typo in Share Drawer Buttons**: Fixed CSS layout bug by renaming invalid property `grid-template-cols` to `grid-template-columns` in `ShareThis.svelte`.
+- **A11y Compiler Warning Silencing**: Silenced Svelte 5 accessibility compiler warnings in `ShareThis.svelte` and `ClickToTweet.svelte` by adding targeted compiler ignores for element interactions.
+- **MICE Package Page Timeout**: Fixed intermittent hydration timeouts on package-page E2E testing by changing the load wait state from `'networkidle'` to `'load'` and using web-first regex `toHaveText(/verificar/i)` assertions.
+- **Type Casts in CRM test suites**: Added `unknown` intermediate casting for `mockEnv` object manipulations in `service.test.ts` to satisfy strict TypeScript object index rules.
+
+### Changed
+- **Canonical Domain to malagaeventgear.com (no-www)**: Updated OpenGraph and Schema E2E assertions in `tests/opengraph.spec.ts` and `tests/schema.spec.ts` to expect the canonical domain without `www.` (`https://malagaeventgear.com`).
+
 ### Added (meet-the-team-enhancements)
 - **Profile Image & Scrolling Gallery / Google Reviews on Team Page**: Replaced Hector Luis Lorenzo's placeholder profile icon with an optimized, CDN-hosted WebP image (`https://cdn.malagaeventgear.com/team/hector-luis-lorenzo.webp`). Integrated the high-performance scrolling `ImageMarquee` component and verified client `Testimonials` (Google My Business reviews) below the profile cards on the `/meet-the-team/` page to drive brand validation and trust. Standardized the canonical URL with trailing slash conventions.
 

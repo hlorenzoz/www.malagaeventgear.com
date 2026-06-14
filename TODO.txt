@@ -1,19 +1,29 @@
 
 -- ❌ ✅
 
-Ok, con respecto a la gestión de errores en el lead form submit
+Ok, con respecto a la gestión de errores en el lead form submit:
 
---
+Autocompletar los campos del formulario de Contacto según lo especificado en el Lead Form
 
-Verifica también la persistencia en la base de datos, de forma tal que se pueda
+En la descripción del formulario de Contacto, en la descripción (debajo del Submitted details:), añade la URL del paquete que se está solicitando (por ejemplo: https://malagaeventgear.com/packages/eco/)
+
+Hace falta persistir los errores en la base de datos, de forma tal que se pueda consultar desde la administración en el futuro.
+
+Modela la base de datos de forma tal que se pueda escalar en el futuro.
+Persiste los errores mediante /api/v1/error-tracking
+
+Verifica que se persistan los leads y sus respuestas en la base de datos, así como el estado de los envíos de correos, etc...
+
 
 
 -- ❌ ✅ Comments
 
 
+
 -- ❌ ✅ API REST
 
 Crea un API REST para la creación de contenido (INTEGRACIÓN) con SEO Toolkit, algo similar al WordPress API
+
 
 
 -- ❌ ✅ Tracking Google Analytics & Cloudflare Zaraz

@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { getContext } from 'svelte';
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { faqs, buildFaqSchema } from '$lib/data/faq';
 	import { slide } from 'svelte/transition';
+
+	const reveal = getContext<{ scan: () => void }>('reveal');
 
 	// FAQPage JSON-LD generated from the same source as the rendered content,
 	// so the structured data always matches every visible question.
@@ -11,6 +14,12 @@
 
 	let activeCategory = $state('all');
 	let openIndex = $state<number | null>(null);
+
+	$effect(() => {
+		if (filteredFaqs && reveal) {
+			reveal.scan();
+		}
+	});
 
 	let faqList = $derived(
 		faqs.map((item) => ({

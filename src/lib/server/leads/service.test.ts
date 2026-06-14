@@ -235,7 +235,7 @@ describe('submitLead — missing email configuration', () => {
 	});
 
 	function envWithout(key: 'RESEND_API_KEY' | 'RESEND_FROM') {
-		const e = { ...(mockEnv as Record<string, unknown>) };
+		const e = { ...(mockEnv as unknown as Record<string, unknown>) };
 		delete e[key];
 		return e as unknown as App.Platform['env'];
 	}
@@ -360,7 +360,7 @@ describe('submitLead — emailStatus signal', () => {
 		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
 		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
 
-		const envNoKey = { ...(mockEnv as Record<string, unknown>) };
+		const envNoKey = { ...(mockEnv as unknown as Record<string, unknown>) };
 		delete envNoKey.RESEND_API_KEY;
 
 		const result = await submitLead(

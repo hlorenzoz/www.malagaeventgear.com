@@ -12,7 +12,7 @@ test.describe('OpenGraph & Twitter Card Meta E2E Validation Tests', () => {
 		// OpenGraph Core
 		await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', 'Premium Audiovisual Equipment Rental in Malaga | MEG');
 		await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /Malaga Event Gear/);
-		await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://www.malagaeventgear.com/');
+		await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://malagaeventgear.com/');
 		await expect(page.locator('meta[property="og:type"]')).toHaveAttribute('content', 'website');
 		await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', 'Malaga Event Gear');
 		

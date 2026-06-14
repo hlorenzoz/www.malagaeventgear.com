@@ -71,8 +71,8 @@ test.describe('Share This Component E2E', () => {
 		await page.bringToFront();
 		await copyButton.focus();
 
-		// Click copy button using dispatchEvent to fire onclick handler reliably
-		await copyButton.dispatchEvent('click');
+		// Click copy button
+		await copyButton.click();
 
 		// Tooltip/bubble should appear with "Copied!"
 		const tooltip = page.locator('.copy-tooltip');
