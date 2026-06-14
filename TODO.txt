@@ -1,6 +1,10 @@
 
 -- ❌ ✅
 
+Ok, con respecto a la gestión de errores en el lead form submit
+
+--
+
 Verifica también la persistencia en la base de datos, de forma tal que se pueda
 
 

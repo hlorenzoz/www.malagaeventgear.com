@@ -65,15 +65,24 @@
 			const intro = i18n.t.contact.errorPrefillMessage.replace('{ref}', lead || '—');
 
 			// The submitted fields are carried via sessionStorage (set by LeadForm) to
-			// avoid leaking PII through the URL. Append each non-empty value on its own line.
+			// avoid leaking PII through the URL. Prefill the form fields and append each
+			// non-empty value on its own line (with the originating package page URL).
 			let details = '';
 			try {
 				const raw = sessionStorage.getItem('meg:lead-error');
 				sessionStorage.removeItem('meg:lead-error');
 				if (raw) {
 					const d = JSON.parse(raw) as Record<string, string>;
+
+					// Mirror the package form into the contact form fields.
+					if (d.name) name = d.name;
+					if (d.email) email = d.email;
+					if (d.phone) phone = d.phone;
+					if (d.eventDate) date = d.eventDate;
+
 					const t = i18n.t.contact;
 					const lines = [
+						[t.errorDetailSource, d.sourceUrl],
 						[t.errorDetailName, d.name],
 						[t.errorDetailEmail, d.email],
 						[t.errorDetailPhone, d.phone],

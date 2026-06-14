@@ -157,6 +157,7 @@ export const translations = {
 			errorPrefillMessage:
 				'Hi, I submitted a package request on your website but the confirmation email failed to send. Could you please confirm you received my enquiry? Reference: {ref}',
 			errorDetailsHeader: 'Submitted details:',
+			errorDetailSource: 'Form URL',
 			errorDetailName: 'Name',
 			errorDetailEmail: 'Email',
 			errorDetailPhone: 'Phone',
@@ -432,6 +433,7 @@ export const translations = {
 			errorPrefillMessage:
 				'Hola, envié una solicitud de paquete en su sitio web pero el correo de confirmación no se pudo enviar. ¿Podrían confirmarme que recibieron mi consulta? Referencia: {ref}',
 			errorDetailsHeader: 'Datos enviados:',
+			errorDetailSource: 'URL del formulario',
 			errorDetailName: 'Nombre',
 			errorDetailEmail: 'Correo',
 			errorDetailPhone: 'Teléfono',

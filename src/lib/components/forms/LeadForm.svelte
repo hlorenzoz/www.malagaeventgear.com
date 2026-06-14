@@ -201,7 +201,15 @@
 		try {
 			sessionStorage.setItem(
 				'meg:lead-error',
-				JSON.stringify({ name, email, phone, eventDate, packageId, comments }),
+				JSON.stringify({
+					name,
+					email,
+					phone,
+					eventDate,
+					packageId,
+					comments,
+					sourceUrl: window.location.href,
+				}),
 			);
 		} catch {
 			// sessionStorage unavailable (private mode quirks) — degrade gracefully.
