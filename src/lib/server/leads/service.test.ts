@@ -219,3 +219,69 @@ describe('submitLead — email lifecycle', () => {
 		expect(sendEmail).toHaveBeenCalledTimes(1);
 	});
 });
+
+// ─── Regression: missing email configuration (the prod incident) ─────────────
+//
+// When RESEND_API_KEY (a Worker secret) is not set, the whole email lifecycle
+// is skipped. The lead must still be created (REQ-38), but the skip must be
+// LOUD — otherwise the failure is invisible, exactly what happened in prod
+// when the secret was missing on the deployed Worker.
+
+describe('submitLead — missing email configuration', () => {
+	const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+	afterEach(() => {
+		errorSpy.mockClear();
+	});
+
+	function envWithout(key: 'RESEND_API_KEY' | 'RESEND_FROM') {
+		const e = { ...(mockEnv as Record<string, unknown>) };
+		delete e[key];
+		return e as unknown as App.Platform['env'];
+	}
+
+	it('still creates the lead when RESEND_API_KEY is missing', async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-uuid-nokey');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+
+		const result = await submitLead(mockDB, validInput(), 'es', '1.2.3.4', envWithout('RESEND_API_KEY'));
+
+		expect(result.leadId).toBe('lead-uuid-nokey');
+	});
+
+	it('does NOT attempt any email send when RESEND_API_KEY is missing', async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-uuid-nokey');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+
+		await submitLead(mockDB, validInput(), 'es', '1.2.3.4', envWithout('RESEND_API_KEY'));
+
+		expect(sendEmail).not.toHaveBeenCalled();
+		expect(insertEmailMessage).not.toHaveBeenCalled();
+	});
+
+	it('logs a loud error naming RESEND_API_KEY when the secret is missing', async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-uuid-nokey');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+
+		await submitLead(mockDB, validInput(), 'es', '1.2.3.4', envWithout('RESEND_API_KEY'));
+
+		expect(errorSpy).toHaveBeenCalled();
+		const logged = errorSpy.mock.calls.flat().join(' ');
+		expect(logged).toContain('RESEND_API_KEY');
+	});
+
+	it('logs a loud error naming RESEND_FROM when it is missing', async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-uuid-nofrom');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+
+		await submitLead(mockDB, validInput(), 'es', '1.2.3.4', envWithout('RESEND_FROM'));
+
+		expect(sendEmail).not.toHaveBeenCalled();
+		const logged = errorSpy.mock.calls.flat().join(' ');
+		expect(logged).toContain('RESEND_FROM');
+	});
+});

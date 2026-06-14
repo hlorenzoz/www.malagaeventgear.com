@@ -59,7 +59,19 @@ export async function submitLead(
 		});
 	}
 
-	// 4–6. Email lifecycle — failures are logged but do NOT abort the response
+	// 4–6. Email lifecycle — failures are logged but do NOT abort the response.
+	// Missing config must fail LOUDLY: a silent skip here is invisible in prod
+	// (lead is created, but no email is ever sent — the Resend secret incident).
+	const missingConfig: string[] = [];
+	if (!env?.RESEND_API_KEY) missingConfig.push('RESEND_API_KEY');
+	if (!env?.RESEND_FROM) missingConfig.push('RESEND_FROM');
+	if (missingConfig.length > 0) {
+		console.error(
+			`[service] Email lifecycle SKIPPED for lead ${leadId} — missing config: ${missingConfig.join(', ')}. ` +
+				`No confirmation/notification email was sent. Set the missing Worker secret(s) via 'wrangler secret put'.`,
+		);
+	}
+
 	if (env?.RESEND_API_KEY && env?.RESEND_FROM) {
 		const apiKey = env.RESEND_API_KEY;
 		const from = env.RESEND_FROM;
