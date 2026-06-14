@@ -30,9 +30,13 @@
 				</a>
 			</div>
 
-			<!-- Horizontal scroll-snap carousel (zero-JS, swipe on mobile / scroll on desktop) -->
+			<!-- Horizontal scroll-snap carousel (zero-JS, swipe on mobile / scroll on desktop).
+			     snap-proximity (not mandatory) on purpose: mandatory makes the browser perform a
+			     forced snap-scroll on initial layout (the first card's snap point sits 8px in due to
+			     the px-2 padding), and that early container scroll suppressed Largest Contentful Paint
+			     recording on the home -> NO_LCP. proximity keeps the snap UX without the load scroll. -->
 			<div
-				class="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-2 px-2 scrollbar-none [&::-webkit-scrollbar]:hidden"
+				class="flex gap-5 overflow-x-auto snap-x snap-proximity scroll-smooth pb-4 -mx-2 px-2 scrollbar-none [&::-webkit-scrollbar]:hidden"
 			>
 				{#each posts as post (post.slug)}
 					<BlogPostCard {post} />

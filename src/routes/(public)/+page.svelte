@@ -435,10 +435,12 @@
 		</div>
 
 		<div class="relative mb-12">
+			<!-- snap-proximity (not mandatory): mandatory triggers a forced snap-scroll on initial
+			     layout that suppressed Largest Contentful Paint on the home (NO_LCP). See LatestPostsRow. -->
 			<div
 				bind:this={track}
 				data-testid="packages-carousel-track"
-				class="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
+				class="flex gap-6 overflow-x-auto snap-x snap-proximity scroll-smooth pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
 			>
 				{#each homepagePacks as pack (pack.id)}
 					<div
