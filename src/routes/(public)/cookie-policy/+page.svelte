@@ -19,7 +19,7 @@
 	description={i18n.lang === 'en'
 		? 'Understand how Malaga Event Gear uses cookies and tracking technologies to optimize website usability and analyze performance.'
 		: 'Comprendé cómo Malaga Event Gear utiliza cookies y tecnologías de seguimiento para optimizar la usabilidad del sitio web.'}
-	canonicalUrl="https://malagaeventgear.com/cookie-policy"
+	canonicalUrl="https://malagaeventgear.com/cookie-policy/"
 	jsonLdSchema={cookiesSchema}
 />
 

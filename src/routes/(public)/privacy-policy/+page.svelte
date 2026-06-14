@@ -19,7 +19,7 @@
 	description={i18n.lang === 'en'
 		? 'Read the official Privacy Policy for Malaga Event Gear. Learn how we collect, process, and protect your personal information.'
 		: 'Leé la Política de Privacidad oficial de Malaga Event Gear. Aprendé cómo recopilamos, procesamos y protegemos tu información personal.'}
-	canonicalUrl="https://malagaeventgear.com/privacy-policy"
+	canonicalUrl="https://malagaeventgear.com/privacy-policy/"
 	jsonLdSchema={privacySchema}
 />
 

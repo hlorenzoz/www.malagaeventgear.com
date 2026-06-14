@@ -45,7 +45,7 @@
 	description={i18n.lang === 'en'
 		? 'Find clear FAQ answers on Malaga Event Gear\'s professional audiovisual rentals, covering packages, service area (Malaga/Costa del Sol), and booking requirements.'
 		: 'Encontrá respuestas claras en la sección de Preguntas Frecuentes de Malaga Event Gear sobre el alquiler de equipos audiovisuales profesionales.'}
-	canonicalUrl="https://malagaeventgear.com/faq"
+	canonicalUrl="https://malagaeventgear.com/faq/"
 	jsonLdSchema={faqSchema}
 />
 

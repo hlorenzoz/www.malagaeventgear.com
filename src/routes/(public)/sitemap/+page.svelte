@@ -22,7 +22,7 @@
 	description={i18n.lang === 'en'
 		? 'Explore the sitemap for Malaga Event Gear. Find links to all our professional audiovisual and lighting rental services, packages, and contact information.'
 		: 'Explorá el mapa del sitio de Malaga Event Gear. Encontrá enlaces a todos nuestros servicios de alquiler de equipos audiovisuales y de iluminación.'}
-	canonicalUrl="https://malagaeventgear.com/sitemap"
+	canonicalUrl="https://malagaeventgear.com/sitemap/"
 	jsonLdSchema={sitemapSchema}
 />
 

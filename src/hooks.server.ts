@@ -48,5 +48,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	// Normal request handling
-	return resolve(event);
+	const response = await resolve(event);
+
+	// Security headers — applied to every response (dynamic + prerendered).
+	// CSP is intentionally NOT set here yet: a strict policy breaks Turnstile,
+	// the R2 image CDN and SvelteKit's inline styles, so it needs a dedicated
+	// Report-Only rollout (see prod-hardening plan, P1).
+	response.headers.set(
+		'Strict-Transport-Security',
+		'max-age=31536000; includeSubDomains; preload',
+	);
+	response.headers.set('X-Content-Type-Options', 'nosniff');
+	response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+	response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+	response.headers.set('Permissions-Policy', 'geolocation=(), camera=(), microphone=()');
+
+	return response;
 };

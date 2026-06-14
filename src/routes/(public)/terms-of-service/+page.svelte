@@ -19,7 +19,7 @@
 	description={i18n.lang === 'en'
 		? 'Read the official Terms of Service for Malaga Event Gear rentals. Understand our policies on booking, payments, and secure service.'
 		: 'Leé los Términos de Servicio oficiales para el alquiler en Malaga Event Gear. Entendé nuestras políticas de reservas, pagos y servicios.'}
-	canonicalUrl="https://malagaeventgear.com/terms-of-service"
+	canonicalUrl="https://malagaeventgear.com/terms-of-service/"
 	jsonLdSchema={termsSchema}
 />
 

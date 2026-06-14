@@ -27,7 +27,7 @@
 	description={i18n.lang === 'en'
 		? 'Understand how Malaga Event Gear secures your personal data under the General Data Protection Regulation (GDPR) for audiovisual rentals.'
 		: 'Comprendé cómo Malaga Event Gear protege tus datos personales de acuerdo con el Reglamento General de Protección de Datos (RGPD).'}
-	canonicalUrl="https://malagaeventgear.com/gdpr"
+	canonicalUrl="https://malagaeventgear.com/gdpr/"
 	jsonLdSchema={gdprSchema}
 />
 

@@ -32,7 +32,7 @@
 			{
 				'@type': 'AboutPage',
 				'@id': 'https://malagaeventgear.com/about-us/#webpage',
-				'url': 'https://malagaeventgear.com/about-us',
+				'url': 'https://malagaeventgear.com/about-us/',
 				'name': i18n.lang === 'en' ? 'About Us - Malaga Event Gear (MEG)' : 'Sobre Nosotros - Malaga Event Gear (MEG)',
 				'description': i18n.lang === 'en'
 					? 'Meet the experts at Malaga Event Gear! We are dedicated to making your weddings, corporate events, and parties unforgettable with top-tier gear.'
@@ -53,7 +53,7 @@
 	description={i18n.lang === 'en'
 		? 'Meet the experts at Malaga Event Gear! We are dedicated to making your weddings, corporate events, and parties unforgettable with top-tier gear.'
 		: 'Conocé a los expertos de Malaga Event Gear. Nos dedicamos a hacer que tus bodas, eventos corporativos y fiestas sean inolvidables con equipos de primer nivel.'}
-	canonicalUrl="https://malagaeventgear.com/about-us"
+	canonicalUrl="https://malagaeventgear.com/about-us/"
 	jsonLdSchema={aboutSchema}
 />
 

@@ -16,7 +16,7 @@
 		'description': i18n.lang === 'en'
 			? 'Contact the technical team at Malaga Event Gear to request custom quotes for sound, lighting, and screen rentals.'
 			: 'Contactá al equipo técnico de Malaga Event Gear para solicitar presupuestos personalizados de alquiler de sonido, iluminación y pantallas.',
-		'url': 'https://malagaeventgear.com/contact',
+		'url': 'https://malagaeventgear.com/contact/',
 		// Referencia al nodo de organización global (#organization) para no duplicar la entidad.
 		'mainEntity': { '@id': 'https://malagaeventgear.com/#organization' }
 	});
@@ -208,7 +208,7 @@
 <SeoHead
 	title="Contact Us & Audiovisual Quotes | MEG"
 	description="Get in touch with Malaga Event Gear to request quotes for sound, lighting, and screen rentals. 24/7 technical support."
-	canonicalUrl="https://malagaeventgear.com/contact"
+	canonicalUrl="https://malagaeventgear.com/contact/"
 	jsonLdSchema={[contactSchema, faqSchema]}
 />
 
