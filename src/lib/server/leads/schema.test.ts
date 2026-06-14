@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LeadInputSchema } from './schema';
+import { ContactInputSchema, LeadInputSchema } from './schema';
 
 const tomorrow = (() => {
 	const d = new Date();
@@ -71,6 +71,68 @@ describe('LeadInputSchema — sad paths', () => {
 
 	it('rejects comments longer than 1000 chars', () => {
 		const result = LeadInputSchema.safeParse({ ...validPayload, comments: 'a'.repeat(1001) });
+		expect(result.success).toBe(false);
+	});
+});
+
+// ─── ContactInputSchema — lenient schema for the general contact form ─────────
+//
+// The contact form has no package and leaves phone/date optional, so it can't
+// use LeadInputSchema. Only name, email, and message are required here.
+
+const validContact = {
+	name: 'Ana García',
+	email: 'ana@example.com',
+	message: 'I would like a quote for a wedding in August.',
+};
+
+describe('ContactInputSchema — happy path', () => {
+	it('accepts the minimal payload (name + email + message)', () => {
+		const result = ContactInputSchema.safeParse(validContact);
+		expect(result.success).toBe(true);
+	});
+
+	it('phone, eventDate, eventType, turnstile and website are optional', () => {
+		const result = ContactInputSchema.safeParse(validContact);
+		expect(result.success).toBe(true);
+		if (result.success) {
+			expect(result.data.phone).toBe('');
+			expect(result.data.eventDate).toBe('');
+			expect(result.data.eventType).toBe('');
+			expect(result.data['cf-turnstile-response']).toBe('');
+			expect(result.data.website).toBe('');
+		}
+	});
+
+	it('accepts a future eventDate when provided', () => {
+		const result = ContactInputSchema.safeParse({ ...validContact, eventDate: tomorrow });
+		expect(result.success).toBe(true);
+	});
+});
+
+describe('ContactInputSchema — sad paths', () => {
+	it('rejects missing name', () => {
+		const result = ContactInputSchema.safeParse({ ...validContact, name: '' });
+		expect(result.success).toBe(false);
+	});
+
+	it('rejects invalid email', () => {
+		const result = ContactInputSchema.safeParse({ ...validContact, email: 'nope' });
+		expect(result.success).toBe(false);
+	});
+
+	it('rejects missing message', () => {
+		const result = ContactInputSchema.safeParse({ ...validContact, message: '' });
+		expect(result.success).toBe(false);
+	});
+
+	it('rejects a past eventDate when one is provided', () => {
+		const result = ContactInputSchema.safeParse({ ...validContact, eventDate: yesterday });
+		expect(result.success).toBe(false);
+	});
+
+	it('rejects message longer than 2000 chars', () => {
+		const result = ContactInputSchema.safeParse({ ...validContact, message: 'a'.repeat(2001) });
 		expect(result.success).toBe(false);
 	});
 });

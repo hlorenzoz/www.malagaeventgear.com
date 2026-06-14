@@ -2,7 +2,9 @@
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { onMount } from 'svelte';
+	import { env } from '$env/dynamic/public';
 	import { i18n } from '$lib/i18n.svelte';
+	import { loadTurnstile } from '$lib/utils/turnstile';
 	import { getContactFaqs, buildFaqSchema } from '$lib/data/faq';
 	import { siteConfig } from '$lib/data/site';
 
@@ -30,6 +32,15 @@
 	let isSubmitted = $state(false);
 	let errorMessage = $state('');
 	let openFaqIndex = $state<number | null>(null);
+	let isLoading = $state(false);
+
+	// When arriving from a lead email-failure, the message is auto-generated and locked.
+	let messageLocked = $state(false);
+
+	// Anti-spam: honeypot (must stay empty) + Turnstile token (set by CF callback).
+	let websiteHoneypot = $state('');
+	let turnstileToken = $state('');
+	const TURNSTILE_SITE_KEY = env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
 	// Earliest selectable event date = tomorrow (today and past dates are not bookable).
 	// Built from local date parts to avoid UTC off-by-one from toISOString().
@@ -42,10 +53,18 @@
 		const params = new URLSearchParams(window.location.search);
 		const pack = params.get('pack');
 		const category = params.get('category');
-		
-		if (pack) {
+		const errtype = params.get('errtype');
+		const lead = params.get('lead');
+
+		if (errtype === 'email') {
+			// Arrived from a lead whose confirmation/notification email failed.
+			// Pre-fill a non-editable rescue message so the team can be reached.
+			eventType = 'other';
+			message = i18n.t.contact.errorPrefillMessage.replace('{ref}', lead || '—');
+			messageLocked = true;
+		} else if (pack) {
 			eventType = pack === 'wedding' ? 'wedding' : 'corporate';
-			message = i18n.lang === 'en' 
+			message = i18n.lang === 'en'
 				? `Hi, I am interested in booking the Pack: ${pack.toUpperCase()}. Please let me know the availability and details.`
 				: `Hola, estoy interesado en reservar el Pack: ${pack.toUpperCase()}. Por favor, indíquenme disponibilidad y detalles.`;
 		} else if (category) {
@@ -53,10 +72,24 @@
 				? `Hi, I am interested in booking equipment from the category: ${category.toUpperCase()}. I look forward to your quote.`
 				: `Hola, estoy interesado en alquilar equipos de la categoría: ${category.toUpperCase()}. Quedo a la espera de su presupuesto.`;
 		}
+
+		// Load the Turnstile widget (no-op if the site key is absent, e.g. in dev).
+		if (TURNSTILE_SITE_KEY) {
+			loadTurnstile('_tsContactCallback', (token) => {
+				turnstileToken = token;
+			});
+		}
 	});
 
-	function handleSubmit(e: Event) {
+	async function handleSubmit(e: Event) {
 		e.preventDefault();
+
+		// Honeypot — silently pretend success.
+		if (websiteHoneypot) {
+			isSubmitted = true;
+			return;
+		}
+
 		if (!name.trim() || !email.trim() || !message.trim()) {
 			errorMessage = i18n.t.contact.formRequiredError;
 			return;
@@ -68,8 +101,50 @@
 				: 'Elegí una fecha de evento posterior a hoy.';
 			return;
 		}
+
+		if (isLoading) return;
+		isLoading = true;
 		errorMessage = '';
-		isSubmitted = true;
+
+		try {
+			const res = await fetch('/api/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					name: name.trim(),
+					email: email.trim(),
+					message: message.trim(),
+					phone,
+					eventDate: date,
+					eventType,
+					'cf-turnstile-response': turnstileToken,
+					website: websiteHoneypot,
+				}),
+			});
+
+			const data = (await res.json()) as { ok: boolean; error?: string };
+
+			if (!res.ok || !data.ok) {
+				if (data.error === 'turnstile-failed') {
+					errorMessage = i18n.t.contact.formErrorTurnstile;
+				} else if (data.error === 'rate_limited') {
+					errorMessage = i18n.t.contact.formErrorRateLimited;
+				} else if (data.error === 'validation-failed') {
+					errorMessage = i18n.t.contact.formRequiredError;
+				} else {
+					errorMessage = i18n.t.contact.formErrorSubmit;
+				}
+				return;
+			}
+
+			// Success — note: if the contact email itself failed (emailStatus), we still
+			// show success here to avoid a contact→contact redirect loop. The lead is saved.
+			isSubmitted = true;
+		} catch {
+			errorMessage = i18n.t.contact.formErrorSubmit;
+		} finally {
+			isLoading = false;
+		}
 	}
 
 	// Inquiry-oriented FAQs sourced from the centralized FAQ store (single source of truth)
@@ -199,7 +274,7 @@
 							{i18n.t.contact.successText1} <strong>{name}</strong>, {i18n.t.contact.successText2}<strong>{email}</strong>{i18n.t.contact.successText3}
 						</p>
 						<button 
-							onclick={() => { isSubmitted = false; name = ''; email = ''; phone = ''; message = ''; date = ''; eventType = ''; }}
+							onclick={() => { isSubmitted = false; name = ''; email = ''; phone = ''; message = ''; date = ''; eventType = ''; messageLocked = false; }}
 							class="px-8 py-3 rounded-full border border-border-glass bg-on-surface/5 hover:bg-on-surface/10 text-on-surface font-label-lg active:scale-95 transition-all"
 						>
 							{i18n.t.contact.successButton}
@@ -308,13 +383,15 @@
 
 						<!-- Message -->
 						<div class="relative">
-							<textarea 
+							<textarea
 								id="message"
 								bind:value={message}
 								required
+								readonly={messageLocked}
+								aria-readonly={messageLocked}
 								rows="4"
 								placeholder="Message"
-								class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent resize-none"
+								class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent resize-none {messageLocked ? 'opacity-70 cursor-not-allowed' : ''}"
 							></textarea>
 							<label
 								for="message"
@@ -322,14 +399,42 @@
 							>
 								{i18n.t.contact.formMessage}
 							</label>
+							{#if messageLocked}
+								<p class="mt-2 flex items-center gap-1.5 text-xs text-on-surface-variant/75">
+									<Icon name="lock" size="14" />
+									{i18n.t.contact.lockedFieldNote}
+								</p>
+							{/if}
 						</div>
 
+						<!-- Honeypot — visually hidden, must stay empty -->
+						<input
+							type="text"
+							name="website"
+							tabindex="-1"
+							autocomplete="off"
+							aria-hidden="true"
+							bind:value={websiteHoneypot}
+							class="absolute left-[-9999px] h-0 w-0 opacity-0"
+						/>
+
+						<!-- Turnstile widget (rendered only when a site key is configured) -->
+						{#if TURNSTILE_SITE_KEY}
+							<div
+								class="cf-turnstile"
+								data-sitekey={TURNSTILE_SITE_KEY}
+								data-callback="_tsContactCallback"
+								data-theme="dark"
+							></div>
+						{/if}
+
 						<!-- Submit Button -->
-						<button 
+						<button
 							type="submit"
-							class="w-full bg-electric-blue-strong text-white py-4 rounded-lg font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-[0.98] transition-all duration-300"
+							disabled={isLoading}
+							class="w-full bg-electric-blue-strong text-white py-4 rounded-lg font-label-lg tracking-wider uppercase hover:shadow-[0_0_20px_rgba(77,140,255,0.4)] active:scale-[0.98] transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-60"
 						>
-							{i18n.t.contact.formSubmit}
+							{isLoading ? i18n.t.contact.formSubmitting : i18n.t.contact.formSubmit}
 						</button>
 					</form>
 				{/if}

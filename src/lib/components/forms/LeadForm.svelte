@@ -2,6 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { env } from '$env/dynamic/public';
 	import { i18n } from '$lib/i18n.svelte';
+	import ErrorModal from '$lib/components/modals/ErrorModal.svelte';
+	import { loadTurnstile } from '$lib/utils/turnstile';
 	import PhoneInput from './PhoneInput.svelte';
 
 	let { packageId }: { packageId: string } = $props();
@@ -20,6 +22,10 @@
 	let submitError = $state('');
 	let isLoading = $state(false);
 
+	// Email-failure modal (lead saved but confirmation/notification email failed)
+	let showErrorModal = $state(false);
+	let lastLeadId = $state('');
+
 	// Turnstile token (populated by CF callback)
 	let turnstileToken = $state('');
 
@@ -30,19 +36,9 @@
 	const TURNSTILE_SITE_KEY = env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
 	function injectTurnstileScript() {
-		// Expose callback for Turnstile managed widget
-		(window as unknown as Record<string, unknown>)['_tsCallback'] = (token: string) => {
+		loadTurnstile('_tsCallback', (token) => {
 			turnstileToken = token;
-		};
-
-		if (!document.querySelector('script[data-turnstile]')) {
-			const script = document.createElement('script');
-			script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-			script.async = true;
-			script.defer = true;
-			script.setAttribute('data-turnstile', '1');
-			document.head.appendChild(script);
-		}
+		});
 	}
 
 	// Defer the Turnstile third-party script until the form nears the viewport. On package pages the
@@ -164,10 +160,30 @@
 				}),
 			});
 
-			const data = (await res.json()) as { ok: boolean; leadId?: string };
+			const data = (await res.json()) as {
+				ok: boolean;
+				leadId?: string;
+				error?: string;
+				emailStatus?: 'sent' | 'failed' | 'skipped';
+			};
 
 			if (!res.ok || !data.ok) {
-				submitError = i18n.t.leadForm.errorSubmit;
+				// Turnstile fails before the lead is saved and is retryable → inline, no modal.
+				if (data.error === 'turnstile-failed') {
+					submitError = i18n.t.leadForm.errorTurnstile;
+				} else if (data.error === 'rate_limited') {
+					submitError = i18n.t.leadForm.errorRateLimited;
+				} else {
+					submitError = i18n.t.leadForm.errorSubmit;
+				}
+				return;
+			}
+
+			// Lead saved, but the email lifecycle failed/was skipped → surface the
+			// rescue modal instead of redirecting, so the user can reach the team.
+			if (data.emailStatus === 'failed' || data.emailStatus === 'skipped') {
+				lastLeadId = data.leadId ?? '';
+				showErrorModal = true;
 				return;
 			}
 
@@ -177,6 +193,12 @@
 		} finally {
 			isLoading = false;
 		}
+	}
+
+	function goToContactWithError() {
+		const params = new URLSearchParams({ errtype: 'email' });
+		if (lastLeadId) params.set('lead', lastLeadId);
+		goto(`/contact?${params.toString()}`);
 	}
 </script>
 
@@ -350,3 +372,13 @@
 		</div>
 	</form>
 </section>
+
+<ErrorModal
+	bind:open={showErrorModal}
+	title={i18n.t.leadForm.emailFailTitle}
+	message={i18n.t.leadForm.emailFailBody}
+	actionLabel={i18n.t.leadForm.emailFailAction}
+	dismissLabel={i18n.t.leadForm.emailFailDismiss}
+	onAction={goToContactWithError}
+	onClose={() => {}}
+/>

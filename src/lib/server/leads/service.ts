@@ -5,8 +5,17 @@ import { renderNotification } from '$lib/server/email/templates/notification';
 import { resolveRecipients } from '$lib/server/leads/recipients';
 import type { LeadInput } from './schema';
 
+/**
+ * Outcome of the email lifecycle for a submitted lead:
+ * - 'sent'    — every attempted email succeeded
+ * - 'failed'  — confirmation OR notification was attempted and threw
+ * - 'skipped' — email config (RESEND_API_KEY / RESEND_FROM) was absent, nothing attempted
+ */
+export type EmailStatus = 'sent' | 'failed' | 'skipped';
+
 export interface SubmitLeadResult {
 	leadId: string;
+	emailStatus: EmailStatus;
 }
 
 /**
@@ -72,7 +81,12 @@ export async function submitLead(
 		);
 	}
 
+	// 'skipped' until the lifecycle runs; flips to 'failed' if any attempted send throws.
+	let emailStatus: EmailStatus = 'skipped';
+
 	if (env?.RESEND_API_KEY && env?.RESEND_FROM) {
+		// Lifecycle runs → assume success, downgrade to 'failed' on any attempted send error.
+		emailStatus = 'sent';
 		const apiKey = env.RESEND_API_KEY;
 		const from = env.RESEND_FROM;
 		const locale = (lang === 'es' ? 'es' : 'en') as 'en' | 'es';
@@ -99,6 +113,7 @@ export async function submitLead(
 			confirmStatus = 'sent';
 		} catch (err) {
 			console.error('[service] Confirmation email failed:', err);
+			emailStatus = 'failed';
 		}
 
 		await insertEmailMessage(db, {
@@ -133,6 +148,7 @@ export async function submitLead(
 				notifyStatus = 'sent';
 			} catch (err) {
 				console.error('[service] Notification email failed:', err);
+				emailStatus = 'failed';
 			}
 
 			await insertEmailMessage(db, {
@@ -150,5 +166,5 @@ export async function submitLead(
 		}
 	}
 
-	return { leadId };
+	return { leadId, emailStatus };
 }

@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mock the db/queries module to avoid needing a real D1 instance
 vi.mock('$lib/server/db/queries', () => ({
@@ -283,5 +283,94 @@ describe('submitLead — missing email configuration', () => {
 		expect(sendEmail).not.toHaveBeenCalled();
 		const logged = errorSpy.mock.calls.flat().join(' ');
 		expect(logged).toContain('RESEND_FROM');
+	});
+});
+
+// ─── emailStatus — the signal the frontend uses to show the error modal ───────
+//
+// submitLead must report whether the email lifecycle succeeded so the API can
+// surface it. 'sent' only when every attempted email succeeded; 'failed' when
+// confirmation OR notification throws; 'skipped' when config is absent.
+
+describe('submitLead — emailStatus signal', () => {
+	beforeEach(() => {
+		vi.spyOn(console, 'error').mockImplementation(() => {});
+	});
+
+	it("returns emailStatus 'sent' when both emails succeed", async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-ok');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+		vi.mocked(resolveRecipients).mockResolvedValueOnce(['team@meg.com']);
+		vi.mocked(sendEmail).mockResolvedValue({ id: 'resend-id' });
+		vi.mocked(insertEmailMessage).mockResolvedValue('em-uuid');
+
+		const result = await submitLead(mockDB, validInput(), 'es', '1.2.3.4', mockEnv);
+
+		expect(result.emailStatus).toBe('sent');
+	});
+
+	it("returns emailStatus 'failed' when the confirmation email throws", async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-confirm-fail');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+		vi.mocked(resolveRecipients).mockResolvedValueOnce(['team@meg.com']);
+		// First call (confirmation) rejects, second (notification) resolves
+		vi.mocked(sendEmail)
+			.mockRejectedValueOnce(new Error('Resend 500'))
+			.mockResolvedValueOnce({ id: 'resend-id' });
+		vi.mocked(insertEmailMessage).mockResolvedValue('em-uuid');
+
+		const result = await submitLead(mockDB, validInput(), 'es', '1.2.3.4', mockEnv);
+
+		expect(result.emailStatus).toBe('failed');
+	});
+
+	it("returns emailStatus 'failed' when the notification email throws", async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-notify-fail');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+		vi.mocked(resolveRecipients).mockResolvedValueOnce(['team@meg.com']);
+		// First call (confirmation) resolves, second (notification) rejects
+		vi.mocked(sendEmail)
+			.mockResolvedValueOnce({ id: 'resend-id' })
+			.mockRejectedValueOnce(new Error('Resend 500'));
+		vi.mocked(insertEmailMessage).mockResolvedValue('em-uuid');
+
+		const result = await submitLead(mockDB, validInput(), 'es', '1.2.3.4', mockEnv);
+
+		expect(result.emailStatus).toBe('failed');
+	});
+
+	it("returns emailStatus 'sent' when confirmation succeeds and there are no recipients", async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-no-recipients');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+		vi.mocked(resolveRecipients).mockResolvedValueOnce([]); // no recipients → notification skipped
+		vi.mocked(sendEmail).mockResolvedValue({ id: 'resend-id' });
+		vi.mocked(insertEmailMessage).mockResolvedValue('em-uuid');
+
+		const result = await submitLead(mockDB, validInput(), 'es', '1.2.3.4', mockEnv);
+
+		expect(result.emailStatus).toBe('sent');
+	});
+
+	it("returns emailStatus 'skipped' when email config is missing", async () => {
+		vi.mocked(insertLead).mockResolvedValueOnce('lead-skipped');
+		vi.mocked(insertLeadEvent).mockResolvedValue('event-uuid');
+		vi.mocked(insertReviewRequest).mockResolvedValue('rr-uuid');
+
+		const envNoKey = { ...(mockEnv as Record<string, unknown>) };
+		delete envNoKey.RESEND_API_KEY;
+
+		const result = await submitLead(
+			mockDB,
+			validInput(),
+			'es',
+			'1.2.3.4',
+			envNoKey as unknown as App.Platform['env'],
+		);
+
+		expect(result.emailStatus).toBe('skipped');
 	});
 });
