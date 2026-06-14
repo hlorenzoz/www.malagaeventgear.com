@@ -43,13 +43,21 @@ export default defineConfig({
 				]
 			},
 			workbox: {
+				// Precache only the app shell + main marketing pages. The blog (post pages,
+				// listing, categories, authors) is intentionally EXCLUDED from precache — it's
+				// large (~140 prerendered pages) and served from the network instead. This keeps
+				// the SW install small instead of shipping the whole blog up front.
 				globPatterns: ['**/*.{js,css,png,svg,ico,webmanifest}'],
-				// El chunk gigante (~3.4 MB) ERA el blog: el glob eager de metadata
-				// importaba estáticamente cada .svx y anulaba el code-split por post, así que
-				// todos los cuerpos terminaban en un solo chunk. Resuelto con el módulo virtual
-				// `virtual:blog-meta` (scripts/vite-blog-meta.mjs): ahora cada post se divide en
-				// su propio chunk. Mantenemos el límite holgado por seguridad para el SW.
-				maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
+				globIgnores: ['**/blog/**'],
+				maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
+				// Cache blog pages/assets at runtime as the user visits them (not up front).
+				runtimeCaching: [
+					{
+						urlPattern: ({ url }) => url.pathname.startsWith('/blog'),
+						handler: 'StaleWhileRevalidate',
+						options: { cacheName: 'blog-runtime', expiration: { maxEntries: 60 } }
+					}
+				]
 			}
 		})
 	]

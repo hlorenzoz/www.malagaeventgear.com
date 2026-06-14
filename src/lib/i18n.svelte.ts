@@ -568,6 +568,7 @@ export const i18n = {
 	set lang(val: Language) {
 		currentLang = val;
 		if (browser) {
+			document.documentElement.lang = val;
 			try {
 				localStorage.setItem('lang', val);
 			} catch (_) {}
@@ -589,6 +590,9 @@ export const i18n = {
 						currentLang = 'es';
 					}
 				}
+				// Keep the <html lang> attribute in sync with the active language
+				// (app.html ships lang="en" as the SSR default).
+				document.documentElement.lang = currentLang;
 			} catch (_) {}
 		}
 	}
