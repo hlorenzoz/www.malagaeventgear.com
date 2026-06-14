@@ -86,6 +86,13 @@
 	let atStart = $state(true);
 	let atEnd = $state(false);
 
+	// Start NON-scrollable, enable scrolling after hydration ($effect runs post-mount, after
+	// FCP). A scrollable carousel container that the browser scroll-adjusts during initial
+	// layout (before the hero <h1> paints) stops Largest Contentful Paint recording -> NO_LCP.
+	// SSR renders overflow-x:hidden so no early scroll happens; by the time this flips the
+	// <h1> is already the recorded LCP. The showcase is below the fold (no visible change).
+	let canScroll = $state(false);
+
 	// Cached max scroll distance. scrollWidth/clientWidth only change on resize, so we
 	// read them in `measure()` (ResizeObserver) and avoid touching layout on every scroll.
 	let maxScroll = 0;
@@ -113,6 +120,7 @@
 
 	$effect(() => {
 		if (!track) return;
+		canScroll = true;
 		measure();
 		const el = track;
 		let raf = 0;
@@ -440,7 +448,7 @@
 			<div
 				bind:this={track}
 				data-testid="packages-carousel-track"
-				class="flex gap-6 overflow-x-auto snap-x snap-proximity scroll-smooth pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
+				class="flex gap-6 {canScroll ? 'overflow-x-auto' : 'overflow-x-hidden'} snap-x snap-proximity scroll-smooth pb-4 -mx-2 px-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {scrollable ? '' : 'justify-center'}"
 			>
 				{#each homepagePacks as pack (pack.id)}
 					<div

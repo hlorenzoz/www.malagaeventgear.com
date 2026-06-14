@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Icon from '$lib/components/navigation/Icon.svelte';
 	import BlogPostCard from '$lib/components/blog/BlogPostCard.svelte';
 	import type { BlogPost } from '$lib/types/blog';
@@ -14,6 +15,18 @@
 		viewAllHref: string;
 		viewAllLabel: string;
 	} = $props();
+
+	// Start NON-scrollable, become scrollable after hydration. Root cause of the home's
+	// NO_LCP: the browser scroll-adjusts a scrollable carousel container during initial
+	// layout (~150ms, before the hero <h1> paints), and that early container scroll stops
+	// Largest Contentful Paint recording -> zero LCP candidates. Rendering overflow-x:hidden
+	// in SSR prevents the scroll; onMount runs after FCP (the <h1> is already the recorded
+	// LCP), so enabling scroll then is safe. These rows are below the fold, so there is no
+	// visible difference.
+	let scrollable = $state(false);
+	onMount(() => {
+		scrollable = true;
+	});
 </script>
 
 {#if posts.length > 0}
@@ -36,7 +49,7 @@
 			     the px-2 padding), and that early container scroll suppressed Largest Contentful Paint
 			     recording on the home -> NO_LCP. proximity keeps the snap UX without the load scroll. -->
 			<div
-				class="flex gap-5 overflow-x-auto snap-x snap-proximity scroll-smooth pb-4 -mx-2 px-2 scrollbar-none [&::-webkit-scrollbar]:hidden"
+				class="flex gap-5 {scrollable ? 'overflow-x-auto' : 'overflow-x-hidden'} snap-x snap-proximity scroll-smooth pb-4 -mx-2 px-2 scrollbar-none [&::-webkit-scrollbar]:hidden"
 			>
 				{#each posts as post (post.slug)}
 					<BlogPostCard {post} />
