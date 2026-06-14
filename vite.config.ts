@@ -2,6 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 import tailwindcss from '@tailwindcss/vite';
+import { blogMeta } from './scripts/vite-blog-meta.mjs';
 
 export default defineConfig({
 	server: {
@@ -9,6 +10,7 @@ export default defineConfig({
 		strictPort: true
 	},
 	plugins: [
+		blogMeta(),
 		tailwindcss(),
 		sveltekit(),
 		SvelteKitPWA({
@@ -42,10 +44,11 @@ export default defineConfig({
 			},
 			workbox: {
 				globPatterns: ['**/*.{js,css,png,svg,ico,webmanifest}'],
-				// El chunk principal de la app ronda los ~3.2 MB (≈535 KB gzip) y supera el
-				// default de workbox (2 MiB), lo que rompía el build del SW. Subimos el límite
-				// para precachearlo como antes. NOTA: ese bundle grande es un tema de CWV
-				// pre-existente (no del blog) que conviene revisar/code-split por separado.
+				// El chunk gigante (~3.4 MB) ERA el blog: el glob eager de metadata
+				// importaba estáticamente cada .svx y anulaba el code-split por post, así que
+				// todos los cuerpos terminaban en un solo chunk. Resuelto con el módulo virtual
+				// `virtual:blog-meta` (scripts/vite-blog-meta.mjs): ahora cada post se divide en
+				// su propio chunk. Mantenemos el límite holgado por seguridad para el SW.
 				maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
 			}
 		})

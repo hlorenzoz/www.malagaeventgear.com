@@ -19,6 +19,7 @@ import {
 import coverThumbsRaw from '$lib/data/cover-thumbs.json';
 import postFaqsRaw from '$lib/data/post-faqs.json';
 import postTocRaw from '$lib/data/post-toc.json';
+import blogMeta from 'virtual:blog-meta';
 
 const coverThumbs = coverThumbsRaw as Record<string, { thumb: string; srcset?: string }>;
 const postFaqs = postFaqsRaw as Record<string, { question: string; answer: string }[]>;
@@ -26,14 +27,13 @@ const postToc = postTocRaw as Record<string, { id: string; text: string; level: 
 
 // ─── Build-time data load ─────────────────────────────────────────────────────
 
-// Frontmatter ONLY — evaluated eagerly at build time. `import: 'metadata'` pulls just
-// the exported frontmatter object from each .svx, NOT the compiled component. This keeps
-// listing pages (index/category/author/sitemaps) from bundling every post body (CWV).
-// Path is relative to THIS FILE (src/lib/data/blog.ts → ../content/blog/).
-const metaModules = import.meta.glob('../../content/blog/*.svx', {
-	eager: true,
-	import: 'metadata'
-}) as Record<string, unknown>;
+// Frontmatter ONLY — provided by the `virtual:blog-meta` Vite plugin, which parses the
+// YAML frontmatter from the raw .svx files at build time (scripts/vite-blog-meta.mjs).
+// Crucially this does NOT statically import the compiled .svx, so the lazy component glob
+// below can code-split each post body into its own chunk. (A previous eager
+// `import.meta.glob(..., { import: 'metadata' })` defeated that splitting, bundling every
+// post body into one ~3.4 MB chunk loaded even on listing pages — a CWV regression.)
+const metaModules = blogMeta as Record<string, { metadata: unknown }>;
 
 // Compiled components — LAZY loaders, code-split per post. Only the visited post's
 // body chunk is fetched (in [slug]/+page.ts via getPostComponentLoader).
@@ -43,10 +43,7 @@ const componentLoaders = import.meta.glob('../../content/blog/*.svx', {
 
 // Posts cache — computed once at module evaluation time (ADR-003, ADR-004).
 // The date filter uses the current date at build time (ADR-004).
-// Wrap each metadata value into the GlobModule shape the pure pipeline expects.
-const _allPosts: BlogPost[] = buildPostsFromGlob(
-	Object.fromEntries(Object.entries(metaModules).map(([path, metadata]) => [path, { metadata }]))
-);
+const _allPosts: BlogPost[] = buildPostsFromGlob(metaModules);
 
 // Attach the card-sized cover variant (~768px) from the generated lookup, so listing
 // grids serve a card-appropriate image instead of the full-size cover (CWV / LCP).
