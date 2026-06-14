@@ -50,7 +50,10 @@ export const handle: Handle = async ({ event, resolve }) => {
 	// Normal request handling
 	const response = await resolve(event);
 
-	// Security headers — applied to every response (dynamic + prerendered).
+	// Security headers for SSR pages + /api/* (Worker-generated responses).
+	// Prerendered pages and static assets are served from the ASSETS binding and
+	// never reach this hook — those get the SAME headers via the `/*` block in
+	// `_headers`. Keep both in sync.
 	// CSP is intentionally NOT set here yet: a strict policy breaks Turnstile,
 	// the R2 image CDN and SvelteKit's inline styles, so it needs a dedicated
 	// Report-Only rollout (see prod-hardening plan, P1).
