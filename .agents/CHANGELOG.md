@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 - **Type Casts in CRM test suites**: Added `unknown` intermediate casting for `mockEnv` object manipulations in `service.test.ts` to satisfy strict TypeScript object index rules.
 
 ### Changed
+- **Professional Package Names in Emails**: Mapped raw package IDs (like `presentation` or `basic-mice`) inside confirmation and internal notification emails to their capitalized professional names (e.g., `Product Presentation Pack`, `Basic MICE Pack`) resolving from the centralized `packages.ts` store, including a localized fallback for general inquiries.
 - **Canonical Domain to malagaeventgear.com (no-www)**: Updated OpenGraph and Schema E2E assertions in `tests/opengraph.spec.ts` and `tests/schema.spec.ts` to expect the canonical domain without `www.` (`https://malagaeventgear.com`).
 
 ### Added (meet-the-team-enhancements)

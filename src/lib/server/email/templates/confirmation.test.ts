@@ -28,9 +28,9 @@ describe('renderConfirmation', () => {
 		expect(result.html).toContain('ana@example.com');
 	});
 
-	it('html contains package id', () => {
+	it('html contains package name', () => {
 		const result = renderConfirmation(baseLead, 'en');
-		expect(result.html).toContain('basic-mice');
+		expect(result.html).toContain('Basic MICE Pack');
 	});
 
 	it('returns Spanish copy for es locale', () => {

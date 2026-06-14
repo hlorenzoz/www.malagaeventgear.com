@@ -3,7 +3,7 @@
  * Fixed to English (internal use). Pure function, unit-testable with Vitest.
  */
 
-import type { LeadData } from './confirmation';
+import { formatPackageName, type LeadData } from './confirmation';
 
 interface EmailTemplate {
 	subject: string;
@@ -20,10 +20,11 @@ function escapeHtml(s: string): string {
 }
 
 export function renderNotification(lead: LeadData): EmailTemplate {
-	const subject = `New lead: ${lead.name} — ${lead.packageId}`;
+	const packageName = formatPackageName(lead.packageId, 'en');
+	const subject = `New lead: ${lead.name} — ${packageName}`;
 
 	const rows = [
-		['Package', lead.packageId],
+		['Package', packageName],
 		['Name', lead.name],
 		['Email', lead.email],
 		lead.phone ? ['Phone / WhatsApp', lead.phone] : null,

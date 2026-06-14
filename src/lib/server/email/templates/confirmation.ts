@@ -3,6 +3,8 @@
  * Pure function: no I/O, no runtime template engine. Unit-testable with Vitest.
  */
 
+import { packages } from '$lib/data/packages';
+
 export interface LeadData {
 	name: string;
 	email: string;
@@ -16,6 +18,21 @@ interface EmailTemplate {
 	subject: string;
 	html: string;
 	text: string;
+}
+
+export function formatPackageName(packageId: string, lang: 'en' | 'es' = 'es'): string {
+	if (packageId === 'general-inquiry') {
+		return lang === 'es' ? 'Consulta General' : 'General Inquiry';
+	}
+	const pkg = packages.find((p) => p.id === packageId || p.slug === packageId);
+	if (pkg) {
+		return pkg.name;
+	}
+	// Fallback: capitalize the raw packageId
+	return packageId
+		.split(/[-_]/)
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(' ');
 }
 
 const copy = {
@@ -56,9 +73,10 @@ function escapeHtml(s: string): string {
 export function renderConfirmation(lead: LeadData, lang: 'en' | 'es' = 'es'): EmailTemplate {
 	const t = copy[lang] ?? copy.es;
 	const subject = t.subject(lead.name);
+	const packageName = formatPackageName(lead.packageId, lang);
 
 	const rows: string[] = [
-		`<tr><td style="padding:4px 8px;color:#6b7280;">${t.package}</td><td style="padding:4px 8px;">${escapeHtml(lead.packageId)}</td></tr>`,
+		`<tr><td style="padding:4px 8px;color:#6b7280;">${t.package}</td><td style="padding:4px 8px;">${escapeHtml(packageName)}</td></tr>`,
 		lead.eventDate
 			? `<tr><td style="padding:4px 8px;color:#6b7280;">${t.eventDate}</td><td style="padding:4px 8px;">${escapeHtml(lead.eventDate)}</td></tr>`
 			: '',
@@ -96,7 +114,7 @@ export function renderConfirmation(lead: LeadData, lang: 'en' | 'es' = 'es'): Em
 		t.body,
 		'',
 		t.details,
-		`${t.package}: ${lead.packageId}`,
+		`${t.package}: ${packageName}`,
 		lead.eventDate ? `${t.eventDate}: ${lead.eventDate}` : '',
 		lead.phone ? `${t.phone}: ${lead.phone}` : '',
 		`Email: ${lead.email}`,

@@ -18,9 +18,9 @@ describe('renderNotification', () => {
 		expect(result.text).toBeTruthy();
 	});
 
-	it('html contains package id', () => {
+	it('html contains package name', () => {
 		const result = renderNotification(baseLead);
-		expect(result.html).toContain('basic-mice');
+		expect(result.html).toContain('Basic MICE Pack');
 	});
 
 	it('html contains lead name', () => {
