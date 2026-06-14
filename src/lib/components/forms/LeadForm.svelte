@@ -196,6 +196,16 @@
 	}
 
 	function goToContactWithError() {
+		// Carry the submitted fields to /contact via sessionStorage (NOT query params:
+		// name/email/phone in the URL would leak PII to history, logs and referrers).
+		try {
+			sessionStorage.setItem(
+				'meg:lead-error',
+				JSON.stringify({ name, email, phone, eventDate, packageId, comments }),
+			);
+		} catch {
+			// sessionStorage unavailable (private mode quirks) — degrade gracefully.
+		}
 		const params = new URLSearchParams({ errtype: 'email' });
 		if (lastLeadId) params.set('lead', lastLeadId);
 		goto(`/contact?${params.toString()}`);

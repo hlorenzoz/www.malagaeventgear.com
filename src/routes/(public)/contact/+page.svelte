@@ -60,8 +60,38 @@
 			// Arrived from a lead whose confirmation/notification email failed.
 			// Pre-fill a non-editable rescue message so the team can be reached.
 			eventType = 'other';
-			message = i18n.t.contact.errorPrefillMessage.replace('{ref}', lead || '—');
 			messageLocked = true;
+
+			const intro = i18n.t.contact.errorPrefillMessage.replace('{ref}', lead || '—');
+
+			// The submitted fields are carried via sessionStorage (set by LeadForm) to
+			// avoid leaking PII through the URL. Append each non-empty value on its own line.
+			let details = '';
+			try {
+				const raw = sessionStorage.getItem('meg:lead-error');
+				sessionStorage.removeItem('meg:lead-error');
+				if (raw) {
+					const d = JSON.parse(raw) as Record<string, string>;
+					const t = i18n.t.contact;
+					const lines = [
+						[t.errorDetailName, d.name],
+						[t.errorDetailEmail, d.email],
+						[t.errorDetailPhone, d.phone],
+						[t.errorDetailDate, d.eventDate],
+						[t.errorDetailPackage, d.packageId],
+						[t.errorDetailComments, d.comments],
+					]
+						.filter(([, value]) => value && value.trim())
+						.map(([label, value]) => `${label}: ${value}`);
+					if (lines.length > 0) {
+						details = `\n\n${t.errorDetailsHeader}\n${lines.join('\n')}`;
+					}
+				}
+			} catch {
+				// Malformed/unavailable storage — fall back to the intro only.
+			}
+
+			message = intro + details;
 		} else if (pack) {
 			eventType = pack === 'wedding' ? 'wedding' : 'corporate';
 			message = i18n.lang === 'en'
@@ -389,7 +419,7 @@
 								required
 								readonly={messageLocked}
 								aria-readonly={messageLocked}
-								rows="4"
+								rows={messageLocked ? 8 : 4}
 								placeholder="Message"
 								class="peer w-full bg-surface-glass border-b border-border-glass border-t-0 border-x-0 px-0 py-3 text-on-surface focus:ring-0 focus:border-electric-blue transition-colors placeholder-transparent resize-none {messageLocked ? 'opacity-70 cursor-not-allowed' : ''}"
 							></textarea>

@@ -1,9 +1,26 @@
 
 -- ❌ ✅
 
+Verifica también la persistencia en la base de datos, de forma tal que se pueda
 
 
 -- ❌ ✅ Comments
+
+
+-- ❌ ✅ API REST
+
+Crea un API REST para la creación de contenido (INTEGRACIÓN) con SEO Toolkit, algo similar al WordPress API
+
+
+-- ❌ ✅ Tracking Google Analytics & Cloudflare Zaraz
+
+
+
+-- ❌ ✅ Error tracking
+
+Verifica también la persistencia en la base de datos, de forma tal que se pueda persistir los errores de forma tal que se pueda 
+
+
 
 ✅ Navbar oculta
 
@@ -42,15 +59,6 @@ Email
 Sección de comentarios
 
 
--- ❌ ✅
-
-API REST para la creación de contenido (INTEGRACIÓN) con SEO Toolkit
-
-
--- ❌ ✅ Tracking Google Analytics & Cloudflare Zaraz
-
-
-
 -- ✅ Package (redesign)
 
 En la página específica de cada uno de los paquetes hace falta
@@ -84,11 +92,6 @@ Hace falta un sistema que trackee si el cliente hace clic en el link de review p
 Antes del footer, hace falta incluir una sección con los reviews de Google My Business en forma de carrusel. Reutilizar el existente en el Home.
 
 Usa SDD: Automático + openspec
-
-
-
--- ❌ ✅
-
 
 
 -- ✅ Packages / (filtros)

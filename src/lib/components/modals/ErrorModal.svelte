@@ -43,7 +43,7 @@
 
 <dialog
 	bind:this={dialogEl}
-	class="error-modal glass-panel max-w-md rounded-2xl p-0 text-on-surface backdrop:bg-black/60"
+	class="error-modal max-w-md rounded-2xl border border-border-glass bg-surface-container-high p-0 text-on-surface shadow-2xl backdrop:bg-black/75 backdrop:backdrop-blur-sm"
 	onclose={handleClose}
 	aria-labelledby="error-modal-title"
 >
