@@ -1,6 +1,6 @@
 <script lang="ts">
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
-	import Testimonials from '$lib/components/testimonials/Testimonials.svelte';
+	import LazyMount from '$lib/components/util/LazyMount.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { packages } from '$lib/data/packages';
 	import { getHomepageFaqs, buildFaqSchema } from '$lib/data/faq';
@@ -544,8 +544,14 @@
 	</div>
 </section>
 
-<!-- Testimonials Section (Google Reviews) -->
-<Testimonials />
+<!-- Testimonials Section (Google Reviews).
+     Below the fold: lazy-mounted + code-split (dynamic import) so its carousel JS and
+     DOM stay out of the initial bundle and the critical render window. -->
+<LazyMount minHeight="760px">
+	{#await import('$lib/components/testimonials/Testimonials.svelte') then { default: Testimonials }}
+		<Testimonials />
+	{/await}
+</LazyMount>
 
 <!-- FAQ Section -->
 <section class="py-24 px-margin-mobile md:px-margin-desktop bg-surface-container-low transition-colors duration-300">
