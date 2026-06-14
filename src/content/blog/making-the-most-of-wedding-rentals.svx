@@ -18,7 +18,7 @@ draft: false
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
-Planning a wedding can be an exciting yet daunting task, especially when it comes to ensuring you have the right equipment and ambiance for your special day. [Wedding rentals](https://malagaeventgear.com/wedding-rentals/) play a crucial role in bringing your vision to life, offering a wide range of essential items to create an unforgettable experience.
+Planning a wedding can be an exciting yet daunting task, especially when it comes to ensuring you have the right equipment and ambiance for your special day. [Wedding rentals](/blog/wedding-rentals/) play a crucial role in bringing your vision to life, offering a wide range of essential items to create an unforgettable experience.
 
 From sound systems and lighting to projectors and more, understanding what to rent is key. This guide will walk you through the must have rental items and provide valuable tips to ensure your wedding day is seamless and spectacular, making it a memorable celebration in every way.
 
@@ -26,7 +26,7 @@ From sound systems and lighting to projectors and more, understanding what to re
 
 ---
 
-Planning a wedding in Malaga, Spain, is an exciting endeavor that hinges on choosing the right rentals to bring your vision to life. From elegant indoor receptions to stunning outdoor ceremonies, strategic selections of audio visuals, lighting, and decor can elevate your event into an unforgettable experience. **Malaga Event Gear (MEG)** offers comprehensive packages like the [Wedding Pack](https://malagaeventgear.com/wedding-pack/) to ensure crystal clear audio and enchanting lighting, tailored to fit both beachside and countryside venues. By opting for professional and flexible rental solutions, you can create a seamless and memorable celebration that reflects your unique love story.
+Planning a wedding in Malaga, Spain, is an exciting endeavor that hinges on choosing the right rentals to bring your vision to life. From elegant indoor receptions to stunning outdoor ceremonies, strategic selections of audio visuals, lighting, and decor can elevate your event into an unforgettable experience. **Malaga Event Gear (MEG)** offers comprehensive packages like the [Wedding Pack](/packages/wedding/) to ensure crystal clear audio and enchanting lighting, tailored to fit both beachside and countryside venues. By opting for professional and flexible rental solutions, you can create a seamless and memorable celebration that reflects your unique love story.
 
 ## Key Highlights
 
@@ -81,7 +81,7 @@ Planning a wedding in Malaga, Spain, is an exciting endeavor that hinges on choo
 
 ## Understanding the Basics of Wedding Rentals
 
-Planning a wedding is an exciting journey where details matter. Understanding the basics of wedding rentals ensures your event runs smoothly and meets your expectations. **[Wedding rentals](https://malagaeventgear.com/wedding-rentals/)** can transform your venue, offering flexibility and personalization that reflect your style. Key insights include knowing which **rental companies** provide the best service and selecting essential rental items.
+Planning a wedding is an exciting journey where details matter. Understanding the basics of wedding rentals ensures your event runs smoothly and meets your expectations. **[Wedding rentals](/blog/wedding-rentals/)** can transform your venue, offering flexibility and personalization that reflect your style. Key insights include knowing which **rental companies** provide the best service and selecting essential rental items.
 
 By choosing reputable rental providers, you ensure quality and timely delivery, which are vital for a successful event. The main ways to maximize your rental experience include making informed decisions and managing your own rental order efficiently for a flawless celebration.
 
@@ -106,7 +106,7 @@ When it comes to planning an unforgettable wedding, having a comprehensive check
 
 To ensure your event rentals arrive on time, carefully organize your rental collection schedule. This means confirming delivery times with your rental provider well in advance. For those hosting weddings in Malaga, Spain, it’s important to adapt your rental order to fit both indoor and outdoor settings, capitalizing on the region’s stunning backdrops.
 
-You can find more insights and tips by visiting [Malaga Event Gear’s Wedding Rentals](https://malagaeventgear.com/wedding-rentals/) page. By embracing these industry tips, you elevate your wedding experience and create cherished memories in a beautiful, well coordinated setting. Let your wedding reflect not only your shared love but also your impeccable planning.
+You can find more insights and tips by visiting [Malaga Event Gear’s Wedding Rentals](/blog/wedding-rentals/) page. By embracing these industry tips, you elevate your wedding experience and create cherished memories in a beautiful, well coordinated setting. Let your wedding reflect not only your shared love but also your impeccable planning.
 
 ## Selecting the Perfect Wedding Venue
 
@@ -245,7 +245,7 @@ This approach not only adds visual interest but also facilitates conversation am
 
 Leave adequate space between tables to allow guests to move freely and interact naturally. This thoughtful arrangement not only optimizes the spatial flow but also creates an inviting environment.
 
-For more insights on crafting the perfect wedding ambiance, consider visiting the [Wedding Pack page at Malaga Event Gear](https://malagaeventgear.com/wedding-pack/). Here, you can find solutions tailored to fit both your venue’s unique style and your guests’ comfort, making your special day even more memorable.
+For more insights on crafting the perfect wedding ambiance, consider visiting the [Wedding Pack page at Malaga Event Gear](/packages/wedding/). Here, you can find solutions tailored to fit both your venue’s unique style and your guests’ comfort, making your special day even more memorable.
 
 Additional Ideas for Enhancing Venue Setup
 
@@ -364,11 +364,11 @@ For example, elegant ivory linens can offer a timeless appeal, while rich, bold 
 
 These textiles not only provide aesthetic value but also add layers of visual interest, making your venue feel more intimate and personalized. The strategic use of these décor items can transform your space, creating spots of interest that captivate your guests and enhance their overall experience. When planning your wedding in Malaga, selecting the right linens is essential in capturing the natural beauty of the locale while maintaining an elegant reception atmosphere.
 
-Collaborating with professionals from **Malaga Event Gear (MEG)** can provide access to a wide range of options, ensuring you find textiles that fit seamlessly within your design framework. To explore more about audio visual enhancements for your wedding, visit [audio visual rentals at MEG](https://malagaeventgear.com/audio-visual-rental-for-weddings/).
+Collaborating with professionals from **Malaga Event Gear (MEG)** can provide access to a wide range of options, ensuring you find textiles that fit seamlessly within your design framework. To explore more about audio visual enhancements for your wedding, visit [audio visual rentals at MEG](/blog/audio-visual-rental-for-weddings/).
 
 ## Conclusions
 
-With the right wedding rentals, your special day can transform into a seamless and memorable celebration. Opt for packages like the [Wedding Pack](https://malagaeventgear.com/wedding-pack/) from **Malaga Event Gear (MEG)** for its comprehensive solutions, ensuring crystal clear audio and enchanting lighting.
+With the right wedding rentals, your special day can transform into a seamless and memorable celebration. Opt for packages like the [Wedding Pack](/packages/wedding/) from **Malaga Event Gear (MEG)** for its comprehensive solutions, ensuring crystal clear audio and enchanting lighting.
 
 Take advantage of the tailored packages and flexible options to match your style and venue, whether beachside or countryside. Remember, preparation and choosing the right equipment can significantly enhance your wedding experience. For any questions, feel free to reach out via our contact page. We’re here to help make your wedding day extraordinary!
 
@@ -396,7 +396,7 @@ Must have rental items for a wedding in Malaga include sound systems, lighting, 
 
 ### How can Malaga Event Gear (MEG) enhance my wedding experience?
 
-**Malaga Event Gear (MEG)** offers comprehensive packages like the [Wedding Pack](https://malagaeventgear.com/wedding-pack/), ensuring crystal clear audio and enchanting lighting. They provide flexible rental solutions tailored to fit both beachside and countryside venues, significantly enhancing your wedding experience.
+**Malaga Event Gear (MEG)** offers comprehensive packages like the [Wedding Pack](/packages/wedding/), ensuring crystal clear audio and enchanting lighting. They provide flexible rental solutions tailored to fit both beachside and countryside venues, significantly enhancing your wedding experience.
 
 ### Why is choosing the right rental provider important?
 

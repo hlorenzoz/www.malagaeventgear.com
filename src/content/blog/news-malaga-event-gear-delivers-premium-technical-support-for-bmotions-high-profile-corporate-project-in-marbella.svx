@@ -42,7 +42,7 @@ The primary technical focus centered on immaculate speech intelligibility and cr
 
 Discover Audiovisual Rental options for your **stress free event**
 
-[See Packages Options](https://malagaeventgear.com/pricing/)
+[See Packages Options](/packages/)
 
 Acoustic management was equally critical, given the precise nature of the presentations. The audio architecture included specialized, speech-optimized gooseneck microphones ideal for podiums and lecterns, alongside high-performance wireless microphone systems that gave presenters the freedom to move dynamically across the stage.
 
@@ -58,7 +58,7 @@ For international agencies planning events across the region, having a partner t
 
 Operating in the sector since 1996 and backing every project with a portfolio of over 1,000 satisfied clients, **MEG** remains the premier choice for event production on the Costa del Sol. Whether your upcoming project requires discrete corporate setups or expansive lighting and sound services in Spain, our team brings the high-quality equipment and professional dedication needed to make it a triumph.
 
-[Contact](https://malagaeventgear.com/pricing/) **Malaga Event Gear** today to discover how our tailored technical support can elevate your next event.
+[Contact](/packages/) **Malaga Event Gear** today to discover how our tailored technical support can elevate your next event.
 
 <div class="my-12 overflow-hidden w-full">
 	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />

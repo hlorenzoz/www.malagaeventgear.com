@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 ## [Unreleased]
 
 ### Fixed
+- **Normalized Legacy Links in Blog Posts**: Normalized 265 absolute and outdated relative internal links (e.g. pointing to legacy paths `/wedding-pack/`, `/pricing/`, `/contact-us/`, etc.) across all 75+ blog post `.svx` files, using robust regex patterns to avoid partial-path overrides, pointing them directly to their new SvelteKit canonical targets (e.g., `/packages/wedding/`, `/packages/`, `/contact/`).
 - **Svelte-Check Type-Checking wrangler types**: Created a helper script (`scripts/fix-types.ts`) integrated into `package.json` (`build`, `check`, `gen`) to patch the auto-generated `worker-configuration.d.ts` file, replacing `typeof import("./.svelte-kit/cloudflare/_worker")` with `any`. This prevents TypeScript and `svelte-check` from type-checking the minified Edge worker JS bundle, fixing 1098 compiler errors.
 - **Playwright Copy Link Tooltip Click Gesture**: Updated the "Copy Link" desktop E2E test in `tests/share.spec.ts` to trigger a native Playwright `.click()` instead of a synthetic `dispatchEvent('click')`. This ensures a true user gesture is simulated, allowing the secure Clipboard API to resolve and set the tooltip visible under parallel test runners.
 - **FAQ Page Reveal Animation on Filter Switch**: Resolved a bug where switching categories on the FAQ page left items with 0 opacity by exposing the layout's scroll reveal `scan` method via Svelte Context and calling it within an `$effect` block on filter state changes.
@@ -18,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows [
 - **Type Casts in CRM test suites**: Added `unknown` intermediate casting for `mockEnv` object manipulations in `service.test.ts` to satisfy strict TypeScript object index rules.
 
 ### Changed
+- **Trailing Slash Targets in _redirects**: Aligned Cloudflare Pages redirects in `_redirects` to point directly to SvelteKit's canonical trailing-slash targets, avoiding double redirection hops (TTFB optimization).
 - **Professional Package Names in Emails**: Mapped raw package IDs (like `presentation` or `basic-mice`) inside confirmation and internal notification emails to their capitalized professional names (e.g., `Product Presentation Pack`, `Basic MICE Pack`) resolving from the centralized `packages.ts` store, including a localized fallback for general inquiries.
 - **Canonical Domain to malagaeventgear.com (no-www)**: Updated OpenGraph and Schema E2E assertions in `tests/opengraph.spec.ts` and `tests/schema.spec.ts` to expect the canonical domain without `www.` (`https://malagaeventgear.com`).
 

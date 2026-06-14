@@ -22,7 +22,7 @@ Welcome to Malaga Event Gear, your premier partner for top notch audio visual re
 
 Our specialized packages and state of the art equipment cater to all your digital event needs, providing seamless experiences from start to finish. Whether you’re hosting a company meeting or a product launch, trust us to deliver exceptional audiovisual solutions.
 
-[Book now](https://malagaeventgear.com/product-presentation-pack/) for an extraordinary online event experience.
+[Book now](/packages/product-presentation/) for an extraordinary online event experience.
 
 ## Table of Contents
 
@@ -85,7 +85,7 @@ Maximize your impact with our state of the art audio visual rental for remote pr
 
 Our extensive range of audiovisual rental options allows you to tailor every aspect of your presentation, ensuring seamless delivery. Choose the perfect combination of equipment for impactful engagement and enhanced clarity.
 
-Discover more about our [audiovisual rental services](https://malagaeventgear.com/audio-visual-rental/) and elevate your next digital event to new heights.
+Discover more about our [audiovisual rental services](/blog/audio-visual-rental/) and elevate your next digital event to new heights.
 
 <InlineCTA />
 
@@ -177,7 +177,7 @@ At Malaga Event Gear, we’re experts in making your online event stand out with
 
 Our state of the art audiovisual technology enhances every event, delivering unmatched clarity and impact. From seamless production support to advanced technology solutions, we cover all your needs.
 
-Trust our professional technicians to handle every detail. Learn more about our tailored [rental services for seminars](https://malagaeventgear.com/audio-visual-rental-for-seminars).
+Trust our professional technicians to handle every detail. Learn more about our tailored [rental services for seminars](/blog/audio-visual-rental-for-seminars/).
 
 ### Expert Tips on Sound and Lighting for Effective Virtual Engagement
 
@@ -240,7 +240,7 @@ _This table highlights how advanced event technologies and professional expertis
 
 In today’s dynamic landscape, having professional technicians is essential for seamless event delivery. They ensure that every aspect of your sound and video needs is perfectly managed, from setup to execution.
 
-At Malaga Event Gear, our dedicated team provides top notch audio and visual solutions tailored to elevate your remote presentations. For those seeking enhanced clarity and reliability, discover our comprehensive [Product Presentation Pack](https://malagaeventgear.com/product-presentation-pack/).
+At Malaga Event Gear, our dedicated team provides top notch audio and visual solutions tailored to elevate your remote presentations. For those seeking enhanced clarity and reliability, discover our comprehensive [Product Presentation Pack](/packages/product-presentation/).
 
 Trust in our professional expertise to provide technical prowess and peace of mind for your next event.
 

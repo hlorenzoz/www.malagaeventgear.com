@@ -18,13 +18,13 @@ draft: false
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
-Welcome to Malaga Event Gear, your premier partner for professional [audio visual rental](https://malagaeventgear.com/audio-visual-rental/) for charity fundraisers services, perfect for charity fundraisers in Malaga, Spain.
+Welcome to Malaga Event Gear, your premier partner for professional [audio visual rental](/blog/audio-visual-rental/) for charity fundraisers services, perfect for charity fundraisers in Malaga, Spain.
 
 Our commitment to elevating your event shines through with our top tier equipment tailored for fundraising galas, auctions, and community initiatives. With our diverse range of services, including stunning sound systems, vibrant lighting, and high definition projectors, we ensure that your cause receives the attention and impact it deserves.
 
 Trust our expertise, as many others have, to transform your event into a memorable experience for all attendees.
 
-[Reach out today](https://malagaeventgear.com/pricing/) to discover how we can support your charitable endeavors.
+[Reach out today](/packages/) to discover how we can support your charitable endeavors.
 
 ## Brief Overview
 
@@ -89,7 +89,7 @@ Our expertise in _event production_ ensures your charity events make a lasting
 
 ## Testimonials
 
-From affordable hire options to high quality rental packages, we’re committed to your needs. Explore our [wide range of solutions](https://malagaeventgear.com/pricing/). Enjoy reliable support, elevate your fundraisers, and leave a lasting impression with our trusted AV services.
+From affordable hire options to high quality rental packages, we’re committed to your needs. Explore our [wide range of solutions](/packages/). Enjoy reliable support, elevate your fundraisers, and leave a lasting impression with our trusted AV services.
 
 ### Enhancing Fundraising Events with Audio Visual Expertise
 
@@ -171,13 +171,13 @@ Planning a successful charity event doesn’t have to be overwhelming with our f
 
 Whether it’s projector hire, sound solutions, or complete AV equipment setups, we’ve got your event needs covered. Our team ensures your events are memorable with high quality audio and video equipment, perfect for any charity gathering.
 
-Trust us, as many others, to deliver seamless equipment and services hire, ensuring your charity event stands out in every detail. Choose [customizable hire packages](https://malagaeventgear.com/pricing/) that prioritize your fundraising goals.
+Trust us, as many others, to deliver seamless equipment and services hire, ensuring your charity event stands out in every detail. Choose [customizable hire packages](/packages/) that prioritize your fundraising goals.
 
 ### Customized Options to Suit Your Budget and Requirements
 
 At Malaga Event Gear, our audio visual hire services for charity fundraisers in Malaga offer customized options tailored to your budget and specific requirements. Whether you need screens for impactful presentations or high quality audio solutions to keep your charity event engaging, we provide comprehensive visual enhancements.
 
-Our expertise ensures your fundraising success with adaptable solutions that don’t break the bank. Check out our [other types of events](https://malagaeventgear.com/audio-visual-rental-for-religious-events) too. Trust us to deliver seamless audio visual solutions perfectly suited for your unique charity needs.
+Our expertise ensures your fundraising success with adaptable solutions that don’t break the bank. Check out our [other types of events](/blog/audio-visual-rental-for-religious-events/) too. Trust us to deliver seamless audio visual solutions perfectly suited for your unique charity needs.
 
 Our tailored services can significantly enhance your charity fundraiser experience by providing unparalleled support and personalized solutions that cater to your specific needs.
 
@@ -201,7 +201,7 @@ Get ready for an unforgettable experience with our flexible hire packages design
 
 ### Steps to Ensure a Smooth Rental and Setup Process
 
-Ensuring a smooth [setup process](https://malagaeventgear.com/basic-mice-pack/) for your charity fundraiser in Malaga with our audio visual rentals is all about meticulous planning. Start by selecting the right equipment tailored to your event’s needs, whether it’s live presentations or comprehensive visual solutions.
+Ensuring a smooth [setup process](/packages/basic-mice/) for your charity fundraiser in Malaga with our audio visual rentals is all about meticulous planning. Start by selecting the right equipment tailored to your event’s needs, whether it’s live presentations or comprehensive visual solutions.
 
 Our team assists with the installation to guarantee a seamless transition. Hiring audio visual gear from our range of options guarantees high quality performance.
 
@@ -215,7 +215,7 @@ Malaga Event Gear is your trusted partner for exceptional AV hire and equipment 
 
 Let’s create a remarkable experience for your guests while achieving your fundraising goals. [Contact us](https://malagaeventgear.com/contact-us/) today to discuss your specific needs, and together, we’ll elevate your event to new heights.
 
-We eagerly invite you to [join our growing list of satisfied clients](https://malagaeventgear.com/pricing/). For more information, feel free to leave a comment or visit our [contact page](https://malagaeventgear.com/contact-us/).
+We eagerly invite you to [join our growing list of satisfied clients](/packages/). For more information, feel free to leave a comment or visit our [contact page](https://malagaeventgear.com/contact-us/).
 
 ## FAQs
 

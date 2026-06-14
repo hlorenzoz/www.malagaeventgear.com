@@ -49,9 +49,9 @@ We were selling a hassle free experience.
 
 This was immediately clear from their service oriented packages.
 
-The **[MICE Pack](https://malagaeventgear.com/mice-pack/)** for corporate events, for instance, includes a dedicated technician for up to 6 hours.
+The **[MICE Pack](/packages/mice/)** for corporate events, for instance, includes a dedicated technician for up to 6 hours.
 
-The **[Wedding Pack](https://malagaeventgear.com/wedding-pack/)** goes even further, bundling transport, setup, on site support, and post event pickup into the [price](https://malagaeventgear.com/#pricing).
+The **[Wedding Pack](/packages/wedding/)** goes even further, bundling transport, setup, on site support, and post event pickup into the [price](https://malagaeventgear.com/#pricing).
 
 This completely shifts the value proposition.
 
@@ -109,7 +109,7 @@ We present you with an endless à la carte menu of cables, mixers, and projector
 
 This company does the opposite.
 
-We offer a handful of curated packages named for their purpose: the **[Eco Pack](https://malagaeventgear.com/eco-pack/)** for parties, the **[Wedding Pack](https://malagaeventgear.com/wedding-pack/)**, and the **[MICE Pack](https://malagaeventgear.com/mice-pack/)** for corporate events.
+We offer a handful of curated packages named for their purpose: the **[Eco Pack](/packages/eco/)** for parties, the **[Wedding Pack](/packages/wedding/)**, and the **[MICE Pack](/packages/mice/)** for corporate events.
 
 This simple strategy is brilliant.
 
@@ -139,9 +139,9 @@ This isn’t just about bundling random equipment.
 
 It’s about anticipating the client’s exact requirements.
 
--   **Projector Power:** The **[Basic MICE Pack](https://malagaeventgear.com/basic-mice-pack/)**, designed for small meetings, includes a “3000 lumen projector.” The **[Product Presentation Pack](https://malagaeventgear.com/product-presentation-pack/)**, however, upgrades this to a more powerful “5000 lumen projector,” recognizing that product launches often happen in more brightly lit environments where a stronger beam is needed to keep visuals sharp.
--   **Microphone Flexibility:** The **[Basic MICE pack](https://malagaeventgear.com/basic-mice-pack/)** provides “1 gooseneck microphone,” which is perfect for a speaker standing at a podium. The full **[MICE pack](https://malagaeventgear.com/mice-pack/)** includes both a gooseneck microphone _and_ “1 wireless microphone,” adding crucial flexibility for Q&A sessions or presenters who like to move around the stage.
--   **Anticipatory Add Ons:** The optional extras show we’re always thinking one step ahead. For just 20€, you can add a “Smoke machine” to the party focused **[Eco Pack](https://malagaeventgear.com/eco-pack/)**. For a corporate event, a sleek “Methacrylate lectern” is available as an add on to the **[MICE pack](https://malagaeventgear.com/mice-pack/)** for 50€. These aren’t random upsells. We are logical enhancements for each specific event type.
+-   **Projector Power:** The **[Basic MICE Pack](/packages/basic-mice/)**, designed for small meetings, includes a “3000 lumen projector.” The **[Product Presentation Pack](/packages/product-presentation/)**, however, upgrades this to a more powerful “5000 lumen projector,” recognizing that product launches often happen in more brightly lit environments where a stronger beam is needed to keep visuals sharp.
+-   **Microphone Flexibility:** The **[Basic MICE pack](/packages/basic-mice/)** provides “1 gooseneck microphone,” which is perfect for a speaker standing at a podium. The full **[MICE pack](/packages/mice/)** includes both a gooseneck microphone _and_ “1 wireless microphone,” adding crucial flexibility for Q&A sessions or presenters who like to move around the stage.
+-   **Anticipatory Add Ons:** The optional extras show we’re always thinking one step ahead. For just 20€, you can add a “Smoke machine” to the party focused **[Eco Pack](/packages/eco/)**. For a corporate event, a sleek “Methacrylate lectern” is available as an add on to the **[MICE pack](/packages/mice/)** for 50€. These aren’t random upsells. We are logical enhancements for each specific event type.
 
 
 <div class="my-12 overflow-hidden w-full">

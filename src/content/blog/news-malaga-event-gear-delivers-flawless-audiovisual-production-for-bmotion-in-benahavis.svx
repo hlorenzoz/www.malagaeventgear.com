@@ -35,7 +35,7 @@ Given the complex needs of modern corporate conferences, the technical setup had
 
 ### MEG’s Role
 
-To meet **Bmotion’s** exact standards, **Malaga Event Gear** deployed a comprehensive audiovisual equipment rental Málaga [package](https://malagaeventgear.com/pricing/) tailored specifically for executive meetings and corporate presentations. Understanding that flawless communication is the backbone of any successful **MICE** event, **MEG** assumed complete responsibility for the logistics, technical design, on-site installation, and live operations.
+To meet **Bmotion’s** exact standards, **Malaga Event Gear** deployed a comprehensive audiovisual equipment rental Málaga [package](/packages/) tailored specifically for executive meetings and corporate presentations. Understanding that flawless communication is the backbone of any successful **MICE** event, **MEG** assumed complete responsibility for the logistics, technical design, on-site installation, and live operations.
 
 Since all services offered by **MEG** are delivered entirely in native-level English, collaboration with the international crew and organizers was fluid, eliminating any potential language barriers and allowing the event schedule to progress exactly on time.
 
@@ -61,7 +61,7 @@ By blending high-quality equipment with a highly trained, English-speaking techn
 
 Planning an upcoming corporate summit, product launch, or private function in the south of Spain?
 
-[Contact](https://malagaeventgear.com/pricing/) **Malaga Event Gear** today via [email](mailto:contact@malagaeventgear.com) or [WhatsApp](https://wa.me/34600428750) to secure a tailored, hassle-free audiovisual solution for your next event.
+[Contact](/packages/) **Malaga Event Gear** today via [email](mailto:contact@malagaeventgear.com) or [WhatsApp](https://wa.me/34600428750) to secure a tailored, hassle-free audiovisual solution for your next event.
 
 <div class="my-12 overflow-hidden w-full">
 	<ImageMarquee images={getImagesForPackage('eco')} speed="normal" direction="left" />

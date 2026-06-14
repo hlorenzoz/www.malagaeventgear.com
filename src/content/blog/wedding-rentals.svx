@@ -18,7 +18,7 @@ draft: false
 	import InlineCTA from '$lib/components/blog/InlineCTA.svelte';
 </script>
 
-Transform your special day with our expert wedding rentals, designed to add elegance and sophistication to any celebration. Whether it’s an intimate beach ceremony or a grand countryside gala, [our tailored packages](https://malagaeventgear.com/pricing/) offer everything you need to create unforgettable memories. From professional sound systems ensuring clarity during vows to exquisite lighting that sets the perfect romantic mood, we provide all in one solutions that promise a seamless wedding experience. Our dedicated team is committed to making your event extraordinary, guiding you through every step to ensure a flawless and stress free celebration.
+Transform your special day with our expert wedding rentals, designed to add elegance and sophistication to any celebration. Whether it’s an intimate beach ceremony or a grand countryside gala, [our tailored packages](/packages/) offer everything you need to create unforgettable memories. From professional sound systems ensuring clarity during vows to exquisite lighting that sets the perfect romantic mood, we provide all in one solutions that promise a seamless wedding experience. Our dedicated team is committed to making your event extraordinary, guiding you through every step to ensure a flawless and stress free celebration.
 
 ## Brief Overview
 
@@ -119,7 +119,7 @@ Lounge furniture plays a pivotal role in transforming wedding venues into luxuri
 
 Not only does this setup enhance the visual appeal, but it also provides practical seating solutions that encourage interaction among guests. CE professionals agree that incorporating lounge furniture into wedding events can significantly enhance guest experience, blending comfort with elegant style. For those seeking a comprehensive rental solution that includes stunning lounge arrangements, **Malaga Event Gear (MEG)** offers an array of customizable options.
 
-**Explore** [our offerings](https://malagaeventgear.com/pricing/) to secure your ideal setting. Whether your celebration is by the beach or in a countryside locale, the right furniture hire can turn any setting into a cozy yet sophisticated environment.
+**Explore** [our offerings](/packages/) to secure your ideal setting. Whether your celebration is by the beach or in a countryside locale, the right furniture hire can turn any setting into a cozy yet sophisticated environment.
 
 | Equipment Type | Purpose | Impact on Wedding | Customization Options |
 | --- | --- | --- | --- |
@@ -201,7 +201,7 @@ Choosing to personalize aspects of your event not only elevates the ambiance but
 
 ## Perfect Parties: Elevating Your Wedding Experience
 
-When it comes to organizing unforgettable parties, weddings top the list for their elegance and emotional significance. At **Malaga Event Gear (MEG)**, we specialize in making these occasions exceptional with our comprehensive rental services. Whether you’re celebrating under sunlit skies or in a cozy banquet hall, the [**Wedding Pack**](https://malagaeventgear.com/wedding-pack/) ensures your event stands out with pristine audio and enchanting visual effects.
+When it comes to organizing unforgettable parties, weddings top the list for their elegance and emotional significance. At **Malaga Event Gear (MEG)**, we specialize in making these occasions exceptional with our comprehensive rental services. Whether you’re celebrating under sunlit skies or in a cozy banquet hall, the [**Wedding Pack**](/packages/wedding/) ensures your event stands out with pristine audio and enchanting visual effects.
 
 From crystal clear sound systems tailored for pivotal speeches to mood setting lighting, couples and planners can trust MEG to enhance every aspect of their special day. Our approach isn’t just about delivering event gear. It’s about crafting a cohesive experience that resonates with your vision.
 
@@ -209,7 +209,7 @@ With customizable options, you can design every element to reflect personal tast
 
 ## Conclusions
 
-At **Malaga Event Gear (MEG)**, we are dedicated to transforming your wedding into an unforgettable celebration. With top notch [audio visual rentals](https://malagaeventgear.com/audio-visual-rental/) equipment, enchanting lighting, and premium party rentals, your special day will shine. Our team is committed to providing seamless service from setup to support, ensuring a hassle free experience.
+At **Malaga Event Gear (MEG)**, we are dedicated to transforming your wedding into an unforgettable celebration. With top notch [audio visual rentals](/blog/audio-visual-rental/) equipment, enchanting lighting, and premium party rentals, your special day will shine. Our team is committed to providing seamless service from setup to support, ensuring a hassle free experience.
 
 Whether planning an intimate gathering or a grand affair, we offer tailored packages to meet your unique needs. For exceptional service and memories that last a lifetime, contact us today and let us make your dream wedding a reality.  
 

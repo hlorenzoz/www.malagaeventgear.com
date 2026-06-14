@@ -69,9 +69,9 @@ While the community meeting highlights MEG’s dedication to local non profit an
 
 Their services are tailored for:
 
--   **Corporate Events & Conferences:** Providing solutions like the specialized [MICE Pack](https://malagaeventgear.com/mice-pack/), which includes professional sound systems, presentation screens, and dedicated technicians to manage large corporate meetings and product launches.
--   **Weddings and Private Parties:** Offering full service packages, such as the [Wedding Pack](https://malagaeventgear.com/wedding-pack/), which ensures both crystal clear speeches and dynamic lighting for the celebration.
--   **[Product Presentations](https://malagaeventgear.com/product-presentation-pack/):** Featuring high lumen projectors and clear audio systems ideal for workshops and seminars.
+-   **Corporate Events & Conferences:** Providing solutions like the specialized [MICE Pack](/packages/mice/), which includes professional sound systems, presentation screens, and dedicated technicians to manage large corporate meetings and product launches.
+-   **Weddings and Private Parties:** Offering full service packages, such as the [Wedding Pack](/packages/wedding/), which ensures both crystal clear speeches and dynamic lighting for the celebration.
+-   **[Product Presentations](/packages/product-presentation/):** Featuring high lumen projectors and clear audio systems ideal for workshops and seminars.
 
 MEG operates under the slogan: “Rent your audiovisual system for multiple occasions”. With over 1000 satisfied customers, the company prides itself on delivering a seamless experience, including easy online package selection and technical assistance for a hassle free event.
 
@@ -79,4 +79,4 @@ All communication and services are offered to an Anglophone public, primarily in
 
 The team at Malaga Event Gear looks forward to many more years of serving the Malaga community, upholding its standard of excellence in every **sound system rental** and audiovisual service they provide.
 
-You can contact us by [selecting any of the packages that fit your needs](https://malagaeventgear.com/pricing/), or directly through our [contact page](https://malagaeventgear.com/contact-us/).
+You can contact us by [selecting any of the packages that fit your needs](/packages/), or directly through our [contact page](https://malagaeventgear.com/contact-us/).
