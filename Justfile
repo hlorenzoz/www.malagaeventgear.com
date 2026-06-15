@@ -95,6 +95,12 @@ post-new:
 post-touch slug:
     bun scripts/post-touch.ts {{slug}}
 
+# Optimiza las imágenes de assets/ → WebP+AVIF multi-ancho, las sube a R2 (blog/<id>/),
+# persiste refs+metadata en manifest.json y escribe el markup <picture> en assets/_urls.txt.
+# Acepta una subcarpeta (just post-images test) o --dry-run (no encodea ni sube, solo muestra).
+post-images *ARGS:
+    bun scripts/post-images.ts {{ARGS}}
+
 # Migración WP → mdsvex en modo DRY-RUN (solo lectura — no escribe archivos ni sube a R2)
 migrate-wp-dry-run:
     bun scripts/migrate-wp/index.ts --dry-run

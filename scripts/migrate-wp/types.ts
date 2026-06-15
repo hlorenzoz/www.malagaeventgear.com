@@ -53,6 +53,26 @@ export interface MediaEntry {
 	 * originalUrl, not wpId, for orphan entries.
 	 */
 	orphan?: boolean;
+	/**
+	 * When/where this image is meant to be used, e.g. ["cover", "hero", "gallery", "body", "og"].
+	 * Added by the local authoring pipeline (scripts/post-images.ts) — WordPress did not model
+	 * this. Optional: absent on all migrated entries.
+	 */
+	usage?: string[];
+	/**
+	 * CDN URL of the sibling AVIF rendition of THIS exact variant (same base + dimensions,
+	 * `.avif` extension). Stored here — never as its own media entry — because
+	 * rehype-blog-images groups variants by base (extension-stripped) and would otherwise
+	 * merge WebP + AVIF into a single (invalid) <img srcset>. Consumers that build <picture>
+	 * read this field; existing readers ignore it. Optional: absent on migrated WebP-only entries.
+	 */
+	avifUrl?: string;
+	/**
+	 * SHA-256 of the original source file bytes. Used by scripts/post-images.ts for
+	 * idempotent re-runs (skip re-encode/re-upload when the same source is seen again).
+	 * Optional: absent on migrated entries.
+	 */
+	sourceHash?: string;
 }
 
 /** One entry per migrated WP post. */

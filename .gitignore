@@ -25,6 +25,10 @@ bun-debug.log*
 # Generated exports & local temporary media
 *-export.ts
 
+# Local image authoring source files — re-uploadable; refs + metadata are persisted in
+# scripts/migrate-wp/manifest.json (tracked). assets/_urls.txt and meta.yaml are local scratch/input.
+assets/
+
 # ------------------------------------------------------------------------------
 # Cloudflare / Wrangler & D1 Local State
 # ------------------------------------------------------------------------------
