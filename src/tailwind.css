@@ -10,13 +10,17 @@
 }
 
 /* Self-hosted variable fonts (latin subset, woff2). Servidas desde /fonts con preload de Playfair
-   (fuente del LCP) → disponibles antes del primer paint, sin swap-relayout (forced reflow) ni
-   round-trip a fonts.gstatic.com. */
+   (fuente del LCP) → disponibles antes del primer paint, sin round-trip a fonts.gstatic.com.
+   Playfair usa `swap` (no `optional`) PORQUE es la fuente del <h1> = el elemento LCP: con
+   `optional`, el Chrome de PageSpeed NO emite candidato de LCP para el texto (queda "invisible"
+   durante el bloqueo de la fuente) → NO_LCP, aunque Chrome nuevo sí lo registre. `swap` pinta el
+   fallback de inmediato (siempre candidato de LCP). El `Playfair Fallback` (Georgia size-adjusted)
+   tiene métricas igualadas, así que el swap no produce CLS. */
 @font-face {
   font-family: 'Playfair Display';
   font-style: normal;
   font-weight: 400 900;
-  font-display: optional;
+  font-display: swap;
   src: url('/fonts/playfair-display-latin-wght-normal.woff2') format('woff2-variations');
 }
 @font-face {
