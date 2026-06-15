@@ -14,7 +14,12 @@
 	// Esquemas de datos estructurados globales
 	const localBusinessSchema = buildLocalBusinessSchema();
 	const webSiteSchema = buildWebSiteSchema();
-	const breadcrumbSchema = $derived(buildBreadcrumbsSchema($page.url.pathname));
+	// Última miga = título real de la página cuando está en los datos de la ruta
+	// (post de blog → data.post.title; paquete → data.pkg.name). Si no, cae al slug capitalizado.
+	const breadcrumbLeaf = $derived(
+		($page.data as any)?.post?.title ?? ($page.data as any)?.pkg?.name ?? undefined
+	);
+	const breadcrumbSchema = $derived(buildBreadcrumbsSchema($page.url.pathname, breadcrumbLeaf));
 
 	const REVEAL_SELECTOR = '.reveal, .reveal-on-scroll, .reveal-card, .reveal-card-featured';
 	let revealObserver: IntersectionObserver | null = null;

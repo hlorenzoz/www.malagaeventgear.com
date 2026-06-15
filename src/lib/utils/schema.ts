@@ -79,7 +79,7 @@ export function buildWebSiteSchema(): Record<string, any> {
  * Genera el esquema de BreadcrumbList de manera dinámica basado en el path de la URL activa.
  * Respeta de forma estricta las trailing slashes.
  */
-export function buildBreadcrumbsSchema(pathname: string): Record<string, any> {
+export function buildBreadcrumbsSchema(pathname: string, leafName?: string): Record<string, any> {
 	// Asegurar que el pathname comience con / y termine con / si no es la Home
 	let path = pathname;
 	if (path !== '/' && !path.endsWith('/')) {
@@ -98,15 +98,20 @@ export function buildBreadcrumbsSchema(pathname: string): Record<string, any> {
 		const segments = path.split('/').filter(Boolean);
 		const accumulatedSegments: string[] = [];
 
-		segments.forEach((segment) => {
+		segments.forEach((segment, idx) => {
 			accumulatedSegments.push(segment);
 			const currentPath = `/${accumulatedSegments.join('/')}/`;
-			
-			// Capitalizar el nombre del segmento de forma amigable para la miga de pan
-			const name = segment
-				.split('-')
-				.map(word => word.charAt(0).toUpperCase() + word.slice(1))
-				.join(' ');
+			const isLast = idx === segments.length - 1;
+
+			// La última miga usa el título real de la página (leafName) cuando está disponible;
+			// el resto (y el fallback) capitaliza el segmento de la URL de forma amigable.
+			const name =
+				isLast && leafName
+					? leafName
+					: segment
+							.split('-')
+							.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+							.join(' ');
 
 			items.push({
 				name,
@@ -385,15 +390,10 @@ export function buildArticleSchema(post: {
 			'name': post.authorName,
 			...(post.authorUrl ? { 'url': post.authorUrl } : {})
 		},
-		'publisher': {
-			'@type': 'Organization',
-			'name': siteConfig.brandName,
-			'logo': {
-				'@type': 'ImageObject',
-				'url': siteConfig.logoUrl
-			},
-			'url': siteConfig.url
-		},
+		// Referencia al nodo canónico de la organización (#organization, emitido por el layout
+		// público vía buildLocalBusinessSchema con name+logo+address). Consolidar por @id evita
+		// un segundo nodo "Organization" parcial en el grafo. Mismo patrón que buildWebSiteSchema.
+		'publisher': { '@id': `${siteConfig.url}/#organization` },
 		'mainEntityOfPage': {
 			'@type': 'WebPage',
 			'@id': `${siteConfig.url}${post.url}`

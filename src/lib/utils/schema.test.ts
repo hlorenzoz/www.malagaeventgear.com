@@ -3,7 +3,7 @@
  * Covers: buildArticleSchema extensions + buildFAQSchema.
  */
 import { describe, it, expect } from 'vitest';
-import { buildArticleSchema, buildFAQSchema, buildServiceSchema, buildServiceListSchema, toIso8601WithOffset } from './schema';
+import { buildArticleSchema, buildFAQSchema, buildServiceSchema, buildServiceListSchema, toIso8601WithOffset, buildBreadcrumbsSchema } from './schema';
 import { siteConfig } from '../data/site';
 
 const basePost = {
@@ -94,8 +94,34 @@ describe('buildArticleSchema', () => {
 		expect(schema['datePublished']).toBe('2026-01-15T09:00:00+01:00');
 		expect(schema['dateModified']).toBe('2026-01-20T09:00:00+01:00');
 		expect(schema['author']).toMatchObject({ '@type': 'Person', name: 'Hector Luis Lorenzo' });
-		expect(schema['publisher']).toMatchObject({ '@type': 'Organization' });
+		// publisher references the canonical #organization node by @id (entity-graph consolidation).
+		expect(schema['publisher']).toEqual({ '@id': `${siteConfig.url}/#organization` });
 		expect(schema['mainEntityOfPage']).toMatchObject({ '@type': 'WebPage' });
+	});
+});
+
+describe('buildBreadcrumbsSchema', () => {
+	it('uses the slug-derived (Title Case) name for the last crumb when no leafName given', () => {
+		const schema = buildBreadcrumbsSchema('/blog/news-malaga-event-gear-unveils-new-rebranded-website/');
+		const last = schema.itemListElement.at(-1);
+		expect(last.name).toBe('News Malaga Event Gear Unveils New Rebranded Website');
+	});
+
+	it('uses leafName for the last crumb when provided (real page title)', () => {
+		const schema = buildBreadcrumbsSchema(
+			'/blog/news-malaga-event-gear-unveils-new-rebranded-website/',
+			'Malaga Event Gear Unveils a Faster, Rebranded Website'
+		);
+		const items = schema.itemListElement;
+		expect(items.at(-1).name).toBe('Malaga Event Gear Unveils a Faster, Rebranded Website');
+		// Intermediate crumbs are unaffected by leafName.
+		expect(items[0].name).toBe('Home');
+		expect(items[1].name).toBe('Blog');
+	});
+
+	it('positions are sequential starting at 1', () => {
+		const schema = buildBreadcrumbsSchema('/blog/', 'Blog');
+		expect(schema.itemListElement.map((i: any) => i.position)).toEqual([1, 2]);
 	});
 });
 
