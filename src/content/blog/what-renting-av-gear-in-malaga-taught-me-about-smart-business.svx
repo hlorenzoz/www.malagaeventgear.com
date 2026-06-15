@@ -51,7 +51,7 @@ This was immediately clear from their service oriented packages.
 
 The **[MICE Pack](/packages/mice/)** for corporate events, for instance, includes a dedicated technician for up to 6 hours.
 
-The **[Wedding Pack](/packages/wedding/)** goes even further, bundling transport, setup, on site support, and post event pickup into the [price](https://malagaeventgear.com/#pricing).
+The **[Wedding Pack](/packages/wedding/)** goes even further, bundling transport, setup, on site support, and post event pickup into the [price](/packages/).
 
 This completely shifts the value proposition.
 
