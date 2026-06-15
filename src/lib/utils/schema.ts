@@ -140,10 +140,13 @@ export function buildServiceSchema(
 	},
 	lang: 'en' | 'es' = 'en'
 ): Record<string, any> {
+	// Referencia al nodo canónico de la organización (emitido en el layout con
+	// @id .../#organization). NO redefinimos la empresa aquí: un provider parcial
+	// hace que Google detecte una segunda "Empresa local" incompleta (faltan
+	// telephone, priceRange, address, image). El grafo de entidades exige un único
+	// nodo canónico referenciado por @id — igual que hace buildWebSiteSchema.
 	const providerSchema = {
-		'@type': 'ProfessionalService',
-		'name': siteConfig.brandName,
-		'url': siteConfig.url
+		'@id': `${siteConfig.url}/#organization`
 	};
 
 	return {

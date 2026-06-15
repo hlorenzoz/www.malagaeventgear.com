@@ -3,7 +3,8 @@
  * Covers: buildArticleSchema extensions + buildFAQSchema.
  */
 import { describe, it, expect } from 'vitest';
-import { buildArticleSchema, buildFAQSchema } from './schema';
+import { buildArticleSchema, buildFAQSchema, buildServiceSchema } from './schema';
+import { siteConfig } from '../data/site';
 
 const basePost = {
 	title: 'Test Article',
@@ -124,5 +125,36 @@ describe('buildFAQSchema', () => {
 	it('handles empty FAQ array', () => {
 		const schema = buildFAQSchema([]);
 		expect(schema['mainEntity']).toHaveLength(0);
+	});
+});
+
+describe('buildServiceSchema', () => {
+	const baseService = {
+		name: 'Wedding Audiovisual Pack',
+		description: 'Sound, lighting and screen rental for weddings in Malaga.',
+		price: 499,
+		url: '/packages/wedding/',
+	};
+
+	it('references the canonical organization node by @id instead of redefining it', () => {
+		const schema = buildServiceSchema(baseService);
+		// The provider must be a pure @id reference — NOT a partial ProfessionalService.
+		// A partial node makes Google detect a second, incomplete "Local Business".
+		expect(schema['provider']).toEqual({ '@id': `${siteConfig.url}/#organization` });
+	});
+
+	it('does not redeclare provider @type or duplicate business fields', () => {
+		const schema = buildServiceSchema(baseService);
+		expect(schema['provider']).not.toHaveProperty('@type');
+		expect(schema['provider']).not.toHaveProperty('name');
+		expect(schema['provider']).not.toHaveProperty('url');
+	});
+
+	it('keeps the Service core: name, offers with price/currency', () => {
+		const schema = buildServiceSchema(baseService);
+		expect(schema['@type']).toBe('Service');
+		expect(schema['name']).toBe(baseService.name);
+		expect(schema['offers']['price']).toBe('499.00');
+		expect(schema['offers']['priceCurrency']).toBe('EUR');
 	});
 });
