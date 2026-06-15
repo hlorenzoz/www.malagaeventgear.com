@@ -35,9 +35,12 @@ export const GET: RequestHandler = async () => {
 	const packagesXml = packages
 		.map((pkg) => {
 			const loc = `${baseUrl}${pkg.route}`;
+			// image:loc MUST be an absolute URL (sitemap protocol). pkg.image is a
+			// site-relative path (e.g. /images/packages/eco.webp), so prefix baseUrl —
+			// otherwise GSC reports "URL no válida" on every package image.
 			const imageBlock = pkg.image
 				? `\n		<image:image>
-			<image:loc>${pkg.image}</image:loc>
+			<image:loc>${baseUrl}${pkg.image}</image:loc>
 		</image:image>`
 				: '';
 

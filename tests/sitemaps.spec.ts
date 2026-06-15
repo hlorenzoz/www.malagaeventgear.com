@@ -39,6 +39,11 @@ test.describe('Technical SEO Sitemap & Edge Redirection E2E Tests', () => {
 		expect(text).toContain('https://malagaeventgear.com/packages/wedding/');
 		expect(text).toContain('https://malagaeventgear.com/packages/eco/');
 		expect(text).toContain('https://malagaeventgear.com/packages/mice/');
+
+		// image:loc must be ABSOLUTE — relative paths are rejected by GSC ("URL no válida")
+		expect(text).toContain('<image:loc>https://malagaeventgear.com/images/packages/');
+		// Guard against regression: no relative image:loc (i.e. <image:loc>/...)
+		expect(text).not.toMatch(/<image:loc>\/images\//);
 	});
 
 	test('should serve post, category, and author sitemaps as valid empty XML', async ({ request }) => {
