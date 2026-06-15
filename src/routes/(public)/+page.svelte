@@ -150,27 +150,16 @@
 	jsonLdSchema={[buildFaqSchema(getHomepageFaqs(), i18n.lang)]}
 />
 
-<!-- Preload the decorative hero backdrop so the CSS background paints early -->
-<svelte:head>
-	<link rel="preload" as="image" href="/premium_event_stage_mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
-	<link rel="preload" as="image" href="/premium_event_stage.webp" media="(min-width: 768px)" fetchpriority="high" />
-</svelte:head>
-
 <!-- Hero Section -->
 <section class="relative min-h-[90vh] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-24 overflow-hidden">
 	<div class="absolute inset-0 z-0">
 		<!--
-			Decorative hero backdrop rendered as a CSS background-image (not an <img>).
-			A full-viewport <img> is excluded from LCP candidacy by Chrome (treated as a
-			background) yet still occupies the "largest paint" slot, which suppressed the
-			real LCP element (the <h1>) and produced NO_LCP in Lighthouse. As a CSS
-			background it stays visible but no longer competes, so the <h1> is the stable LCP.
+			Decorative hero backdrop as a pure CSS gradient (no raster image). A full-viewport
+			background-IMAGE was the LCP element, but PageSpeed's Chrome excludes full-viewport
+			images from LCP while they still hold the "largest paint" slot, suppressing the real
+			LCP (<h1>) -> NO_LCP. A gradient is not an image candidate, so the <h1> is the LCP.
 		-->
-		<div
-			class="hero-bg absolute inset-0 opacity-60 dark:opacity-70 transition-opacity duration-300"
-			role="img"
-			aria-label="Stage background with professional event lights"
-		></div>
+		<div class="hero-bg absolute inset-0 transition-colors duration-300"></div>
 		<div class="absolute inset-0 bg-gradient-to-b from-background/55 via-background/15 to-background transition-colors duration-300"></div>
 	</div>
 	

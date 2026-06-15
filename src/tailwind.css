@@ -258,19 +258,17 @@ html {
   -webkit-text-fill-color: transparent;
 }
 
-/* Hero decorative backdrop — CSS background (not an <img>) so it never competes
-   for the LCP "largest paint" slot. Mobile-first source, desktop source ≥768px. */
+/* Hero decorative backdrop — a pure CSS gradient (no raster image) that evokes the
+   stage-lighting look. A full-viewport background-IMAGE was the home's LCP element
+   locally, but PageSpeed's Chrome excludes full-viewport images from LCP candidacy
+   while it still holds the "largest paint" slot, suppressing the real LCP (<h1>) ->
+   NO_LCP. A gradient is not an image candidate, so the <h1> becomes the stable LCP
+   in every environment. Adapts to light/dark via the surface/background tokens. */
 .hero-bg {
-  background-image: url('/premium_event_stage_mobile.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-@media (min-width: 768px) {
-  .hero-bg {
-    background-image: url('/premium_event_stage.webp');
-  }
+  background:
+    radial-gradient(135% 95% at 12% -15%, rgba(77, 140, 255, 0.45), transparent 55%),
+    radial-gradient(120% 85% at 100% 5%, rgba(37, 99, 235, 0.30), transparent 50%),
+    linear-gradient(168deg, var(--surface-container) 0%, var(--background) 60%);
 }
 
 /* Scroll Reveal Animations.
