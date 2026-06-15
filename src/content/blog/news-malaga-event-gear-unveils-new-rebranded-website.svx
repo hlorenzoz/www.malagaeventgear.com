@@ -1,48 +1,44 @@
 ---
 title: "Malaga Event Gear Unveils a Faster, Rebranded Website"
-description: "Malaga Event Gear launches a faster, fully rebuilt and rebranded website — the same trusted AV and event equipment rental across Málaga and the Costa del Sol."
+description: "Malaga Event Gear relaunches with a faster, rebuilt website and fixed-price online booking for AV and event equipment rental across the Costa del Sol."
 author: "Hector Luis Lorenzo"
 slug: news-malaga-event-gear-unveils-new-rebranded-website
 publishDate: "2026-06-15"
-excerpt: "Malaga Event Gear today announced the launch of its newly rebranded website — rebuilt from the ground up for speed, clarity, and a smoother booking experience — while continuing to deliver the same professional sound, lighting, and audiovisual rental service trusted across Málaga and the Costa del Sol."
+excerpt: "Malaga Event Gear has relaunched its website with a refreshed brand and a faster, rebuilt platform, making it easier to book professional sound, lighting, and audiovisual equipment online, at fixed prices, across Málaga and the Costa del Sol."
 coverImage: "https://cdn.malagaeventgear.com/blog/3094/malagaeventgear.webp"
 categories: ["News", "Audio Visual Rental"]
 tags: ["rebranding", "company news", "malaga"]
 draft: false
 ---
 
-**Málaga, Spain — June 15, 2026**
+**Málaga, Spain. June 15, 2026.**
 
-Malaga Event Gear (MEG), a leading audiovisual and event equipment hire service on the Costa del Sol, today announced the launch of its newly rebranded website at [malagaeventgear.com](https://malagaeventgear.com).
+Malaga Event Gear (MEG), an audiovisual and event equipment rental service active on the Costa del Sol since 1996, has relaunched its website at [malagaeventgear.com](https://malagaeventgear.com) with a refreshed brand and a rebuilt platform.
 
-The new site has been rebuilt from the ground up — faster to load, clearer to navigate, and designed to make finding and booking the right equipment effortless, whether you are planning a wedding, a corporate conference, or a private celebration.
+The new site keeps what has set MEG apart for years: 100% online booking with fixed, standardized prices, so clients can confirm their gear without waiting on a manual quote.
 
-## A New Digital Home for Costa del Sol Events
+## A Website Built Around Online Booking
 
-For years, clients across Málaga and the wider Costa del Sol have relied on Malaga Event Gear for professional [sound systems](/packages/mice/), [lighting](/packages/basic-mice/), and [large-screen projection](/packages/product-presentation/).
+In most of the rental industry, securing equipment still means emails, phone calls, and back-and-forth quotes. MEG built its new site around the opposite idea: browse the [rental packages](/packages/), see the price, and book in one sitting.
 
-The rebrand brings that experience online with a cleaner identity and a website that reflects the quality of the service behind it.
+Every package lists its inclusions and a clear price up front, whether you are planning a [wedding](/packages/wedding/), a [corporate conference](/packages/mice/), or a private celebration.
 
-Every page has been reorganised around how clients actually plan an event — by occasion and by need — so the path from "I have an event" to "my gear is booked" is shorter than ever.
+## Faster Pages, Cleaner Navigation
 
-## Built for Speed and Clarity
+Performance was the priority. The site was rebuilt to load quickly on phones and laptops, because the company that handles the technical side of an event should not run a slow website.
 
-Performance was the priority from the first line of code.
+Pages are organized by occasion and by need, so the path from "I have an event" to "my gear is booked" stays short.
 
-The new platform was engineered to load near-instantly on any device, because a slow website is a poor first impression for a company whose entire job is making events run flawlessly.
+## Nearly Three Decades, More Than a Thousand Events
 
-The result is a faster, more reliable experience: quicker browsing of equipment and packages, clearer pricing, and a streamlined enquiry process that gets you a response without friction.
+The brand is new. The track record is not. MEG has worked in audiovisual production since 1996 and has served more than 1,000 clients across Málaga, Marbella, and the wider Costa del Sol, with delivery and on-site setup included rather than counter pickup.
 
-## The Same Trusted Service, A Fresh Look
+The Malaga Event Gear team summed up the relaunch this way:
 
-While the look is new, the commitment behind it is not.
-
-> A new website doesn't change who we are — it just makes it easier for our clients to work with us. The same gear, the same hands-on support, the same obsession with getting every event right.
-
-Malaga Event Gear continues to provide end-to-end audiovisual support — from delivery and on-site setup to technical assistance throughout the event — for weddings, corporate gatherings, conferences, and private functions across the region.
+> Our clients do not rent equipment to admire it. They rent it to run an event. The new website makes booking the right gear faster, and the hands-on delivery and setup behind it stays exactly the same.
 
 ## Explore the New malagaeventgear.com
 
-Clients and event planners are invited to explore the rebranded site, browse the full range of [event rental packages](/packages/), and read more on the [Malaga Event Gear blog](/blog/).
+Clients and event planners can browse the full range of [event rental packages](/packages/) and read more on the [Malaga Event Gear blog](/blog/).
 
-For enquiries, quotes, and availability, the team is reachable directly through the new website.
+For quotes and availability across the Costa del Sol, Sevilla, and Granada, the team is reachable through the new site.
