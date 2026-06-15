@@ -150,6 +150,12 @@
 	jsonLdSchema={[buildFaqSchema(getHomepageFaqs(), i18n.lang)]}
 />
 
+<!-- Preload the hero <img> (the LCP element) so it starts loading before the markup is parsed. -->
+<svelte:head>
+	<link rel="preload" as="image" href="/premium_event_stage_mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+	<link rel="preload" as="image" href="/premium_event_stage.webp" media="(min-width: 768px)" fetchpriority="high" />
+</svelte:head>
+
 <!-- Hero Section -->
 <section class="relative min-h-[90vh] flex items-center justify-center px-margin-mobile md:px-margin-desktop py-24 overflow-hidden">
 	<div class="absolute inset-0 z-0">
@@ -164,7 +170,7 @@
 	</div>
 	
 	<div class="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
-		<div class="space-y-8">
+		<div class="space-y-8 order-2 lg:order-1">
 			<span class="inline-block px-4 py-2 rounded-full glass-panel font-label-sm text-primary uppercase tracking-widest">
 				{i18n.t.hero.span}
 			</span>
@@ -189,37 +195,27 @@
 			</div>
 		</div>
 
-		<!-- Bento Info Cards -->
-		<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 lg:mt-0">
-			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300">
-				<div class="w-12 h-12 rounded-full bg-electric-blue/20 flex items-center justify-center mb-4">
-					<Icon name="build" className="text-electric-blue" />
-				</div>
-				<h2 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card1Title}</h2>
-				<p class="font-body-md text-on-surface-variant text-sm">
-					{i18n.t.bento.card1Text}
-				</p>
-			</div>
-			
-			<div class="glass-card p-6 rounded-xl ambient-shadow sm:translate-y-8 hover:translate-y-6 transition-transform duration-300">
-				<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-4">
-					<Icon name="inventory_2" className="text-primary" />
-				</div>
-				<h2 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card2Title}</h2>
-				<p class="font-body-md text-on-surface-variant text-sm">
-					{i18n.t.bento.card2Text}
-				</p>
-			</div>
-			
-			<div class="glass-card p-6 rounded-xl ambient-shadow hover:-translate-y-2 transition-transform duration-300 sm:col-span-2 sm:w-[80%] mx-auto sm:mt-8">
-				<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center mb-4">
-					<Icon name="memory" className="text-secondary" />
-				</div>
-				<h2 class="font-headline-md text-[20px] mb-2 text-on-surface">{i18n.t.bento.card3Title}</h2>
-				<p class="font-body-md text-on-surface-variant text-sm">
-					{i18n.t.bento.card3Text}
-				</p>
-			</div>
+		<!--
+			Hero photo as a real, bounded <img> (not a full-viewport background). This is the LCP
+			element on purpose: PageSpeed's Chrome reliably picks a real, eager, above-the-fold
+			image as the LCP (same pattern as the package cards on /packages/), whereas a
+			full-viewport background image was excluded from LCP candidacy -> NO_LCP. `order-1`
+			keeps it above the fold on mobile so it qualifies as the LCP there too.
+		-->
+		<div class="order-1 lg:order-2">
+			<picture>
+				<source media="(min-width: 768px)" srcset="/premium_event_stage.webp" />
+				<img
+					src="/premium_event_stage_mobile.webp"
+					alt="Premium event stage with professional audiovisual lighting on the Costa del Sol"
+					width="800"
+					height="600"
+					loading="eager"
+					fetchpriority="high"
+					decoding="async"
+					class="w-full aspect-4/3 object-cover rounded-2xl ambient-shadow border border-border-glass"
+				/>
+			</picture>
 		</div>
 	</div>
 </section>
