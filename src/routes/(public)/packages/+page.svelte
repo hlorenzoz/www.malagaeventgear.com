@@ -7,15 +7,20 @@
 	import ImageMarquee from '$lib/components/home/ImageMarquee.svelte';
 	import { galleryImages } from '$lib/data/gallery';
 
-	import { buildItemListSchema } from '$lib/utils/schema';
+	import { buildServiceListSchema } from '$lib/utils/schema';
 	import { faqs, buildFaqSchema } from '$lib/data/faq';
 
-	// Esquema estructurado ItemList de paquetes de servicios (SEO Generativo)
+	// ItemList de Services con Offer (precio). Cada item reusa el mismo @id (.../#service)
+	// que su página individual /packages/[slug]/, enlazando el listado al grafo de entidades.
 	let pricingSchema = $derived(
-		buildItemListSchema(
+		buildServiceListSchema(
 			packages.map((pkg) => ({
 				name: pkg.name,
-				url: pkg.route
+				description: pkg.desc[i18n.lang],
+				price: pkg.price,
+				url: pkg.route,
+				serviceType: pkg.seo.serviceType,
+				image: pkg.image
 			})),
 			'Audiovisual Rental Packages - Malaga Event Gear'
 		)

@@ -3,7 +3,7 @@
  * Covers: buildArticleSchema extensions + buildFAQSchema.
  */
 import { describe, it, expect } from 'vitest';
-import { buildArticleSchema, buildFAQSchema, buildServiceSchema } from './schema';
+import { buildArticleSchema, buildFAQSchema, buildServiceSchema, buildServiceListSchema } from './schema';
 import { siteConfig } from '../data/site';
 
 const basePost = {
@@ -156,5 +156,50 @@ describe('buildServiceSchema', () => {
 		expect(schema['name']).toBe(baseService.name);
 		expect(schema['offers']['price']).toBe('499.00');
 		expect(schema['offers']['priceCurrency']).toBe('EUR');
+	});
+});
+
+describe('buildServiceListSchema', () => {
+	const services = [
+		{ name: 'Eco Pack', description: 'Basic.', price: 290, url: '/packages/eco/', serviceType: 'Party Rental', image: '/images/packages/eco.webp' },
+		{ name: 'Wedding Pack', description: 'Premium.', price: 499, url: '/packages/wedding/' },
+	];
+
+	it('returns an ItemList with one ListItem per service', () => {
+		const schema = buildServiceListSchema(services, 'Packages');
+		expect(schema['@type']).toBe('ItemList');
+		expect(schema['itemListElement']).toHaveLength(2);
+	});
+
+	it('wraps each service as a positioned ListItem with a Service item', () => {
+		const schema = buildServiceListSchema(services, 'Packages');
+		const first = schema['itemListElement'][0];
+		expect(first['@type']).toBe('ListItem');
+		expect(first['position']).toBe(1);
+		expect(first['item']['@type']).toBe('Service');
+	});
+
+	it('reuses the same @id as the per-package page (.../#service)', () => {
+		const schema = buildServiceListSchema(services, 'Packages');
+		expect(schema['itemListElement'][0]['item']['@id']).toBe(`${siteConfig.url}/packages/eco/#service`);
+	});
+
+	it('references the canonical organization as provider by @id', () => {
+		const schema = buildServiceListSchema(services, 'Packages');
+		expect(schema['itemListElement'][0]['item']['provider']).toEqual({ '@id': `${siteConfig.url}/#organization` });
+	});
+
+	it('emits an Offer with formatted price and EUR currency', () => {
+		const schema = buildServiceListSchema(services, 'Packages');
+		const offer = schema['itemListElement'][0]['item']['offers'];
+		expect(offer['@type']).toBe('Offer');
+		expect(offer['price']).toBe('290.00');
+		expect(offer['priceCurrency']).toBe('EUR');
+	});
+
+	it('includes an absolute image URL when image is provided, omits it otherwise', () => {
+		const schema = buildServiceListSchema(services, 'Packages');
+		expect(schema['itemListElement'][0]['item']['image']).toBe(`${siteConfig.url}/images/packages/eco.webp`);
+		expect(schema['itemListElement'][1]['item']).not.toHaveProperty('image');
 	});
 });

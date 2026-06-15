@@ -198,6 +198,63 @@ export function buildItemListSchema(
 }
 
 /**
+ * Genera un ItemList donde cada elemento ES la entidad Service del paquete, con su
+ * Offer (precio). A diferencia de buildItemListSchema (name + url planos, sin valor
+ * semántico), esto enlaza el listado al grafo de entidades: cada item usa el MISMO
+ * `@id` (.../#service) que su página individual /packages/[slug]/, y referencia el
+ * nodo canónico de la organización por @id. Google entiende cada paquete como un
+ * servicio con precio y proveedor, sin duplicar entidades.
+ *
+ * Nota: Service + Offer es válido y refuerza el grafo, pero NO genera un snippet de
+ * precio visible en la búsqueda (eso requiere Product/merchant listings).
+ */
+export function buildServiceListSchema(
+	services: Array<{
+		name: string;
+		description: string;
+		price: number;
+		url: string;
+		serviceType?: string;
+		image?: string;
+	}>,
+	listName: string
+): Record<string, any> {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		'name': listName,
+		'itemListElement': services.map((service, index) => {
+			const serviceNode: Record<string, any> = {
+				'@type': 'Service',
+				'@id': `${siteConfig.url}${service.url}#service`,
+				'name': service.name,
+				'description': service.description,
+				'serviceType': service.serviceType || 'Audiovisual Equipment Rental',
+				'url': `${siteConfig.url}${service.url}`,
+				'provider': { '@id': `${siteConfig.url}/#organization` },
+				'offers': {
+					'@type': 'Offer',
+					'price': service.price.toFixed(2),
+					'priceCurrency': 'EUR',
+					'url': `${siteConfig.url}${service.url}`,
+					'availability': 'https://schema.org/InStock'
+				}
+			};
+
+			if (service.image) {
+				serviceNode['image'] = `${siteConfig.url}${service.image}`;
+			}
+
+			return {
+				'@type': 'ListItem',
+				'position': index + 1,
+				'item': serviceNode
+			};
+		})
+	};
+}
+
+/**
  * Genera el esquema FAQPage dinámico.
  */
 export function buildFAQPageSchema(
