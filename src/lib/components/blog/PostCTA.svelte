@@ -17,12 +17,12 @@
 	};
 
 	const sublineMap: Record<string, string> = {
-		wedding: 'Get the Wedding Pack — professional sound and romantic lighting for your special day.',
-		'basic-mice': 'Get the Basic MICE Pack — clear AV for executive meetings and conferences.',
-		mice: 'Get the MICE Pack — premium LED display, sound, and a live technician.',
+		wedding: 'Get the Wedding Pack: professional sound and romantic lighting for your special day.',
+		'basic-mice': 'Get the Basic MICE Pack: clear AV for executive meetings and conferences.',
+		mice: 'Get the MICE Pack: premium LED display, sound, and a live technician.',
 		'product-presentation':
-			'Get the Product Presentation Pack — laser projection and audio for high-impact showcases.',
-		eco: 'Get the Eco Pack — solid sound and ambient lighting for up to 50 guests.'
+			'Get the Product Presentation Pack: laser projection and audio for high-impact showcases.',
+		eco: 'Get the Eco Pack: solid sound and ambient lighting for up to 50 guests.'
 	};
 
 	let headline = $derived(headlineMap[pkg.slug] ?? headlineMap['eco']);
