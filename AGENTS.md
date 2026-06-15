@@ -187,6 +187,18 @@ Esto crea `src/content/blog/<slug>.svx` con frontmatter válido y `draft: true`.
 
 No existe un campo `date` en el schema — `publishDate` es la fecha de creación/publicación.
 
+> **Datos estructurados — fechas (Article/NewsArticle) — gotcha verificado:** Google exige
+> `datePublished`/`dateModified` en ISO 8601 completo **con offset de zona horaria**
+> (ej. `2026-06-15T09:00:00+02:00`). Un valor **solo-fecha** `YYYY-MM-DD` dispara los avisos
+> *"el valor de fecha y hora no es válido"* / *"falta la zona horaria"* en el test de Rich Results.
+> Esto se normaliza **de forma centralizada** con `toIso8601WithOffset()` en
+> [`src/lib/utils/schema.ts`](file:///Users/hlorenzoz/databank/Development/%5BMEG%20-%20Malaga%20Event%20Gear%20%28malagaeventgear.com%29%5D/projects/website/src/lib/utils/schema.ts)
+> (offset real de Europe/Madrid, respeta DST), aplicado dentro de `buildArticleSchema`. **NO**
+> formatees fechas a mano en el JSON-LD ni en el frontmatter.
+> Causa raíz del gotcha (YAML): `publishDate: "2026-06-15"` **entre comillas** queda como string
+> solo-fecha; **sin comillas**, el parser YAML lo convierte a datetime con `Z` (UTC). Ambas formas
+> son seguras hoy porque el helper las normaliza, pero tenelo presente al revisar JSON-LD.
+
 ### Reglas del body
 
 1. **NO repetir el título como `<h1>`** — el layout (`BlogPost.svelte`) ya lo renderiza.

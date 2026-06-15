@@ -287,6 +287,64 @@ export function buildFAQPageSchema(
  * - image: emitted as ImageObject when imageUrl is provided (with optional dims);
  *   falls back to siteConfig.logoUrl as a plain string only when imageUrl is absent
  */
+/**
+ * Offset (en minutos) de una zona horaria IANA para un instante dado.
+ * Edge-safe: solo usa `Intl` (sin Node ni dependencia de `timeZoneName: 'longOffset'`).
+ */
+function tzOffsetMinutes(isoUtc: string, timeZone: string): number {
+	const instant = new Date(isoUtc);
+	const dtf = new Intl.DateTimeFormat('en-US', {
+		timeZone,
+		hour12: false,
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		second: '2-digit'
+	});
+	const parts: Record<string, string> = {};
+	for (const p of dtf.formatToParts(instant)) parts[p.type] = p.value;
+	// Algunas implementaciones devuelven "24" para medianoche → normalizar a "00".
+	const hour = parts.hour === '24' ? '00' : parts.hour;
+	const asLocalMs = Date.UTC(
+		Number(parts.year),
+		Number(parts.month) - 1,
+		Number(parts.day),
+		Number(hour),
+		Number(parts.minute),
+		Number(parts.second)
+	);
+	return Math.round((asLocalMs - instant.getTime()) / 60000);
+}
+
+/**
+ * Normaliza una fecha a ISO 8601 completo CON offset de zona horaria — requerido por Google
+ * para `datePublished`/`dateModified` en Article/NewsArticle (un valor solo-fecha "YYYY-MM-DD"
+ * dispara los avisos "no es válido" / "falta la zona horaria" en Rich Results).
+ *
+ * - Si el valor ya trae hora (contiene 'T'), se respeta sin tocar.
+ * - Si es solo fecha (YYYY-MM-DD), se le agrega una hora local fija + el offset REAL de
+ *   `timeZone` para ese día (respeta DST: Europe/Madrid = +01:00 invierno, +02:00 verano).
+ *
+ * Ejemplo: "2026-06-15" → "2026-06-15T09:00:00+02:00".
+ */
+export function toIso8601WithOffset(
+	date: string,
+	timeZone = 'Europe/Madrid',
+	clock = '09:00:00'
+): string {
+	if (!date) return date;
+	if (date.includes('T')) return date; // ya es datetime → respetar
+	if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) return date; // formato inesperado → no romper
+	const offsetMinutes = tzOffsetMinutes(`${date}T${clock}Z`, timeZone);
+	const sign = offsetMinutes >= 0 ? '+' : '-';
+	const abs = Math.abs(offsetMinutes);
+	const hh = String(Math.floor(abs / 60)).padStart(2, '0');
+	const mm = String(abs % 60).padStart(2, '0');
+	return `${date}T${clock}${sign}${hh}:${mm}`;
+}
+
 export function buildArticleSchema(post: {
 	title: string;
 	description: string;
@@ -318,8 +376,8 @@ export function buildArticleSchema(post: {
 		'@id': `${siteConfig.url}${post.url}#article`,
 		'headline': post.title,
 		'description': post.description,
-		'datePublished': post.datePublished,
-		'dateModified': post.dateModified || post.datePublished,
+		'datePublished': toIso8601WithOffset(post.datePublished),
+		'dateModified': toIso8601WithOffset(post.dateModified || post.datePublished),
 		'inLanguage': 'en',
 		'image': imageNode,
 		'author': {

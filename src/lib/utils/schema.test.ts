@@ -3,7 +3,7 @@
  * Covers: buildArticleSchema extensions + buildFAQSchema.
  */
 import { describe, it, expect } from 'vitest';
-import { buildArticleSchema, buildFAQSchema, buildServiceSchema, buildServiceListSchema } from './schema';
+import { buildArticleSchema, buildFAQSchema, buildServiceSchema, buildServiceListSchema, toIso8601WithOffset } from './schema';
 import { siteConfig } from '../data/site';
 
 const basePost = {
@@ -90,11 +90,31 @@ describe('buildArticleSchema', () => {
 		});
 		expect(schema['headline']).toBe('Test Article');
 		expect(schema['description']).toBe('A test description for the article.');
-		expect(schema['datePublished']).toBe('2026-01-15');
-		expect(schema['dateModified']).toBe('2026-01-20');
+		// Dates are normalized to full ISO 8601 with timezone offset (Google Rich Results).
+		expect(schema['datePublished']).toBe('2026-01-15T09:00:00+01:00');
+		expect(schema['dateModified']).toBe('2026-01-20T09:00:00+01:00');
 		expect(schema['author']).toMatchObject({ '@type': 'Person', name: 'Hector Luis Lorenzo' });
 		expect(schema['publisher']).toMatchObject({ '@type': 'Organization' });
 		expect(schema['mainEntityOfPage']).toMatchObject({ '@type': 'WebPage' });
+	});
+});
+
+describe('toIso8601WithOffset', () => {
+	it('adds CEST offset (+02:00) for a summer date (Europe/Madrid DST)', () => {
+		expect(toIso8601WithOffset('2026-06-15')).toBe('2026-06-15T09:00:00+02:00');
+	});
+
+	it('adds CET offset (+01:00) for a winter date (Europe/Madrid standard time)', () => {
+		expect(toIso8601WithOffset('2026-01-15')).toBe('2026-01-15T09:00:00+01:00');
+	});
+
+	it('leaves an already-full datetime untouched', () => {
+		expect(toIso8601WithOffset('2026-06-15T14:30:00+02:00')).toBe('2026-06-15T14:30:00+02:00');
+	});
+
+	it('returns the value unchanged for empty or unexpected formats', () => {
+		expect(toIso8601WithOffset('')).toBe('');
+		expect(toIso8601WithOffset('not-a-date')).toBe('not-a-date');
 	});
 });
 
