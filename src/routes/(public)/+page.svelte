@@ -152,8 +152,8 @@
 
 <!-- Preload the hero <img> (the LCP element) so it starts loading before the markup is parsed. -->
 <svelte:head>
-	<link rel="preload" as="image" href="/premium_event_stage_mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
-	<link rel="preload" as="image" href="/premium_event_stage.webp" media="(min-width: 768px)" fetchpriority="high" />
+	<link rel="preload" as="image" href="/hero-stage-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+	<link rel="preload" as="image" href="/hero-stage.webp" media="(min-width: 768px)" fetchpriority="high" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -204,9 +204,9 @@
 		-->
 		<div class="order-1 lg:order-2">
 			<picture>
-				<source media="(min-width: 768px)" srcset="/premium_event_stage.webp" />
+				<source media="(min-width: 768px)" srcset="/hero-stage.webp" width="1024" height="768" />
 				<img
-					src="/premium_event_stage_mobile.webp"
+					src="/hero-stage-mobile.webp"
 					alt="Premium event stage with professional audiovisual lighting on the Costa del Sol"
 					width="800"
 					height="600"
