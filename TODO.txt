@@ -230,3 +230,18 @@ PENDIENTE (Cloudflare dashboard, NO repo):
 
 Verificación tras deploy + purge + toggle: npx lighthouse https://nuevo.malagaeventgear.com/blog/ --only-categories=performance --form-factor=mobile -> objetivo FCP <2.5s, LCP <3s, score >=85.
 
+
+-- ✅ Home NO_LCP (PSI mobile: Performance Error! -> ~93)
+
+OJO: el NO_LCP del HOME NO era Bot Fight Mode. Con BFM en OFF el NO_LCP seguía, y la URL *.workers.dev
+(sin edge de Cloudflare) también daba NO_LCP. Causa real: el home no tenía ninguna <img> real
+above-the-fold; su backdrop full-viewport queda excluido del LCP por el Chrome de PSI pero retiene el
+slot de "largest paint" y suprime todo candidato más chico -> cero candidatos -> NO_LCP.
+
+✅ Fix (commit 882eaf5, +cd22d3e): foto del hero como <img> real ACOTADO (aspect-4/3 object-cover, no
+full-viewport) eager + fetchpriority=high + preload, above-the-fold en mobile (mismo patrón que hace
+que /packages/ puntúe 93). + prerender de la home + variantes 4:3 (static/hero-stage*.webp). El score
+real es ~93; la intermitencia NO_LCP/93 entre corridas es varianza del laboratorio de PSI (no bug).
+
+Writeup completo para agentes: docs/home-no-lcp-investigation.md
+

@@ -4,6 +4,10 @@
 > Estado: **todo lo controlable desde el repo está resuelto y verificado.** El forced reflow
 > residual (`[unattributed]`, Unscored) proviene del **edge de Cloudflare**, no del código.
 
+> **Nota relacionada (LCP):** el `NO_LCP` del **home** fue un problema **distinto**, NO causado por
+> Bot Fight Mode (con BFM en OFF el `NO_LCP` persistía). Su causa era el tipo de elemento LCP, no el
+> edge. Ver **`docs/home-no-lcp-investigation.md`**.
+
 ## Contexto
 
 Partimos de un score de performance **71** (mobile) en las páginas de paquete (FCP 3.0s, LCP 6.4s).
