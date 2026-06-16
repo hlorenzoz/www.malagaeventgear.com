@@ -40,6 +40,7 @@
 		? 'Meet the team at Malaga Event Gear! Learn about our experienced team driving our professional service and seamless events in Malaga, Spain.'
 		: 'Conocé al equipo de Malaga Event Gear. Descubrí al equipo experimentado detrás de nuestro servicio profesional y montajes sin contratiempos.'}
 	canonicalUrl="https://malagaeventgear.com/meet-the-team/"
+	image="https://cdn.malagaeventgear.com/team/hector-luis-lorenzo.webp"
 	jsonLdSchema={teamSchema}
 />
 

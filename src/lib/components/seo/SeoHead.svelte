@@ -9,6 +9,8 @@
 		description,
 		canonicalUrl,
 		image,
+		imageWidth,
+		imageHeight,
 		openGraph = {},
 		twitter = {},
 		jsonLdSchema,
@@ -18,6 +20,8 @@
 		description: string;
 		canonicalUrl: string;
 		image?: string;
+		imageWidth?: number;
+		imageHeight?: number;
 		openGraph?: OpenGraphMeta;
 		twitter?: TwitterCardMeta;
 		jsonLdSchema?: JsonLdSchema | JsonLdSchema[];
@@ -42,6 +46,10 @@
 	};
 
 	let ogImage = $derived(getAbsoluteImageUrl(image || openGraph.images?.[0]?.url));
+	// Dimensiones del og:image del fallback. Sin `image` -> el default premium_event_stage.webp
+	// es 1024x1024. Con `image` -> solo declaramos dimensiones si la página las provee (no inventar).
+	let ogImageWidth = $derived(image ? imageWidth : 1024);
+	let ogImageHeight = $derived(image ? imageHeight : 1024);
 	let ogLocale = $derived(i18n.lang === 'es' ? 'es_ES' : 'en_US');
 	let ogAlternateLocales = $derived(i18n.lang === 'es' ? ['en_US'] : ['es_ES']);
 </script>
@@ -86,8 +94,12 @@
 		{/each}
 	{:else}
 		<meta property="og:image" content={ogImage} />
-		<meta property="og:image:width" content="1024" />
-		<meta property="og:image:height" content="1024" />
+		{#if ogImageWidth}
+			<meta property="og:image:width" content={ogImageWidth.toString()} />
+		{/if}
+		{#if ogImageHeight}
+			<meta property="og:image:height" content={ogImageHeight.toString()} />
+		{/if}
 		<meta property="og:image:alt" content={openGraph.images?.[0]?.alt || title} />
 		<meta property="og:image:type" content="image/webp" />
 	{/if}

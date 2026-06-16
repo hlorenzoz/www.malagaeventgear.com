@@ -20,15 +20,15 @@ test.describe('OpenGraph & Twitter Card Meta E2E Validation Tests', () => {
 		await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute('content', 'en_US');
 		await expect(page.locator('meta[property="og:locale:alternate"]')).toHaveAttribute('content', 'es_ES');
 
-		// Dynamic Absolute Image Default
-		const defaultImg = 'https://malagaeventgear.com/premium_event_stage.webp';
-		await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', defaultImg);
+		// Home now references its own hero image as og:image (not the brand fallback)
+		const heroImg = 'https://malagaeventgear.com/hero-stage.webp';
+		await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', heroImg);
 		await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute('content', '1024');
-		await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content', '1024');
+		await expect(page.locator('meta[property="og:image:height"]')).toHaveAttribute('content', '768');
 
 		// Twitter Cards
 		await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute('content', 'summary_large_image');
-		await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', defaultImg);
+		await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', heroImg);
 	});
 
 	test('2. should dynamic toggle locales between ES and EN', async ({ page }) => {
