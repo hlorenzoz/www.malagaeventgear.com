@@ -3,6 +3,7 @@
 	import { env } from '$env/dynamic/public';
 	import { i18n } from '$lib/i18n.svelte';
 	import ErrorModal from '$lib/components/modals/ErrorModal.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { loadTurnstile } from '$lib/utils/turnstile';
 	import PhoneInput from './PhoneInput.svelte';
 
@@ -385,8 +386,14 @@
 
 		<!-- Micro-copy de confianza -->
 		<div class="mt-4 flex flex-col items-center justify-center gap-1 text-center text-xs text-on-surface-variant/75">
-			<p>🛡️ {i18n.lang === 'en' ? 'No credit card required to check availability' : 'No se requiere tarjeta de crédito para consultar'}</p>
-			<p>⚡ {i18n.lang === 'en' ? 'Response as soon as possible' : 'Respuesta lo antes posible'}</p>
+			<p class="flex items-center gap-1.5">
+				<Icon name="shield" size="14" />
+				{i18n.lang === 'en' ? 'No credit card required to check availability' : 'No se requiere tarjeta de crédito para consultar'}
+			</p>
+			<p class="flex items-center gap-1.5">
+				<Icon name="zap" size="14" />
+				{i18n.lang === 'en' ? 'Response as soon as possible' : 'Respuesta lo antes posible'}
+			</p>
 		</div>
 	</form>
 </section>

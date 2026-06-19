@@ -1,5 +1,81 @@
 <script lang="ts">
-	// Svelte 5 component with strict typing and modern runes
+	// Svelte 5 icon adapter. Public contract unchanged (`name`, `className`, `size`)
+	// so the 30+ call sites keep using <Icon name="..." /> verbatim. Internally the
+	// catalog now maps each semantic name to a tree-shakeable @lucide/svelte icon
+	// (deep imports → only the icons listed below ship in the bundle).
+	import ArrowRight from '@lucide/svelte/icons/arrow-right';
+	import ArrowUpRight from '@lucide/svelte/icons/arrow-up-right';
+	import Bot from '@lucide/svelte/icons/bot';
+	import Box from '@lucide/svelte/icons/package';
+	import Briefcase from '@lucide/svelte/icons/briefcase';
+	import Building2 from '@lucide/svelte/icons/building-2';
+	import Check from '@lucide/svelte/icons/check';
+	import CheckCircle from '@lucide/svelte/icons/check-circle';
+	import ChevronDown from '@lucide/svelte/icons/chevron-down';
+	import ChevronLeft from '@lucide/svelte/icons/chevron-left';
+	import ChevronRight from '@lucide/svelte/icons/chevron-right';
+	import Circle from '@lucide/svelte/icons/circle';
+	import CircleUser from '@lucide/svelte/icons/circle-user';
+	import Clock from '@lucide/svelte/icons/clock';
+	import Compass from '@lucide/svelte/icons/compass';
+	import Cookie from '@lucide/svelte/icons/cookie';
+	import Cpu from '@lucide/svelte/icons/cpu';
+	import CreditCard from '@lucide/svelte/icons/credit-card';
+	import FileCheck from '@lucide/svelte/icons/file-check';
+	import FileText from '@lucide/svelte/icons/file-text';
+	import Flag from '@lucide/svelte/icons/flag';
+	import Folder from '@lucide/svelte/icons/folder';
+	import Gavel from '@lucide/svelte/icons/gavel';
+	import Globe from '@lucide/svelte/icons/globe';
+	import HardHat from '@lucide/svelte/icons/hard-hat';
+	import Headset from '@lucide/svelte/icons/headset';
+	import Heart from '@lucide/svelte/icons/heart';
+	import HelpCircle from '@lucide/svelte/icons/help-circle';
+	import Highlighter from '@lucide/svelte/icons/highlighter';
+	import History from '@lucide/svelte/icons/history';
+	import Home from '@lucide/svelte/icons/home';
+	import Info from '@lucide/svelte/icons/info';
+	import LayoutGrid from '@lucide/svelte/icons/layout-grid';
+	import Leaf from '@lucide/svelte/icons/leaf';
+	import Lightbulb from '@lucide/svelte/icons/lightbulb';
+	import Lock from '@lucide/svelte/icons/lock';
+	import Mail from '@lucide/svelte/icons/mail';
+	import MapPin from '@lucide/svelte/icons/map-pin';
+	import Menu from '@lucide/svelte/icons/menu';
+	import MessageSquare from '@lucide/svelte/icons/message-square';
+	import Mic from '@lucide/svelte/icons/mic';
+	import Minus from '@lucide/svelte/icons/minus';
+	import Monitor from '@lucide/svelte/icons/monitor';
+	import Moon from '@lucide/svelte/icons/moon';
+	import Newspaper from '@lucide/svelte/icons/newspaper';
+	import PartyPopper from '@lucide/svelte/icons/party-popper';
+	import Phone from '@lucide/svelte/icons/phone';
+	import Plus from '@lucide/svelte/icons/plus';
+	import PlusCircle from '@lucide/svelte/icons/plus-circle';
+	import Presentation from '@lucide/svelte/icons/presentation';
+	import Receipt from '@lucide/svelte/icons/receipt';
+	import RotateCcw from '@lucide/svelte/icons/rotate-ccw';
+	import Route from '@lucide/svelte/icons/route';
+	import Rss from '@lucide/svelte/icons/rss';
+	import SearchX from '@lucide/svelte/icons/search-x';
+	import Shield from '@lucide/svelte/icons/shield';
+	import ShieldCheck from '@lucide/svelte/icons/shield-check';
+	import Sliders from '@lucide/svelte/icons/sliders';
+	import Speaker from '@lucide/svelte/icons/speaker';
+	import Star from '@lucide/svelte/icons/star';
+	import Sun from '@lucide/svelte/icons/sun';
+	import Tag from '@lucide/svelte/icons/tag';
+	import Tornado from '@lucide/svelte/icons/tornado';
+	import User from '@lucide/svelte/icons/user';
+	import Users from '@lucide/svelte/icons/users';
+	import Video from '@lucide/svelte/icons/video';
+	import Volume2 from '@lucide/svelte/icons/volume-2';
+	import Wrench from '@lucide/svelte/icons/wrench';
+	import X from '@lucide/svelte/icons/x';
+	import Zap from '@lucide/svelte/icons/zap';
+
+	type IconComponent = typeof Phone;
+
 	let {
 		name,
 		className = '',
@@ -10,376 +86,109 @@
 		size?: number | string;
 	} = $props();
 
-	// Centralized catalog of pixel-perfect SVG paths matching Google Material Design specifications
-	const svgPaths: Record<string, { viewBox: string; paths: string[] }> = {
-		build: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.3C.5 6.7.9 9.8 2.9 11.8c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.6z"/>'
-			]
-		},
-		inventory_2: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M20 2H4c-1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 18H5V5h14v15zm-2-11H7V7h10v2z"/>'
-			]
-		},
-		memory: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M15 9H9v6h6V9zm-2 4h-2v-2h2v2zm8-2V9h-2V7c0-1.1-.9-2-2-2h-2V3h-2v2h-2V3H9v2H7c-1.1 0-2 .9-2 2v2H3v2h2v2H3v2h2v2c0 1.1.9 2 2 2h2v2h2v-2h2v2h2v-2h2c1.1 0 2-.9 2-2v-2h2v-2h-2v-2h2zm-4 6H7V7h10v10z"/>'
-			]
-		},
-		speaker: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M17 2H7c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-5 2c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 16c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>'
-			]
-		},
-		lightbulb: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 3.82 2.66 5.86 3.78 6.9.52.48.72 1.15.72 1.85V20c0 1.1.9 2 2 2h2.5c.3 0 .5-.2.5-.5V21c0-.55.45-1 1-1h1c1.1 0 2-.9 2-2v-1.75c0-.7.2-1.37.72-1.85 1.12-1.04 3.78-3.08 3.78-6.9C19.5 5.36 16.14 2 12 2zm3.5 13.58c-.76.71-1 1.63-1 2.67V19H9.5v-.75c0-1.04-.24-1.96-1-2.67-1-1-3-2.67-3-6.08 0-3.59 2.91-6.5 6.5-6.5s6.5 2.91 6.5 6.5c0 3.41-2 5.08-3 6.08z"/>'
-			]
-		},
-		videocam: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM15 16H5V8h10v8z"/>'
-			]
-		},
-		arrow_forward: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>'
-			]
-		},
-		chevron_left: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>'
-			]
-		},
-		chevron_right: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>'
-			]
-		},
-		check: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>'
-			]
-		},
-		add: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>'
-			]
-		},
-		remove: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M19 13H5v-2h14v2z"/>'
-			]
-		},
-		eco: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2c-5.52 0-10 4.48-10 10 0 4.84 3.44 8.87 8 9.8V15H8v-2h2v-1.5C10 9.01 11.57 7 14.5 7c1.39 0 2.5.11 2.5.11v2.89s-1-.11-2.11-.11c-1.12 0-2.39.56-2.39 2.11V13h4.5l-1 2H12.5v6.8c4.56-.93 8-4.96 8-9.8 0-5.52-4.48-10-10-10z"/>'
-			]
-		},
-		favorite: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>'
-			]
-		},
-		co_present: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M21 3H3c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h5v2H6v2h12v-2h-2v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12H3V5h18v10zm-9-1.5c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm0-4.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/>'
-			]
-		},
-		groups: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>'
-			]
-		},
-		business_center: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M10 16v-1H3.01L3 19c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2v-4h-7v1h-4zm10-9h-4.01V5c0-1.1-.9-1.99-2-1.99h-4c-1.1 0-2 .9-2 1.99v2H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm-6 0h-4V5h4v2z"/>'
-			]
-		},
-		package_2: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5v-5l-10 5-10-5v5zM2 12l10 5 10-5V7l-10 5-10-5v5z"/>'
-			]
-		},
-		request_quote: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M14 2H6c-1.1 0-1.99.89-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>'
-			]
-		},
-		task_alt: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M22 10.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3"/>'
-			]
-		},
-		celebration: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M2 22l1.35-4.11L1.24 15l4.23-.37L7.22 11l1.75 3.63 4.23.37-3.11 2.89L11.44 22 7.22 19.89 3 22zM12.5 10c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5zm6.5-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5z"/>'
-			]
-		},
-		menu: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>'
-			]
-		},
-		close: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>'
-			]
-		},
-		light_mode: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2v-2H2v2zm18 0h2v-2h-2v2zM11 2v2h2V2h-2zm0 18v2h2v-2h-2zm-5.22-13.78l1.41-1.41-1.41-1.41-1.41 1.41 1.41 1.41zm12.02 12.02l1.41-1.41-1.41-1.41-1.41 1.41 1.41 1.41zM6.19 19.22l1.41-1.41-1.41-1.41-1.41 1.41 1.41 1.41zM19.22 6.19l1.41-1.41-1.41-1.41-1.41 1.41 1.41 1.41z"/>'
-			]
-		},
-		dark_mode: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12.3 22h-.1c-5.5 0-10-4.5-10-10 0-4.8 3.5-8.9 8-9.8.5-.1 1 .2 1.2.7.2.5 0 1.1-.4 1.4-1.1.8-1.7 2.1-1.7 3.5 0 2.5 2 4.5 4.5 4.5 1.4 0 2.7-.6 3.5-1.7.3-.4.9-.5 1.4-.4.5.2.8.7.7 1.2-.9 4.5-5 8-9.8 8-.2.2-.4.2-.6.2z"/>'
-			]
-		},
-		call: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.21c.28-.26.36-.65.25-1C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.58c0-.56-.45-1.04-1-1.04z"/>'
-			]
-		},
-		mail: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>'
-			]
-		},
-		location_on: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>'
-			]
-		},
-		schedule: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>'
-			]
-		},
-		arrow_outward: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M6 6v2h8.59L5 17.59 6.41 19 16 9.41V18h2V6z"/>'
-			]
-		},
-		cyclone: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 2c-2.79 0-5.2 1.64-6.32 4h8.07c1.79 0 3.25 1.46 3.25 3.25 0 1.4-.89 2.59-2.13 3.04.72.4 1.21 1.16 1.21 2.04 0 .35-.08.68-.21.98C17.18 17.96 18 15.08 18 12c0-1.13-.19-2.21-.54-3.22C16.84 5.97 14.65 4 12 4zm-1.75 6c-1.79 0-3.25 1.46-3.25 3.25 0 1.4.89 2.59 2.13 3.04-.72.4-1.21 1.16-1.21 2.04 0 .35.08.68.21.98C6.82 17.96 6 15.08 6 12c0-.69.07-1.36.2-2H10.25z"/>'
-			]
-		},
-		engineering: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M11 14H9c0-4.97 4.03-9 9-9v2c-3.87 0-7 3.13-7 7zm7-3V9c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2zM7 4c0-1.11-.89-2-2-2s-2 .89-2 2 .89 2 2 2 2-.89 2-2zm4.45 4.5l-1.95.5c-.55.14-1.14-.05-1.49-.5h-.02C7.6 8.45 6.96 8.13 6.21 8.04 4.46 7.85 3 9.25 3 11v3h2v6h4v-9.34c.83.55 1.82.84 2.86.84h.01l-.42-3zM19 17h-1v-1c0-.55-.45-1-1-1s-1 .45-1 1v1h-1c-.55 0-1 .45-1 1s.45 1 1 1h1v1c0 .55.45 1 1 1s1-.45 1-1v-1h1c.55 0 1-.45 1-1s-.45-1-1-1z"/>'
-			]
-		},
-		mic: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>'
-			]
-		},
-		volume_up: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>'
-			]
-		},
-		business: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>'
-			]
-		},
-		highlight: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M6 14l3 3v5h6v-5l3-3V9H6v5zm5-12h2v3h-2V2zM3.5 5.875L4.914 4.46l2.12 2.122L5.62 7.997 3.5 5.875zm13.46.71l2.123-2.12 1.413 1.414L18.375 8 16.96 6.585z"/>'
-			]
-		},
-		chat: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>'
-			]
-		},
-		check_circle: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>'
-			]
-		},
-		expand_more: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/>'
-			]
-		},
-		person: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>'
-			]
-		},
-		support_agent: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M21 12.22C21 6.73 16.74 3 12 3c-4.69 0-9 3.65-9 9.28-.6.34-1 .98-1 1.72v2c0 1.1.9 2 2 2h1v-6.1c0-3.87 3.13-7 7-7s7 3.13 7 7V19h-8v2h8c1.1 0 2-.9 2-2v-1.22c.59-.31 1-.92 1-1.64v-2.3c0-.7-.41-1.31-1-1.62zM9 14c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm3-3.95C17.52 7.18 15.01 5 12 5S6.48 7.18 6.01 10.05C7.51 7.71 9.49 7 12 7s4.49.71 6 3.05z"/>'
-			]
-		},
-		group: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>'
-			]
-		},
-		add_circle: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>'
-			]
-		},
-		cookie: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.04 10-9c0-.5-.04-1-.13-1.5-.91.94-2.19 1.5-3.62 1.5-2.76 0-5-2.24-5-5 0-1.43.56-2.71 1.5-3.62C14.5 4.04 14 4 13.5 4 13 2.84 12.55 2 12 2zm-3.5 6c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm6.5 8c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-6 1c-.83 0-1.5-.67-1.5-1.5S8.17 14 9 14s1.5.67 1.5 1.5S9.83 17 9 17z"/>'
-			]
-		},
-		corporate_fare: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>'
-			]
-		},
-		explore: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"/>'
-			]
-		},
-		flag: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>'
-			]
-		},
-		gavel: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M1 21h12v2H1zM5.245 8.07l2.83-2.827 14.14 14.142-2.828 2.828zM12.317 1l5.657 5.656-2.83 2.83-5.654-5.66zM3.825 9.485l5.657 5.657-2.828 2.828-5.657-5.657z"/>'
-			]
-		},
-		grid_view: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M3 3v8h8V3H3zm6 6H5V5h4v4zm-6 4v8h8v-8H3zm6 6H5v-4h4v4zm4-16v8h8V3h-8zm6 6h-4V5h4v4zm-6 4v8h8v-8h-8zm6 6h-4v-4h4v4z"/>'
-			]
-		},
-		help: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>'
-			]
-		},
-		home: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>'
-			]
-		},
-		info: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>'
-			]
-		},
-		payments: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M19 14V6c0-1.1-.9-2-2-2H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zm-9-1c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm13-6v11c0 1.1-.9 2-2 2H4v-2h17V7h2z"/>'
-			]
-		},
-		policy: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M21 5l-9-4-9 4v6c0 5.55 3.84 10.74 9 12 1.21-.3 2.36-.78 3.41-1.42L17 23.41 18.41 22l-2.36-2.36C18.45 17.04 21 13.04 21 11V5zm-9 6.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>'
-			]
-		},
-		shield: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>'
-			]
-		},
-		verified_user: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>'
-			]
-		},
-		desktop_windows: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/>'
-			]
-		},
-		star: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>'
-			]
-		},
-		star_border: {
-			viewBox: '0 0 24 24',
-			paths: [
-				'<path d="M22 9.24l-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03L22 9.24zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"/>'
-			]
-		}
+	// Semantic name (kept stable for every call site) → Lucide component.
+	// Names mirror the previous Material Design catalog so no consumer changes.
+	const iconMap: Record<string, IconComponent> = {
+		// actions
+		add: Plus,
+		add_circle: PlusCircle,
+		remove: Minus,
+		check: Check,
+		check_circle: CheckCircle,
+		task_alt: CheckCircle,
+		close: X,
+		menu: Menu,
+		tune: Sliders,
+		restart_alt: RotateCcw,
+		search_off: SearchX,
+		radio_button_unchecked: Circle,
+		// navigation / arrows
+		arrow_forward: ArrowRight,
+		arrow_outward: ArrowUpRight,
+		chevron_left: ChevronLeft,
+		chevron_right: ChevronRight,
+		expand_more: ChevronDown,
+		explore: Compass,
+		home: Home,
+		route: Route,
+		// communication
+		call: Phone,
+		phone: Phone,
+		mail: Mail,
+		email: Mail,
+		chat: MessageSquare,
+		comments: MessageSquare,
+		location_on: MapPin,
+		schedule: Clock,
+		history: History,
+		website: Globe,
+		robots: Bot,
+		// people
+		person: User,
+		account_circle: CircleUser,
+		group: Users,
+		groups: Users,
+		co_present: Presentation,
+		support_agent: Headset,
+		// theme toggle
+		light_mode: Sun,
+		dark_mode: Moon,
+		// business / commerce
+		business: Building2,
+		business_center: Briefcase,
+		corporate_fare: Building2,
+		payments: CreditCard,
+		request_quote: Receipt,
+		// equipment / media
+		build: Wrench,
+		engineering: HardHat,
+		inventory_2: Box,
+		package_2: Box,
+		memory: Cpu,
+		desktop_windows: Monitor,
+		speaker: Speaker,
+		volume_up: Volume2,
+		mic: Mic,
+		videocam: Video,
+		lightbulb: Lightbulb,
+		highlight: Highlighter,
+		// content / blog
+		article: Newspaper,
+		description: FileText,
+		folder: Folder,
+		label: Tag,
+		sell: Tag,
+		rss_feed: Rss,
+		grid_view: LayoutGrid,
+		// trust / legal
+		shield: Shield,
+		verified_user: ShieldCheck,
+		lock: Lock,
+		gavel: Gavel,
+		policy: FileCheck,
+		cookie: Cookie,
+		flag: Flag,
+		info: Info,
+		help: HelpCircle,
+		// values / misc
+		eco: Leaf,
+		cyclone: Tornado,
+		favorite: Heart,
+		celebration: PartyPopper,
+		star: Star,
+		star_border: Star,
+		zap: Zap
 	};
 
-	// Fallback mechanism in case an icon is not defined
-	let activeIcon = $derived(svgPaths[name] ?? svgPaths['inventory_2']);
+	let ActiveIcon = $derived(iconMap[name] ?? Box);
+	// Lucide icons are stroke-based outlines. Filled rating stars carry meaning
+	// (full vs empty score), so only `star` gets a solid fill.
+	let fill = $derived(name === 'star' ? 'currentColor' : 'none');
 </script>
 
-<svg
-	class="inline-block fill-current select-none shrink-0 {className}"
-	width={size}
-	height={size}
-	viewBox={activeIcon.viewBox}
+<ActiveIcon
+	class={`inline-block select-none shrink-0 ${className}`}
+	{size}
+	{fill}
 	aria-hidden="true"
->
-	{#each activeIcon.paths as path (path)}
-		{@html path}
-	{/each}
-</svg>
+/>

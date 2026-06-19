@@ -9,6 +9,12 @@ export default defineConfig({
 		port: 5173,
 		strictPort: true
 	},
+	// @lucide/svelte ships uncompiled `.svelte` icon files. Vite must bundle it
+	// through the Svelte plugin during SSR instead of externalizing it to Node,
+	// which can't load a raw `.svelte` extension (ERR_UNKNOWN_FILE_EXTENSION).
+	ssr: {
+		noExternal: ['@lucide/svelte']
+	},
 	plugins: [
 		blogMeta(),
 		tailwindcss(),

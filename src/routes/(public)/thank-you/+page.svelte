@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import SeoHead from '$lib/components/seo/SeoHead.svelte';
+	import Icon from '$lib/components/navigation/Icon.svelte';
 	import { i18n } from '$lib/i18n.svelte';
 	import { siteConfig } from '$lib/data/site';
 
@@ -46,9 +47,7 @@
 		<!-- Success icon -->
 		<div class="flex justify-center mb-8">
 			<div class="w-20 h-20 rounded-full bg-electric-blue/15 flex items-center justify-center">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-10 h-10 text-electric-blue">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-				</svg>
+				<Icon name="check" size="40" className="text-electric-blue" />
 			</div>
 		</div>
 
@@ -64,7 +63,7 @@
 
 		<!-- Response time badge -->
 		<div class="inline-flex items-center gap-2 px-5 py-2 rounded-full glass-panel mb-10">
-			<span class="text-electric-blue">⚡</span>
+			<Icon name="zap" size="18" className="text-electric-blue" />
 			<span class="font-label-md text-on-surface">{i18n.t.thankYou.responseTime}</span>
 		</div>
 
